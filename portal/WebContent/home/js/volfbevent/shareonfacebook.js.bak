@@ -1,0 +1,107 @@
+
+/*facebook share popup begins*/
+function getconfirmationfbsharepopup(){
+	if($('fbshareblock')){}
+	else{
+		var divpopup=document.createElement("div");
+		divpopup.setAttribute('id','fbshareblock');
+		divpopup.className='ticketunavailablepopup_div';
+		var cell=$('container');
+		cell.appendChild(divpopup);
+	}
+	//var src="/portal/socialnetworking/fbpopupshare.jsp?eid="+eventid+"";
+	$('fbshareblock').innerHTML="<a href='javascript:closesharepopup();'><img src='/home/images/close.png' class='imgclose' style='margin-top:-36px;'></a><div id='fb-root'></div><div style='color: black;font-size: 11px;font-style: inherit;padding: 0 0 10px;' align='center'>Your registration is complete.</div><center><div id='share-on-facebook'><img src='/home/images/share-on-facebook.png' alt='' border='0' height='40' width='310'></div></center>";
+	$('fbshareblock').style.display='block';
+	jQuery('#share-on-facebook').attr("style","cursor:pointer;");
+	jQuery('#share-on-facebook').click(function(){
+		showStream();
+		return false;
+	});
+	document.getElementById('fbshareblock').style.top='50%';
+	document.getElementById('fbshareblock').style.left='20%';
+	if(document.getElementById("backgroundPopup"))
+		document.getElementById("backgroundPopup").style.display='block';
+	window.scrollTo("0","0");
+	//jQuery( "#fbshareblock" ).draggable();
+	//jQuery("#fbshareblock").click(function(){
+	//});
+}
+
+function closesharepopup(){
+if(document.getElementById("backgroundPopup"))
+		document.getElementById("backgroundPopup").style.display='none';
+if(document.getElementById("fbshareblock"))
+		document.getElementById("fbshareblock").style.display='none';
+}
+
+window.fbAsyncInit = function() {
+	//FB.init({appId: '201409456567228', status: true, cookie: true, xfbml: true});
+//227788873904118 ---localhost
+//48654146645-- production
+FB.init({appId: '201409456567228', status: true, cookie: true, xfbml: true});
+	/* All the events registered */
+	//FB.Event.subscribe('auth.login', function(response) {
+		// do something with response
+		//login();
+	//});
+	//FB.Event.subscribe('auth.logout', function(response) {
+		// do something with response
+		//logout();
+	//});
+
+	//FB.getLoginStatus(function(response) {
+	//	if (response.session) {
+			// logged in and connected user, someone you know
+			//login();
+	//	}
+	//});
+};
+/*
+(function() {
+	var e = document.createElement('script');
+	e.type = 'text/javascript';
+	e.src = document.location.protocol +
+		'//connect.facebook.net/en_US/all.js';
+	e.async = true;
+	//document.getElementById('fb-root').appendChild(e);
+}());*/
+
+ function streamPublish(name, description, hrefTitle, hrefLink, userPrompt){
+ 		var caption='';
+		//serveradd="http://192.168.1.96";
+		if(document.getElementById('eventname'))
+			caption=document.getElementById('eventname').innerHTML
+		else{
+			
+		}
+		var fbcaption="I register for \""+caption+"\" via Eventbee!";
+			FB.ui(
+                {
+                    method: 'stream.publish',
+                   // message: 'hi, this is just for fb api testing',
+                    attachment: {
+                        media:[{'type':'image','src':'http://www.eventbee.com/home/images/logo_big.jpg','href':''+serveradd+'/main/'}],
+						name: document.title,
+                        caption: fbcaption,
+                        description: document.getElementById('fb-description').innerHTML,
+                        href: ''+serveradd+'/event?eid='+eventid+'',
+					},
+					action_links: [
+                        { text: 'invitation', href: ''+serveradd+'/event?eid='+eventid+'' }
+                    ],
+                    user_prompt_message: 'come as well'
+                },
+				
+                function(response) {
+						
+                });
+            }
+            function showStream(){
+			closesharepopup();
+                FB.api('/me', function(response) {
+                    //console.log(response.id);
+                    streamPublish(response.name, 'eventbee.com', 'hrefTitle', 'http://eventbee.com', "Share eventbee.com");
+                });
+            }
+
+/*facebook share popup ends*/

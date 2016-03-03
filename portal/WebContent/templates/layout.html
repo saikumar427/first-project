@@ -1,0 +1,135 @@
+<head>
+<link rel="stylesheet" type="text/css" href="/home/index.css" />
+<link rel="stylesheet" type="text/css" href='/home/homepage.css' />
+
+<style>
+</style>
+
+<script type="text/javascript" src="/home/js/getcontent.js">
+function dummy(){}
+</script>
+</head>
+<div id="container">
+	<div id="header" >
+
+				<jsp:include page='/stylesheets/ebeeheaderhome.jsp' />
+
+	</div>
+	<div id="mylinks">
+		 <jsp:include page='/stylesheets/ebeenavhorizontalhome.jsp'/>
+	</div>
+	<div id="headerbox">
+		<div id="headerblock" class="headerbox">
+					<div id="headerblockcontent" class="headerboxcontent">
+					</div>
+				</div>
+	</div>
+	<div id="center" >
+			<div id="leftcolumn">
+				<div id="leftimageblock" class="leftbox">
+					<div id="leftimagecontent" class="leftboxcontent">
+					</div>
+				</div>
+
+				<div id="leftbannerblock" class="leftbox">
+						<div id="leftbannercontent" class="leftboxcontent">
+						</div>
+
+				</div>
+				<div id="eventsblock" class="leftbox">
+					<div id="eventsheader" class="leftboxheader" >
+						<span class="rightarrows"  onclick="javascript:collapse('eventscontent');"><img id="eventscontent_img" src="/home/images/downarrow.gif"/></span>
+						<span class="contentheadertext"><a href="/portal/eventdetails/events.jsp?evttype=event">Events</a></span>
+					</div>
+					<div id="eventscontent" class="leftboxcontent">
+					</div>
+
+				</div>
+				<div id="classblock" class="leftbox">
+					<div id="classifiedsheader" class="leftboxheader" >
+						<span class="rightarrows" onclick="javascript:collapse('classcontent');"><img id="classcontent_img" src="/home/images/downarrow.gif"/></span>
+						<span class="contentheadertext" ><a href="/portal/eventdetails/events.jsp?evttype=class">Classes</a></span>
+					</div>
+					<div id="classcontent" class="leftboxcontent">
+					</div>
+				</div>
+
+			</div>
+			<div id="rightcolumn">
+			<%
+			if(com.eventbee.general.AuthUtil.getAuthData(pageContext)==null){
+			%>
+						<div class="rightbox" style="display:block">
+			<div id="loginheader" class="rightboxheader">
+						<span class="rightarrows" onclick="javascript:collapse('logincontent');return false"><img id="logincontent_img" src="/home/images/downarrow.gif"/></span>
+						<span class="contentheadertext" >Login</span>
+			</div>
+
+			<div id="logincontent" class="rightboxcontent">
+						<jsp:include page='/hub/login.jsp'/>
+
+			</div>
+			</div>
+				<%}%>
+				<div id="rightimageblock" class="rightbox">
+					<div id="rightimagecontent" class="rightboxcontent">
+					</div>
+				</div>
+				<div id="hubsblock" class="rightbox">
+					<div id="hubsheader" class="rightboxheader">
+						<span class="rightarrows" onclick="javascript:collapse('hubscontent');return false"><img id="hubscontent_img" src="/home/images/downarrow.gif"/></span>
+						<span class="contentheadertext" ><a href="/portal/hub/clubsview.jsp">Communities</a></span>
+					</div>
+					<div id="hubscontent" class="rightboxcontent">
+					</div>
+				</div>
+				<div id="featuredblock" class="rightbox">
+
+
+				<div id="featuredheader" class="rightboxheader">
+										<span class="rightarrows" onclick="javascript:collapse('featuredcontent');return false"><img id="featuredcontent_img" src="/home/images/downarrow.gif"/></span>
+										<span class="contentheadertext" >Featured </a></span>
+									</div>
+
+
+
+					<div id="featuredcontent" class="rightboxcontent">
+
+
+
+
+					</div>
+				</div>
+			</div>
+
+	</div>
+
+<div  id="footer">
+		<div align="center" width="100%" > <table width="100%" cellpadding="0" cellspacing="0" ><tr><td height='1' width="100%" bgcolor="#666666"></td></tr></table></div>
+		<div align="center"><p><a href="javascript:popupwindow('/home/links/aboutus.html','');" STYLE="text-decoration: none"><span
+
+			class="footertab">About Us</span></a><span class="footertab">
+
+						| </span><a href="javascript:popupwindow('/home/links/privacystatement.html','');" STYLE="text-decoration: none">
+						<span class="footertab">Privacy Statement</span></a><span class="footertab"> | </span><a
+
+			href="javascript:popupwindow('/home/links/termsofservice.html','');" STYLE="text-decoration: none"><span class="footertab">Terms
+						of Service</span></a><span class="footertab"> | </span><a
+
+			href="javascript:popupwindow('/home/links/trademarks.html','');" STYLE="text-decoration: none"><span class="footertab">Trade
+						Marks</span></a><span class="footertab"> | </span><a
+
+			href="javascript:popupwindow('/home/links/contact.html','');" STYLE="text-decoration: none"><span
+
+			class="footertab">Contact</span></a></p>
+		</div>
+		 <tr>
+          <td colspan="2" height="18">
+            <div align="center"><span class="footertab">Copyright
+              2003. Eventbee Inc. All Rights Reserved. </span></div>
+          </td>
+        </tr>
+		<div align='right'>
+			<a href="http://www.beeport.com" target="_blank"><img src="/home/images/poweredby_beeport.jpg" border="0" /></a>
+		</div>
+	</div>

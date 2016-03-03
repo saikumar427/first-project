@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+Content-Type:text/calendar
+PRODID:-//www.eventbee.com//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:20140508T090000
+DTEND:20140831T100000
+LOCATION:hyderabad
+UID:20140509T061100@eventbee.com
+SUMMARY:Test Event For New Jboss Recurring On May 08 1
+URL:http://vasu1280.citypartytix.com/event?eventid=111003205
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,49 @@
+.mybutton {
+    overflow: hidden;
+    top: 8px;
+    right: 10px;
+    margin: 0;
+    border-width: 0 5px;
+    padding: 0 3px;
+    width: auto;
+    height: 50px;
+    line-height: 50px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0;
+    text-overflow: ellipsis;
+    text-decoration: none;
+	text-align: center;
+    white-space: nowrap;
+    background: none;
+	cursor:hand;
+    -webkit-border-image: url(img/button.png) 0 5 0 5;
+}
+#footer td{
+	
+    font-family: Lucida Grande,Lucida Sans Unicode,sans-serif;
+    font-size: 11px;
+    line-height: 20px;
+
+}
+.smallfont{
+	font-family: Lucida Grande,Lucida Sans Unicode,sans-serif;
+    font-size: 11px;
+}
+td a {
+	display:inline;
+}
+.header{
+	font-family: Helvetica Neue,HelveticaNeue,Helvetica,arial,sans;
+	font-size: 24px;
+	color:white;
+}
+.description{
+	font-weight:normal;
+	font-family: Helvetica;
+	font-size:16px;
+	color:#999999 
+}
+

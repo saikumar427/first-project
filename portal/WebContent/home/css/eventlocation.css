@@ -1,0 +1,45 @@
+#locbox 
+{
+	position:absolute;
+	display:none;
+	background-color:#FFFFFF;
+	width:120px;
+	padding:5px;
+	padding-top:1px;
+	border:thin solid black;
+	test-align:left;
+}
+
+
+.locchangelink{
+	text-decoration:none;
+	font-size:12px;
+	color: ##606060;
+	padding:0px;
+	text-align:left;
+}
+
+.locchangelink a:hover {
+	cursor: pointer;
+}
+
+.locchangelink a{
+	text-decoration:none;
+}
+
+
+.locclose{
+	float:right;
+	padding-right:10px;
+	padding-top:0px;
+}
+
+.locclose a:hover{
+	cursor:pointer;
+	text-decoration:none;
+}
+.locclose a{
+	text-decoration:none;
+}
+
+#categorybold a{color:#000000;font-weight:bold; font-size: 12px}

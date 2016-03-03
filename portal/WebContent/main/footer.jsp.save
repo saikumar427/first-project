@@ -1,0 +1,54 @@
+<div  id="footer" >
+
+
+
+<%if(request.getAttribute("CUSTOM_FOOTER")!=null && !"".equals(request.getAttribute("CUSTOM_FOOTER"))){%>
+<%=(String)request.getAttribute("CUSTOM_FOOTER")%>
+
+<%}else{%>
+
+		<div align="center" width="100%" > <table width="840" cellpadding="0" cellspacing="0" ><tr><td height='1' width="840" bgcolor="#666666"></td></tr></table></div>
+		<div align="center" ><p><a href='/portal/helplinks/aboutus.jsp' STYLE="text-decoration: none"><span
+
+			class="footertab">About Us</span></a><span class="footertab">
+
+						| </span><a href='/portal/helplinks/privacystatement.jsp' STYLE="text-decoration: none">
+						<span class="footertab">Privacy Statement</span></a><span class="footertab"> | </span><a
+
+			href='/portal/helplinks/termsofservice.jsp' STYLE="text-decoration: none"><span class="footertab">Terms
+						of Service</span></a><span class="footertab"> | </span><a
+
+			href='/portal/helplinks/trademarks.jsp' STYLE="text-decoration: none"><span class="footertab">Trade
+						Marks</span></a><span class="footertab"> | </span><a
+
+			href='/portal/helplinks/contact.jsp' STYLE="text-decoration: none"><span
+
+			class="footertab">Contact</span></a>
+			<span class="footertab">  |  </span><a
+
+			href='http://blog.eventbee.com' STYLE="text-decoration: none"><span
+
+			class="footertab">Blog</span></a>
+			<span class="footertab">  |  </span><a
+
+			href='http://twitter.eventbee.com/' STYLE="text-decoration: none"><span
+
+			class="footertab">Twitter</span></a>
+			<span class="footertab">  |  </span><a
+			
+			href='http://support.eventbee.com/community/supportcommunity' STYLE="text-decoration: none"><span
+			
+			class="footertab">Community<img src="/home/images/new.gif" border='0'></span></a></p>
+			
+			
+			
+		</div>
+
+            <div align="center"><span class="footertab">Copyright
+              2003. Eventbee Inc. All Rights Reserved. </span></div>
+                <div align='right'>
+                        <img src="/home/images/poweredbyaws.jpg" border="0" />
+                </div>
+
+        </div>
+

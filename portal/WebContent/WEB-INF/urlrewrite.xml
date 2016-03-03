@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.5//EN"
+        "http://tuckey.org/res/dtds/urlrewrite2.5.dtd">
+
+
+<urlrewrite>
+
+<rule>
+	    	<name>redirect from xyz.com to www.xyz.com </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://eventbee\.com/</condition>
+	    	<from>^/</from>
+	    	<to type="redirect">http://www.eventbee.com/</to>
+</rule>
+
+<rule>
+	    	<name>redirect url for pacquiaovsbradleylivestreaming urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://pacquiaovsbradleylivestreaming.eventbee.com</condition>
+	    	<from>^/</from>
+	    	<to type="redirect">http://www.eventbee.com/guesttasks/invalidpage.jsp</to>
+</rule>
+<rule>
+	    	<name>redirect url for halloween urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://halloween.eventbee.com/</condition>
+	    	<from>^/</from>
+	    	<to type="redirect">http://halloween.eventbee.com/city/san-francisco-halloween</to>
+</rule>
+
+<rule>
+	    	<name>redirect url for nye urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://nye.eventbee.com/</condition>
+	    	<from>^/</from>
+	    	<to type="redirect">http://nye.eventbee.com/city/san-francisco-nye</to>
+</rule>
+
+<rule>
+	    	<name>redirect url for global tracking urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://([^.]+)\.eventbee\.com/tu/</condition>
+	    	<from>^/tu/(.*)$</from>
+	    	<to type="redirect">http://www.eventbee.com/main/TrackUrlManage?beeid=%1&amp;trackcode=$1 </to>
+</rule>
+  
+<rule>
+	    	<name>redirect url for global tracking urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.eventbee\.</condition>
+	    	<condition type="request-url">^http://www.([^.]+)\.eventbee\.com/tu/</condition>
+	    	<from>^/tu/(.*)$</from>
+	    	<to type="redirect">http://www.eventbee.com/main/TrackUrlManage?beeid=%1&amp;trackcode=$1 </to>
+</rule>
+<rule>
+	    	<name>redirect url for global tracking urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://([^.]+)\.eventbee\.com/trackurl/</condition>
+	    	<from>^/trackurl/(.*)$</from>
+	    	<to type="redirect">http://www.eventbee.com/main/TrackUrlManage?beeid=%1&amp;trackcode=$1 </to>
+</rule>
+  
+<rule>
+	    	<name>redirect url for global tracking urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.eventbee\.</condition>
+	    	<condition type="request-url">^http://www.([^.]+)\.eventbee\.com/trackurl/</condition>
+	    	<from>^/trackurl/(.*)$</from>
+	    	<to type="redirect">http://www.eventbee.com/main/TrackUrlManage?beeid=%1&amp;trackcode=$1 </to>
+</rule>
+
+    
+  <rule>
+	<name>redirect url to events page </name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee.com/$ </condition>
+	<from>^/(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1 </to>
+    </rule>
+
+	
+	<rule>
+	<name>redirect url to events page </name>
+	<condition name="host" operator="notequal">^www\.eventbee\.</condition>
+	<condition type="request-url">^http://www.([^.]+)\.eventbee.com/$ </condition>
+	<from>^/(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1 </to>
+    </rule>
+	
+	<rule>
+	<name>redirect url for ipad boxoffice urls </name>
+
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee.com/ipad</condition>
+	<from>^/ipad</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/ipad </to>
+</rule>
+
+<rule>
+	<name>redirect url for ipad boxoffice urls </name>
+
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee.com/boxoffice</condition>
+	<from>^/boxoffice</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/boxoffice </to>
+</rule>
+<rule>
+    <name>redirect url for NTS urls </name>
+
+    <condition name="host" operator="notequal">^www\.</condition>
+    <condition type="request-url">^http://([^.]+)\.eventbee\.com/n/ </condition>
+    <from>^/n/(.*)$</from>
+    <to type="redirect" >http://www.eventbee.com/v/%1/n/$1 </to>
+</rule>
+
+<rule>
+    <name>local redirect url for NTS urls </name>
+
+    <condition name="host" operator="notequal">^www\.eventbee\.</condition>
+    <condition type="request-url">^http://www.([^.]+)\.eventbee\.com/n/ </condition>
+    <from>^/n/(.*)$</from>
+    <to type="redirect" >http://www.eventbee.com/v/%1/n/$1 </to>
+</rule>
+	
+<rule>
+	<name>redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/track/ </condition>
+	<from>^/track/(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/track/$1 </to>
+</rule>
+
+<rule>
+	<name>redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.eventbee\.</condition>
+	<condition type="request-url">^http://www.([^.]+)\.eventbee\.com/track/ </condition>
+	<from>^/track/(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/track/$1 </to>
+</rule>
+
+
+<rule>
+	<name>redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/t/ </condition>
+	<from>^/t/(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/t/$1 </to>
+</rule>
+	
+<rule>
+	<name>local redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.eventbee\.</condition>
+	<condition type="request-url">^http://www.([^.]+)\.eventbee\.com/t/ </condition>
+	<from>^/t/(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/t/$1 </to>
+</rule>
+	
+	
+<rule>
+      <name>TicketUrl</name>
+             <condition name="host" operator="notequal">^www\.</condition>
+             <condition type="request-url">^http://([^.]+)\.eventbee\.com/ticket$ </condition>
+             <from>^/ticket(.*)$</from>
+             <to type="redirect" >http://www.eventbee.com/v/%1/ticket$1 </to>
+    </rule>	
+	
+ <rule>
+      <name>TicketUrl</name>
+             <condition name="host" operator="notequal">^www\.eventbee\.</condition>
+             <condition type="request-url">^http://www.([^.]+)\.eventbee\.com/ticket$ </condition>
+             <from>^/ticket(.*)$</from>
+             <to type="redirect" >http://www.eventbee.com/v/%1/ticket$1 </to>
+  </rule>	
+
+	
+<rule>
+	<name>redirect to ticketing page</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/register$ </condition>
+	<from>^/register(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/register$1 </to>
+</rule>
+<rule>
+    <name>redirect url for signup urls with no part1</name>
+    <condition type="request-url">^http://eventbee\.com/signup/ </condition>
+    <from>^/signup/(.*)$</from>
+    <to type="redirect" >http://www.eventbee.com/main/user/signup?ref=$1 </to>
+</rule>
+<rule>
+    <name>redirect url for signup urls </name>
+    <condition type="request-url">^http://([^.]+)\.eventbee\.com/signup/ </condition>
+    <from>^/signup/(.*)$</from>
+    <to type="redirect" >http://www.eventbee.com/main/user/signup?ref=$1 </to>
+</rule>
+<rule>
+	<name>NETWORK_PAGE</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/network$ </condition>
+	<from>^/network(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/network$1 </to>
+    </rule>
+
+    <rule>
+	<name>BLOG</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/blog$ </condition>
+	<from>^/blog(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/blog$1 </to>
+    </rule>
+
+    <rule>
+	<name>LOGIN</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/login$ </condition>
+	<from>^/login(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/login$1 </to>
+	</rule>
+	
+   <rule>
+	<name>SIGNUP</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/signup$ </condition>
+	<from>^/signup(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/signup$1 </to>
+    </rule>
+
+   <rule>
+	<name>RENEW</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/renew$ </condition>
+	<from>^/renew(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/renew$1 </to>
+    </rule>
+
+    <rule>
+	<name>PHOTOS-ID</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/photos$ </condition>
+	<from>^/photos(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/photos$1 </to>
+    </rule>
+	
+    <rule>
+	<name>PHOTOS-SLASH</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/photos/ </condition>
+	<from>^/photos(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/photos </to>
+    </rule>
+
+    <rule>
+        <name>EVENT-ID</name>
+        <condition name="host" operator="notequal">^www\.</condition>
+        <condition type="request-url">^http://([^.]+)\.eventbee\.com/event$ </condition>
+		<from>^/event(.*)$</from>
+        <to type="redirect" >http://www.eventbee.com/v/%1/event$1 </to>
+    </rule>
+	
+     <rule>
+        <name>EVENTS</name>
+        <condition name="host" operator="notequal">^www\.</condition>
+        <condition type="request-url">^http://([^.]+)\.eventbee\.com/events$ </condition>
+        <from>^/events(.*)$</from>
+
+        <to type="redirect" >http://www.eventbee.com/v/%1/events$1 </to>
+    </rule>
+    
+    <rule>
+      <name>Discounts</name>
+             <condition name="host" operator="notequal">^www\.</condition>
+             <condition type="request-url">^http://([^.]+)\.eventbee\.com/discount$ </condition>
+             <from>^/discount(.*)$</from>
+     
+             <to type="redirect" >http://www.eventbee.com/v/%1/discount$1 </to>
+    </rule>
+    <rule>
+    <name>Discounts</name>
+             <condition name="host" operator="notequal">^www\.eventbee\.</condition>
+             <condition type="request-url">^http://www.([^.]+)\.eventbee\.com/discount$ </condition>
+             <from>^/discount(.*)$</from>
+     
+             <to type="redirect" >http://www.eventbee.com/v/%1/discount$1 </to>
+    </rule>
+
+    
+    <rule>
+    
+        	<name>ALL_COMMUNITY</name>
+        	<condition name="host" operator="notequal">^www\.</condition>
+        	<condition type="request-url">^http://([^.]+)\.eventbee\.com/community/ </condition>
+        	<from>^/community/(.*)$</from>
+        	<to type="redirect" >http://www.eventbee.com/v/%1/community/$1 </to>
+        </rule>
+
+    
+
+    <rule>
+     	<name>DEF_COMMUNITY</name>
+     	<condition name="host" operator="notequal">^www\.</condition>
+        <condition type="request-url">^http://([^.]+)\.eventbee\.com/community$ </condition>
+        <from>^/community(.*)$</from>
+        <to type="redirect" >http://www.eventbee.com/v/%1/community/$1 </to>
+    </rule>
+    
+    
+   
+   
+    
+    <rule>
+	<name>FORUM-RSS</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eventbee\.com/rss/forum$ </condition>
+	<from>^/rss/forum(.*)$</from>
+	<to type="redirect" >http://www.eventbee.com/v/%1/rss/forum$1 </to>
+    </rule>
+    
+      
+    
+</urlrewrite>

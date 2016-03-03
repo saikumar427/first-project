@@ -1,0 +1,423 @@
+body{
+	background-color: #FFFFFF;
+	//background: #6699ff url('/home/images/india_bg.gif') left;
+    font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; 
+    font-style: normal; font-weight: normal;
+}
+
+#container{
+	background-color: #FFFFFF;
+	width: 840px;
+        float: center;
+	margin:0 auto;
+	padding: 8px;
+}
+#header{
+	background-color: #FFFFFF;
+  width: 840px;
+  float: left;
+  border-bottom:0px blue solid;
+}
+#headertop{
+	width: 840px;
+}
+#headerbottom{
+	width: 840px;
+}
+#headerleftcontent{
+	width:500px;
+	float:left;
+}
+
+#headermiddlecontent{
+	width:360px;
+	float:left;
+}
+
+#headerrightcontent {
+ float: right;
+ width: 200px;
+ display: table-row;
+ padding-left:3px;
+}
+.headerrightad{
+	height:60px;
+	text-align:right;
+
+}
+.headerloginlinks{
+
+	text-align:right;
+}
+
+.headercity{
+	text-decoration:none;
+	font-size:18px;
+	font-style: normal;
+	font-family: arial;
+	color: #FF6600;
+	padding-bottom:0px;
+	text-align:left;
+}
+#headerbottomleft{
+	float:left;
+	width:840px;
+	padding:0px;
+	
+}
+}
+#navigationlinks{
+  width:500px;
+  text-align:top;
+ }
+
+#footer {
+  background-color: #FFFFFF;
+  width: 840px;
+  float: left;
+}
+
+#center {
+  background-color: #FFFFFF;
+  width: 840px;
+  float: left;
+}
+
+#leftcolumn {
+ float: left;
+ width: 480px;
+}
+
+#rightcolumn {
+ float: right;
+ width: 350px;
+}
+.leftbox {
+  padding-left:0px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-family: arial;
+  display:none;
+}
+
+
+.leftboxheader {
+	font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; background-color: #d8ec79 ; font-weight: normal; color: #1C3700; border-color: #4B9700 black; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 2px; padding-bottom: 2px; padding-left:5px; padding-right:5px
+}
+
+.leftboxcontent {
+
+}
+
+.rightbox {
+  padding-left:3px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-family: arial;
+  display:none;
+}
+
+
+.rightboxheader {
+font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; background-color: #ffdfb0 ; font-weight: normal; color: #331f00; border-color: #ff9900 black; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 2px; padding-bottom: 2px; padding-left:5px; padding-right:5px
+}
+.rightboxcontent {
+
+}
+
+#locbox 
+{
+	position:absolute;
+	display:none;
+	background-color:#FFFFFF;
+	width:120px;
+	padding:5px;
+	padding-top:1px;
+	border:thin solid black;
+}
+ 
+.locchangelink{
+	text-decoration:none;
+	font-size:12px;
+	color: ##606060;
+	padding:0px;
+	text-align:left;
+}
+
+.locchangelink a:hover {
+	cursor: pointer;
+}
+.locchangelink a{
+	text-decoration:none;
+}
+
+.loccountry a:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
+.loccountry a{
+	text-decoration: none;
+	color:#FF6600;
+}
+
+.loccity {
+	padding-left:8px;
+	color:#009933;
+	
+}
+.loccity a{
+	text-decoration: none;
+	color:#009933;
+}
+.loccity a:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
+.loccitynew a:hover{
+	text-decoration: underline;
+}
+.loccitynew a{
+	text-decoration: none;
+	color:#990000;
+}
+.loccitynew{
+	padding-left:8px;
+	color:#990000;
+}
+.locselected a:hover{
+	cursor:pointer;
+	text-decoration: underline;
+}
+.locselected a{
+	text-decoration: none;
+}
+.locselected {
+	padding-left:1px;
+}
+#loclist{
+	padding-top:1em;
+	line-height:1.5em;
+	font-style: normal;
+    font-family: arial;
+	font-size:12px;
+}
+
+.locclose{
+	float:right;
+	padding-right:10px;
+	padding-top:0px;
+}
+
+.locclose a:hover{
+	cursor:pointer;
+	text-decoration:none;
+}
+.locclose a{
+	text-decoration:none;
+}
+#navigationlinks{
+	width:600px;
+	float:right;
+	margin-top:0px;
+}
+#eventsbox{
+}
+
+#eventscontent{
+}
+
+#classifiedsbox{
+	background-color:#CCFFCC;
+}
+
+#classifiedscontent{
+}
+
+#moviesbox{
+}
+
+#moviescontent{
+}
+
+#musicbox{
+}
+
+#musiccontent{
+}
+
+#sportsbox{
+}
+
+#sportscontent{
+}
+
+#servicesbox{
+}
+
+#servicescontent{
+}
+
+#announcementsbox{
+}
+
+#announcementscontent{
+}
+
+#weeklyroundupbox{
+}
+
+#weeklyroundupcontent{
+}
+
+#egreetingsbox{
+}
+
+#egreetingscontent{
+}
+
+
+#searchbox{
+}
+
+#searchcontent{
+}
+
+#blogsbox{
+}
+
+#blogscontent{
+}
+
+#photosbox{
+}
+
+#photoscontent{
+}
+
+#videosbox{
+}
+
+#videoscontent{
+}
+
+#hubsbox{
+}
+
+#hubscontent{
+}
+
+#reviewsbox{
+}
+
+#reviewscontent{
+}
+
+#travelbox{
+}
+
+#travelcontent{
+}
+
+#astrologybox{
+}
+
+#astrologycontent{
+}
+
+#extrabox{
+}
+
+#extracontent{
+}
+
+#gamesbox{
+}
+
+#gamescontent{
+}
+
+#wallpapersbox{
+}
+
+#wallpaperscontent{
+}
+
+#pollsbox{
+}
+
+#pollscontent{
+}
+
+#humorbox{
+}
+
+#humorcontent{
+}
+
+#eventsheader{
+}
+
+#classifiedsheader{
+}
+
+#eventsheader{
+}
+
+#moviesheader{
+}
+
+#musicheader{
+}
+
+#sportsheader{
+}
+
+#servicesheader{
+}
+
+#announcementsheader{
+}
+
+#weeklyroundupheader{
+}
+
+#egreetingsheader{
+}
+
+#searchheader{
+}
+
+#blogsheader{
+}
+
+#photosheader{
+}
+
+#videosheader{
+}
+
+#hubsheader{
+}
+
+#reviewsheader{
+}
+
+#travelheader{
+}
+
+#astrologyheader{
+}
+
+#gamesheader{
+}
+
+#wallpapersheader{
+}
+
+#pollsheader{
+}
+
+#humorheader{
+}
+
+

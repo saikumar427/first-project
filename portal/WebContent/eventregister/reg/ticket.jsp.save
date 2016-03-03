@@ -1,0 +1,643 @@
+<%@ page import="com.eventbee.event.*,com.eventbee.event.ticketinfo.*"%>
+<%@ page import="com.eventbee.authentication.*"%>
+<%@ page import="com.eventbee.general.GenUtil"%>
+<%@ page import="com.eventbee.general.formatting.*"%>
+<%@ page import="com.eventbee.general.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.eventbee.survey.*"%>
+<%@ page import="com.eventbee.creditcard.*"%>
+<%@ include file='/xfhelpers/xffunc.jsp' %>
+<script language="javascript" src="/home/js/ajax.js">
+         function dummy(){}
+</script>
+
+<%!
+	String formname="form";
+	String rowdisplay(int count){
+		if(count%2==0){
+			return "<tr class='oddbase'>";
+		}else{
+			return "<tr class='evenbase'>";
+		}
+	}
+   
+
+ EventTicket[] orderTickets(EventTicket[] tickets,Vector v){
+	    	
+	 EventTicket[] evttkt=new EventTicket[tickets.length];
+	    	EventTicket[] evt=new EventTicket[tickets.length];
+	    	int m=0;
+	    	HashMap hm1=new HashMap();
+	    	if(v.isEmpty()||v==null){
+	    	
+	    	return tickets;
+	    	
+	    	}
+	    	else{
+	    	
+	    	for(int j=0;j<v.size();j++){
+	    	HashMap  hm=(HashMap)v.elementAt(j);
+	    	 String price=(String)hm.get("ticketid");	
+	    	 String position=(String)hm.get(price);	
+	    	hm1.put(price,position);
+	    	}
+	    	
+	    	}
+	    	
+	    	for(int i=0;i<tickets.length;i++){
+	    	String ticketid=tickets[i].getTicketId();
+	    	
+	    	if(hm1.containsKey(ticketid)){
+	    	int pos=Integer.parseInt((String)hm1.get(ticketid));
+	    	
+	    	evttkt[pos-1]=tickets[i];
+	    	}
+	    	else{
+	    	
+		evt[m]=tickets[i];
+		m++;
+   	   	
+	    	}}
+	    	
+	    	for(int q=0;q<m;q++){
+		   	int l=tickets.length-m+q;
+		   	
+		   	evttkt[l]=evt[q];
+		   	
+   	            }
+	    	
+	    	
+	    	
+	    	
+	    	return evttkt;
+	    	
+   	}
+  	
+   	
+	  
+  Vector getReqGroupDetails(String evtid,EventTicket[] evt1,String tickettype){
+	  	Vector vec=new Vector();
+	  	HashMap pm=new HashMap();
+	  	for(int p=0;p<evt1.length;p++){
+		   	pm.put(evt1[p].getTicketId(),"");
+		   	}
+   	
+	  	
+	  	DBManager dbmanager=new DBManager();
+	  	StatusObj st=dbmanager.executeSelectQuery("select groupname,description,price_id,g.position from group_tickets g,event_ticket_groups e where e.ticket_groupid=g.ticket_groupid and e.eventid=? and e.tickettype=? order by e.position,g.position ",new String []{evtid,tickettype});
+	  	if(st.getStatus()){
+	  	   	int a=0;
+	  	   	for(int k=0;k<st.getCount();k++){
+	  	   	
+	  	       if(pm.containsKey(dbmanager.getValue(k,"price_id",""))){
+	  	        HashMap hm=new HashMap ();
+		   	hm.put("ticketid",dbmanager.getValue(k,"price_id",""));
+		   	hm.put("name",dbmanager.getValue(k,"groupname",""));
+		   	hm.put("description",dbmanager.getValue(k,"description",""));
+		   	
+		   	a++;
+		   	hm.put(dbmanager.getValue(k,"price_id",""),String.valueOf(a));
+		   	vec.add(hm);
+		   	}
+   	   		   	
+	  	   	}
+	  	   	}
+	  	   	return vec;
+	  	   	
+	   	}
+	 
+	 
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+ 	String TicketsDisplay(EventRegisterBean jBean,String title,String selectOneRef, 
+			String baseRef,EventTicket[] Tickets,  boolean selectOneNeeded, 
+			boolean selectManyNeeded,
+			boolean isQtyFixed, boolean couponExists,String description,
+			boolean includebasefee, Map reqMap,int count,String option,Vector v){
+		
+		HashMap scopemap=jBean.getScopeMap();
+		String currencyformat=GenUtil.getHMvalue(scopemap,"event.reg.currency.format","$");
+		StringBuffer sb=new StringBuffer("");
+		sb.append("<table width='100%'>");
+		//sb.append("<tr><td class='medium'>");
+		//sb.append(GenUtil.XMLEncode(title));
+		//sb.append("</td></tr>");
+	       	//sb.append("<tr><td class='inform'>");
+	       	//sb.append(GenUtil.textToHtml(GenUtil.XMLEncode(description) ));
+		//sb.append("</td></tr>");
+       	
+		sb.append("<tr><td>");
+		sb.append("<table width='100%'>");
+		sb.append("<tr><td class='colheader' width='5%'/>" );
+		sb.append("<td class='colheader' width='65%' ></td>");
+		sb.append("<td class='colheader' width='10%' >Price ("+currencyformat+")</td>");
+		sb.append("<td class='colheader' width='10%' >Fee ("+currencyformat+")</td>");
+		sb.append("<td class='colheader' width='5%'>Quantity</td>");
+		/*if (couponExists){
+		     sb.append("<td class='colheader' width='10%' style='{font: 62.5% verdana, sans-serif;}'>Couponnnnnn</td>");
+		}else{*/
+		     sb.append("<td width='10%' style='{font: 62.5% verdana, sans-serif;}'></td>");
+		//}
+
+		sb.append("</tr>");
+
+     	 String grpnam="";
+     	 String gname="";
+     	 String grpdesc="";
+     	 int i=0;
+     	 String base="oddbase";
+     	 int groupindex=0;
+     	 boolean isgroupticket=false;
+        	for ( i=0;i<Tickets.length; i++) {
+        	      isgroupticket=false;
+        	       if(v!=null&&v.size()>0&&i<v.size()){
+        	        
+        	        HashMap hm1=(HashMap)v.elementAt(i);
+        	       
+        	         String grpnam1=(String)hm1.get("name");
+        	         grpdesc=(String)hm1.get("description");
+        	         if(!"".equals(grpnam1)){
+        	         if(gname.equals(grpnam1)){
+			    grpnam="";
+			    grpdesc="";
+			    }
+		        else{
+			    groupindex++; 
+			    grpnam=grpnam1 ;
+        	           }
+        	         isgroupticket=true;
+        	         }
+        	         else
+        	         {
+        	         groupindex++;
+        	         grpnam="";
+			    grpdesc="";
+        	         
+        	         }
+        	         
+        	        
+        	        gname=grpnam1;
+        	       
+        	        sb.append("<tr><td colspan='5'><strong>"+grpnam+"</strong></td></tr>");
+        	        sb.append("<tr><td colspan='5'>"+grpdesc+"</td></tr>");
+        	    }
+			sb.append("<input type='hidden' name='cost"+option+i+"' id='cost"+option+i+"' value='"+CurrencyFormat.getCurrencyFormat("",Tickets[i].getTicketPrice(),true)+"'>");
+			sb.append("<input type='hidden' name='processfee"+option+i+"' id='processfee"+option+i+"' value='"+jBean.getTotalProcessfee(Tickets[i],1)+"'>");
+			sb.append("<input type='hidden' name='discost_"+Tickets[i].getTicketId()+"' id='discost_"+Tickets[i].getTicketId()+"' value=''>");
+			sb.append("<input type='hidden' name='discount_"+Tickets[i].getTicketId()+"' id='discount_"+Tickets[i].getTicketId()+"' value='' >");
+			sb.append("<input type='hidden' name='discountcode' id='discountcode' value='"+Tickets[i].getCouponCode()+"' >");
+			
+			int coupon=Tickets[i].getCouponCount();
+			int j=count+i;
+			String tktqty="";
+			if("/publicTickets".equals(baseRef)){
+				tktqty=(jBean.getPublicTickets())[i].getTicketQty();
+				if("".equals(tktqty)) tktqty=Tickets[i].getMinQty()+"";
+
+			}
+			else if("/optTickets".equals(baseRef)){
+				tktqty=(jBean.getOptTickets())[i].getTicketQty();
+			}
+			
+			if(groupindex%2!=0)
+			base="evenbase";
+			else
+			base="oddbase";
+			sb.append("<tr>");  
+			
+			if(selectOneNeeded){
+				
+			if(isgroupticket)	
+			{
+			
+			sb.append("<td width='20' class='"+base+"'>&nbsp;</td>");
+			sb.append("<td valign='center' class='"+base+"' ><span class='inform'><strong>");
+			}
+			else{
+			sb.append("<td colspan='2' valign='center' class='"+base+"'><span class='inform'><strong>");
+			}
+			
+			sb.append(getXfSelectOneRadio(selectOneRef, new String[]{Tickets[i].getTicketId()}, new String[]{GenUtil.XMLEncode(Tickets[i].getTicketName())},jBean.getTicketSelect() ," onclick=getTotalAmt();SubmitTicketOnBlur(); "));
+			
+			}else if(selectManyNeeded){
+				if(isgroupticket)	
+							{
+							
+							sb.append("<td width='20' class='"+base+"' >&nbsp;</td>");
+							sb.append("<td valign='center' class='"+base+"' ><span class='inform'><strong>");
+							}
+			       else{
+			       sb.append("<td colspan='2' valign='center' class='"+base+"' ><span class='inform'><strong>");
+			       			}
+			
+				sb.append(getXfSelectMany(selectOneRef, new String[]{Tickets[i].getTicketId()}, new String[]{GenUtil.XMLEncode(Tickets[i].getTicketName())},jBean.getOptTicketsSelect()," onclick=getTotalAmt() " ));
+				
+		       }else{
+		       
+		       
+		                if(isgroupticket)	
+				{
+
+				sb.append("<td width='20' class='"+base+"'>&nbsp;</td>");
+				sb.append("<td valign='center' class='"+base+"'  ><span class='inform'><strong>");
+				}
+			else{
+			   sb.append("<td colspan='2' valign='center' class='"+base+"' ><span class='inform'><strong>");
+			    }
+				sb.append("<input type='checkbox' checked='true' disabled>");
+				sb.append(getXfHidden(selectOneRef, Tickets[i].getTicketId()));
+				sb.append(GenUtil.XMLEncode(Tickets[i].getTicketName()));
+				sb.append("<br/>");
+			}
+			
+                        
+			sb.append("</strong>(min buy - "+ Tickets[i].getMinQty() +", max  buy - "+ Tickets[i].getMaxQty() +")<br/><br/>"+ GenUtil.textToHtml(GenUtil.XMLEncode(Tickets[i].getDescription())));
+			
+			sb.append("</span></td><td class='"+base+"'><table><tr><td id='ticket_"+Tickets[i].getTicketId()+"' valign='center'><span class='inform'>");
+			sb.append(CurrencyFormat.getCurrencyFormat("",Tickets[i].getTicketPrice(),true));
+			sb.append("</td><td id='upticket_"+Tickets[i].getTicketId()+"' valign='center'><span class='inform'></td></tr></table></td><td id='processfee_"+Tickets[i].getTicketId()+"'  class='"+base+"'  valign='center' ><span class='inform'>");
+			sb.append(CurrencyFormat.getCurrencyFormat("",jBean.getTotalProcessfee(Tickets[i],1),true));
+			sb.append("</span></td><td align='center' class='"+base+"'  valign='center'><span class='inform'>");
+			
+			if (isQtyFixed){
+               			sb.append(getXfHidden(baseRef+"["+(i+1)+"]/ticketQty", "1"));
+				sb.append("1");
+			}else{
+				//sb.append(getXfTextBox(baseRef+"["+(i+1)+"]/ticketQty",  tktqty, "3"));
+				//sb.append("<input type='text' size='"+GenUtil.getEncodedXML("3")+"' name='"+GenUtil.getEncodedXML(baseRef+"["+(i+1)+"]/ticketQty")+"' ");
+				sb.append("<input type='text' size='"+GenUtil.getEncodedXML("3")+"' id='qty"+option+i+"' name='"+GenUtil.getEncodedXML(baseRef+"["+(i+1)+"]/ticketQty")+"' ");
+				if(tktqty!=null){
+					//if("/publicTickets".equals(baseRef)||"/memberTickets".equals(baseRef)){
+					if(selectOneNeeded)
+						sb.append(" onKeyPress=' keypress2(event,this,"+j+")' value='"+GenUtil.getEncodedXML(tktqty)+"' onkeyup=' selectOne(this,"+j+"); '" );
+					else
+						sb.append(" onKeyPress='keypress(event,this)' value='"+GenUtil.getEncodedXML(tktqty)+"' onkeyup='SubmitTicketOnBlur();' " );
+				}
+
+    				sb.append(" />");
+    			}
+			sb.append("</span></td>");
+
+        		/*if (coupon>0){
+				String cpcode="";
+				if("/publicTickets".equals(baseRef)){
+					cpcode=(jBean.getPublicTickets())[i].getCouponCode();
+				}
+				else if("/optTickets".equals(baseRef)){
+					cpcode=(jBean.getOptTickets())[i].getCouponCode();
+
+				}
+				sb.append("<td class='inform' align='center' valign='center'>");
+				sb.append(getXfTextBox(baseRef+"["+(i+1)+"]/couponCode", cpcode, "7"));
+       				sb.append("</td>");
+			}*/
+			
+    			sb.append("</tr>");
+   		}// end for loop
+		sb.append("</table></td></tr></table>");
+		return sb.toString();
+		
+ 	}
+ 	
+
+ 	
+ 	
+	
+
+ 	
+ 	
+ 	
+ %>
+
+<%
+
+	Map reqMap=(Map)session.getAttribute("reg_ticket");
+	String evtid=request.getParameter("GROUPID");
+	EventRegisterBean jBean = (EventRegisterBean)session.getAttribute("regEventBean");
+	String eventid=jBean.getEventId();
+	EventConfigScope evt_scope=new EventConfigScope();
+	HashMap scopemap=evt_scope.getEventConfigValues(eventid,"Registration");
+	
+	int pubTicketCount=0;
+	int optTicketCount=0;
+	int count=0;
+      boolean isQtyFixed=(("no").equals(jBean.getBookingType()));
+	EventTicketDB eb=new EventTicketDB();
+	EventTicket[] publicTickets=jBean.getPublicTickets();
+	Vector v=getReqGroupDetails(evtid,publicTickets,"Public");
+	
+	EventTicket[] optionalTickets=jBean.getOptTickets();
+	Vector v1=getReqGroupDetails(evtid,optionalTickets,"Optional");
+	
+	if (publicTickets!=null){
+	pubTicketCount=publicTickets.length;
+	publicTickets=orderTickets(publicTickets,v);
+	
+	jBean.setPublicTickets(publicTickets);
+	}
+	if (optionalTickets!=null)
+	{optTicketCount=optionalTickets.length;
+	
+	
+	optionalTickets=orderTickets(optionalTickets,v1);
+	jBean.setOptTickets(optionalTickets);
+	
+	}
+	
+	boolean selectOneNeeded=(pubTicketCount>1);
+	
+	Authenticate au=AuthUtil.getAuthData(pageContext);
+	String authid=null;
+	if(au!=null)
+		authid=au.getUserID();
+	
+	String event_name=DbUtil.getVal("select eventname from eventinfo where eventid=?", new String [] {evtid});
+	String username=DbUtil.getVal("select getMemberPref(mgr_id||'','pref:myurl','') as username from eventinfo where eventid=?", new String [] {evtid});
+	request.setAttribute("NavlinkNames",new String[]{event_name});
+
+	String participant=jBean.getAgentId();
+
+	if (participant!=null)	
+	request.setAttribute("NavlinkURLs",new String[]{ShortUrlPattern.get(username)+"/event?eventid="+evtid+"&participant="+participant});
+	else
+	request.setAttribute("NavlinkURLs",new String[]{ShortUrlPattern.get(username)+"/event?eventid="+evtid});
+
+	request.setAttribute("tasktitle","Select Tickets");
+	request.setAttribute("tasksubtitle","Step 1 of  3");
+	request.setAttribute("tabtype","event");
+%>
+
+<script type="text/javascript" language="JavaScript" src="/home/js/advajax.js">
+        function dummy1() { }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/eventreg.js">
+ 	function dummy2() { }
+</script>
+<script language="javascript" src="/home/js/enterkeypress.js" >
+	dummy23456=888;
+</script>
+<script language="javascript" src="/home/js/popup.js"></script>
+<script type="text/javascript" language="JavaScript" >
+	var evtid=<%=evtid%>;
+	var audata=<%=authid%>;
+	var xy='false';
+	var val='evtmem';
+	function submitform(){
+		document.form1.elements["cocoon-action-next"].click();
+	}
+	function  keypress2(event1,tes,i){
+		if( ( document.all && event1.keyCode == 13 ) || event1.which == 13 ){
+			selectOne(tes,i);
+ 			submitform();
+		}
+	}
+</script>
+<form id='attendeefrm' name='form1'  method="post"  view="ticket" action="/portal/eventregister/reg/ticketController.jsp" > 
+<input value="ticket" name="cocoon-xmlform-view" type="hidden" />
+<input type="hidden" name="optTicketCount" value="<%=optTicketCount%>" id="optTicketCount"/>
+<input type="hidden" name="pubTicketCount" value="<%=pubTicketCount%>" id="pubTicketCount"/>
+<input type='hidden' name='formname' value='ticket' />
+<input type='hidden' name='/selectPayType' value=''  id="/selectPayType"/>
+
+<table width='100%' align='center' >
+
+<tr><td id='showerror' class='error' ></td></tr>
+<tr><td id='showtkterror' class='error' ></td></tr>
+<tr><td align='left' id='showattendeeerror' class='error' ></td></tr>
+
+<tr><td class='medium'>Required Tickets</td></tr>
+<tr><td>
+
+<%
+
+if(pubTicketCount>0){
+
+	out.println(TicketsDisplay( jBean,"","ticketSelect", "/publicTickets",
+		publicTickets, selectOneNeeded, false, isQtyFixed, jBean.getPublicCouponsExist(),
+		(String)jBean.getObject("event.ticketpage.publicticket.statement"),false,
+		reqMap,count,"publicTickets",v));
+	count=count+pubTicketCount;
+}
+out.println("</td></tr>");
+if(optTicketCount>0){ 
+	out.println("<tr><td class='medium'>Optional Tickets</td></tr>");
+out.println("<tr><td>");
+	
+      		out.println(TicketsDisplay(jBean,"","optTicketsSelect", "/optTickets",
+		optionalTickets, false,	true, false, jBean.getOptCouponsExist(),(String)jBean.getObject("event.ticketpage.optionalticket.statement"),true,reqMap,count,"Optional",v1));
+	out.println("</td></tr>");
+}
+
+
+%>
+<tr><td width='100%' align="right"><table >
+<tr><td width='75%' align="right"></td><td width='14%' align="left">Total</td><td id="totamount">$0.00</td><td width='11%'></td></tr>
+<tr><td width='75%' align="right"></td><td width='14%' align="left">Discounts </td><td id="disamount">$0.00</td><td width='11%'></td></tr>
+<tr><td width='75%' align="right"></td><td width='14%' align="left">Grand Total </td><td id="grandtotamount">$0.00</td><td width='11%'></td></tr></table></td></tr>
+
+</table> 
+
+</form>
+
+
+<tr><td ><div id='paydata'></div></td></tr>
+
+
+<table>
+<tr><td align='left' id='showacouponerror' class='error' ></td></tr>
+<tr><td id='couponBlock'></td><td align='left' id='showacouponstatus' class='error' ></td></tr>
+<tr><td align='left' id='memshowacouponerror' class='error' ></td></tr>
+<tr><td id='memcouponBlock' ></td><td align='left' id='memshowacouponstatus' class='error' ></td></tr></table>
+
+
+<table  width='100%' >
+<tr><td class='error' id="msgtab"></td></tr>
+
+<%
+
+HashMap ptypehm=PaymentTypes.getPaymentTypeInfo(evtid,"Event","other");
+String otherdesc=null;
+
+if(ptypehm!=null){
+	otherdesc=(String)ptypehm.get("attrib_1");
+
+}
+
+
+ProfileData[] m_ProfileData=new ProfileData[]{new ProfileData()};
+SurveyAttendee[] m_surveys=new SurveyAttendee[]{new CustomAttributeSurvey()};
+String display="none";
+if(au!=null){ 
+	display="block";
+	m_ProfileData[0].setFirstName((String)au.UserInfo.get("FirstName"));
+	m_ProfileData[0].setLastName((String)au.UserInfo.get("LastName"));
+	m_ProfileData[0].setEmail((String)au.UserInfo.get("Email"));
+	jBean.setProfileData(m_ProfileData);
+}
+
+
+if((m_surveys[0].getSurveyObject())==null){
+	m_surveys[0].setGroupId(evtid);
+	m_surveys[0].setSurvey(evtid,"EVENT","surveys[1]");
+	jBean.setSurveys(m_surveys);
+}
+String showloginsignup=DbUtil.getVal("select showlogin from eventinfo e,config c where e.config_id=c.config_id and c.name='event.poweredbyEB' and c.value='yes' and e.eventid=?",new String[]{evtid});
+if(showloginsignup==null) showloginsignup="No";
+if(au==null&&("Yes".equals(showloginsignup))){ 
+String defaultradio=request.getParameter("memberType");
+
+
+
+
+%>
+
+<tr><td>
+<form id='attendeelogininfo' name='attendeelogininfo'  method="post" action="/portal/eventregister/attendeeauth/processattendeeauth.jsp"  onsubmit="submitLoginForm(); return false;" >
+<%=PageUtil.writeHiddenCore((HashMap)request.getAttribute("REQMAP")) %>
+<div id='loginerrmsg' align='center'></div>
+<table width='100%'>
+
+<tr>
+<td class='medium'>Attendee Info</td>
+<td>
+<input type='radio' name='memberType' value='evtmem'  <%=WriteSelectHTML.isRadioChecked("evtmem", ((defaultradio==null)||("".equals((defaultradio).trim())))?"evtmem":defaultradio)%> onclick='showMemberBlock();'  /> Eventbee Member 
+<input type='radio' name='memberType' value='newmem' <%=WriteSelectHTML.isRadioChecked("newmem", defaultradio)%> onclick='showMemberBlock();' /> New to Eventbee
+</td></tr>
+<tr><td colspan='2'><div id='attendeeBlock'></div></td></tr>
+
+
+</table>
+</form>
+</td></tr>
+<script type="text/javascript">
+	showMemberBlock();
+</script>
+<%}else if(au==null&&("No".equals(showloginsignup))){%>
+	
+	<tr><td class='medium'>Attendee Info</td></tr>
+	<script type="text/javascript" language="JavaScript" >
+		var val='newmem';
+	</script>
+<%}else if(au!=null){%>
+	<tr><td class='medium'>Attendee Info</td></tr>
+<%}%>
+ 	
+<tr><td> 
+        
+	<div id='submsg' class='medium' style='display:none'>Attendee Info</div>
+	<div id="attendeePersonalInfo" style='display:'<%=display%>'>
+	</div>
+</td></tr>
+</table>
+<table width='100%' >
+<tr><td>
+<form id='finalform' name='frm' action='/portal/eventregister/reg/confirm.jsp'  method='post' >
+<input type='hidden' name='GROUPID' value='<%=evtid%>' />
+<%if("FB".equals(request.getParameter("context"))){%>
+<input type='hidden' name='context' id="fbcontext" value='FB' />
+<%}%>
+<table width='100%' cellpadding='0' cellspacing='0'>
+<tr><td>
+	<table width='100%'  align='center' cellpadding='0' cellspacing='0'>
+	<tr><td class="medium">Refund Policy/Terms & Conditions </td></tr>
+	<%--<td><%=getXfBoolean("policy","I Accept",jBean.getPolicy() )%></td>--%>
+	<tr><td colspan="2" class="inform"> 
+	<% 
+	   out.println(getXfTextAreaRO("/refundPolicy",jBean.getRefundPolicy(),"10","75"));
+	%>
+	</td>
+	</tr>
+</table>
+</td></tr>
+<%
+
+ 
+ if(jBean.getPaymentType()!=null && !"".equals(jBean.getPaymentType())){
+ %>
+ <tr height='5'></tr>
+ <tr><td class="medium">Payment</td></tr>
+ <%
+ }
+	if(jBean.getPaymentType().indexOf("E")!=-1){%>
+<tr ><td><table><tr><td width='150'> </td>
+  <td><a href=''onClick="selectPayType('eventbee');ValidateRegData();return false; " ><img src='/home/images/ebeepay.jpg' border='0' alt='Eventbee Payment Processing'/>
+</td>
+	</tr></table>
+</td></tr>
+<%}
+
+	if(jBean.getPaymentType().indexOf("G")!=-1){%>
+<tr ><td><table><tr><td width='150'> </td>
+  <td><a href=''onClick=" selectPayType('google'); ValidateRegData();return false; " ><img src='/home/images/googlepay.jpg' border='0' alt='Google Payment Processing'/>
+</td>
+	</tr></table>
+</td></tr>
+<%}	if(jBean.getPaymentType().indexOf("P")!=-1){%>
+<tr ><td><table><tr><td width='150'> </td>
+  <td><a href=''onClick="selectPayType('paypal'); ValidateRegData();return false; " ><img src='/home/images/paypalpay.jpg' border='0' alt='PayPal Payment Processing'/></td>
+	</tr></table>
+</td></tr>
+<%}	if(jBean.getPaymentType().indexOf("O")!=-1){%>
+<tr ><td><table><tr><td width='150'> </td><td width='200'><b>Other payment methods</b></td>
+  <td><%=otherdesc%></td>
+	</tr></table>
+</td></tr>
+<%}%>
+</table>
+</form>
+</td></tr>
+</table>
+<%
+if(session.getAttribute("CouponContent_"+evtid)!=null){
+
+%>
+<script>
+getCouponBlock('refresh');
+getMemCouponBlock('isnew');
+</script>
+<%}
+if(session.getAttribute("MemCouponContent_"+evtid)!=null){
+
+%>
+<script>
+getMemCouponBlock('refresh');
+getCouponBlock('isnew');
+</script>
+<%}
+else{
+
+
+
+
+%>
+<script type="text/javascript">
+	
+	getCouponBlock('isnew');
+	
+	
+	getMemCouponBlock('isnew');
+	
+	
+</script>
+<%}%>
+
+
+<script type="text/javascript">
+	
+	SubmitTicketOnBlur();
+	
+	
+	getEventAttendees();
+	
+
+	
+</script>
+
+
+
+

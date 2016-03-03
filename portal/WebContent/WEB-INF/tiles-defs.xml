@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+ <!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+<definition name=".beeletspage" path="/templates/beeletspagelayout.jsp">
+	<put name="head"         value="/main/header.jsp" />
+	<put name="mytabs"         value="" />
+	<put name="footer"       value="/main/footer.jsp" />
+	<put name="leftdivid"         value="wideleftcolumn" />
+	<put name="rightdivid"         value="narrowrightcolumn" />
+</definition> 
+
+<definition name=".taskpage" path="/templates/taskpagelayout.jsp">
+	<put name="head"         value="/main/tabsheader.jsp" />
+	<put name="mytabs"         value="" />
+	<put name="footer"       value="/main/footer.jsp" />
+	<put name="content"         value="" />
+</definition>    
+
+
+<definition name=".homepage" path="/templates/homepagelayout.jsp" >
+	<put name="head"         value="/main/header.jsp" />
+	<put name="mytabs"         value="" />
+	<put name="footer"       value="/main/footer.jsp" />
+	<put name="leftdivid"         value="wideleftcolumn" />
+	<put name="rightdivid"         value="narrowrightcolumn" />
+	<put name="leftdivid"         value="leftcolumn" />
+	<put name="rightdivid"         value="rightcolumn" />
+	<putList name="leftdisplaylist">
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="content1a" />
+        			<set-property property="isCollapsable" value="false" />
+				<set-property property="resource" value="/content/static/content1a.html" />
+				<set-property property="includeType" value="AJAX" />
+				
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="content1b" />
+        			<set-property property="isCollapsable" value="false" />				
+				<set-property property="resource" value="/content/static/content1b.html" />
+				<set-property property="includeType" value="AJAX" />
+				
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content1c" />
+				<set-property property="isCollapsable" value="false" />				
+				<set-property property="resource" value="/content/static/content1c.html" />
+				<set-property property="includeType" value="AJAX" />
+										
+			</bean>
+      			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="events" />
+        			<set-property property="isCollapsable" value="false" />
+				<!--<set-property property="url" value="/portal/eventdetails/events.jsp?evttype=event" />-->
+				<!--<set-property property="title" value="Featured Events" />-->
+				<set-property property="resource" value="/portal/content/getevents.jsp?type=event" />
+				<set-property property="includeType" value="AJAX" />
+				
+      			</bean>
+      			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="class" />
+        			<set-property property="isCollapsable" value="false" />
+				<!--<set-property property="url" value="/portal/eventdetails/events.jsp?evttype=class" />-->
+				<!--<set-property property="title" value="Featured Classes" />-->
+				<set-property property="resource" value="/portal/content/getevents.jsp?type=class" />
+				<set-property property="includeType" value="AJAX" />
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content1d" />
+				<set-property property="isCollapsable" value="false" />				
+				<set-property property="resource" value="/content/static/content1d.html" />
+				<set-property property="includeType" value="AJAX" />
+										
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content1e" />
+				<set-property property="isCollapsable" value="false" />				
+				<set-property property="resource" value="/content/static/content1e.html" />
+				<set-property property="includeType" value="AJAX" />
+													
+			</bean>
+		</putList>
+		
+		<putList name="rightdisplaylist">
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="content2a" />
+        			<set-property property="resource" value="/staticcontent/content2a.jsp" />
+				<set-property property="includeType" value="JSP" />
+				
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="content2b" />
+        			<set-property property="resource" value="/staticcontent/content2b.jsp" />
+				<set-property property="includeType" value="JSP" />
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="content2c" />
+        			<set-property property="resource" value="/staticcontent/content2c.jsp" />
+				<set-property property="includeType" value="JSP" />
+      			</bean>
+      			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content2d" />
+				<set-property property="resource" value="/staticcontent/content2d.jsp" />
+				<set-property property="includeType" value="JSP" />
+							
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="networkticketevents" />
+				<set-property property="isCollapsable" value="false" />
+				<set-property property="resource" value="/portal/myearnings/topnetworkticktsellinghomeevents.jsp" />
+				<set-property property="includeType" value="AJAX" />
+
+		        </bean>
+			
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content2e" />
+				<set-property property="resource" value="/staticcontent/content2e.jsp" />
+				<set-property property="includeType" value="JSP" />
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content2f" />
+				<set-property property="resource" value="/staticcontent/content2f.jsp" />
+				<set-property property="includeType" value="JSP" />
+
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content2g" />
+				<set-property property="resource" value="/staticcontent/content2g.jsp" />
+				<set-property property="includeType" value="JSP" />
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content2h" />
+				<set-property property="resource" value="/staticcontent/content2h.jsp" />
+				<set-property property="includeType" value="JSP" />
+
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content2i" />
+				<set-property property="resource" value="/staticcontent/content2i.jsp" />
+				<set-property property="includeType" value="JSP" />
+			</bean>
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+				<set-property property="beeletId" value="content2j" />
+				<set-property property="resource" value="/staticcontent/content2j.jsp" />
+				<set-property property="includeType" value="JSP" />
+			</bean>
+			
+			
+			
+			
+			
+			
+			
+			
+		</putList>
+</definition>
+<definition name=".eventspage" extends=".beeletspage" >
+	<put name="head"         value="/main/tabsheader.jsp" />
+	<put name="leftdivid"         value="wideleftcolumn" />
+	<put name="rightdivid"         value="narrowrightcolumn" />
+      <putList name="leftdisplaylist">
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="eventslist" />
+        			<set-property property="isCollapsable" value="false" />
+				<set-property property="includeType" value="" />
+				<set-property property="beeletBorderType" value="beelettable" />				
+				<set-property property="resource" value="/eventdetails/eventscategories.jsp" />
+			</bean>
+			
+		</putList>
+		
+		<putList name="rightdisplaylist">
+			<bean classtype="com.eventbee.web.presentation.beans.BeeletItem" >
+        			<set-property property="beeletId" value="listevent" />
+        			<set-property property="isCollapsable" value="false" />
+				<set-property property="includeType" value="" />
+				<set-property property="beeletBorderType" value="beelettable" />
+				<set-property property="resource" value="/eventdetails/listevent.jsp" />
+			</bean>
+			
+		</putList>
+</definition>
+
+    
+    
+</tiles-definitions>

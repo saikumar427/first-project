@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+Content-Type:text/calendar
+PRODID:-//www.eventbee.com//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:20140513T090000
+DTEND:20140513T100000
+LOCATION:Hyderabad
+UID:20140512T003800@eventbee.com
+SUMMARY:my rsvp jboss copy
+URL:http://hemanthkk.citypartytix.com/event?eventid=181106005
+END:VEVENT
+END:VCALENDAR

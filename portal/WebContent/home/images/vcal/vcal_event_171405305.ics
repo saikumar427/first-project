@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+Content-Type:text/calendar
+PRODID:-//www.eventbee.com//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:20140510T090000
+DTEND:20140831T160000
+LOCATION:Texas
+UID:20140510T050200@eventbee.com
+SUMMARY:RSVP @ May ---- changed to ticketing
+URL:http://maruthivol.citypartytix.com/event?eventid=171405305
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,461 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+
+<html>
+<head>
+<title>Eventbee - The most effective web based event management software</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META Http-Equiv="Cache-Control" Content="no-cache">
+<META Http-Equiv="Pragma" Content="no-cache">
+<META Http-Equiv="Expires" Content="0">
+<meta name="Description" content="Easy to use web based Event Management
+solution that includes Event Ticketing, Email Marketing, Event Photos,
+Event Blogs and Membership Management" />
+
+<meta name="Keywords" content="online ticketing, event ticketing, event
+payments, email marketing, event blogs, membership management, event
+credit card payments, event photos, event blogging, event communities,
+membership payments, online memberships, event community, event
+networking, event social networking, event promotion, event listing, local
+events" />
+
+<link rel="stylesheet" type="text/css" href="/home/index.css" />
+<link rel="stylesheet" type="text/css" href="/home/homepage.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/niftyCorners.css" />
+
+</head>
+
+<script language="javascript" src="/home/js/popup.js"> 
+         function dummy(){}
+</script>
+<body bgcolor="#FFFFFF" text="555555" link="555555" vlink="555555" alink="555555" topmargin="5">
+<div id="topcontainer">
+  <div id="container"> 
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+      <tr> 
+        
+        <td width="10"></td>
+        <td width="687"></td>
+        <td width="10"></td>
+        <td width="336"></td>
+        <td width="10"></td>
+      </tr>
+      <!--********************************* BEGIN HEADER ************************** -->
+      <tr> 
+        <td colspan='6'/> 
+          <div id="header"> 
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+              <tr height="10"> 
+                <td height="0" /> 
+              </tr>
+              <tr> 
+                <td width="53%" valign="top" height="50"> 
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr> 
+                      <td height="65" valign="bottom" width="19%"> 
+                        <div align="left"><a href="/portal/home.jsp"> <img src="/home/images/logo_big.jpg" border="0"/></a></div>
+                      </td>
+                    </tr>
+                  </table>
+                <td width="47%" height="10" valign="top" > 
+                  <table width="100%" align="center" border="0" cellpadding="5" cellspacing="0">
+                    <tr> 
+                      <td colspan="3" height="40" valign="middle" align="center"> 
+                        <div align="right"> <a href="http://wwww.eventbee.com" style="text-decoration: none"> 
+                          <b><span class="linkfont">Eventbee</span></b> </a><font face="Verdana, Arial, Helvetica, sans-serif" size="-2" color="#333333"> 
+                          | </font> <a href="/portal/community.jsp" style="text-decoration: none"> 
+                          <b><span class="linkfont">Login</span></b> </a> <font face="Verdana, Arial, Helvetica, sans-serif" size="-2" color="#333333"> 
+                          | </font> <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579" style="text-decoration: none"> 
+                          <b><span class="linkfont">Sign Up</span></b> </a> </div>
+                      </td>
+                    </tr>
+                    <tr height="35" id="maintab"> 
+                      <td  class="maintab2" width="31%" height="29"> 
+                        <div align="center"> <a href="/portal/eventdetails/events.jsp?evttype=event&UNITID=13579" > 
+                          <span class="tabfont">Events</span> </a> </div>
+                      </td>
+                      <td class="maintab2" width="31%"> 
+                        <div align="center"> <a href="/portal/eventdetails/events.jsp?evttype=class&UNITID=13579" > 
+                          <span class="tabfont">Classes</span> </a> </div>
+                      </td>
+                      <td class="maintab2"> 
+                        <div align="center"> <a href="/portal/hub/clubsview.jsp" > 
+                          <span class="tabfont">Communities</span> </a></div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr bgcolor="blue"> 
+                <td height="1" colspan="21"  ></td>
+              </tr>
+            </table>
+          </div>
+        </td>
+      </tr>
+      <!--********************************* END HEADER ************************** -->
+      <tr> 
+        <td valign="top" colspan="6" height='20'></td>
+      </tr>
+      <div id="center"> 
+        <tr> 
+          <td height="584" valign="top"> </td>
+          <td valign="top" width="687"> 
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <!--DWLayoutTable-->
+              <tr> 
+                <td width="687" height="63" valign="top"> 
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr> 
+                      <td height="63" valign="top"> 
+                        <p><font size="4" face="Verdana, Arial, Helvetica, sans-serif" color="#FF0000">Eventbee 
+                          Online Registrationn</font></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif">The 
+                          most advanced, yet very easy-to-use web based online 
+                          registration system trusted by thousands of Event Managers. 
+                          </font></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif">Powering 
+                          your event with Eventbee Online Registration is as simple 
+                          as few clicks. You pay only <font color="#006600" size="4">$1 
+                          </font>Service Fee per ticket, regardless of your ticket 
+                          price. Take advantage of PayPal or Google credit card 
+                          processing to further reduce your ticketing costs.</font></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif">Follow 
+                          these simple steps to accept credit card payments online 
+                          within minutes</font></p>
+                        <blockquote>
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif">1. 
+                            List Event</font></p>
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif">2. 
+                            Add Tickets</font></p>
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif">3. 
+                            Publish Event</font></p>
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif">4. 
+                            Sell Tickets</font></p>
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif">5. 
+                            Receive Money</font></p>
+                        </blockquote>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif"><i>Event 
+                          listing by Event Manager slide show:</i></font></p>
+                        <p><embed type="application/x-shockwave-flash" src="http://picasaweb.google.com/s/c/bin/slideshow.swf" width="600" height="400" flashvars="host=picasaweb.google.com&captions=1&noautoplay=1&RGB=0x000000&feed=http%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Feventbee%2Falbumid%2F5219320989729617505%3Fkind%3Dphoto%26alt%3Drss" pluginspage="http://www.macromedia.com/go/getflashplayer">
+                          </embed></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif"><i>Event 
+                          registration by Event Attendee slide show:</i></font></p>
+                        <p><embed type="application/x-shockwave-flash" src="http://picasaweb.google.com/s/c/bin/slideshow.swf" width="600" height="400" flashvars="host=picasaweb.google.com&captions=1&noautoplay=1&RGB=0x000000&feed=http%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Feventbee%2Falbumid%2F5215546091166940193%3Fkind%3Dphoto%26alt%3Drss" pluginspage="http://www.macromedia.com/go/getflashplayer">
+                          </embed></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif"><i>Sample Event Page Customizations:</i></font></p>
+<p>
+<embed type="application/x-shockwave-flash" src="http://picasaweb.google.com/s/c/bin/slideshow.swf" width="600" height="400" flashvars="host=picasaweb.google.com&noautoplay=1&RGB=0x000000&feed=http%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Feventbee%2Falbumid%2F5220960626125295009%3Fkind%3Dphoto%26alt%3Drss" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed></p
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Eventbee 
+                          Advantage</b></font></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif" color="#3300FF">Network 
+                          Ticket Selling:<a name="networkticketselling"></a></font></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif">S</font><font face="Verdana, Arial, Helvetica, sans-serif">ell 
+                          tickets from multiple websites and blogs in our Partner 
+                          Network. Enable Network Ticket Selling on your event, 
+                          tell us how much commission you are willing to pay for 
+                          each ticket sale. Your event will be displayed automatically 
+                          on all our partner websites, giving it instant exposure 
+                          on thousands of web pages.</font></p>
+                        <blockquote> 
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                            Set your own commission for each ticket sale<br>
+                            <b><font color="#FF0000">::</font></b> Pay commission 
+                            only when ticket sale happens<br>
+                            <b><font color="#FF0000">::</font></b> Sell tickets 
+                            through volunteers and friends without paying any 
+                            commission, and motivate them to create separate event 
+                            page with sales goals etc.</font></p>
+                        </blockquote>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif" color="#3300FF">PayPal 
+                          and Google Support:</font><font face="Verdana, Arial, Helvetica, sans-serif" color="#6600CC"><br>
+                          </font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+                          Now you can choose PayPal or Google for credit card 
+                          processing, resulting more savings in your CC processing 
+                          fee. </font></p>
+                        <blockquote> 
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                            Pay low Credit Card processing fee to PayPal or Google<br>
+                            <b><font color="#FF0000">::</font></b> Instantly receive 
+                            ticket sale proceeds to your PayPal or Google account<br>
+                            <b><font color="#FF0000">::</font></b> PayPal and 
+                            Google are trusted by millions of users online</font></p>
+                        </blockquote>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif" color="#3300FF">Facebook 
+                          Event Register Application:<br>
+                          </font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+                          Event Register Facebook application is available starting 
+                          immediately. You can add this application by visiting 
+                          <a href="http://apps.facebook.com/eventregister">http://apps.facebook.com/eventregister</a></font></p>
+                        <blockquote> 
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                            Add tickets to your Facebook events with few clicks 
+                            and enable online payment instantly<br>
+                            <b><font color="#FF0000">::</font></b> Your Facebook 
+                            event page visitors do not go out of Facebook context 
+                            to register for the event<br>
+                            <b><font color="#FF0000">::</font> </b>Increase your 
+                            event visibility through mini-feeds and other viral 
+                            effects built into Event Registration application 
+                            <br>
+                            <b><font color="#FF0000">::</font></b> Display all 
+                            your ticketed events in Event Register application 
+                            box in your profile page</font></p>
+                        </blockquote>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif" color="#3300FF">Amazon 
+                          Web Services:</font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+                          <br>
+                          Eventbee migrated its infrastructure to Amazon Web Services, 
+                          our reliability and scalability is as good as Amazon 
+                          Web Services itself.</font></p>
+                        <blockquote> 
+                          <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                            You can count on 24x7 availability of your event ticketing<br>
+                            <b><font color="#FF0000">::</font></b> Reliable cloud 
+                            computing platform trusted by thousands of companies<br>
+                            <b><font color="#FF0000">::</font></b> Easy scaling 
+                            to support more traffic and users</font></p>
+                        </blockquote>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif">SPECIAL 
+                          PROMOTION: We will credit $100 towards the Service Fee 
+                          for your first event. Experience the power of the Eventbee 
+                          platform while selling your first 100 tickets for FREE.</font></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif">New 
+                          to Eventbee? <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579">Sign 
+                          Up</a> now to start saving</font></p>
+                        <p><font face="Verdana, Arial, Helvetica, sans-serif">For 
+                          more information, visit <a href="http://help.eventbee.com">Eventbee 
+                          Help Cente</a>r</font></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td width="10"></td>
+          <td valign="top" width="336"> 
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+              <!--DWLayoutTable-->
+              <tr> 
+                <td height="74" valign="top" width="356"> 
+                  <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#CCCCFF">
+                    <!--DWLayoutTable-->
+                    <tr> 
+                      <td valign="top" height="81"> 
+                        <div align="center"> 
+                          <p><a href="http://www.eventbee.com/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579"><font size="4" color="#006600" face="Times New Roman, Times, serif">Sign 
+                            Up Now</font></a><font face="Times New Roman, Times, serif"><br>
+                            <br>
+                            <font size="4">For More Information</font><br>
+                            <b>Email:</b> support at eventbee.com<br>
+                            <b>Phone:</b> 408 310 6768<br>
+                            <b>Live Chat:</b> <a href="javascript:popupwindow('http://www.eventbee.com/home/links/livechat.html','Tags','600','400')">Click 
+                            here</a><br>
+                            <b>Help Center:</b> <a href="http://help.eventbee.com">Click 
+                            here</a></font></p>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              <tr> 
+                <td height="10"></td>
+              </tr>
+              <tr> 
+                <td valign="top" align="center"> 
+                  <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#E8EDF7">
+                    <tr> 
+                      <td valign="middle"> 
+                        <div align="center"> 
+                          <p align="left"><font color="#3300FF" face="Times New Roman, Times, serif" size="4">$100 
+                            Service Fee Credit (Introductory Special)</font></p>
+                          <p align="left"><font face="Times New Roman, Times, serif">We 
+                            will credit $100 towards the Service Fee for your 
+                            first event, experience powerful Eventbee platform 
+                            while selling your first 100 tickets for FREE</font></p>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr> 
+                <td height="10"></td>
+              </tr>
+              <tr> 
+                <td height="142" valign="top"> 
+                  <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#CCCCFF">
+                    <tr> 
+                      <td width="356" height="142" valign="top"> 
+                        <p><font color="3300ff" size="4" face="Times New Roman, Times, serif">Ticketing 
+                          Fees</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b>Service 
+                          Fee:</b> Pay to Eventbee $1 per ticket, regardless of 
+                          your ticket price</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b>Credit 
+                          Card Processing Fee:</b> Pay to PayPal or Google whatever 
+                          they charge for processing credit cards</font></p>
+                        <p><img src="http://www.eventbee.com/home/images/paypal_cc.gif" border="0"/><br/><img src="http://www.eventbee.com/home/images/google_cc.gif" border="0"/></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr> 
+                <td height="10"></td>
+              </tr>
+              <tr> 
+                <td height="430" valign="top"> 
+                  <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#E8EDF7">
+                    <tr> 
+                      <td width="346" height="866" valign="top"> 
+                        <p><font size="4" color="3300ff" face="Times New Roman, Times, serif">Eventbee 
+                          Ticketing Highlights</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Secured Real Time Credit Card processing powered by 
+                          PayPal, Google and Eventbee</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Easy customization of Event Pages to match with your 
+                          website look and feel. Access your Event Page HTML/CSS 
+                          templates to fine tune customization</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Create Required or Optional tickets with early bird, 
+                          regular, group discounts<br>
+                          <br>
+                          <font color="#FF0000"><b>::</b></font> Create custom 
+                          registration form with few clicks, and collect required 
+                          and optional information from attendees</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Automatic attendee mailing list creation, and easy one 
+                          click email communication with Attendees</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Power with <a href="http://www.eventbee.com/portal/helplinks/onlineregistration.jsp">Eventbee 
+                          Network Ticket Selling</a> to sell tickets from multiple 
+                          websites and blogs</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Generate Real Time Attendee, Registration and Name Tag 
+                          reports in Microsoft Excel and PDF</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Instant multi-page website including customizable Guest 
+                          and Attendee page</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Configure Guest and Attendee page with following information<br>
+                          - Event Information<br>
+                          - Tickets<br>
+                          - Attendee List (optional)<br>
+                          - Photo<br>
+                          - Notice board<br>
+                          - Agenda<br>
+                          - Sponsor logos<br>
+                          - Polls<br>
+                          - VCal<br>
+                          - Maps</font></p>
+                        <p><font color="#FF0000" face="Times New Roman, Times, serif"><b>::</b></font><font face="Times New Roman, Times, serif"> 
+                          Off-line data entry capability</font></p>
+                        <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000">::</font></b> 
+                          Generation of custom URL and button links to integrate 
+                          your Event Page with your website</font></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr> 
+                <td height="10"></td>
+              </tr>
+              <tr>
+                <td height="53" valign="top">
+                  <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#CCCCFF">
+                    <tr> 
+                      <td width="356" height="53" valign="top">
+                        <p align="left"><font size="4" color="3300ff" face="Times New Roman, Times, serif">Webmasters 
+                          and Bloggers</font></p>
+                        <p align="left"><font face="Times New Roman, Times, serif">Sell 
+                          tickets from your website and get rewarded for each 
+                          ticket sale. Please <a href="http://www.eventbee.com/portal/helplinks/partnernetwork.jsp">click 
+                          here to learn more about Eventbee Partner Network</a></font></p>
+                        </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td height="10"></td>
+              </tr>
+              <tr> 
+                <td height="77" valign="top"> 
+                  <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#E8EDF7">
+                    <tr> 
+                      <td width="356" height="77" valign="top"> 
+                        <p><font size="4" color="3300ff" face="Times New Roman, Times, serif">Learn 
+                          More</font></p>
+                        <p> <font face="Times New Roman, Times, serif">&raquo; 
+                          <a href="http://www.eventbee.com/portal/helplinks/membershipmanagement.jsp">Community 
+                          Building &amp; Membership Management</a></font></p>
+                        <p> <font face="Times New Roman, Times, serif">&raquo; 
+                          <a href="http://www.eventbee.com/portal/helplinks/eventpromotion.jsp">Event 
+                          Promotion</a></font></p>
+                        <p> <font face="Times New Roman, Times, serif">&raquo; 
+                          <a href="http://www.eventbee.com/portal/helplinks/emailmarketing.jsp">Email 
+                          Marketing</a></font></p>
+                        <p> <font face="Times New Roman, Times, serif">&raquo; 
+                          <a href="http://www.eventbee.com/portal/helplinks/partnernetwork.jsp">Eventbee 
+                          Partner Network</a></font></p>
+                        <p> <font face="Times New Roman, Times, serif">&raquo; 
+                          <a href="http://help.eventbee.com">Eventbee Help Center</a></font></p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr> 
+                <td height="11"></td>
+              </tr>
+            </table>
+          </td>
+		 
+        </tr>
+        <tr> 
+          <td height="10" colspan="6"></td>
+        </tr>
+      </div>
+      <div id="footer"> 
+        <tr> 
+          <td height="71" colspan="6" valign="top"> 
+            <!--############################### BEGIN FOOTER ###############################################3-->
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr> 
+                <td height="1" bgcolor="666666" width="988"></td>
+              </tr>
+              <tr> 
+                <td height="16"> 
+                  <div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="-3"> 
+                    </font> 
+                    <p><a href="javascript:popupwindow('/home/links/aboutus.html','');"><font size="-3" face="Verdana, Arial, Helvetica, sans-serif">About 
+                      Us</font></a><font size="-3" face="Verdana, Arial, Helvetica, sans-serif"> 
+                      | <a href="javascript:popupwindow('/home/links/privacystatement.html','');"> 
+                      Privacy Statement</a> | <a href="javascript:popupwindow('/home/links/termsofservice.html','');">Terms 
+                      of Service</a> | <a href="javascript:popupwindow('/home/links/trademarks.html','');">Trade 
+                      Marks</a> | <a href="javascript:popupwindow('/home/links/contact.html','');">Contact</a> 
+                      | <a href="%20http://support.eventbee.com/community/supportcommunity">Community</a> 
+                      | <a href="http://blog.eventbee.com/">Blog</a> | <a href="http://twitter.eventbee.com/">Twitter</a></font></p>
+                  </div>
+                </td>
+              </tr>
+              <tr> 
+                <td height="18"> 
+                  <div align="center"><font face="Verdana, Arial, Helvetica, sans-serif" color="#666666" size="-3">Copyright 
+                    2003. Eventbee Inc. All Rights Reserved. </font></div>
+                </td>
+              </tr>
+            </table>
+            <!--##################################### END FOOTER #############################################-->
+          </td>
+        </tr>
+      </div>
+    </table>
+  </div>
+</div>
+</body>
+</html>

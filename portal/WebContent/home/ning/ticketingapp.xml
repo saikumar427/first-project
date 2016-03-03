@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Eventbee Ticketing"
+        directory_title="NTSBee"
+		title_url="http://www.eventbee.com/home/ning/ticketingapp.xml"
+		author="beeve"
+        author_email=""
+		author_affiliation="bee"
+        author_location="India"
+		thumbnail="http://www.eventbee.com/home/images/eventbee_thumbnail.jpg"
+		screenshot="http://www.eventbee.com/home/images/eventbeepreview.jpg"
+		summary ="Who are your favorite Buddies?? Add your best friends to your BuddyList!. {Now you can create your own CrushList, BlackList, HotList and many more...}" 
+		description="Who are your favorite Buddies?? Add your best friends to your BuddyList!. {Now you can create your own CrushList, BlackList, HotList and many more...}" 
+        icon="http://www.pajworld.com/checksgreen/favicon.ico" >
+        <Require feature="opensocial-0.7" />
+		<Require feature='views' />					<!-- gadgets.views -->
+        <Require feature='dynamic-height' />		<!-- gadgets.window  -->
+        <Require feature="skins"/>
+		<Require feature="analytics"/>
+		<Locale />
+
+    </ModulePrefs>
+
+
+  
+
+
+
+    <Content type="html" view="canvas">
+			<![CDATA[
+				<script>
+				gadgets.window.adjustHeight("700");
+				function response(data) 
+				{
+				  var viewer		= data.get("viewer").getData();
+  				  var owner			= data.get("owner").getData();
+
+				  var vname			= encodeURIComponent(viewer.getDisplayName());
+				  var vid			= viewer.getId();
+  				  var oid			= owner.getId();
+  				  var oname                 = encodeURIComponent(owner.getDisplayName());
+				  var ownerstatus	= viewer.isOwner();
+				  var thumb			= viewer.getField(opensocial.Person.Field.THUMBNAIL_URL);
+
+ 				  if(ownerstatus==true){
+				    
+					document.getElementById('canvasframe').src = "http://test.eventbee.com:9090/ningapp/ticketing/canvas_owner?vid="+vid+"&oid="+oid+"&oname="+oname+"&vname="+vname;
+		     			<iframe id="canvasframe" src="" width="100%" height="700px"/>
+
+				  }
+				  else if(ownerstatus==false){
+				    document.getElementById('canvasframe').src = "http://test.eventbee.com:9090/portal/ningapp/ticketing/canvas_viewer.jsp?vid="+vid+"&oid="+oid+"&oname="+oname+"&vname="+vname;
+				  }
+				 
+				};
+
+				function request() 
+				{
+				  var req = opensocial.newDataRequest();
+				  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+  				  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+				  req.send(response);
+				};
+
+				request();
+				
+				</script>
+     			<iframe id="canvasframe" src="" width="100%" height="700px"/>
+
+				
+			]]>
+    </Content>
+
+    
+
+	
+	 
+    <Content type="html" view="profile">
+		<![CDATA[
+			<script type="text/javascript">			
+			
+			gadgets.window.adjustHeight("700");
+
+			function response(data) 
+			{ 								
+			  var viewer		= data.get("viewer").getData();
+			  var owner			= data.get("owner").getData();
+ 			  var vname			= encodeURIComponent(viewer.getDisplayName());
+			  var vid			= viewer.getId();
+			  var oid			= owner.getId();
+			  var oname                 = encodeURIComponent(owner.getDisplayName());
+				 
+			  var ownerstatus	= viewer.isOwner();
+			  var thumb			= viewer.getField(opensocial.Person.Field.THUMBNAIL_URL);
+
+			  if(ownerstatus==true)
+			  {
+				document.getElementById('profileframe').src = "http://test.eventbee.com:9090/ningapp/ticketing/profile_owner?vid="+vid+"&oid="+oid+"&vname="+vname+"&oname="+oname;
+			  }
+			  else if(ownerstatus==false)
+			  {
+				document.getElementById('profileframe').src = "http://test.eventbee.com:9090/ningapp/ticketing/profile_viewer.jsp?vid="+vid+"&oid="+oid+"&vname="+vname+"&oname="+oname;
+			  }
+			};
+
+
+			function request(obj) 
+			{ 
+				var opt_params	= { };
+				var req			= opensocial.newDataRequest();
+				
+				opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] = 
+				[opensocial.Person.Field.GENDER,opensocial.Person.Field.PROFILE_URL];   
+			  
+				var req = opensocial.newDataRequest();
+				req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+				req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+				req.send(response);
+			};
+
+
+			function makePOSTRequest(data) { 
+				var params={};
+				  var postdata = {
+					data1 : "test",
+					data2 : "1234566"
+				  };
+				  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+				  params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues(postdata); 
+				
+				// Content types available at http://code.google.com/apis/opensocial/docs/0.7/reference/gadgets.io.ContentType.html
+				 
+				params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON; 
+				//var url = "http://www.pajworld.com/ning/profile_db12.php";	
+				//var url = 'http://www.tazagaram.com:9090/ning/filemk.php';
+				
+				var url = 'http://www.pajworld.com/hello.jsp?vid=345'; 
+				gadgets.io.makeRequest(url, request, params);  
+
+			};
+
+
+			function init() 
+			{		
+				var opt_params	= { };
+				var req			= opensocial.newDataRequest();
+				opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 5000; 
+				//opt_params[opensocial.DataRequest.PeopleRequestFields.FILTER] = opensocial.DataRequest.FilterType.HAS_APP;
+
+				opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] =
+				[opensocial.Person.Field.GENDER,opensocial.Person.Field.PROFILE_URL];   
+				
+				req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER, opt_params), "viewer");
+				req.add(req.newFetchPeopleRequest(opensocial.DataRequest.Group.VIEWER_FRIENDS, opt_params), "viewerFriends");
+				req.send(makePOSTRequest);			
+			};		
+
+			init();
+
+			</script>
+  		    <iframe id="profileframe" src="" width="100%" height="700px"/ >
+
+
+		
+
+		]]>
+	</Content>
+
+	  
+	   
+
+   	 
+    
+    <Content type="html" view="preview">
+		<![CDATA[
+			<center>
+				Preview
+			</center>
+		]]>
+    </Content>
+	
+</Module>

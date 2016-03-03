@@ -1,0 +1,1 @@
+<%response.setStatus(301);response.setHeader( "Location", "/main/event-creation" );response.setHeader( "Connection", "close" );%>

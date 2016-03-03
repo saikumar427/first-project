@@ -1,0 +1,27 @@
+<%@ page import="com.eventbee.event.*"%>
+<%@ page import="com.eventbee.authentication.*"%>
+<%@ page import="com.eventbee.general.GenUtil"%>
+<%@ page import="com.eventbee.general.formatting.*"%>
+<%@ page import="com.eventbee.general.*"%>
+<%@ page import="java.util.*"%>
+<%
+	Authenticate au=null;
+	EventRegisterBean jBean=(EventRegisterBean)session.getAttribute("regEventBean");
+	jBean.initProfile();
+	StatusObj sobj=jBean.validateRegTickets();
+	
+	if(sobj.getStatus()){
+		Object o=sobj.getData();
+        if(o instanceof HashMap){
+				hm=(HashMap)(sobj.getData());
+				session.setAttribute("regerrors",hm);
+				}else if (o instanceof Vector){
+                	v=(Vector)(sobj.getData());
+                 	session.setAttribute("regerrors",v);
+				}
+			}
+			response.sendRedirect("ticket.jsp?GROUPID="+request.getParameter("GROUPID"));
+	}else{
+		response.sendRedirect("eventbeelogin.jsp?GROUPID="+request.getParameter("GROUPID"));
+	}	
+%>

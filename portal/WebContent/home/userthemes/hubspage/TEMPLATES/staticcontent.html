@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<head profile="http://gmpg.org/xfn/1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en">
+
+        <title>$uname</title>
+
+        <link rel="stylesheet" type="text/css" href="$customappctx/themes/base.css" />
+	<link rel="stylesheet" type="text/css" href="/home/index.css" />
+        <link rel="stylesheet" type="text/css" href="$customappctx/themes/redtrain/styles/default.css" />
+
+
+<script type="text/javascript" src="$$~CUSTOMAPPCTX~$$/theme/scripts/roller.js"></script>
+<script	      src="http://maps.google.com/maps?file=api&v=1&key=ABQIAAAAXLqd3-2KS6AMhktaU9nl5RTwuH4ArqgL8SuMcbnUUYmOIKUEShRW5dJPTLnl7sKWNuUTA89PKBKt-w"
+type="text/javascript"></script>
+
+
+
+
+<style type="text/css">
+$customcss
+</style>
+
+</head>
+</head>
+<body onLoad="map()">
+$basicDesihubHeader
+
+<div id="container">
+
+ <br/>
+<h1>$uname</h1>
+
+
+<div id="navi">
+<div id="navi-innen">
+<div class="sidebarBox">
+<!-- $showAdsGoogle -->
+         <br/><br/>
+        #if( $networklink)
+          $networklink <br/>
+          #end
+          #if( $Bloglink)
+          $Bloglink<br/>
+          #end
+          #if( $photoslink)
+          $photoslink
+          </br>
+          #end
+
+</div>
+
+</div></div>
+
+<div id="navi-innen">
+
+<div id="content">
+
+
+
+#if($profileinfo)
+<h3> My Hubs: </h3>
+          $profileinfo
+      #end
+
+
+#if($hubslisted)
+<h3>hubscreated:</h3>
+    <div class="hubslisted">
+
+<ul>
+		#foreach( $hubslisted in $hubslisted )
+		 <li>$hubslisted</li>
+                  #end
+</ul>
+	</div>
+#end
+
+
+
+
+
+<!--
+
+          #if( $partnerstreamer)
+               $partnerstreamer
+          </br>
+          #end
+</div>
+<!-- Start side bar -->
+
+
+   <!--start Google ads-->
+
+
+
+
+
+
+
+
+<div id="footer">
+
+<!-- <div >#foreach( $link in $footerLinks )
+		<font size="1">$link</font>
+ 	 #if( $velocityCount < $footerLinks.size() )
+		 |
+		#end
+	#end<br/>
+	$copyright<br/>
+	<div align='right'>$poweredby</div></div>
+</div> -->
+
+</div>
+
+</body>
+</html>

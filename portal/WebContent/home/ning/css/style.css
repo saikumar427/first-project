@@ -1,0 +1,107 @@
+a:hover {
+	color: ##EE9C00;
+	text-decoration: underline;
+}
+a:link {
+	/*color:#000000;*/
+	text-decoration:none
+}
+a:visited {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	/*color: #000000;*/
+}
+
+#fullbody {
+	width:480px;
+	height:auto;
+		}
+
+#header-eventreg {
+	width:480px;
+	height:62px;
+	background-image:url(http://www.eventbee.com/home/ning/images/buytickets.gif);
+	background-repeat:no-repeat;
+	}
+#eventsbody	{
+	width:500px;
+	height:332px;
+	/*background-color:#f5f5f5;*/
+	}	
+#topmorginevent {
+	width:480px;
+	height:27px;
+	margin-top:6px;
+	}	
+#arrow {
+	width:59px;
+	height:27px;
+	float:left;
+	background-image:url(http://www.eventbee.com/home/ning/images/arrow.gif);
+	background-repeat:no-repeat;
+	}
+	
+#eventsname {
+	width:350px;
+	height:27px;
+	/*background-color:#e6e6e6;*/
+	float:left;
+	}
+#register {
+	width:80px;
+	height:27px;
+	/*background-color:#f5f5f5;*/
+	float:left;
+	}
+#comment	{
+	width:300px;
+	height:28px;
+	margin:auto;
+	text-align:center;
+	border:#EE9C00 solid;
+	padding:13px 0px 0px 0px;
+	/*margin:auto;*/
+	/*background-color:#E5E5E5;*/
+	}
+#panel	{
+	width:475px;
+	height:28px;
+	text-align:center;
+	border:#EE9C00 solid;
+	padding:13px 0px 0px 0px;
+	/*margin:auto;*/
+	/*background-color:#E5E5E5;*/
+	}
+#footer-eventreg{
+	width:480px;
+	height:45px;
+	background-image:url(http://www.eventbee.com/home/ning/images/bluefooter.gif);
+	margin-top:6px;
+	}
+		
+/* Style */
+
+.eventstyle {
+	font-family:Arial, Helvetica, sans-serif;
+	/*color:#000000;*/
+	
+	/*font-style:italic;*/
+	
+	padding:5px 0px 0px 10px;
+	letter-spacing:normal;
+		}
+.blackText {
+	color:#000000;
+	}
+
+.grayText{
+	color:#595959;
+	}
+.smallestfont {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: lighter; color: #666666}

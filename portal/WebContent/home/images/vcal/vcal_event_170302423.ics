@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+Content-Type:text/calendar
+PRODID:-//www.eventbee.com//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:20130801T090000
+DTEND:20140523T100000
+LOCATION:asdf
+UID:20140509T035000@eventbee.com
+SUMMARY:new larchwood minyan test event - giri
+URL:http://giridhar.citypartytix.com/event?eventid=170302423
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="Partner Network"
+		directory_title="Network Ticket Selling"
+		title_url="http://www.eventbee.com/home/ning/networkticketselling.xml"
+		author="Eventbee Inc"
+		author_email="support@eventbee.com"
+		author_affiliation="http://www.eventbee.com"
+		author_location="USA"
+		thumbnail="http://eventbee.com/home/images/ningimages/eventbee.gif"
+		screenshot="http://eventbee.com/home/images/ningimages/nts.jpg"
+		summary ="Promote events on your Ning pages, get commission on each ticket sale."
+		description="Promote events on your Ning pages, get commission on each ticket sale.
+		Eventbee Inc., provides state-of-the-art web-based event management and event promotion tools to the Events Industry. Since 2003, over 7000 Event Managers sell tickets using the Eventbee Platform. Eventbee operates with the single mission of maximizing ticket sales while providing easy to use web-based software to the Events Industry." 
+		icon="http://eventbee.com/home/images/ningimages/favicon.jpg" >
+		<Require feature="opensocial-0.7" />
+		<Require feature='views' />					
+		<Require feature='dynamic-height' />		
+		<Require feature="skins"/>
+		<Require feature="analytics"/>
+		<Require feature="ning" />
+		<Locale />
+	</ModulePrefs>
+<Content type="html" view="canvas">
+<![CDATA[
+<style>
+	.gadget {
+		background-color: #FFFFFF;
+		color: #999;
+		padding:1px;
+		padding-bottom:10px;
+	}
+	.gadget a {
+		color: #00f;
+	}	   
+	input.button {
+	   	display:inline-block;
+	   	width:auto;
+	   	border:1px solid #aaa;
+	   	font-size:1em;
+	   	text-decoration:none;
+	   	color:#333;
+	   	overflow:visible;
+	   	white-space:nowrap;
+	   	line-height:1em!important;
+	   	padding:.35em .6em .45em;
+	   	cursor:pointer;
+	 }	   
+	 </style>
+<link rel="stylesheet" type="text/css" href="http://www.eventbee.com/home/index.css" />
+<link rel="stylesheet" type="text/css"  href="http://www.eventbee.com/home/css/webintegration.css" />
+<link href="http://www.eventbee.com/home/ning/css/ningstyle.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/javascript" src="http://www.eventbee.com/home/js/webintegration_ning.js" >
+	function dummy(){}
+</script>
+<script type="text/javascript" language="JavaScript" src="http://www.eventbee.com/home/js/dhtmlpopup.js">
+        function dummy1() { }
+</script>
+<script type="text/javascript" language="JavaScript" src="http://www.eventbee.com/home/js/advajax.js">
+        function dummy2() { }
+</script>
+<script type="text/javascript" language="JavaScript" src="http://www.eventbee.com/home/js/ajax.js">
+        function dummy3() { }
+</script>
+<script language="javascript" src="http://www.eventbee.com/home/js/popup.js">
+         	function dummy4(){}
+	</script>	
+
+<script>
+var Contrast = function(){
+		// private functions and properties
+		var _private =
+		{
+			min : { 
+				'brightness': 125, 
+				'difference': 500 
+			},
+			brightness : function(rgb1, rgb2){
+				var b1 = ((rgb1.r * 299) + (rgb1.g * 587) + (rgb1.b * 114)) / 1000;
+				var b2 = ((rgb2.r * 299) + (rgb2.g * 587) + (rgb2.b * 114)) / 1000;
+				return Math.abs(Math.round(b1-b2));
+			},
+			difference : function(rgb1, rgb2){
+				var diff = (Math.max(rgb1.r, rgb2.r) - Math.min(rgb1.r, rgb2.r)) + 
+				(Math.max(rgb1.g, rgb2.g) - Math.min(rgb1.g, rgb2.g)) + 
+				(Math.max(rgb1.b, rgb2.b) - Math.min(rgb1.b, rgb2.b));
+				return Math.abs(Math.round(diff));
+			},
+			rgb : function(hex){
+				hex = hex.replace('#','');
+			var rgb = {
+				r: parseInt(hex[0] + hex[1], 16),
+				g: parseInt(hex[2] + hex[3], 16),
+				b: parseInt(hex[4] + hex[5], 16)
+			};
+			return rgb;
+			}
+		};
+	}
+	function  registerevent(id,platform){
+		var url='http://www.eventbee.com/eventdetails/event.jsp?appname=nts&eventid='+id+'&platform='+platform+'&domain='+domain;
+		document.getElementById('canvaseventframe').style.display='block';
+		document.getElementById('canvasframe').style.display='none';
+		document.getElementById('canvaseventframe').src=url;
+	}
+	function  registerEvent(id,pid){	
+		var url='http://www.eventbee.com/eventdetails/event.jsp?appname=nts&eventid='+id+'&platform=ning&domain='+domain+'&participant='+pid;
+		document.getElementById('canvaseventframe').style.display='block';
+		document.getElementById('canvasframe').style.display='none';
+		document.getElementById('canvaseventframe').src=url;
+	}
+	function searchevents(evtnamesrchPlsHld) {
+		var eventname=document.getElementById('eventname').value;
+		if(eventname=="Enter Event Name") eventname="";
+		eventname=encodeURIComponent(eventname);	
+		clearPlaceholderContent('eventname','evtnamesrchPlsHld');	 	
+		var params = {};
+		url='http://www.eventbee.com/ntspartner/ning_allntsparticipationeventsview.jsp?platform=ning&eventname='+eventname+'&oid='+oid+'&domain='+domain;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		gadgets.io.makeRequest(url, PostResetresponse, params);
+	}	
+	function resetevents(){
+		var params = {};
+		url='http://www.eventbee.com/ntspartner/ning_allntsparticipationeventsview.jsp?platform=ning&oid='+oid+'&domain='+domain;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		gadgets.io.makeRequest(url, PostResetresponse, params);
+	}	
+	function sendmail(partnerid,eventid){	
+		var params = {};
+		url='http://www.eventbee.com//portal/ntspartner/ajaxsendntsrequestmailprocessor.jsp?platform=ning&oid='+oid+'&domain='+domain+'&partnerid='+partnerid+'&eventid='+eventid;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		gadgets.io.makeRequest(url, ntstab, params);
+	}	
+	function PostResetresponse(obj) {
+	
+		document.getElementById('allntsevents').innerHTML = obj.text;
+	};
+	
+	
+	function submitLogin(appname,oid){	
+		nid=oid;
+		var login=document.getElementById("login").value;
+		var password=document.getElementById("password").value;
+		makePOSTLoginRequest(login,password,oid)
+	};
+	function makePOSTLoginRequest(login,password,oid){
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({login:login,password:password,oid:oid});
+		url ='http://www.eventbee.com/ningapp/ticketing/loginprocess.jsp';
+		gadgets.io.makeRequest(url, PostLoginresponse, params);
+	};    
+	
+	function PostLoginresponse(obj) {
+		var data = obj.text;
+		if(data.indexOf("Success")>-1){
+			makePOSTRequest(true,nid);
+		}else
+			document.getElementById("loginerrormsg").innerHTML="Invalid Login";
+	};
+	function ningsignup(appname,oid){	
+		nid=oid;
+		var uname=document.getElementById("name").value;
+		var password=document.getElementById("profileKey").value;
+		var fname=document.getElementById("fname").value;
+		var lname=document.getElementById("lname").value;
+		var email=document.getElementById("email").value;
+		makePOSTSignupRequest(oid,uname,password,fname,lname,email);
+	};
+	function makePOSTSignupRequest(oid,uname,password,fname,lname,email){
+		var params = {};              
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({oid:oid,uname:uname,password:password,fname:fname,lname:lname,email:email});
+		url ='http://www.eventbee.com/ningapp/ticketing/signupprocess.jsp';
+		gadgets.io.makeRequest(url, Postsignupresponse, params);
+	};
+	function Postsignupresponse(obj) {
+		var data = obj.text;
+		if(data.indexOf("Success")>-1){
+			makePOSTRequest(true,nid);
+		}
+		else
+			document.getElementById("signuperrormsg").innerHTML=data;
+	};
+	function showPlaceholderContent(textbox, placeholdertext) {
+	       if(textbox.value == ''){
+	    		textbox.value = placeholdertext;
+	    		textbox.className='greystyle';
+	       }
+	}
+	function clearPlaceholderContent(textbox, placeholdertext) {	
+	      if(textbox.value == placeholdertext){   
+	   		textbox.value = '';
+	   		textbox.className='stdstyle';
+	      }
+	}
+	function  eventregister(id,pid,platform){	
+		var url='http://www.eventbee.com/eventdetails/event.jsp?appname=nts&eventid='+id+'&participant='+pid+'&platform='+platform+'&oid='+oid+'&domain='+domain;	
+		document.getElementById('canvaseventframe').style.display='block';
+		document.getElementById('canvasframe').style.display='none';
+		document.getElementById('canvaseventframe').src=url;
+	}
+    	function ntstab(){    	
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		var url='http://www.eventbee.com/ningapp/ntstab?oid='+oid+'&domain='+domain;
+		gadgets.io.makeRequest(url, Postresponse, params);
+	}  
+	function earningstab(){
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		var url='http://www.eventbee.com/ningapp/earningstab?oid='+oid+'&domain='+domain;
+		gadgets.io.makeRequest(url, Postresponse, params);
+	}
+	function partnernetwork(){
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		var url='http://www.eventbee.com/ningapp/ntstab?oid='+oid+'&domain='+domain;
+		gadgets.io.makeRequest(url, Postresponse, params);
+	}
+	function transactionreport(transactionid,groupid,platform,filter,type,agentid){	
+		var params = {};
+		url='http://www.eventbee.com/ningapp/partnertransaction.jsp?key='+transactionid+'&GROUPID='+groupid+'&platform='+platform+'&filter='+filter+'&groupid='+groupid+'&cardtype='+type+'&agentid='+agentid+'&oid='+oid+'&domain='+domain;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		gadgets.io.makeRequest(url, Postresponse, params);	
+	}
+	function getNextSet(newBeginIndex){	
+		var params = {};
+		url='http://www.eventbee.com/ntspartner/ning_allntsparticipationeventsview.jsp?platform=ning&begin='+newBeginIndex+'&oid='+oid+'&domain='+domain;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		gadgets.io.makeRequest(url, PostResetresponse, params);	
+	}
+	
+	function getPreviousSet(newBeginIndex){
+		var params = {};
+		url='http://www.eventbee.com/ntspartner/ning_allntsparticipationeventsview.jsp?platform=ning&begin='+newBeginIndex+'&oid='+oid+'&domain='+domain;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		gadgets.io.makeRequest(url, PostResetresponse, params);
+	}
+        function tabsmenu(url){    
+    		var params = {};
+    		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    		var url=url;    		
+    		gadgets.io.makeRequest(url, Postresponse, params);
+	} 
+	function manageevent(id,platform){	 
+	    	var params = {};
+	    	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+	    	var url='http://www.eventbee.com/ningapp/partnerlinks.jsp?groupid='+id+'&platform='+platform+'&oid='+oid+'&domain='+domain;
+	    	gadgets.io.makeRequest(url, Postresponse, params);
+	} 
+	function getapproval(id,platform){	   
+	    	var params = {};
+	    	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+	    	var url='http://www.eventbee.com/ningapp/getntsapproval.jsp?groupid='+id+'&platform='+platform+'&oid='+oid+'&domain='+domain;
+	    	gadgets.io.makeRequest(url, Postresponse, params);
+	} 
+	function reports(eid,partnerid,platform){ 
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		var url='http://www.eventbee.com/ningapp/partner_reports.jsp?GROUPID='+eid+'&platform='+platform+'&oid='+oid+'&domain='+domain+'&agentid='+partnerid;
+		gadgets.io.makeRequest(url, Postresponse, params);
+	 } 
+	 function generatePdf(agentid,groupid){
+	 	var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		var url='http://www.eventbee.com/portal/ntspartner/partner_reports.jsp?rtype=fo&agentid='+agentid+'&GROUPID='+groupid;
+		gadgets.io.makeRequest(url, Postresponse, params);
+	 } 
+  
+       function getStyle (cssrule) {
+		for (var i in document.styleSheets) {
+	   		var styleRules = (document.styleSheets[i].rules) ? document.styleSheets[i].rules :
+			(document.styleSheets[i].cssRules) ? document.styleSheets[i].cssRules : [];
+	   		for (var j=0; j<styleRules.length; j++){
+				if (styleRules[j].selectorText.toUpperCase() == cssrule.toUpperCase()) {
+		    		return styleRules[j];
+				}
+	    		}
+		}
+	return null;
+       }
+		var params1 = gadgets.views.getParams();
+		var purpose='';
+		var eventid='';
+		var partnerid='';
+		var friendid='';
+		var manage=false;
+		var oname='';
+		var oid='';
+		var domain='';
+	function response(data){
+	  	var viewer		= data.get("viewer").getData();
+	  	var owner		= data.get("owner").getData();
+	 	var vname		= encodeURIComponent(viewer.getDisplayName());
+	 	var vid		= viewer.getId();
+	 	oid		= owner.getId();
+	  	oname             = encodeURIComponent(owner.getDisplayName());
+	  	var ownerstatus	= (vid==oid);
+	  	domain  =  ning.core.getNetworkDomain();
+	  	makePOSTRequest(ownerstatus,oid,oname,vid);
+	};			 			  
+	function inviteNingFriendsToEvent(eid, pid, ename, oid){		
+		var params = {};
+		var dname=ning.core.getNetworkDomain();
+		var index=dname.indexOf(".");
+		var dname=dname.substring(0,index);		
+		params[opensocial.Message.Field.TYPE] = opensocial.Message.Type.EMAIL;
+		params[opensocial.Message.Field.TITLE] = "Event Invitation";
+		var message = opensocial.newMessage(oname+" invited you to the event "+ename+". You might get friend discount, visit http://www.eventbee.com/token?oid="+oid+"&eid="+eid+"&pid="+pid+"&d="+dname+"&fid=1", params);
+		opensocial.requestSendMessage("VIEWER_FRIENDS", message, function(resp){});
+	}
+	function makePOSTRequest(ownerstatus,oid,oname,vid) {	
+		var domain  =  ning.core.getNetworkDomain();
+		var url ="";
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		if(purpose=='' && ownerstatus){				    
+			url = "http://www.eventbee.com/ningapp/ticketing/getAccountBasedCanvasPage.jsp?platform=ning&oid="+oid+"&oname="+oname+"&domain="+domain+"&partnerid="+partnerid+"&appname=nts&platform=ning";
+	 	}else if(purpose=='' && ownerstatus==false){
+			url = "http://www.eventbee.com/ningapp/nts/showAllEvents?platform=ning&vid="+vid+"&oid="+oid+"&oname="+oname+"&domain="+domain+"&view=canvas&appname=nts";
+	  	}else if(purpose=='partnerlink'){
+			url = "http://www.eventbee.com/ningapp/partnerlinks.jsp?groupid="+eventid+"&domain="+domain+"&oid="+oid+"&platform=ning&appname=nts";
+	  	}else {
+			var eventurl="http://www.eventbee.com/ningapp/nts/register?vid="+vid+"&oid="+oid+"&eventid="+eventid+"&oname="+oname+"&domain="+domain+"&partnerid="+partnerid+"&platform=ning&appname=nts";
+			if(friendid!=''){
+				eventurl=eventurl+"&fid="+friendid;
+			}
+			url = eventurl;
+	  	}
+	  	
+	  	if(purpose=='register'){	  	
+	  	document.getElementById('canvaseventframe').src=url;		
+		}else{
+		gadgets.io.makeRequest(url, Postresponse, params);
+		}
+	};
+	function init(){
+		 var req = opensocial.newDataRequest();
+		 req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+		 req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+		 req.send(response);
+	};
+
+ 	if('undefined' === typeof(params1) || 'undefined' === typeof(params1['purpose'])){		 
+ 	}else{
+		eventid=params1['eventid'];
+		partnerid=params1['partnerid'];
+		purpose=params1['purpose'];
+		if ('undefined' === typeof(params1['fid'])){
+	}else{
+		friendid=params1['fid'];
+	}
+	manage=false;
+	}		 
+	gadgets.window.adjustHeight("800");
+	function inviteNingFriends(){
+		var params = {};
+		params[opensocial.Message.Field.TYPE] = opensocial.Message.Type.EMAIL;
+		params[opensocial.Message.Field.TITLE] = "Event Invitation";
+		var message = opensocial.newMessage("Visit my profile page to avail special discounts on my Recommended Events", params);
+		opensocial.requestSendMessage("VIEWER_FRIENDS", message, function(resp){});
+	}	
+	init();
+	function Postresponse(obj) {
+		document.getElementById('canvaseventframe').style.display='none';
+		document.getElementById('canvasframe').innerHTML = obj.text;
+	};			
+
+</script>
+	<div class='gadget'  align='center'>
+	<div id="canvasframe"></div></div>
+	<iframe id="canvaseventframe" src="" width="100%" height="800px" border="0"/>
+
+	]]>
+</Content>
+<Content type="html" view="ning.main,profile">
+<![CDATA[
+	<div class='gadget'  align='center'><div id="profilecontent"></div>
+	</div>
+	<style>
+	.gadget {
+		background-color: #FFFFFF;
+		color: #999;
+		padding:1px;
+		padding-bottom:10px;
+	}
+	.gadget a {
+		color: #00f;
+	}	   
+	input.button {
+	   	display:inline-block;
+	   	width:auto;
+	   	border:1px solid #aaa;
+	   	font-size:1em;
+	   	text-decoration:none;
+	   	color:#333;
+	   	overflow:visible;
+	   	white-space:nowrap;
+	   	line-height:1em!important;
+	   	padding:.35em .6em .45em;
+	   	cursor:pointer;
+	 }
+	 .smallestfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: lighter; }
+
+	 </style>
+<link href="http://www.eventbee.com/home/ning/css/ningstyle.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+var oname="";
+	var Contrast = function(){
+		// private functions and properties
+		var _private =
+		{
+			min : { 
+				'brightness': 125, 
+				'difference': 500 
+			},
+			brightness : function(rgb1, rgb2){
+				var b1 = ((rgb1.r * 299) + (rgb1.g * 587) + (rgb1.b * 114)) / 1000;
+				var b2 = ((rgb2.r * 299) + (rgb2.g * 587) + (rgb2.b * 114)) / 1000;
+				return Math.abs(Math.round(b1-b2));
+			},
+			difference : function(rgb1, rgb2){
+				var diff = (Math.max(rgb1.r, rgb2.r) - Math.min(rgb1.r, rgb2.r)) + 
+				(Math.max(rgb1.g, rgb2.g) - Math.min(rgb1.g, rgb2.g)) + 
+				(Math.max(rgb1.b, rgb2.b) - Math.min(rgb1.b, rgb2.b));
+				return Math.abs(Math.round(diff));
+			},
+			rgb : function(hex){
+				hex = hex.replace('#','');
+			var rgb = {
+				r: parseInt(hex[0] + hex[1], 16),
+				g: parseInt(hex[2] + hex[3], 16),
+				b: parseInt(hex[4] + hex[5], 16)
+			};
+			return rgb;
+			}
+		};
+	 }
+	             
+       function getStyle (cssrule) {
+	for (var i in document.styleSheets) {
+	    var styleRules = (document.styleSheets[i].rules) ? document.styleSheets[i].rules :
+			     (document.styleSheets[i].cssRules) ? document.styleSheets[i].cssRules : [];
+	    for (var j=0; j<styleRules.length; j++){
+		if (styleRules[j].selectorText.toUpperCase() == cssrule.toUpperCase()) {
+		    return styleRules[j];
+		}
+	    }
+	}
+	return null;
+    }
+
+       function updateCSS() {
+	var bgColor     = gadgets.skins.getProperty(gadgets.skins.Property.BG_COLOR);
+	var fontColor   = gadgets.skins.getProperty(gadgets.skins.Property.FONT_COLOR);
+	var anchorColor = gadgets.skins.getProperty(gadgets.skins.Property.ANCHOR_COLOR);
+	var gadgetStyle = getStyle('.gadget');
+
+	var gadgetLinks = getStyle('.gadget a');
+	var gadgetButtons = getStyle('input.button');
+	gadgetStyle.style.color = fontColor;
+	gadgetStyle.style.backgroundColor = bgColor;
+	gadgetLinks.style.color = anchorColor;
+	gadgetButtons.style.backgroundColor = anchorColor;
+	var buttonContrast = Contrast('input.button', '#222222');
+	    if (buttonContrast == true) {
+	      gadgetButtons.style.color = '#222222';
+	    } 
+	    else if (anchorColor == '#ffffff'){
+	      gadgetButtons.style.color = '#000000';
+	    } 
+	    else {
+	      gadgetButtons.style.color = '#FFFFFF';
+	    }
+    };
+
+
+	function inviteNingFriendsToEvent(eid, pid, ename, oid){	
+		var params = {};
+		var dname=ning.core.getNetworkDomain();
+		var index=dname.indexOf(".");
+		var dname=dname.substring(0,index);		
+		params[opensocial.Message.Field.TYPE] = opensocial.Message.Type.EMAIL;
+		params[opensocial.Message.Field.TITLE] = "Event Invitation";
+		var message = opensocial.newMessage(oname+" invited you to the event "+ename+". You might get friend discount, visit http://www.eventbee.com/token?oid="+oid+"&eid="+eid+"&pid="+pid+"&d="+dname+"&fid=1", params);
+		opensocial.requestSendMessage("VIEWER_FRIENDS", message, function(resp){});
+	}
+		
+	function inviteNingFriends(){
+		var params = {};
+		params[opensocial.Message.Field.TYPE] = opensocial.Message.Type.EMAIL;
+		params[opensocial.Message.Field.TITLE] = "Event Invitation";
+		var message = opensocial.newMessage("Visit my profile page to avail special discounts on my Recommended Events", params);
+		opensocial.requestSendMessage("VIEWER_FRIENDS", message, function(resp){});
+	}
+
+	function SubmitLogin(oid){
+		nid=oid;
+		var login=document.getElementById("login").value;
+		var password=document.getElementById("password").value;
+		makePOSTLoginRequest(login,password,oid);
+	};
+	function makePOSTLoginRequest(login,password,oid){
+		var params = {};
+		var domain=ning.core.getNetworkDomain();
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({login:login,password:password,oid:oid,domain:domain});
+		url ='http://www.eventbee.com/ningapp/ticketing/loginprocess.jsp';
+		gadgets.io.makeRequest(url, PostLoginresponse, params);
+	};
+	
+	function PostLoginresponse(obj) {
+		var data = obj.text;
+		if(data.indexOf("Success")>-1){
+			makePOSTRequest(true,nid);
+		}else
+			document.getElementById("loginerrormsg").innerHTML="Invalid Login";
+	};
+	function ningsignup(oid){
+		nid=oid;
+		var uname=document.getElementById("name").value;
+		var password=document.getElementById("profileKey").value;
+		var fname=document.getElementById("fname").value;
+		var lname=document.getElementById("lname").value;
+		var email=document.getElementById("email").value;
+		makePOSTSignupRequest(oid,uname,password,fname,lname,email);
+	};
+	
+	function makePOSTSignupRequest(oid,uname,password,fname,lname,email){
+		var params = {}; 
+		var domain=ning.core.getNetworkDomain();
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		params[gadgets.io.RequestParameters.POST_DATA] = gadgets.io.encodeValues({oid:oid,uname:uname,password:password,fname:fname,lname:lname,email:email,domain:domain});
+		url ='http://www.eventbee.com/ningapp/ticketing/signupprocess.jsp';
+		gadgets.io.makeRequest(url, Postsignupresponse, params);
+	};
+
+	function Postsignupresponse(obj) {
+		var data = obj.text;
+		if(data.indexOf("Success")>-1){
+			makePOSTRequest(true,nid);
+		}
+		else
+			document.getElementById("signuperrormsg").innerHTML=data;
+	};	
+
+	function makePOSTRequest(ownerstatus,oid,oname,vid) {
+		var params = {};
+		var domain  =  ning.core.getNetworkDomain();
+		var url ="";
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		if(ownerstatus){
+			url ='http://www.eventbee.com/ningapp/ticketing/getAccountBasedScreen.jsp?oid='+oid+'&ownerstatus='+ownerstatus+'&domain='+domain+'&appname=nts';
+		}else{
+			 url ='http://www.eventbee.com/ningapp/nts/showActiveEvents?oid='+oid+'&ownerstatus='+ownerstatus+'&oname='+oname+'&domain='+domain+'&vid='+vid;
+		}		
+		gadgets.io.makeRequest(url, Postresponse, params);
+	};
+	function Postresponse(obj) {
+		document.getElementById('profilecontent').innerHTML = obj.text;
+	};			
+
+	function gotoCanvas() {
+		var canvas_view = new gadgets.views.View("canvas");
+		gadgets.views.requestNavigateTo(canvas_view);
+	};
+	
+	function  registerEvent(id,pid){
+			
+		var params = {};
+		params['eventid'] = id;
+		params['partnerid'] = pid;
+		params['purpose'] = 'register';
+		var canvas_view = new gadgets.views.View("canvas");
+		gadgets.views.requestNavigateTo(canvas_view, params);
+	};
+	function  manageEvent(id,pid){
+		var params = {};
+		params['eventid'] = id;
+		params['partnerid'] = pid;
+		params['purpose'] = 'partnerlink';
+		var canvas_view = new gadgets.views.View("canvas");
+		gadgets.views.requestNavigateTo(canvas_view, params);
+	};
+
+	function response(data){ 								
+		var viewer		= data.get("viewer").getData();
+		var owner		= data.get("owner").getData();
+		var vname		= encodeURIComponent(viewer.getDisplayName());
+		var vid			= viewer.getId();
+		var oid			= owner.getId();
+		oname               = encodeURIComponent(owner.getDisplayName());				 
+		var ownerstatus	= (vid==oid);
+		if(ownerstatus)
+		  gadgets.window.adjustHeight("470");
+		else
+		     gadgets.window.adjustHeight("470");
+
+		makePOSTRequest(ownerstatus,oid,oname,vid);
+
+	};
+	function init(){ 
+		var req = opensocial.newDataRequest();
+		req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+		req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+		req.send(response);
+	};
+
+	updateCSS();
+        init();
+  
+</script>
+
+]]>
+</Content>	
+</Module>

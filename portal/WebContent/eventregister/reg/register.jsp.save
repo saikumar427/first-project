@@ -1,0 +1,62 @@
+<%@ page import="com.eventbee.event.*"%>
+<%@ page import="com.eventbee.authentication.*"%>
+<%@ page import="com.eventbee.general.GenUtil"%>
+<%@ page import="com.eventbee.general.formatting.*"%>
+<%@ page import="com.eventbee.general.*"%>
+<%@ page import="java.util.*"%>
+<%
+	Authenticate au=null;
+	EventRegisterBean jBean=new EventRegisterBean();
+	session.removeAttribute("regerrors");
+	String eventid=request.getParameter("GROUPID");
+	if(eventid==null)eventid=request.getParameter("eventid");
+	//String eunitid=request.getParameter("UNITID");
+	String agentid=request.getParameter("participant");
+	String fromproxy=(String)session.getAttribute("fromproxy");
+	String context=request.getParameter("context");
+	//if(eunitid==nul	l || "".equals(eunitid.trim()))		eunitid=(String)session.getAttribute("entryunitid");
+	String userid=null;
+		au=(Authenticate)session.getAttribute("13579_authData");
+		//if(userid==null){
+	Authenticate authData=AuthUtil.getAuthData(pageContext);
+	if (authData!=null){
+		userid=authData.getUserID();
+	
+	}
+//}
+		
+		
+		session.setAttribute("entryunitid","13579");
+		if ("Yes".equals(fromproxy)){
+             jBean.setProxy(1);
+        }else{
+              //if("13579".equals(eunitid))
+		 jBean.setProxy(6);
+	     //else
+		 //jBean.setProxy(0);
+        }
+		session.setAttribute("regEventBean", jBean);
+		request.setAttribute("regEventBean", jBean);
+		
+		if(!(jBean.initialize(eventid, au,"13579",agentid)))
+			response.sendRedirect("/guesttasks/regerror.jsp");
+		/*if(!("ACTIVE".equals(jBean.getStatus())))
+              		response.sendRedirect("/portal/guesttasks/regticketnotavailable.jsp?GROUPID="+eventid);*/
+		if (jBean.isTicketsAvailable() && "ACTIVE".equals(jBean.getStatus())){
+			jBean.setUserId(userid);
+		%>
+			<jsp:forward page='../../guesttasks/regticket.jsp'/>
+			
+			<%
+		}else{
+			%>
+			
+			<jsp:forward page='../../guesttasks/regticketnotavailable.jsp'>
+				<jsp:param name='eventstatus' value='<%=jBean.getStatus()%>' />
+			</jsp:forward>	
+			
+	<%	}
+
+	
+	
+%>

@@ -1,0 +1,149 @@
+<html>
+<head>
+
+<title>Eventbee</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="/home/index.css" />
+<link rel="stylesheet" type="text/css" href="/home/homepage.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/niftyCorners.css" />
+
+</head>
+
+
+  <body bgcolor="#FFFFFF" text="555555" link="555555" vlink="555555" alink="555555"  topmargin="5" >
+  <div id="topcontainer" align="center">
+   <div style="{width: 840px;}">
+     <table  border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="#ffffff" width="840px";>
+      
+     <tr> <td>
+
+
+
+<link rel="stylesheet" href="http://www.eventbee.com/home/index.css" type="text/css"/>
+<script language="javascript" src="/home/js/popup.js">
+ function dummy(){}
+</script>
+
+<table border="0" width="840" cellspacing="0" cellpadding="0" class="portalback" >
+	<tr><td align="center">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+  <tr height="10">
+    <td width="300" height="0" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <td width="5" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <td width="450" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <td width="5" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <td width="10" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </tr>
+ <tr>
+
+    <td width="53%" valign="top" height="50" colspan="5">
+
+
+
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+			  <td height="65" valign="bottom" width="19%">
+			    <div align="left"><a href="http://www.eventbee.com/portal/home.jsp">
+			    <img src="/home/images/logo_big.jpg" border="0"/></a></div>
+			  </td></tr>
+		</table>
+	<td width="47%" height="10" valign="top" >
+		<table width="100%" align="center" border="0" cellpadding="5" cellspacing="0"><tr>
+			<td width="50%" colspan="20" height="40" valign="middle" align="center">
+<!-------------------- header ------------------------------>
+			  
+<%@ include file="commonheader.jsp" %>
+			</td>
+		  </tr>
+
+  <tr height="35" id="maintab">
+   
+		  <td  class="maintab2" width="22%">
+	            <div align="center"> <a href="http://www.eventbee.com/portal/eventdetails/events.jsp?evttype=event&UNITID=13579" >
+	              <span class="tabfont">Events</span> </a> </div>
+	          </td>
+		  
+		  <td class="maintab2" width="22%">
+		    <div align="center"> <a href="http://www.eventbee.com/portal/eventdetails/events.jsp?evttype=class&UNITID=13579" >
+		      <span class="tabfont">Classes</span> </a> </div>
+	          </td>
+		  
+		   <td class="maintab2" width="34%">
+	            <div align="center"> <a href="http://www.eventbee.com/portal/hub/clubsview.jsp" >
+	              <span class="tabfont">Communities</span> </a></div>
+	          </td>
+		  
+		  
+		  <td class="maintab2" width="22%">
+	            <div align="center"> <a href="http://www.eventbee.com/portal/listtabs/moretab.jsp" >
+	              <span class="tabfont">More &raquo;</span> </a></div>
+	          </td>
+		
+		</tr></table></td></tr>
+	        <tr bgcolor="blue">
+	          <td height="1" colspan="25"  ></td>
+        </tr> 
+      </table>
+    
+    
+
+    </td>
+
+  </tr>
+ </table>
+ 
+ 
+ 
+
+
+	 </td></tr>
+	 </table>
+
+ <table border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="#ffffff" width="840px";>
+ 	 <tr>
+ 	     <td height="12" width="20"></td>
+ 	     <td></td>
+ 	     <td></td>
+ 	     <td></td>
+ 	     <td width="20"></td>
+     </tr>
+      <tr>
+	  	 <td valign="top" width="100%" cellpadding="10" cellspacing="0">
+	  	   <table width="100%" border="0" cellpadding="10" cellspacing="0" >
+            <!--DWLayoutTable-->
+            <tr> 
+              <td width="816" height="234"  valign="top" > <p><font color="#FF0000" size="4" face="Verdana, Arial, Helvetica, sans-serif">Blog 
+                  Page </font></p>
+                <p>Post and publish your event stories, and get discovered on 
+                  search engines.</p>
+                <p><font color="#339900" face="Verdana, Arial, Helvetica, sans-serif">Blog 
+                  Page URL</font></p>
+                <p>http://&lt;your Bee ID&gt;.eventbee.com/blog</p>
+                <p><font color="#339900" face="Verdana, Arial, Helvetica, sans-serif">Sample 
+                  Screen Shot</font></p>
+                <p><img src="/home/images/blogpage.JPG" border="0" width="800"/><br>
+                  <br>
+                </p>
+                </td>
+            </tr>
+            
+          </table>
+		           </td></tr></table>
+		        
+<div  id="footer">
+
+
+
+		<div align="center" width="100%" > <table width="100%" cellpadding="0" cellspacing="0" ><tr><td height='1' width="100%" bgcolor="#666666"></td></tr></table></div>
+	<!----------------------------- footer -------------------------->	
+		
+
+<%@ include file="commonfooter.jsp" %>
+	</div>
+
+   
+		  </div>
+		  </div>
+		  </body>
+</html>

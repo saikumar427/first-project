@@ -1,0 +1,676 @@
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+<data-sources>
+</data-sources>
+<form-beans>
+      	<form-bean name="FileUpload" type="org.apache.struts.action.DynaActionForm">
+     	<form-property name="FormFile" type="org.apache.struts.upload.FormFile"/>
+	</form-bean>
+
+	<form-bean name="ListUpload" type="org.apache.struts.action.DynaActionForm">
+	<form-property name="member_file" type="org.apache.struts.upload.FormFile"/>
+	</form-bean>
+	
+   	<form-bean name="PhotoUpload" type="org.apache.struts.action.DynaActionForm">
+       	<form-property name="myimage1" type="org.apache.struts.upload.FormFile"/>
+	<form-property name="myimage2" type="org.apache.struts.upload.FormFile"/>
+        <form-property name="myimage3" type="org.apache.struts.upload.FormFile"/>
+	</form-bean>
+	
+	
+	<form-bean name="MultiplePhotoUpload" type="com.actions.FileUploadForm">	       	   
+	</form-bean>
+</form-beans>
+
+<global-exceptions>
+</global-exceptions>
+<global-forwards>
+</global-forwards>
+
+<action-mappings>
+
+  	<action path="/admin/tilesreload" type="org.apache.struts.tiles.actions.ReloadDefinitionsAction" />
+  	<action path="/admin/tilesview" type="org.apache.struts.tiles.actions.ViewDefinitionsAction" />
+  	
+  		
+  	<action path="/es-co" type="com.actions.SimpleAction" >
+        <forward name="success" path="/columbia.jsp?lang=es-co" />
+	</action>
+	<action path="/es" type="com.actions.SimpleAction" >
+        <forward name="success" path="/columbia.jsp?lang=es-co" />
+	</action>
+	<action path="/es-us" type="com.actions.SimpleAction" >
+        <forward name="success" path="/home.jsp" />
+	</action>
+	<action path="/en-co" type="com.actions.SimpleAction" >
+        <forward name="success" path="/columbia.jsp?lang=en-us" />
+	</action>
+	<action path="/en-us" type="com.actions.SimpleAction" >
+        <forward name="success" path="/home.jsp" />
+	</action>
+	<action path="/en" type="com.actions.SimpleAction" >
+         <forward name="success" path="/home.jsp" />
+	</action>
+	<action path="/es-mx" type="com.actions.SimpleAction" >
+        <forward name="success" path="/mexico.jsp?lang=es-mx" />
+	</action>
+	<action path="/en-mx" type="com.actions.SimpleAction" >
+         <forward name="success" path="/mexico.jsp?lang=en-mx" />
+	</action>
+	
+	
+	
+	<action path="/" type="com.actions.SimpleAction" >
+        <forward name="success" path="/home.jsp" />
+	</action>
+
+	<action path="" type="com.actions.SimpleAction" >
+        <forward name="success" path="/home.jsp" />
+	</action>
+	<action path="/introduction" type="com.actions.SimpleAction" >
+	        <forward name="success" path="/main?intro=y" redirect="true" />
+	</action>
+
+	<action path="/portal/eventregister/register" type="com.actions.SimpleAction" >
+        <forward name="success" path="/eventregister/reg/register.jsp" />
+	</action>
+	
+	<action path="/FileUpload" type="com.actions.UploadAction" name="FileUpload" 
+	scope="request"  input="/lists/ListCreateScreen1.jsp">
+ 	<forward name="success" path="/listmgmt/fileupload.jsp"/>
+ 	</action>
+ 	
+	<action path="/FileUpload2" type="com.actions.UploadAction" name="FileUpload" 
+	scope="request"  input="/listmgmt/addmembers.jsp">
+	<forward name="success" path="/listmgmt/fileupload1.jsp"/>
+	</action>	
+    
+        <action path="/photonewpreview" type="com.actions.UploadAction" name="PhotoUpload" 
+        scope="request"  input="/photogallery/uploadnew.jsp">
+        <forward name="success" path="/photogallery/photopreview.jsp" />
+        </action>
+
+	<action path="/ListUpload" type="com.actions.UploadAction" name="ListUpload" 
+        scope="request"  input="/nuser/FileUpload.jsp">
+        <forward name="success" path="/nuser/SaveFile.jsp" />
+	</action>
+       
+        <action path="/pdfreport" type="com.eventbee.pdfgen.pdfGenerator1" name="pdfreport" 
+        scope="request"  input="/listreport/registrations_report.jsp">
+        </action>
+
+	  <action path="/pdfreport1" type="com.eventbee.pdfgen.pdfGenerator" name="pdfreport" 
+
+		 scope="request">
+
+      </action>	 
+      
+      
+      
+      
+      
+
+	   <action path="/communityreport" type="com.eventbee.pdfgen.communityReport" name="communityreport" 
+
+		 scope="request"  input="/listreport/ClubMemberManageScr1.jsp">
+
+       </action>
+
+       
+
+       <action path="/validateeventform" type="com.eventmanage.validations.ValidateEvent" name="validateeventform" 
+       
+              		scope="request" >
+              		<forward name="reload" path="/guesttasks/addevent.jsp" />
+              		<forward name="success" path="/validate" />
+       
+       </action>
+
+       
+
+       <action path="/validatepowerregistration" type="com.eventmanage.validations.ValidatePowerRegistration" name="validatepowerregistration" 
+
+              		scope="request" >
+
+       </action>
+
+       
+
+       <action path="/validatePowerRsvp" type="com.eventmanage.validations.ValidatePowerRsvp" name="validatePowerRsvp" 
+
+                     		scope="request" >
+
+       </action>
+       
+       
+       <action path="/validateExternal" type="com.eventmanage.validations.ValidateExternal" name="validateExternal" 
+
+                     		scope="request" >
+
+       </action>
+
+        <action path="/validate" type="com.eventmanage.validations.Validate" name="validate" 
+	                 scope="request" >
+	                 <forward name="createnew" path="/createevent/addeventerrors.jsp?e=N" />
+	                 <forward name="validatefrm" path="/createevent/addeventerrors.jsp" />
+	                  
+       </action>
+
+       <action path="/createnew" type="com.eventmanage.validations.CreateEvent" name="createnew" 
+		 scope="request" >
+		 <forward name="evtbeelogin" path="/guesttasks/checkevtauth.jsp" />
+		 <forward name="checklogin" path="/guesttasks/checkauthnetworkevtlist.jsp" />
+		 <forward name="success" path="/mytasks/evtlisttype.jsp" />
+		 <forward name="socialnetworkevtsuccess" path="/createevent/done.jsp" />
+		 <forward name="networklistsuccess" path="/createevent/networkevtlist.jsp" />
+		 <forward name="fail" path="/mytasks/eventfailure.jsp" />
+       </action>
+
+	<action path="/club/create" type="com.eventbee.clubs.CreateClub" name="createclub" 
+       		scope="request" >
+       		<forward name="erroraddclub" path="/mytasks/addclub.jsp?errorpage=yes" />
+       		<forward name="success" path="/mytasks/clubmanage.jsp" />
+       		<forward name="failure" path="/mytasks/clubfailure.jsp" />
+       		<forward name="alreadyadded" path="/mytasks/clubinfo.jsp" />
+       		<forward name="nologin" path="/auth/listauth.jsp?purpose=createhub" />
+       		
+       </action>
+       
+       
+       <action path="/club/update" type="com.eventbee.clubs.UpdateClub" name="updateclub" 
+       		scope="request" >
+       		<forward name="updateerror" path="/mytasks/editclub.jsp" />
+       		<forward name="success" path="/mytasks/clubmanage.jsp?type=Community" />
+       		<forward name="failure" path="/mytasks/clubfailure.jsp" />
+       </action>
+
+	<action path="/eventpartner/confirm" type="com.eventbeepartner.partnernetwork.ConfirmPartner" name="confirmPartner" 
+	                 scope="request" >
+		 <forward name="success" path="/mytasks/networkticketsellingpage.jsp" />
+		 <forward name="fail" path="/mytasks/partnerfailure.jsp" />
+		 <forward name="nologin" path="/auth/listauth.jsp?purpose=joinprogram" />
+        </action>
+        
+        <action path="/eventpartner/update" type="com.eventbeepartner.partnernetwork.UpdatePartner" name="updatePartner" 
+		                 scope="request" >
+		 <forward name="success" path="/mytasks/networkticketsellingpage.jsp" />
+		 <forward name="fail" path="/mytasks/eventpartnerfailure.jsp" />
+	</action>
+	
+	<action path="/ningapp/update" type="com.eventbeepartner.partnernetwork.UpdatePartner" name="updatePartner" 
+			                 scope="request" >
+			 <forward name="success" path="/ningapp/ntstab" />
+			 <forward name="fail" path="/ningapp/partnerfailure.jsp" />
+	</action>
+	<action path="/eventpartner/leavepartnerprogram" type="com.eventbeepartner.partnernetwork.ClosePartnership" name="closePartner" 
+		                 scope="request" >
+		 <forward name="success" path="/mytasks/networkticketsellingpage.jsp" />
+		 <forward name="fail" path="/mytasks/eventpartnerfailure.jsp" />
+		 <forward name="nologin" path="/ntspartner/listauth.jsp?purpose=leavpartnerprogram" />
+        </action>
+        
+        <action path="/ningapp/leavepartnerprogram" type="com.eventbeepartner.partnernetwork.ClosePartnership" name="closePartner" 
+			                 scope="request" >
+			 <forward name="success" path="/ningapp/ntstab" />
+			 <forward name="fail" path="/ningapp/partnerfailure.jsp" />
+			 <forward name="nologin" path="/ntspartner/listauth.jsp?purpose=leavpartnerprogram" />
+	        </action>
+        
+        
+        <action path="/eventbeeticket/saveAgent" type="com.eventmanage.networkticketing.saveAgentSettings" name="saveAgent" 
+			                 scope="request" >
+		 <forward name="success" path="/mytasks/ticketsalesdone.jsp" />
+		 <forward name="error" path="/mytasks/settask.jsp?error=yes" />
+		 <forward name="failure" path="/mytasks/agentfailure.jsp" />
+        </action>
+        
+        <action path="/ningapp/saveAgent" type="com.eventmanage.networkticketing.saveAgentSettings" name="saveAgent" 
+				                 scope="request" >
+			 <forward name="success" path="/ningapp/ticketing/ticketsalesdone.jsp" />
+			 <forward name="error" path="/ningapp/ticketing/settask.jsp?error=yes" />
+			 <forward name="failure" path="/ningapp/ticketing/agentfailure.jsp" />
+        </action>
+        <action path="/eventbeeticket/updateConfig" type="com.eventmanage.networkticketing.UpdateConfig" name="updateConfig" 
+				                 scope="request" >
+		 <forward name="success" path="/mytasks/eventmanage.jsp" />
+		 <forward name="failure" path="/eventbeeticket/disableeventfail.jsp" />
+        </action>
+        
+         <action path="/ningapp/updateConfig" type="com.eventmanage.networkticketing.UpdateConfig" name="updateConfig" 
+						 scope="request" >
+		 <forward name="success" path="/ningapp/ticketing/eventmanage.jsp" />
+		 <forward name="failure" path="/eventbeeticket/disableeventfail.jsp" />
+	</action>
+        
+        <action path="/eventbeeticket/statusUpdate" type="com.eventmanage.networkticketing.StatusUpdate" name="statusUpdate" 
+						 scope="request" >
+		 <forward name="success" path="/mytasks/update.jsp" />
+		 <forward name="failure" path="/mytasks/changestatusfail.jsp" />
+	</action>
+
+	<action path="/eventbeeticket/confirm" type="com.eventmanage.networkticketing.ConfirmSettings" name="Confirm" 
+							 scope="request" >
+			 <forward name="error" path="/mytasks/agentcomm.jsp?error=yes" />
+			 <forward name="updateagent" path="/mytasks/updateagentsettings.jsp" />
+			 <forward name="addagent" path="/mytasks/addagent.jsp" />
+			 <forward name="failure" path="/mytasks/agentfailure.jsp" />
+	</action>
+	
+	<action path="/passivemember/join" type="com.eventbee.passivemember.PassiveMemJoinCtrl" name="memberJoin" 
+					 scope="request" >
+		 <forward name="success" path="/guesttasks/passivedone.jsp?title=Join Hub" />
+		 <forward name="fail" path="/guesttasks/passivememberfailure.jsp" />
+	</action>
+		
+	<action path="/passivemember/createManual" type="com.eventbee.passivemember.CreatePassiveMemManual" name="createManual" 
+					 scope="request" >
+		 <forward name="success" path="/mytasks/AddPassiveMemManual.jsp" />
+		 <forward name="fail" path="/mytasks/memberfailure.jsp" />
+	</action>
+
+	<action path="/passivemember/update" type="com.eventbee.passivemember.UpdatePassiveMem" name="updateMember" 
+					 scope="request" >
+		 <forward name="successpaid" path="/mytasks/ClubMemberManageScr1.jsp?UNITID=13579" />
+		 <forward name="successpublic" path="/mytasks/hubmembers.jsp" />
+		 <forward name="fail" path="/mytasks/passivememberfailure.jsp" />
+	</action>
+	
+	
+	<action path="/photos/uploadphotos" type="com.actions.ImageUploadAction" name="MultiplePhotoUpload" 
+	       		scope="request" >
+	       		<forward name="success" path="/photos/uploadresult" />
+	       </action>
+	
+	      <action path="/photos/uploadresult" type="com.eventbee.photos.PhotoPreview" name="photopreviewresult" 
+	       		scope="request" >
+	       		<forward name="success" path="/mytasks/myphotos.jsp?type=Photos" />
+	       		<forward name="error" path="/mytasks/uploadphotos.jsp" />
+	       		<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+       </action>
+       
+       <action path="/photoalbum/insertAlbumPhotos" type="com.eventbee.photoalbum.insertAlbumPhotos" name="Album" 
+       				 scope="request" >
+       				 <forward name="success" path="/mytasks/memberAlbums.jsp" />
+       			         <forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+
+       	</action>
+       	
+       	<action path="/photos/managephotos" type="com.eventbee.photos.PhotoManageDisp" name="managephotos" 
+	       		scope="request" >
+	       		<forward name="success" path="/photogallery/photosmanagedisp.jsp?UNITID=13579" />
+	       		<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+	       </action>
+
+	
+	 <action path="/photoalbum/managealbums" type="com.eventbee.photoalbum.ManageAlbumsAction" name="ManageAlbum" 
+	 scope="request" >
+	 <forward name="success" path="/photoalbum/memberAlbumsdisp.jsp?UNITID=13579" />
+	<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+
+       	</action>
+       	
+       	<action path="/themes/insertAttributes" type="com.themes.InsertAttributesAction" name="themes" 
+			       		scope="request" >
+			<forward name="success" path="/mytasks/MythemesDone.jsp" />
+			<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+	</action>
+	
+	<action path="/hub/sendmails" type="com.eventbee.passivemember.SendMails" name="sendMails" 
+						 scope="request" >
+			 <forward name="success" path="/mytasks/hubmaildone.jsp" />
+			 <forward name="fail" path="/guesttasks/passivememberfailure.jsp" />
+	</action>
+		
+	<action path="/passivemember/unsubscribemem" type="com.eventbee.passivemember.UnsubscribeMem" name="unSubscribe" 
+						 scope="request" >
+			 <forward name="success" path="/guesttasks/passiveunsubscribed.jsp" />
+			 <forward name="fail" path="/guesttasks/passivememberfailure.jsp" />
+	</action>
+		
+	<action path="/passivemember/updatelogin" type="com.eventbee.passivemember.UpdateLoginDetails" name="updateLogin" 
+						 scope="request" >
+			 <forward name="fail" path="/mytasks/passivememberfailure.jsp" />
+	</action>
+	<action path="/club/emailsend" type="com.eventbee.clubs.EmailSendAction" name="invitefriends" 
+								 scope="request" >
+					 <forward name="success" path="/mytasks/emaildone.jsp" />
+					 <forward name="failure" path="/mytasks/clubfailure.jsp" />
+		</action>
+		
+	<action path="/editprofiles/updatememberprofile" type="com.eventbee.editprofiles.UpdateMemberProfile" name="editprofile"
+		                                                                      scope="request" >
+ <!--  		                             
+		 <forward name="validate" path="/mytasks/mysettings.jsp" />
+		 <forward name="error"   path="/editprofiles/error.jsp" />
+		 <forward name="nologin" path="/auth/listauth.jsp?purpose=editprofile" />
+		 <forward name="success" path="/editprofiles/end.jsp" />
+		 <forward name="failure" path="/mytasks/proffailure.jsp" />
+		 -->
+		 
+		 <forward name="validate" path="/editprofiles/updatestatus.jsp?status=validation" />
+		 <forward name="nologin" path="/editprofiles/updatestatus.jsp?status=nologin" />
+		 <forward name="success" path="/editprofiles/updatestatus.jsp?status=success" />
+		 <forward name="failure" path="/editprofiles/updatestatus.jsp?status=failure" />
+		 <forward name="error"   path="/editprofiles/error.jsp" />
+
+		
+        </action>
+	
+	<action path="/club/emailtomembers" type="com.eventbee.clubs.ClubEmailSend" name="emailToMembers" 
+						 scope="request" >
+			 <forward name="success" path="/mytasks/mailsent.jsp" />
+			 <forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+			 <forward name="fail" path="/mytasks/failure.jsp" />
+	</action>
+	
+	<action path="/club/addActiveMemManual" type="com.eventbee.clubs.AddActiveMemManual" name="addActiveMemManual" 
+						 scope="request" >
+			<forward name="error" path="/mytasks/ClubAddMemScreenManual.jsp" />
+			<forward name="success" path="/mytasks/ClubAddMemScreenManual.jsp?type=Community" />			 
+			<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+			<forward name="fail" path="/mytasks/clubfailure.jsp" />
+	</action>
+	<action path="/customevents/themecontroller" type="com.eventbee.customevents.ThemeControllerForEvents" name="evntscustomization" 
+								 scope="request" >
+					 <forward name="success" path="/mytasks/ThemeDone.jsp" />			 
+					 <forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+					 <forward name="fail" path="/mytasks/eventfailure.jsp" />
+					 
+			</action>
+		
+		
+		  <action path="/customevents/customthemes" type="com.eventbee.customevents.CustomThemes" name="customthemes" 
+									 scope="request" >
+						 <forward name="success" path="/mytasks/confirmtheme.jsp" />			 
+						 <forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+						 <forward name="fail" path="/mytasks/eventfailure.jsp" />
+						 
+				</action>
+		<action path="/createevent/emailsend" type="com.eventmanage.invitefriends.EventEmailSendAction" name="EventEmail" 
+										 scope="request" >
+							 <forward name="success" path="/mytasks/eventsemaildone.jsp" />			 
+							 <forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+							 <forward name="fail" path="/createevent/eventfailure.jsp" />
+							 
+				</action>
+				
+				
+				
+				<action path="/mythemes/themecontroller" type="com.eventbee.mythemes.ThemeControllerForTemplates" name="themetemplates" 
+																 scope="request" >
+						 <forward name="success" path="/mytasks/templatedone.jsp" />			 
+				        	 <forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+													
+													 
+			</action>
+		
+	
+	<action path="/discussionforums/logic/insertDiscForum" type="com.eventbee.discussionforums.InsertDiscForum" name="insertDiscForum" 
+						 scope="request" >
+			<forward name="success" path="/mytasks/dffinalinfo.jsp?type=Community" />
+			<forward name="adderror" path="/mytasks/enterforuminfo.jsp" />			 
+			<forward name="editerror" path="/mytasks/editforuminfo.jsp" />			 
+			<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+			<forward name="fail" path="/mytasks/clubfailure.jsp" />
+	</action>
+
+		<action path="/noticeboard/insertNotice" type="com.eventbee.noticeboard.InsertNotice" name="insertNotice" 
+						 scope="request" >
+			<forward name="success" path="/mytasks/notice.jsp" />
+			<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+			<forward name="error" path="/mytasks/enternoticeinfo.jsp" />			 
+			<forward name="fail" path="/mytasks/clubfailure.jsp" />
+	</action>
+
+	<action path="/noticeboard/updateNotice" type="com.eventbee.noticeboard.UpdateNotice" name="updateNotice" 
+						 scope="request" >
+			<forward name="success" path="/mytasks/notice.jsp" />			 
+			<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+			<forward name="error" path="/mytasks/shownoticeinfo.jsp" />			 
+			<forward name="fail" path="/mytasks/clubfailure.jsp" />
+	</action>
+	
+	<action path="/discussionforums/logic/insertDFMessage" type="com.eventbee.discussionforums.InsertDFMessage" name="insertDFMessage" 
+						 scope="request" >
+			<forward name="successedit" path="/discussionforums/logic/entermsginfo.jsp" />
+			<forward name="successpreview" path="/discussionforums/logic/previewmsginfo.jsp" />			 
+			<forward name="nologin" path="/guesttasks/authenticateMessage.jsp" />
+			<forward name="fail" path="/club/failure.jsp" />
+	</action>		
+                                                               
+      <action path="/campmailsopen" type="com.eventbee.emailschedule.CampaignEmailsOpen" name="campmailsopen" 
+						 scope="request" >
+			
+			
+	</action>
+	
+	
+	<action path="/elt" type="com.eventbee.streamer.TrackImpressions" name="impressions" 
+							 scope="request" >
+				
+				
+	</action>
+	
+	
+	<action path="/portal/payment/googlecallback" type="com.actions.SimpleAction" >
+
+         <forward name="success" path="/embedded_reg/googlenotification.jsp" />
+
+	</action>
+	
+	
+	<action path="/viewevent" type="com.actions.SimpleAction" name="viewevent"  scope="request"> 
+	      		 
+	   	 <forward name="success" path="/eventdetails/event.jsp" />
+
+	      
+	      </action>	
+	      
+	 <action path="/captcha" type="com.eventbee.captcha.CaptchaImageAction" name="captcha" 
+	   						 scope="request" >
+	     		      				
+	      	</action>
+		      
+	     <action path="/groupticketr" type="com.actions.SimpleAction" name="groupeventpage" scope="request">
+	<forward name="success" path="/groupticket/gt_registration.jsp"/>
+	</action>
+	<action path="/countdown" type="com.actions.SimpleAction" name="countdownpage" scope="request">
+	<forward name="success" path="/groupticket/countdown.jsp"/>
+	</action>
+	
+	<action path="/groupticketrevent" type="com.actions.SimpleAction" name="gteventpage"  scope="request"> 
+	<forward name="success" path="/groupticket/groupticketr.jsp"/>  
+	</action>
+	<action path="/gtdeals" type="com.actions.SimpleAction" name="dealseventpage"  scope="request"> 
+	<forward name="success" path="/groupticket/gtdeals.jsp"/>  
+	</action>
+       <action path="/groupticketeventinfo" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/groupticket/groupticketeventinfo.jsp"/>  
+	</action>
+	<action path="/gt_frame" type="com.actions.SimpleAction" name="gt_frame" scope="request">
+	<forward name="success" path="/groupticket/gt_frame.jsp"/>
+	</action>
+	<action path="/groupevents" type="com.actions.SimpleAction" name="gt_new_theme" scope="request">
+	<forward name="success" path="/groupticket/gtnew.jsp"/>
+	</action> 
+	      
+      
+      <action path="/ningapp/nts/canvas_owner" type="com.ning.ConvasOwnerAction" name="canvasowner" 
+      
+      		 scope="request"  >
+      
+      		 <forward name="success" path="/ningapp/ntstabview.jsp"/>
+      
+      	 </action>
+      	 
+      	  <action path="/ningapp/nts/canvas_viewer" type="com.ning.ConvasOwnerAction" name="canvasowner" 
+	       
+	       		 scope="request"  >
+	       
+	       		 <forward name="success" path="/ningapp/canvas_viewer.jsp"/>
+	       
+	       	 </action>
+      	 
+      	 <action path="/ningapp/nts/profile_owner" type="com.ning.ConvasOwnerAction" name="profileowner" 
+	 	       
+	 	       		 scope="request"  >
+	 	       
+	 	       		 <forward name="success" path="/ningapp/profileearningspage.jsp"/>
+	 	       
+	       	 </action>
+      	 
+      <action path="/ningapp/nts/profile_viewer" type="com.ning.ConvasOwnerAction" name="profileowner" 
+      	 	       
+      	 	       		 scope="request"  >
+      	 	       
+      	 	       		 <forward name="success" path="/ningapp/profile_viewer.jsp"/>
+      	 	       
+      	       	 </action>
+      	 
+	<action path="/ningapp/ntstab" type="com.actions.SimpleAction" name="ningntstab"  scope="request"> 
+		<forward name="success" path="/ningapp/ntstabview.jsp"/>  
+	</action>
+	<action path="/ningapp/neltab" type="com.actions.SimpleAction" name="ningneltab"  scope="request"> 
+		<forward name="success" path="/ningapp/neltabview.jsp"/>  
+	</action>
+	<action path="/ningapp/earningstab" type="com.actions.SimpleAction" name="ningearningstab"  scope="request"> 
+		<forward name="success" path="/ningapp/earningstabview.jsp"/>  
+	</action>
+        
+      <action path="/token" type="com.actions.SimpleAction" name="ntseventredirect"  scope="request"> 
+      		<forward name="success" path="/ningapp/ntsevent.jsp"/>  
+      	</action>
+        
+      
+	<action path="/ningapp/ticketing/profile_owner" type="com.ning.ConvasOwnerAction" 
+		name="profileowner" 	scope="request"  >
+		<forward name="success" path="/ningapp/ticketing/myeventsbeelet.jsp"/>
+	</action>
+
+	<action path="/ningapp/ticketing/canvas_owner" type="com.ning.ConvasOwnerAction" 
+		name="profileowner"  scope="request"  >
+	     <forward name="success" path="/ningapp/ticketing/canvasownerpagebeelets.jsp"/>
+	</action>
+
+      <action path="/ningapp/ticketing/maincanvas_owner" type="com.ning.ConvasOwnerAction" 
+      		name="profileowner"  scope="request"  >
+      	     <forward name="success" path="/ningapp/ticketing/main_viewer.jsp"/>
+      	</action>
+      	
+<action path="/ningapp/ticketing/manage" type="com.ning.ConvasOwnerAction" 
+      		name="profileowner"  scope="request"  >
+      	     <forward name="success" path="/ningapp/ticketing/canvasownerpagebeelets.jsp"/>
+      	</action>
+	<action path="/ningapp/ticketing/register" type="com.ning.CanvasViewerAction" 
+	name="profileowner"  scope="request"  >
+	<forward name="success" path="/eventdetails/event.jsp"/>
+	</action>
+	<action path="/ningapp/ticketing/showAllEvents" type="com.ning.CanvasViewerAction" 
+	name="profileowner"  scope="request"  >
+	<forward name="success" path="/ningapp/ticketing/getProfileViewerEvents.jsp"/>
+	</action>
+	<action path="/ningapp/ticketing/showActiveEvents" type="com.ning.CanvasViewerAction" 
+	name="profileowner"  scope="request"  >
+	<forward name="success" path="/ningapp/ticketing/getProfileViewerEvents.jsp"/>
+	</action>
+      
+	<action path="/ningapp/nts/manage" type="com.ning.ConvasOwnerAction" 
+	name="profileowner"  scope="request"  >
+	<forward name="success" path="/ningapp/ntstabview.jsp"/>
+	</action>
+	<action path="/ningapp/nts/register" type="com.ning.CanvasViewerAction" 
+	name="profileowner"  scope="request"  >
+	<forward name="success" path="/eventdetails/event.jsp"/>
+	</action>
+
+	<action path="/ningapp/nts/showAllEvents" type="com.ning.CanvasViewerAction" 
+	name="profileowner"  scope="request"  >
+	<forward name="success" path="/ningapp/profileview.jsp"/>
+	</action>
+	<action path="/ningapp/nts/showActiveEvents" type="com.ning.CanvasViewerAction" 
+	name="profileowner"  scope="request"  >
+	<forward name="success" path="/ningapp/profileview.jsp"/>
+	</action>
+	
+	<action path="/event" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/customevents/eventhandler.jsp"/>  
+	</action>
+	
+	<action path="/buyerpage" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/customevents/buyerpagehandler.jsp"/>  
+	</action>
+	
+	<action path="/gettickets" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/embedded_reg/gettickets.jsp"/>  
+	</action>
+
+	<action path="/event/register" type="com.actions.SimpleAction" >
+	<forward name="success" path="/customevents/eventhandler.jsp" />
+	</action>
+	<action path="/ning/register" type="com.actions.SimpleAction" >
+		<forward name="success" path="/ningapp/event.jsp" />
+		</action>
+	
+      <action path="/ning/viewevent" type="com.actions.SimpleAction" >
+          <forward name="success" path="/ningapp/viewevent.jsp" />
+      </action>
+    <!--
+    <action path="/eregister" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/embedded_reg/registration.jsp"/>  
+	</action>
+	-->
+	<action path="/eregister" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/reg_widget/registration.jsp"/>  
+	</action>
+	
+		
+	<action path="/m" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/mobileregistration/mobile.jsp"/>  
+	</action>
+	
+	<action path="/boxoffice" type="com.actions.SimpleAction" name="eventpage"  scope="request">
+    <forward name="success" path="/mobileregistration/boxofficehome.jsp"/> 
+    </action>
+	
+	<action path="/tweetpurchase" type="com.actions.SimpleAction" name="eventpage"  scope="request">
+    <forward name="success" path="/socialnetworking/callback.jsp"/> 
+    </action>
+	
+	<action path="/attendees" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/embedded_reg/whosattendingwidget.jsp"/>  
+	</action>
+	
+	<action path="/fbattendees" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/socialnetworking/fbattendeelist.jsp"/>  
+	</action>
+	<action path="/fbrsvp" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/socialnetworking/fbrsvp.jsp"/>  
+	</action>
+	
+	<action path="/fbcomments" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/socialnetworking/fbcomment.jsp"/>  
+	</action>
+	
+	<action path="/c/halloween" type="com.actions.SimpleAction" name="eventpage"  scope="request"> 
+	<forward name="success" path="/city.jsp"/>  
+	</action>
+	
+</action-mappings>
+
+ <controller  multipartClass="org.apache.struts.upload.CommonsMultipartRequestHandler" maxFileSize="10M" memFileSize="0K" />
+
+<!--
+
+<message-resources key="restmessages" parameter="resources.application"/>
+
+-->
+
+<plug-in className="org.apache.struts.tiles.TilesPlugin">
+    <set-property 
+        property="definitions-config" value="/WEB-INF/tiles-defs.xml"/>
+</plug-in>
+
+</struts-config>
+
+

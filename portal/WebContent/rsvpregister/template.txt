@@ -1,0 +1,23 @@
+insert into reg_flow_templates (content,purpose)values ('$rsvpprofileForm<table width="100%" cellpadding="0" cellspacing="0">
+<tr><td width="100%"></td></tr>
+
+<tr><td width="100%" id="profileerr"></td></tr>
+<tr height="20"><td></td></tr>
+
+#foreach( $pentry in $profileObject.get("customProfile") )
+
+
+  <tr>
+ <td width="100%">
+   <div width="100%" id="p_${pentry.get("qId")}">
+    </div>
+    </td>
+	 </tr>
+<tr height="20"><td></td></tr>
+
+#end
+
+
+
+
+</table>$rsvpprofileFormclose','rsvpPage');

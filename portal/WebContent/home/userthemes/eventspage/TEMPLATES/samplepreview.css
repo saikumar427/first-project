@@ -1,0 +1,136 @@
+BODY{
+font-family: Verdana; 
+font-size: 15px; 
+color: black; 
+background-color:#**BACKGROUND**#;
+left: 2px; 
+clip:  rect( 2px  ); 
+}
+P, UL, LI, DIV, OL, TABLE, TD, TH { 
+font-family: Verdana; 
+font-size: 15px;  
+}
+
+.title { 
+background-color: #FFFFFF; 
+border-color: #AAAAAA ; 
+border-style: solid;  
+border-top-width: 0px; 
+border-right-width: 0px; 
+border-bottom-width: 4px; 
+border-left-width: 0px; 
+font-family: verdana; 
+font-size: 14px; 
+font-weight: bold ; 
+color: black;
+}
+
+.tasktitle {  
+background-color: #**BACKGROUND**#; 
+border-color: #AAAAAA ; 
+border-style: solid;  
+border-top-width: 0px; 
+border-right-width: 0px; 
+border-bottom-width: 4px; 
+border-left-width: 0px; 
+font-family: verdana; 
+font-size: 14px; 
+font-weight: bold ; 
+color: black;
+}
+
+ #container {
+ margin: 0 auto;
+ text-align: center;
+ width: 840px;
+ border-bottom: 0px solid #eee;
+ background: #**BACKGROUND**#;
+ color: black;
+ line-height: 150%;
+ padding: 0px;
+ }
+ 
+
+ .txt {
+ font-family: Verdana;
+ font-size: 11px;
+ color: black;
+ }
+ 
+ 
+.large {
+font-family:#**BIGGER_FONT_TYPE**#;font-size: #**BIGGER_FONT_SIZE**#;color:#**BIGGER_TEXT_COLOR**#;
+padding: 5px;
+}
+
+.medium {
+font-family:#**MEDIUM_FONT_TYPE**#;font-size:#**MEDIUM_FONT_SIZE**#;color:#**MEDIUM_TEXT_COLOR**#;
+padding: 5px;
+}
+
+.small {
+font-family:#**SMALL_FONT_TYPE**#;font-size:#**SMALL_FONT_SIZE**#;color:#**SMALL_TEXT_COLOR**#;
+padding: 5px;
+}
+
+
+ 
+ #content {
+ float: left;
+ margin: 0px;
+ width: 570px;
+ padding: 5px;
+ font-size: 1.1em;
+ border: 0;
+ 
+ }
+ 
+ #content ul {
+ 
+ margin: 0.1em 0em 0.4em 25px;
+ padding: 0;
+}
+ 
+ #content ul li ul {
+ margin: .2em 0 .4em .5em;
+}
+
+ #content a {
+ color: navy;
+}
+
+ #navi-innen {
+ padding: 0 0 0 0;
+ img-border: 0;
+ }
+ 
+  
+ body {
+ background:#**BACKGROUND**#;
+ text-align: center;
+ padding: 0;
+ font: 62.5% verdana, sans-serif;
+ color: black;
+ }
+
+
+ #navi {
+ float: right;
+ width: 260px;
+ margin: 0px;
+ text-align: left;
+ line-height: 11px;
+ }
+ 
+ #navi a {
+ color: navy;
+ }
+ 
+ #footer {
+ clear: both;
+ margin: 3em 15px 0 15px;
+ padding: 5px;
+ text-align: center;
+ font-size: .8em;
+ 
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<head profile="http://gmpg.org/xfn/1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en">
+
+
+
+<style type="text/css">
+$customcss
+</style>
+
+</head>
+<body>
+<div align="center">
+$eventbeeheader
+</div>
+<div id="container">
+<div>
+ <br/>
+<div class="large">$uname</div>
+</div>
+
+<div id="navi">
+ <div id="navi-innen">
+  <div class="sidebarBox">
+   <div class="medium" >
+    <table>
+    <tr>
+    <td  valign="top"><span class="medium">Visit $userfirstname's</span>
+     <span class="txt">
+      #if( $photoslink)
+          $photoslink |
+
+      #end
+
+      #if( $Bloglink)
+          $Bloglink |
+      #end
+
+      #if ( $communitylink)
+            $communitylink |
+      #end
+
+      #if( $networklink)
+          $networklink
+      #end
+      </span>
+     </td>
+     </tr>
+     </table>
+    </div>
+    <br/>
+    #if( $partnerstreamer)
+         $partnerstreamer
+     </br>
+    #end
+  </div>
+ </div>
+ <div align="left"> #showAds("google")
+ </div>
+</div>
+
+<div id="navi-innen">
+ <div id="content" >
+   <table width="100%" border="0">
+   <tr><td width="50%" >
+     #if($eventsphoto)
+          $eventsphoto
+     #end
+   </td> <td ></td>
+  </tr></table>
+
+</div>
+</div>
+<div id="content" align="left">
+#if($profileinfo)
+    $profileinfo
+#end
+<br>
+#if($newevents)
+<span class="medium">Upcoming Events:</span>
+  <div class="attendeelist">
+
+    <ul>
+		#foreach( $newevent in $newevents )
+		 <li>$newevent</li>
+                  #end
+    </ul>
+ </div>
+#end
+
+#if($oldevents)
+<div class="medium">Past Events:</div>
+    <div class="attendeelist">
+
+      <ul>
+		#foreach( $event in $oldevents )
+		 <li>$event</li>
+                  #end
+      </ul>
+	</div>
+#end
+
+</div>
+
+<div id="footer">
+
+$basicDesihubFooter
+</div>
+</body>
+</html>

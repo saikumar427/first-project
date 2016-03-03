@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Event Register"
+        directory_title="Event Register"
+	title_url="http://www.eventbee.com/home/ning/eventregister.xml"
+	author="Eventbee Inc"
+        author_email="support@eventbee.com"
+	author_affiliation="http://www.eventbee.com"
+        author_location="USA"
+	thumbnail="http://eventbee.com/home/images/ningimages/logosmall.jpg"
+	screenshot="http://eventbee.com/home/images/ningimages/screenshot.jpg"
+	summary="Sell tickets from your Ning pages. Pay flat $1 fee per ticket, regardless of your ticket price. We support PayPal, Google credit card processing to further reduce your ticketing costs." 
+	description="Sell tickets from your Ning pages. Pay flat $1 fee per ticket, regardless of your ticket price. We support PayPal, Google credit card processing to further reduce your ticketing costs. 
+	Eventbee Inc., provides state-of-the-art web-based event management and event promotion tools to the Events Industry. Since 2003, over 8000 Event Managers sold tickets using the Eventbee Platform. Eventbee operates with the single mission of maximizing ticket sales while providing easy to use web-based software to the Events Industry." 
+        icon="http://eventbee.com/home/images/ningimages/favicon.jpg" >
+        <Require feature="opensocial-0.7" />
+	<Require feature='views' />					
+        <Require feature='dynamic-height' />		
+        <Require feature="skins"/>
+	<Require feature="analytics"/>
+	<Require feature="ning" />
+	<Locale />
+    </ModulePrefs>
+
+<Content type="html" view="canvas">
+	<![CDATA[
+		<script>
+		
+		
+			
+		
+		
+		gadgets.window.adjustHeight("700");
+		var params1 = gadgets.views.getParams();
+		var purpose='';
+		var eventid='';
+		var manage=false;
+		if ('undefined' === typeof(params1) || 'undefined' === typeof(params1['purpose'])){
+					
+		}else{
+			eventid=params1['eventid'];
+			purpose=params1['purpose'];
+			manage=false;
+		}
+				
+
+		function response(data) 
+		{
+		  var viewer		= data.get("viewer").getData();
+		  var owner		= data.get("owner").getData();
+		  var vname		= encodeURIComponent(viewer.getDisplayName());
+		  var vid		= viewer.getId();
+		  var oid		= owner.getId();
+		  var oname             = encodeURIComponent(owner.getDisplayName());
+		  var ownerstatus	= (vid==oid);
+		  var domain  =  ning.core.getNetworkDomain();
+                 if(purpose=='' && ownerstatus){				    
+			document.getElementById('canvasframe').src = "http://test.eventbee.com:9090/ningapp/ticketing/manage?oid="+oid+"&oname="+oname+"&domain="+domain;
+		  }else if(purpose=='' && ownerstatus==false){
+			document.getElementById('canvasframe').src = "http://test.eventbee.com:9090/ningapp/ticketing/showAllEvents?vid="+vid+"&oid="+oid+"&oname="+oname+"&domain="+domain+"&view=canvas";
+		  }else {
+		  	document.getElementById('canvasframe').src = "http://test.eventbee.com:9090/ningapp/ticketing/register?vid="+vid+"&oid="+oid+"&eventid="+eventid+"&oname="+oname+"&domain="+domain;
+		  }
+		};
+
+		function init() 
+		{
+		  var req = opensocial.newDataRequest();
+		  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+		  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+		  req.send(response);
+		};
+		init();
+		</script>
+	<iframe id="canvasframe" src="" width="100%" height="700px" border="0"/>
+
+	]]>
+</Content>
+
+<Content type="html" view="ning.main,profile">
+	<![CDATA[
+	    <link href="http://test.eventbee.com:9090/home/ning/css/style.css" rel="stylesheet" type="text/css" />
+	    
+  		<div id='profilecontent'  align='center'> </div>
+	
+		<script type="text/javascript">	
+
+             function setSkin() 
+	       { 
+	         if (gadgets && gadgets.skins && gadgets.skins.getProperty)
+	         {
+	           var fontColor = gadgets.skins.getProperty(gadgets.skins.Property.FONT_COLOR);
+	     	    var bgImage = gadgets.skins.getProperty(gadgets.skins.Property.BG_IMAGE);
+	     	    var bgColor = gadgets.skins.getProperty(gadgets.skins.Property.BG_COLOR);
+	     	    var anchorColor = gadgets.skins.getProperty(gadgets.skins.Property.ANCHOR_COLOR);
+	     
+	           var profilecontent = document.getElementById('profilecontent');
+	           
+	           if (bgColor){
+	             profilecontent.style.backgroundColor = bgColor;
+	           }
+	           if (bgImage){
+	             profilecontent.style.backgroundImage = "url("+bgImage+")";
+	           }
+	     
+	           if (anchorColor){
+	             profilecontent.style.color = anchorColor;
+	           }
+	         }      
+	       }
+
+
+
+
+
+
+
+
+		function makePOSTRequest(ownerstatus,oid,oname) {
+			var params = {};
+			var domain  =  ning.core.getNetworkDomain();   
+               
+			params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+			var url ='http://www.eventbee.com/ningapp/ticketing/getViewerEvents.jsp?oid='+oid+'&ownerstatus='+ownerstatus+'&oname='+oname+'&domain='+domain;
+			gadgets.io.makeRequest(url, Postresponse, params);
+		};
+		function Postresponse(obj) {
+			document.getElementById('profilecontent').innerHTML = obj.text;
+		};			
+
+		function gotoCanvas() {
+			var canvas_view = new gadgets.views.View("canvas");
+			gadgets.views.requestNavigateTo(canvas_view);
+		};			
+
+		function  registerEvent(id){			                
+			var params = {};
+			params['eventid'] = id;
+			params['purpose'] = 'register';
+			var canvas_view = new gadgets.views.View("canvas");
+			gadgets.views.requestNavigateTo(canvas_view, params);
+		};			
+			
+		function response(data) 
+		{ 								
+			var viewer		= data.get("viewer").getData();
+			var owner		= data.get("owner").getData();
+			var vname		= encodeURIComponent(viewer.getDisplayName());
+			var vid			= viewer.getId();
+			var oid			= owner.getId();
+			var oname               = encodeURIComponent(owner.getDisplayName());				 
+			var ownerstatus	= (vid==oid);
+			
+			if(ownerstatus)
+			gadgets.window.adjustHeight("470");
+			else
+			gadgets.window.adjustHeight("420");
+			makePOSTRequest(ownerstatus,oid,oname);
+			
+		};
+
+		function init() 
+		{ 
+			var req = opensocial.newDataRequest();
+			req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+			req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+			req.send(response);
+		};
+		init();
+                setSkin();
+  
+		</script>
+		
+	]]>
+</Content>	
+</Module>

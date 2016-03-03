@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+Content-Type:text/calendar
+PRODID:-//www.eventbee.com//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:20140515T090000
+DTEND:20141130T100000
+LOCATION:ewfewfwxwxcw
+UID:20140509T005900@eventbee.com
+SUMMARY:copy existing for new jboss
+URL:http://vibhav.citypartytix.com/event?eventid=111303704
+END:VEVENT
+END:VCALENDAR

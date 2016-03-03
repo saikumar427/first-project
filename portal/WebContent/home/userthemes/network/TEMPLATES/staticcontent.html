@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head profile="http://gmpg.org/xfn/1">
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <meta http-equiv="Content-Language" content="en">
+		 <title>$pageTitle</title>
+	<style type="text/css">
+	$customcss
+	  </style>
+
+</head>
+<body>
+<div align="center">
+$eventbeeheader
+</div>
+<div id="container">
+<br/>
+ <div class="large">$pageTitle</div>
+ <div id="content">
+  <div align="left">
+    <table align='center' width='100%'>
+    <tr><td>
+     <div align="left">$lifestylephoto.get("photolink")</div>
+     <div align="left">$lifestylephoto.get("photocaption")</div>
+    </td></tr>
+    #if( $invitationhandler)
+    <tr><td align='center' width='100%'>$invitationhandler</td></tr>
+    #end
+    <tr><td>
+    <!--start of profile -->
+    <div class="medium">Profile</div>
+    <div align="left">$profilecontent </div>
+    <!--end of profile -->
+    </td></tr>
+    <tr><td></td></tr>
+    <tr><td>
+    <!--start of pitch -->
+    <div align="left" >$pitch</div>
+    <!--end of pitch  -->
+    </td></tr>
+    <tr><td></td></tr>
+    <tr><td>
+    <div align="left">#showAds("yahoo")</div>
+    </td></tr>
+    <tr><td></td></tr>
+    <tr><td>
+    <span class="medium">Listed Events</span>
+    <!--start of memberlistedevents -->
+    <div align="left">
+    <ul>
+    #foreach( $event in $listedevents )
+      <li>$event</li>
+    #end
+    </ul>
+    </div>
+    <!--end of memberlistedevents -->
+    </td></tr>
+    <tr><td></td></tr>
+    <tr><td>
+     <span class="medium">Registered Events</span>
+     <!--start of memberregistered events -->
+      <div align="left">
+      <ul>
+      #foreach( $event in $registeredevents )
+         <li>$event</li>
+      #end
+      </ul>
+       </div>
+     <!--end of memberregistered events -->
+    </td></tr>
+    <tr><td></td></tr>
+    <tr><td>
+      <span class="medium">RSVPd Events</span>
+       <!--start of memberrsvpd events -->
+       <div align="left">
+       <ul>
+       #foreach( $event in $rsvpevents )
+         <li>$event</li>
+       #end
+       </ul>
+       </div>
+       <!--end of memberrsvpd events -->
+    </td></tr>
+    <tr><td></td></tr>
+    <tr><td >
+    <!--start of guestbook -->
+      <span class="medium">Guestbook</span>
+      <div align='left'>$guestbooksignuplink</div>
+       #foreach( $entry in $guestbookentries )
+       <div class='$entry.get("class")'>
+          $entry.get("userlink"),  $entry.get("msgdate")<br/>
+	        $entry.get("message")
+      </div>
+      #end
+      </td></tr>
+	  </table>
+	</div>
+  </div>
+  <div id="sidebar">
+   <div id="box" align="left" >
+    <div align="left">
+      <table>
+		<tr>
+		<td  valign="top"><span class="medium">Visit $userfirstname's</span>
+		<span class="txt">
+		#if ( $eventslink)
+		  $eventslink |
+	   #end
+
+	   #if ( $communitylink)
+		  $communitylink |
+	   #end
+
+	   #if( $Bloglink)
+		  $Bloglink |
+	   #end
+
+	   #if( $photoslink)
+		  $photoslink
+	   #end
+	   </span>
+	   </td>
+	   </tr>
+	 </table>
+	</div>
+	<div><br/></div>
+     <div align="left">
+      <table align='center' width='100%'>
+      <tr><td>
+	   <span class="medium">Networking Links</span>
+	    <div align="left">
+	    <ul>
+	    #foreach( $feature in $featuresofunit )
+	     <li>$feature </li>
+	    #end
+	    </ul>
+	    </div>
+	  </td></tr>
+      <tr><td></td></tr>
+      <tr><td>
+       <span class="medium">Friends</span>
+         <table width='100%'>
+	       <tr valign="bottom">
+	       #foreach( $entry in $friends )
+	       <td width="50%">
+	         <table>
+	         <tr valign="top">
+	         <td>$entry.get("imgsrc")</td>
+	         </tr>
+	         <tr valign="bottom">
+	         <td>$entry.get("name")</td>
+	         </tr>
+	         </table>
+	       #if( $velocityCount%2 == 0)
+	 	  </td></tr>
+	 	  <tr valign="bottom">
+	 	  #else
+	 	  </td>
+	 	  #end
+	 	  #end
+	       </tr>
+         </table>
+      </td></tr>
+
+       <tr><td></td></tr>
+       <tr><td>
+       <span class="medium">Moderated Communities</span>
+       <div align="left">
+       <ul>
+       #foreach( $hub in $moderatedhubs )
+	        <li>$hub</li>
+	   #end
+       </ul>
+       </div>
+       </td></tr>
+       <tr><td></td></tr>
+       <tr><td>
+	   <span class="medium">Member Communities</span>
+	   <div align="left">
+	   <ul>
+	   #foreach($hub in $memberinhubs )
+	      <li>$hub</li>
+	   #end
+	   </ul>
+	   </div>
+	   </td></tr>
+       </table>
+       </div>
+     </div>
+       <div class="str" align="left" >
+       #if($partnerstreamer)
+	     $partnerstreamer
+       #end
+       </div>
+       <br>
+       <div align="left">#showAds("google")</div>
+
+   </div>
+   <div id="footer" align="center">$basicDesihubFooter</div>
+ </div>
+</body>
+</html>

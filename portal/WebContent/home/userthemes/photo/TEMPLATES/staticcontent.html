@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- decorator began with line above -->
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="utf-8">
+        <meta http-equiv="Content-Language" content="en">
+            <link rel="stylesheet" type="text/css" href="$customappctx/themes/base.css" />
+
+
+<!--<style type="text/css" media="print">
+    .rWeblogCategoryChooser{ visibility: hidden; }
+    .entries{ width: 100%; float: none; }
+    .rightbar{ visibility: hidden; }
+</style>-->
+
+    <script type="text/javascript" src="$customappctx/theme/scripts/roller.js">
+    </script>
+        <script type="text/javascript" src="/home/js/slideshow.js"></script>
+    <title>$pageTitle</title>
+	   	<style type="text/css">
+		$customcss
+        </style>
+</head>
+<body>
+
+<div align="center">
+$eventbeeheader
+</div>
+<div id="container">
+<br/>
+<div class="large" align="center">$pageTitle</div>
+<div class="entries">
+
+  #if($albumName)
+    <div class="medium" align="center"> $albumName</div>
+  #end
+  #if($thumbSizePhotos)
+    <div>
+      <table>
+      <tr>
+      #if($currentRecordPosition)
+      <td>$currentRecordPosition</td>
+      #end
+      #if($navigationIndexes)
+      <td>$navigationIndexes</td>
+      #end
+      #if($viewSlidesButton)
+      <td>$viewSlidesButton</td>
+      #end
+      </tr>
+      </table>
+    </div>
+    <div>
+      <table width='100%'>
+      <tr valign="bottom">
+      #foreach($entry in $thumbSizePhotos)
+      <td width="25%">
+        <table>
+        <tr valign="top">
+        <td>$entry.get("photo")</td>
+        </tr>
+        <tr valign="bottom">
+        <td>$entry.get("caption") <br/>($entry.get("no_of_comments") comments)</td>
+        </tr>
+        </table>
+      #if( $velocityCount%4 == 0)
+	  </td></tr>
+	  <tr valign="bottom">
+	  #else
+	  </td>
+	  #end
+	  #end
+      </tr>
+      </table>
+	</div>
+  #end
+  #if($photoInfo)
+  <br/>
+  <div>
+    <table width="510px">
+    <tr>
+    #if($showPreviousPhotoLink)
+    <td width="15%">
+     $showPreviousPhotoLink
+    <br/>
+    #if($showPreviousPhoto)
+       $showPreviousPhoto
+    #end
+    </td>
+    #end
+    #if($showNextPhotoLink)
+    <td width="15%">
+      $showNextPhotoLink
+    <br/>
+    #if($showNextPhoto)
+        $showNextPhoto
+    #end
+    </td>
+    #end
+    <td align="left">$photoInfo.get("photoname")</td>
+    </tr>
+    <tr><td align="left"><a href='$photoInfo.get("origphoto")'><font size='1' color="gray">(Large size)</font></a></td></tr>
+    <tr><td colspan="3" align="left" width="100%"><a href='$photoInfo.get("origphoto")'>$photoInfo.get("photo")</a></td></tr>
+    <tr><td colspan="3" align="center" width="100%">$photoInfo.get("caption")</td></tr>
+    </table>
+  </div>
+  #end
+  <br/>
+  <div>
+   #if($postCommentButton)
+       $postCommentButton
+   #end
+   <br/>
+   #if($comments)
+   #foreach($comment in $comments)
+	 $comment.get("comment")<br/>
+	 $comment.get("commentPostedBy")
+	 $comment.get("commentPostedDate")
+   <br/>
+   <br/>
+   #end
+   #end
+ </div>
+ #if($photoSlide)
+ <br/><br/>
+ <div>
+   <table>
+   <tr>
+   <td width="10%">
+   <font size="1">
+   #if($showPreviousImage)
+	  $showPreviousImage
+   #end
+   </font>
+   </td>
+   <td width="10%">
+   <font size="1">
+   #if($showNextImage)
+	$showNextImage
+   #end
+   </font>
+   </td>
+   <td width="10%">
+   <font size="1">
+	#if($playPauseSlideShowImage)
+ 	 $playPauseSlideShowImage
+	#end
+	</font>
+	</td>
+	<td width="10%">
+	<font size="1">
+	  #if($showSpeedBars)
+		$showSpeedBars
+	  #end
+	</font>
+	</td>
+	<td width="60%" align="center">
+	<font size="2">
+	#if($photoName)
+	  $photoName
+	#end
+	</font>
+	</td>
+	</tr>
+	<tr>
+	#if($photoSlide)
+	<td colspan="5" align="center">$photoSlide</td>
+	#end
+	</tr>
+	<tr>
+	<td colspan="5" align="center">
+	#if($photoCaption)
+	  $photoCaption
+	#end
+	</td>
+	</tr>
+	</table>
+  </div>
+  #end
+    <div>
+  	<span id="previousEntry">
+  	</span>
+  	<span id="nextEntry">
+  	</span>
+    </div>
+
+ </div>
+
+ <div class="rightbar">
+
+     <div align="left">
+       <table>
+       <tr>
+       <td valign="top"><span class="medium">Visit $userfirstname's</span>
+       <span class="txt" valign="top">
+         #if ( $eventslink)
+	      $eventslink |
+	   #end
+	   #if ( $communitylink)
+	      $communitylink |
+	   #end
+	   #if( $Bloglink)
+	      $Bloglink |
+	   #end
+	   #if( $networklink)
+	      $networklink
+	   #end
+	   </td>
+	   </tr>
+	   </table>
+	 </div>
+	 #if($smallThumbSizePhotos)
+	 <div class="sidebarBox">
+	   <table border="1px">
+	   <tr>
+	   #foreach($entry in $smallThumbSizePhotos)
+	   <td width="25%">
+	     $entry.get("photo")
+
+	   #if( $velocityCount%3 == 0)
+	   </td>
+	   </tr>
+	   <tr valign="bottom">
+	   #else
+	   </td>
+	   #end
+
+	   #end
+	   </tr>
+	   </table>
+	 </div>
+	 #end
+	 #if($albums)
+	 <ul>
+	 #foreach($entry in $albums)
+	 <li>
+	 $entry.get("albumname") ($entry.get("photoscount") photos)<br/>
+	 <div class="albumphoto" align="left">
+	 $entry.get("albumphoto")
+	 </div>
+	 </li>
+	 <br/>
+	 #end
+	 </ul>
+	 #end
+	 <div align="left">#showAds("google")</div>
+
+
+  </div>
+ <div  id="footer" >$eventbeefooter</div>
+
+</div>
+
+ </body>
+ </html>

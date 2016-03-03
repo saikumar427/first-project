@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<head profile="http://gmpg.org/xfn/1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en">
+
+        <title>$eventName</title>
+
+        <link rel="stylesheet" type="text/css" href="$customappctx/themes/base.css" />
+	<link rel="stylesheet" type="text/css" href="/home/index.css" />
+        <link rel="stylesheet" type="text/css" href="$customappctx/themes/redtrain/styles/default.css" />
+
+
+<script type="text/javascript" src="$customappctx/theme/scripts/roller.js"></script>
+ <script
+src="http://maps.google.com/maps?file=api&v=1&key=ABQIAAAAXLqd3-2KS6AMhktaU9nl5RTwuH4ArqgL8SuMcbnUUYmOIKUEShRW5dJPTLnl7sKWNuUTA89PKBKt-w"
+type="text/javascript"></script>
+
+$GOOGLEMAP
+
+<style type="text/css">
+
+$customcss
+</style>
+
+</head>
+<body onLoad="map()">
+<div align="center">
+$eventbeeheader
+</div>
+<div id="container">
+  <div class="large"><b>$eventName</b></div>
+  <br>
+  <div id="content">
+   #if ($requiredTickets)
+    <div class="sidebarBox">
+       <table width="100%">
+    	<tr><td width="100%">
+    	<div class="medium"><b>Registration:</b> $creditcardLogos</div>
+    	</td>    	</tr>
+       #foreach( $entry in $requiredTickets )
+       <tr>
+       <td width="100%"><b>$entry.get("ticketname")</b> -
+            $entry.get("description") (Available $entry.get("start_date") - $entry.get("end_date")) <b>$$entry.get("price")</b></td>
+       </tr>
+       #end
+       #if ($optionalTickets)
+        <tr>
+        <td><b>Optional</b></td>
+         </tr>
+       #end
+       #foreach( $entry in $optionalTickets )
+         <tr>
+         <td width="70%">$entry.get("ticketname") -
+                    $entry.get("description")<br/> (Available $entry.get("start_date") - $entry.get("end_date"))</td>
+         <td width="30%" align="left">$$entry.get("price")</td>
+         </tr>
+       #end
+       <tr><td align="left">  #if($registerButton)
+
+                   $registerButton
+            #end
+       </td></tr>
+       </table>
+    </div>
+ #end
+
+
+  <div class="sidebarBox" align="left">#showAds("yahoo")</div>
+  <div id="content" align="left">
+     <table width="100%">
+     <tr>
+     <td width="45%" valign="top">
+     <div class="medium"><b>When:</b></div>
+                        Starts - $startDate<br/>
+	 	                Ends - $endDate
+	 </td>
+	 <td width="10%"></td>
+	 <td width="45%" valign="top">
+	 <div class="medium"><b>Where:</b></div>
+	                       #foreach( $address in $fullAddress ) $address<br/>
+	                       #end
+	 </td>
+	 </tr>
+	 </table>
+  </div>
+  <div id="content" align="left">
+     <table align='center' width='100%' valign="top">
+	 <tr>
+	 <td width="100%" align="left">
+	     <table>
+	      <tr><td width="50%">
+	        $eventPhoto
+	      </td></tr>
+	      </table>
+	 </td>
+     </tr>
+     <tr>
+     <td>
+	    #if( $display)
+	    <div class="f2fbox">
+	      <table width="100%">
+	      <tr>
+	      <td width="50%">
+	          #if ($particpantPhoto)
+	          $particpantPhoto
+	          #end
+	      </td>
+	      <td  width="50%" align="left">
+	          #if ($particpantTitle)
+	    	  $particpantTitle
+	    	  #end
+	      </td>
+	      </tr>
+	      <tr>
+	      <td width="50%"  >
+	 	      #if ($particpantName)
+	 	      $particpantName
+	 	      #end
+	 	  </td>
+	 	  <td width="50%"  align="left">
+	 	        #if ($particpantMessage)
+	 	        $particpantMessage
+	 	        #end
+	       </td>
+	       </tr>
+	       <tr>
+	       <td>
+	          #if($goalReachGraph)
+	    	  $goalReachGraph
+	          #end
+	       </td></tr>
+	       </table>
+	    </div>
+	    #end
+     </td>
+     </tr>
+     </table>
+   </div>
+   <div id="content" align="left">$description</div>
+ </div>
+
+ <div id="navi">
+  <div id="navi-innen">
+    <div class="medium" >
+	<table>
+	<tr>
+
+	<td valign="top"><span class="medium"><b>Visit $userfirstname's</b></span>
+	<span class="txt">
+
+
+	#if ( $eventslink)
+			     $eventslink |
+	 #end
+         #if( $photoslink)
+	 	          $photoslink |
+	 #end
+
+	#if ( $communitylink)
+		     $communitylink |
+	 #end
+
+	#if( $Bloglink)
+	          $Bloglink
+	          #end
+
+
+   </span>
+	</td>
+	</tr>
+	</table>
+</div>
+<br>
+   <div align="left">
+     <table><tr><td class="taskheader">
+      <span class="txt"><a href="http://test.desihub.com:9090/home/networkticketselling.jsp">Sell tickets from your website or blog, and get paid $agentcommission per each ticket sale! This event is Powered by Eventbee Network Ticket Selling.</a>
+   	  </td></tr></table>
+   	</div>
+   	<br>
+       <div class="sidebarBox" align="left">
+           <!-- $showAdsGoogle -->
+
+                  #if( $sponsormeform)
+                  $sponsormeform<br/>
+                  #end
+                  #if( $sponsormessagebutton)
+                  $sponsormessagebutton
+                  </br>
+                  #end
+                  #if( $rsvpButton)
+                  $rsvpButton<br/>
+                  #end
+                  #if( $selectFreindsOfEvents)
+                  Register through Network Ticket Selling Participant Page
+                  $selectFreindsOfEvents<br/>
+                  #end
+                  #if( $requestforsponsor)
+                      <ul>#if($sponsorheadermsg)
+                            $sponsorheadermsg
+                          #end
+                       </ul>
+                    $requestforsponsor
+                  #end
+       </div>
+       <div class="sidebarBox" align="left" >
+
+	        #if( $main_event_link)
+	             <li>$main_event_link</li>
+	        #end
+
+
+	        #if( $eventListedBy)
+	             <li>Listed by $eventListedBy</li>
+	        #end
+
+	        #if( $eventListedDate)
+	             <li>Listed on $eventListedDate</li>
+	        #end
+
+	       #if( $mgrEventsLink)
+                     <li>$mgrEventsLink</li>
+                #end
+
+            #if( $contactMgrlink)
+                    <li>$contactMgrlink</li>
+            #end
+
+	        #if( $emailToFriendLink)
+	             <li>$emailToFriendLink</li>
+	        #end
+
+	        #if( $addCalendarLink)
+	             <li>$addCalendarLink</li>
+	        #end
+
+	        #if( $eventPrintableVersionLink)
+	             <li>$eventPrintableVersionLink</li>
+	        #end
+	        #if( $eventlink)
+	             <li>$eventlink</li>
+	        #end
+
+	        #if($f2fTagLine)
+	   	         <li>$f2fTagLine</li>
+	        #end
+
+
+       </div>
+       <!--start Attendeelist-->
+       #if($topSellers)
+       <br>
+	     <div class="attendeelist" align="left">
+	        <div class="medium"><b>$header</b></div>
+
+	   		#foreach( $seller in $topSellers )
+	   		 <li>$seller</li>
+	                     #end
+
+	     </div>
+      #end
+
+      #if($viewAttendeeList)
+      <br>
+	    <div class="attendeelist" align="left">
+	       <div class="medium"><b>Who's Attending:</b></div>
+	         #set($rlistentry =$viewAttendeeList.get("registeredattendees"))
+
+	         #if($rlistentry)
+
+	         #foreach($xentry in $rlistentry)
+	    		<li>$xentry.get("name") </li>
+	                            $xentry.get("comments")
+	    	   #end
+
+	       #end
+	       #set($listentry =$viewAttendeeList.get("yesattending"))
+	       #if($listentry)
+	       <b>Yes ($viewAttendeeList.get("yesattendingcount"))</b>
+
+	       	#foreach($xentry in $listentry)
+	    		<li>$xentry.get("name") - $xentry.get("attendeecount")</li>
+	    		$xentry.get("comments")
+	    	    	#end
+
+	       #end
+	       #set($listentry1 =$viewAttendeeList.get("notsureattending"))
+	       #if($listentry1)
+	       <b>Not Sure ($viewAttendeeList.get("notsureattendingcount"))</b>
+
+	       	#foreach($xentry in $listentry1)
+	    		<li>$xentry.get("name") - $xentry.get("attendeecount")</li>
+	    		$xentry.get("comments")
+	    	#end
+
+	       #end
+	        #set($listentry2 =$viewAttendeeList.get("notattending"))
+	       	 #if($listentry2)
+	       <b>No ($viewAttendeeList.get("notattendingcount"))</b>
+
+	       	#foreach($xentry in $listentry2)
+	    		<li>$xentry.get("name") - $xentry.get("attendeecount")</li>
+	    		$xentry.get("comments")
+	    	#end
+
+	       #end
+
+	    </div>
+     #end
+
+    <!-- Start noticeboard -->
+    #if ($notices)
+    <br>
+     <div class="sidebarBox" align="left">
+    <div class="medium"><b>Notice Board:</b></div>
+   <table>
+
+   #foreach( $entry in $notices)
+   <tr><td width="20%">$entry.get("noticetype")</td><td width="80%">$entry.get("postedat1")</td></tr>
+   <tr><td></td><td>$entry.get("notice")</td></tr>
+   #end
+   </table>
+
+   </div>
+   #end
+
+   <div id="map" style="width: 234px; height:150px">$mapstring</div>
+  <div class="sidebarBox" align="left">#showAds("google")</div>
+   </br>
+   <div align="left" class="str">
+      #if( $partnerstreamer)
+                  $partnerstreamer
+
+          #end
+    </div>
+ </div>
+ </div>
+ <div id="footer">
+ $basicDesihubFooter
+  </div>
+
+  </body>
+</html>

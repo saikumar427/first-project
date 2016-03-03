@@ -1,0 +1,43 @@
+#backgroundPopup
+{  
+display:none;  
+position:absolute;
+height:4000px;
+width:100%;  
+z-index:1000;
+top:0;  
+left:0;  
+background-color: #080808;
+filter:alpha(opacity=50);   
+-moz-opacity:0.5;        
+opacity: 0.5;             
+}
+.ebeepopup{
+	display:none;
+	top:30%;
+	left:26%;
+	background-color: #F5F5F5;
+    border: 20px solid #DDDDDD;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 20px #000000;
+	min-width:300px;
+    color: black;
+    display: none;
+    float: left;
+    margin-top: -50px;
+    padding: 20px;
+    position: absolute;
+    width: auto;
+    z-index: 100003;
+}
+.ebeepopupcontent{
+	position: relative;
+}
+.ebeepopupclose{
+	cursor: pointer;
+    margin-top: -36px;
+    position: absolute;
+    right: -15px;
+}
+
+  

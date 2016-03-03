@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 2.5//EN"
+        "http://tuckey.org/res/dtds/urlrewrite2.5.dtd">
+
+
+<urlrewrite>
+
+<rule>
+	    	<name>redirect from xyz.com to www.xyz.com </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://eticketr\.com/</condition>
+	    	<from>^/</from>
+	    	<to type="redirect">http://www.eticketr.com/</to>
+</rule>
+
+
+<rule>
+	    	<name>redirect url for global tracking urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.</condition>
+	    	<condition type="request-url">^http://([^.]+)\.eticketr\.com/trackurl/</condition>
+	    	<from>^/trackurl/(.*)$</from>
+	    	<to type="redirect">http://www.eticketr.com/guesttasks/trackingacctlevel.jsp?userid=%1&amp;trackcode=$1 </to>
+</rule>
+  
+<rule>
+	    	<name>redirect url for global tracking urls </name>
+	    
+	    	<condition name="host" operator="notequal">^www\.eticketr\.</condition>
+	    	<condition type="request-url">^http://www.([^.]+)\.eticketr\.com/trackurl/</condition>
+	    	<from>^/trackurl/(.*)$</from>
+	    	<to type="redirect">http://www.eticketr.com/guesttasks/trackingacctlevel.jsp?userid=%1&amp;trackcode=$1 </to>
+</rule>
+
+  
+	<rule>
+	<name>redirect url to events page </name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr.com/$ </condition>
+	<from>^/(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1 </to>
+    </rule>
+
+	<rule>
+	<name>redirect url to events page </name>
+	<condition name="host" operator="notequal">^www\.eticketr\.</condition>
+	<condition type="request-url">^http://www.([^.]+)\.eticketr.com/$ </condition>
+	<from>^/(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1 </to>
+    </rule>
+	
+<rule>
+	<name>redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/track/ </condition>
+	<from>^/track/(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/track/$1 </to>
+</rule>
+
+<rule>
+	<name>redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.eticketr\.</condition>
+	<condition type="request-url">^http://www.([^.]+)\.eticketr\.com/track/ </condition>
+	<from>^/track/(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/track/$1 </to>
+</rule>
+
+
+<rule>
+	<name>redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/t/ </condition>
+	<from>^/t/(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/track/$1 </to>
+</rule>
+	
+<rule>
+	<name>local redirect url for tracking urls </name>
+
+	<condition name="host" operator="notequal">^www\.eticketr\.</condition>
+	<condition type="request-url">^http://www.([^.]+)\.eticketr\.com/t/ </condition>
+	<from>^/t/(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/track/$1 </to>
+</rule>
+	
+	
+<rule>
+      <name>TicketUrl</name>
+             <condition name="host" operator="notequal">^www\.</condition>
+             <condition type="request-url">^http://([^.]+)\.eticketr\.com/ticket$ </condition>
+             <from>^/ticket(.*)$</from>
+             <to type="redirect" >http://www.eticketr.com/view/%1/ticket$1 </to>
+    </rule>	
+	
+ <rule>
+      <name>TicketUrl</name>
+             <condition name="host" operator="notequal">^www\.eticketr\.</condition>
+             <condition type="request-url">^http://www.([^.]+)\.eticketr\.com/ticket$ </condition>
+             <from>^/ticket(.*)$</from>
+             <to type="redirect" >http://www.eticketr.com/view/%1/ticket$1 </to>
+  </rule>	
+
+	
+<rule>
+	<name>redirect to ticketing page</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/register$ </condition>
+	<from>^/register(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/register$1 </to>
+</rule>
+<rule>
+    <name>redirect url for signup urls with no part1</name>
+    <condition type="request-url">^http://eticketr\.com/signup/ </condition>
+    <from>^/signup/(.*)$</from>
+    <to type="redirect" >http://www.eticketr.com/main/user/signup?ref=$1 </to>
+</rule>
+<rule>
+    <name>redirect url for signup urls </name>
+    <condition type="request-url">^http://([^.]+)\.eticketr\.com/signup/ </condition>
+    <from>^/signup/(.*)$</from>
+    <to type="redirect" >http://www.eticketr.com/main/user/signup?ref=$1 </to>
+</rule>
+<rule>
+	<name>NETWORK_PAGE</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/network$ </condition>
+	<from>^/network(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/network$1 </to>
+    </rule>
+
+    <rule>
+	<name>BLOG</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/blog$ </condition>
+	<from>^/blog(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/blog$1 </to>
+    </rule>
+
+    <rule>
+	<name>LOGIN</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/login$ </condition>
+	<from>^/login(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/login$1 </to>
+	</rule>
+	
+   <rule>
+	<name>SIGNUP</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/signup$ </condition>
+	<from>^/signup(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/signup$1 </to>
+    </rule>
+
+   <rule>
+	<name>RENEW</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/renew$ </condition>
+	<from>^/renew(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/renew$1 </to>
+    </rule>
+
+    <rule>
+	<name>PHOTOS-ID</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/photos$ </condition>
+	<from>^/photos(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/photos$1 </to>
+    </rule>
+	
+    <rule>
+	<name>PHOTOS-SLASH</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/photos/ </condition>
+	<from>^/photos(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/photos </to>
+    </rule>
+
+    <rule>
+        <name>EVENT-ID</name>
+        <condition name="host" operator="notequal">^www\.</condition>
+        <condition type="request-url">^http://([^.]+)\.eticketr\.com/event$ </condition>
+		<from>^/event(.*)$</from>
+        <to type="redirect" >http://www.eticketr.com/view/%1/event$1 </to>
+    </rule>
+	
+     <rule>
+        <name>EVENTS</name>
+        <condition name="host" operator="notequal">^www\.</condition>
+        <condition type="request-url">^http://([^.]+)\.eticketr\.com/events$ </condition>
+        <from>^/events(.*)$</from>
+
+        <to type="redirect" >http://www.eticketr.com/view/%1/events$1 </to>
+    </rule>
+    
+    <rule>
+      <name>Discounts</name>
+             <condition name="host" operator="notequal">^www\.</condition>
+             <condition type="request-url">^http://([^.]+)\.eticketr\.com/discount$ </condition>
+             <from>^/discount(.*)$</from>
+     
+             <to type="redirect" >http://www.eticketr.com/view/%1/discount$1 </to>
+    </rule>
+    <rule>
+    <name>Discounts</name>
+             <condition name="host" operator="notequal">^www\.eticketr\.</condition>
+             <condition type="request-url">^http://www.([^.]+)\.eticketr\.com/discount$ </condition>
+             <from>^/discount(.*)$</from>
+     
+             <to type="redirect" >http://www.eticketr.com/view/%1/discount$1 </to>
+    </rule>
+
+    
+    <rule>
+    
+        	<name>ALL_COMMUNITY</name>
+        	<condition name="host" operator="notequal">^www\.</condition>
+        	<condition type="request-url">^http://([^.]+)\.eticketr\.com/community/ </condition>
+        	<from>^/community/(.*)$</from>
+        	<to type="redirect" >http://www.eticketr.com/view/%1/community/$1 </to>
+        </rule>
+
+    
+
+    <rule>
+     	<name>DEF_COMMUNITY</name>
+     	<condition name="host" operator="notequal">^www\.</condition>
+        <condition type="request-url">^http://([^.]+)\.eticketr\.com/community$ </condition>
+        <from>^/community(.*)$</from>
+        <to type="redirect" >http://www.eticketr.com/view/%1/community/$1 </to>
+    </rule>
+    
+    
+   
+   
+    
+    <rule>
+	<name>FORUM-RSS</name>
+	<condition name="host" operator="notequal">^www\.</condition>
+	<condition type="request-url">^http://([^.]+)\.eticketr\.com/rss/forum$ </condition>
+	<from>^/rss/forum(.*)$</from>
+	<to type="redirect" >http://www.eticketr.com/view/%1/rss/forum$1 </to>
+    </rule>
+    
+      
+    
+</urlrewrite>

@@ -1,0 +1,257 @@
+P, UL, LI, DIV, OL, TABLE, TD, TH { font-family: verdana; font-size: 14px; }
+.betafont { font-size: 11px; font-family: Verdana; color :#999999 }
+.linkfont { font-size: 12px; font-family: Verdana; color :#999999 }
+.tabfont { font-size: 14px; font-family: Verdana; color :#333333 }
+.menufont { font-size: 12px; font-family: Verdana; color :#333333 }
+.footerfont { font-size: 10px; font-family: Verdana; color :#999999 }
+.footertab { font-size: 10px; font-family: Verdana; color :#999999 }
+.normal {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; border: 1px #6699CC solid; background-position: center center}
+ td {  border: #FFFFFF}
+.beelet {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; background-color: #eeeee8; border: 1px #6699cc solid}
+.innerbeelet {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; background-color: #eeeee8; border: 0px #6699cc solid}
+.colheader { background-color: #ccccc8;  padding-left: 5px; padding-right: 5px; padding-top: 2px; padding-bottom:2px;  }
+ .evenbase { background-color: #e4fae6; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; font-family: Verdana; font-size: 14px; color: #000000; } 
+ .oddbase { background-color: #f1fcf2; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;  border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; font-family: Verdana; font-size: 14px; color: black; }
+ .onebase {  padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;  border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; font-family: Verdana; font-size: 14px; color: #000000; } 
+ .more {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; border: 1px #FF9900 dotted; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px}
+.more-header {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 16px; font-style: normal; color: #FF0000; font-weight: bold; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; vertical-align: middle}
+.popup {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; padding-top: 0px; padding-right: 0px; padding-bottom: 10px; padding-left: 0px}
+.popup-header1 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px; font-style: normal; font-weight: bold; color: #666666; border-color: black black #999999; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 2px; border-left-width: 0px}
+.popup-header2 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-weight: bold; color: #FF6600; text-decoration: underline}
+.popup-color1 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; background-color: #eeeee8; border: #FFFFFF; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; vertical-align: middle}
+.popup-color2 {  font-family: Verdana, Arial, Helvetica, sans-serif; background-color: #ccccc8; border: 1px #FFFFFF solid; text-align: center; vertical-align: middle}
+.popup-color3 {  font-family: Verdana, Arial, Helvetica, sans-serif; background-color: #FDF8B3; border: #FFFFFF; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; text-align: center; vertical-align: middle}
+
+#maintab              
+{
+  background: #ddd url(/home/images/bg_blue1.gif) repeat-x;
+  border-bottom: 1px dotted #ddd;
+  padding: 0px;
+  height: 25px;
+}
+                                                                                          
+#maintab li
+{
+  display: inline;
+  text-align: center;
+}
+                                                                                          
+#maintab td a
+{
+
+  text-decoration: none;
+  color: #333333;
+}
+
+#maintab li a, #maintab td a:hover
+{
+  text-decoration: underline;
+  color: #333333;
+  float: center;
+  text-align: center;
+}
+                                                                                          
+#maintab li a:hover
+{
+  background: #ddd url(http://www.desihub.com:8888/home/images/images/bg_blue.gif) repeat-x;
+  border-right: 1px dashed #ccc;
+  border-left: 1px dashed #ccc;
+}
+
+.maintab1 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-weight: bold; color: #333333; background-color: #6699FF; border: none; background: #FFFFFF}
+.maintab1 a {
+text-decoration: none;
+font-size= 14px;
+color: #333333;
+                                                                                
+}
+
+.maintab2 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-weight: bold; color: #333333; background-color: #9999CC; background-position: center text-align: center;  background: #ddd url(/home/images/maintab_bg.gif) repeat-x;}
+.maintab2 a{
+text-decoration: none;
+font-size= 14px;
+color: #333333;
+                                                                                
+}
+
+
+.tab1 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-weight: bold; color: #333333; background-color: #6699FF; border: none; background: #FFFFFF}
+
+.tab2 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-weight: bold; color: #333333; background-color: #9999CC; background-position: center text-align: center  }
+
+.tab3 {  font-family: Verdana, Arial, Helvetica, sans-serif; 
+font-size: 9px; font-style: normal; font-weight: normal; color: #FFFFFF; background-color: #663366;
+border: 1px #FFFFFF solid; text-align: center}
+.tab4 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; font-style: normal;
+ font-weight: normal; color: #FFFFFF; background-color: #999999; border: 1px #FFFFFF solid;text-align: left; padding-left: 5px }
+.divider {  border-color:black black #666666; border-style: dashed; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 0px}
+.menutab {  font-family: Verdana, Arial, Helvetica,sans-serif; font-size: 12px; background-color:#FFFFFF; text-align: left; vertical-align: middle;padding-top: 5px; padding-right: 5px; padding-bottom:5px; padding-left: 5px; border: 1px #339933 solid}
+.selectedmenutab {  font-family: Verdana, Arial, Helvetica,sans-serif; font-size: 12px; background-color:#339933; text-align: left; vertical-align: middle;padding-top: 5px; padding-right: 5px; padding-bottom:5px; padding-left: 5px; border: 1px FFFFFF solid}
+.innertab1 {  border: #999999 solid; border-width: 1px 1px 0px 1px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; color: #000000; background-color: #9999CC}
+.innertab2  {  border: #999999 solid; border-width: 0px 1px 0px 1px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; color: #000000; background-color: #9999CC}
+.innertab3 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; border-color: #999999 #999999 #999999 #666666; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 0px; border-left-width: 1px; background-color:#FFFFFF}
+
+
+/* new tab related*/
+
+.mytab1{
+margin-right: 20;
+font: bold 12px Verdana, Arial, Helvetica, sans-serif;
+border: 1px solid
+#CCCCFF;padding-right:2;background-color:#CCCCFF;border-bottom:0;padding-bottom:4px;color:black;
+}
+
+.mytab1 a {
+text-decoration: none;
+color:black;
+
+}
+.tabhighlightcolor{
+background-color:#CCCCFF;
+font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+}
+
+.mytab2{
+margin-right: 20;
+font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+border: 1px solid #CCCCFF;padding:4;background-color:#FFF;border-bottom:0;color:black;
+}
+
+.mytab2 a {
+text-decoration: none;
+color:black;
+
+}
+
+
+.desitabcont {
+float: left;
+display: block;
+
+text-decoration: none;
+padding: 5px;
+}
+
+.desitabcont a {
+text-decoration: none;
+color:black;
+
+}
+
+.desiborder {
+border: 1px solid #CCCCFF;
+
+border-top: 0;
+padding-bottom: 10px
+}
+
+
+.desibordernontabcontent {
+	border: 1px solid #CCCCFF;
+	padding-bottom: 10px
+}
+
+
+
+
+.desiborderfull {
+
+background-color: #cfc;
+border: 1px solid green;
+color: black;
+padding: 5px;
+}
+
+
+.previewmylifestyle{
+	background-color:#CCCCCC;
+	padding: 5px
+}
+.previewmylifestyle a{
+text-decoration:underline;
+font-size: 12px;
+color: #000000
+}
+
+#ebeemenu{
+font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; font-style: normal; font-weight: normal; color: #000000; background-color: #CCCCFF; background-position: center text-align: center; padding: 5px
+
+}
+
+#ebeemenu a{
+text-decoration:underline;
+font-size: 12px;
+color: #000000
+}
+
+
+#ebeemenuhighlightlink a{color:#000000;font-weight:bold; font-size: 12px}
+
+
+.previewtablink{
+float:right ; 
+text-align: center;
+margin-right: 0;
+padding-top:5px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 12px; 
+font-style: normal; 
+font-weight: normal; 
+color: #000000; background-color: #fff; 
+
+
+}
+
+
+
+
+.smallfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #333333; font-weight: lighter}
+.smallestfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-weight: lighter; color: #666666}
+
+.bigfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; color: #ff9900; font-weight: normal}
+.bigfont a{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; color: #ff9900; font-weight: normal}
+.biggestestfont { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 24px; font-weight: normal; color: #333333}
+
+
+/* end */
+
+.portaltitle { background-color: #red font-family: verdana; font-size: 14px; color: #1C3700; padding-top: 2px; padding-right: 5px; padding-bottom: 2px; padding-left: 5px;; border-color: #4B9700 black; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px} 
+.beelet-header {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; background-color: #ffdfb0 ; font-weight: normal; color: #331f00; border-color: #ff9900 black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 4px; padding-bottom: 4px; padding-left:5px; padding-right:5px} 
+.memberbeelet-header {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; font-style: bold; background-color: #ffdfb0 ; font-weight: normal; color: #331f00; border-color: #ff9900 black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 4px; padding-bottom: 4px; padding-left:5px; padding-right:5px} 
+.one-header {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 28px; font-style: bold; font-weight: bold; color: #669900; border-color: #ff9900 black; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 2px; padding-bottom: 2px; padding-left:5px; padding-right:5px} 
+.tip { text-align:justify;background-color: #f2f6ff;border-color: #6699cc solid;border-left-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-top-width: 0px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 6px; color :#666666}
+.tipbox { text-align:justify;background-color: #f2f6ff;border-color: #6699cc solid;border-left-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-top-width: 0px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 6px; color :#666666}
+
+.imgbgstyle   { background: url("/home/images/albumbg.gif") center no-repeat;}
+.imgbgstyle_100   { background: url("/home/images/album_bg_100px_new.gif") center no-repeat;}
+.imgbgstyle_500   { background: url("/home/images/album_bg_500px_new.gif") center no-repeat;}
+
+.notitletable1 {  border-color: #4B9700 black; border-style: solid; border-top-width:1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px }
+
+.notitletable2 {  border-color: #ff9900 black; border-style: solid; border-top-width:1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px }
+
+.divtable {  padding-left: 10px; border-color: black black black #999999
+; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; border-styl
+e: dotted; border-top-width: 0px; border-right-width: 0px; border-bottom
+-width: 0px; border-left-width: 1px}
+
+
+
+
+.taskbox{ background-color: #ccff99; padding-top: 5px; padding-right: 5px; padding-bottom: 5px;padding-left: 5px}
+
+.infobox{ background-color: #ccff99; padding-top: 5px; padding-right: 5px; padding-bottom: 5px;padding-left: 5px}
+.error{ font-family: verdana; font-size: 13px; font-weight: normal; color: #FF0000;}
+
+.taskblock{ background-color: #dce8ff; padding-top: 5px; padding-right: 5px; padding-bottom: 5px;padding-left: 5px;color: black; text-align: left;}
+.block{padding-top: 5px; padding-right: 15px; padding-bottom: 15px;padding-left: 15px;margin-bottom: 15px;}
+.block1 {  border:px; border:1px #eeeee8 solid;  width: 100%; }
+
+.tasktable{background-color: #ccEFFF; padding-top: 5px; padding-right: 5px; padding-bottom: 5px;padding-left: 5px}
+.subheader{ font-family: Verdana; font-size: 15px; font-weight: bold; padding-left: 5px; padding-right: 5px; padding-top: 2px; padding-bottom:2px; color: green;}
+.topsubheader{ font-family: Verdana; font-size: 20px; font-weight: bold; padding-left: 5px; padding-right: 5px; padding-top: 2px; padding-bottom:2px; color:green;}
+
+
+.inputlabel { padding-left: 5px; padding-right: 5px; padding-top: 2px; padding-bottom:2px}
+.inputvalue { padding-left: 5px; padding-right: 5px; padding-top: 2px; padding-bottom:2px}
+			

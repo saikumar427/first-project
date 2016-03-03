@@ -1,0 +1,201 @@
+.layoutwidget,
+.ticketwidget{
+display:none;
+background-color:#F5F5F5;
+width:250px;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:20px;
+margin-left:-70px;
+z-index: 100003;
+position:absolute;
+padding: 20px;
+border: 20px solid #ddd;
+/*--CSS3 Box Shadows--*/
+-webkit-box-shadow: 0px 0px 20px #000;
+-moz-box-shadow: 0px 0px 20px #000;
+box-shadow: 0px 0px 20px #000;
+/*--CSS3 Rounded Corners--*/
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+
+ .layoutwidget{
+width: 550px;
+height:400px;
+}
+
+ ul{
+text-align:left;
+}
+
+ #divpopup{
+text-align:center;
+}
+
+.imgclose {
+border:0 none;
+float:right;
+margin-right:-37px;
+margin-top:-74px;
+}
+#layoutpopup .imgclose {
+border:0 none;
+float:right;
+margin-right:-37px;
+margin-top:-35px;
+}
+
+
+.ticket_timer {
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#CCCCCC), to(#666666));
+background: -moz-linear-gradient(center top , #CCCCCC, #666666) repeat scroll 0 0 black;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#CCCCCC', endColorstr='#666666');
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+background-color:black;
+float:right;
+font-size:12px;
+
+margin:-5px 15px 20px 0;
+color:#333;
+bottom:0;
+position:fixed;
+
+right:85px;
+padding:1px 1px 3px 5px 3px;
+width:95px;
+text-align:center;
+z-index:9999
+}
+
+
+ .initial_timer {
+background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#66ffee), to(#000000));
+background: -moz-linear-gradient(center top , #66ffee, #000000) repeat scroll 0 0 transparent;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#66ffee', endColorstr='#000000');
+color:white;
+ margin-bottom: 480px;
+ margin-top: -550px;
+padding:5px;
+position:absolute;
+width:95px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+}
+
+ .ticketunavailablepopup_div,
+ .ticketpoup_div{
+display:none;
+background-color:#F5F5F5;
+width:250px;
+float:left;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:20px;
+z-index: 100003;
+position:absolute;
+padding: 20px;
+margin-top:-50px;
+color:black;
+border: 20px solid #ddd;
+/*--CSS3 Box Shadows--*/
+-webkit-box-shadow: 0px 0px 20px #000;
+-moz-box-shadow: 0px 0px 20px #000;
+box-shadow: 0px 0px 20px #000;
+/*--CSS3 Rounded Corners--*/
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+
+
+
+ .ticketpoup_div1{
+display:none;
+background-color:#F5F5F5;
+width:250px;
+float:left;
+padding-left:10px;
+padding-right:10px;
+padding-bottom:20px;
+position:absolute;
+padding: 20px;
+margin-top:-50px;
+color:black;
+border: 20px solid #ddd;
+/*--CSS3 Box Shadows--*/
+-webkit-box-shadow: 0px 0px 20px #000;
+-moz-box-shadow: 0px 0px 20px #000;
+box-shadow: 0px 0px 20px #000;
+/*--CSS3 Rounded Corners--*/
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+ .ticketunavailablepopup_div{
+width:300px;
+}
+#ticketpoup_div1,
+#ticketpoup_div .divimage{
+border:0px;
+float:right;
+margin-right:-37px;
+margin-top:-54px;
+}
+#ticketunavailablepopup_div .divimage{
+border:0px;
+float:right;
+margin-right:-37px;
+margin-top:-120px;
+}
+
+.spanblinker{
+text-decoration:blink;
+}
+
+
+.spannormal{
+text-decoration:none;
+}
+
+.spantimeover{
+	text-decoration:line-through;
+}
+
+.noseat,
+.unassign{
+width:17px;
+height:17px;
+min-width:17px;
+min-height:17px;
+}
+
+
+.layoutheader{
+width:17px;
+height:17px;
+border:1px solid black;
+}
+
+.share-on-facebook{
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#43609C), to(#3B5999));
+	background: -moz-linear-gradient(center top , #43609C, #3B5999) repeat scroll 0 0 transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='43609C', endColorstr='#3B5999');
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	color: white;
+	font-size: 25px;
+    padding: 2px 5px 2px 0px;
+}
+	
+#ticketunavailablepopup_div .divimage1{
+
+    border: 0 none;
+    margin-right: -15px;
+    margin-top: -17px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}

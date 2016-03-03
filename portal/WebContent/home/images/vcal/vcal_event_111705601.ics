@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+Content-Type:text/calendar
+PRODID:-//www.eventbee.com//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:20140514T090000
+DTEND:20140521T100000
+LOCATION:gfds
+UID:20140510T025100@eventbee.com
+SUMMARY:test venue event  rec
+URL:http://giridhar.citypartytix.com/event?eventid=111705601
+END:VEVENT
+END:VCALENDAR

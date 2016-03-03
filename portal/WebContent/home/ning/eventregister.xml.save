@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Event Register"
+        directory_title="Event Register"
+	title_url="http://www.eventbee.com/home/ning/eventregister.xml"
+	author="Eventbee Inc"
+        author_email="support@eventbee.com"
+	author_affiliation="http://www.eventbee.com"
+        author_location="USA"
+	thumbnail="http://eventbee.com/home/images/ningimages/logosmall.jpg"
+	screenshot="http://eventbee.com/home/images/ningimages/screenshot.jpg"
+	summary="Sell tickets from your Ning pages. Pay flat $1 fee per ticket, regardless of your ticket price. We support PayPal, Google credit card processing to further reduce your ticketing costs." 
+	description="Sell tickets from your Ning pages. Pay flat $1 fee per ticket, regardless of your ticket price. We support PayPal, Google credit card processing to further reduce your ticketing costs. 
+	Eventbee Inc., provides state-of-the-art web-based event management and event promotion tools to the Events Industry. Since 2003, over 8000 Event Managers sold tickets using the Eventbee Platform. Eventbee operates with the single mission of maximizing ticket sales while providing easy to use web-based software to the Events Industry." 
+        icon="http://eventbee.com/home/images/ningimages/favicon.jpg" >
+        <Require feature="opensocial-0.7" />
+	<Require feature='views' />					
+        <Require feature='dynamic-height' />		
+        <Require feature="skins"/>
+	<Require feature="analytics"/>
+	<Locale />
+    </ModulePrefs>
+
+    <Content type="html" view="ning.main">
+   		<![CDATA[
+		
+                <p>Welcome To Eventbee Event Register Application</p>
+		]]>
+    </Content>
+	 
+  
+
+    <Content type="html" view="canvas">
+		<![CDATA[
+			<script>
+			gadgets.window.adjustHeight("700");
+			function response(data) 
+			{
+			  var viewer		= data.get("viewer").getData();
+			  var owner			= data.get("owner").getData();
+			  var vname			= encodeURIComponent(viewer.getDisplayName());
+			  var vid			= viewer.getId();
+			  var oid			= owner.getId();
+			  var oname                 = encodeURIComponent(owner.getDisplayName());
+			  var ownerstatus	= viewer.isOwner();
+			  var domain=opensocial.getEnvironment().getDomain();
+			  if(ownerstatus==true){				    
+				document.getElementById('canvasframe').src = "http://test.eventbee.com:8080/ningapp/ticketing/canvas_owner?vid="+vid+"&oid="+oid+"&oname="+oname+"&vname="+vname+"&domain="+domain;
+			  }else if(ownerstatus==false){
+				document.getElementById('canvasframe').src = "http://test.eventbee.com:8080/portal/ningapp/ticketing/canvas_viewer.jsp?vid="+vid+"&oid="+oid+"&oname="+oname+"&vname="+vname+"&domain="+domain;
+			  }
+			};
+
+			function init() 
+			{
+			  var req = opensocial.newDataRequest();
+			  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+			  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+			  req.send(response);
+			};
+			init();
+			</script>
+		<iframe id="canvasframe" src="" width="100%" height="700px"/>
+
+		]]>
+    </Content>
+	 
+    <Content type="html" view="profile">
+		<![CDATA[
+			<script type="text/javascript">				
+			gadgets.window.adjustHeight("700");
+			function response(data) 
+			{ 								
+			  var viewer		= data.get("viewer").getData();
+			  var owner			= data.get("owner").getData();
+ 			  var vname			= encodeURIComponent(viewer.getDisplayName());
+			  var vid			= viewer.getId();
+			  var oid			= owner.getId();
+			  var oname                 = encodeURIComponent(owner.getDisplayName());				 
+			  var ownerstatus	= viewer.isOwner();
+			  var domain=opensocial.getEnvironment().getDomain(); 				
+			  if(ownerstatus==true)
+			  {
+				document.getElementById('profileframe').src = "http://test.eventbee.com:8080/ningapp/ticketing/profile_owner?vid="+vid+"&oid="+oid+"&vname="+vname+"&oname="+oname+"&domain="+domain;
+			  }
+			  else if(ownerstatus==false)
+			  {
+				document.getElementById('profileframe').src = "http://test.eventbee.com:8080/ningapp/ticketing/profile_viewer.jsp?vid="+vid+"&oid="+oid+"&vname="+vname+"&oname="+oname+"&domain="+domain;
+			  }
+			};
+
+			function init() 
+			{ 
+				var req = opensocial.newDataRequest();
+				req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+				req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+				req.send(response);
+			};
+			init();
+			</script>
+  		    <iframe id="profileframe" src="" width="100%" height="700px"/ >	
+
+		]]>
+
+	</Content>	
+</Module>

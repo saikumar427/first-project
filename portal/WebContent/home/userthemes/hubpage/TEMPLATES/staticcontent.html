@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+
+<head profile="http://gmpg.org/xfn/1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en">
+
+<title>$clubName</title>
+<style type="text/css">
+$customcss
+</style>
+
+</head>
+<body >
+<div align="center">
+$basicDesihubHeader
+</div>
+<div id="container">
+ <br/>
+ #if($clubName)
+ <div class="large">$clubName</div>
+ <div class="medium">$patternServer</div>
+ #end
+ <br>
+ <div id="content">
+  <div align="left">
+  <table align='center' width='100%'>
+  <tr>
+  <td valign="top">
+    <table cellpadding="0"  align='center' width='100%'>
+    <tr>
+    <td>
+      <table cellpadding="0" >
+      #if($clubDescription)
+      <tr><td>
+      $clubDescription
+      </td></tr>
+      #end
+      </table>
+    </td></tr>
+    <tr><td>
+	  <table cellpadding="0">
+	  <tr><td class="medium">Photos
+
+	  #if($allphotos)
+	  »$allphotos
+	  #end
+	  #if($addphotos)
+	  »$addphotos
+	  #end
+	  </td></tr>
+	  #if($hubphotolist)
+	  #foreach( $photosublist in $hubphotolist )
+	  <tr>
+	  #foreach( $hubphotomap in $photosublist )
+	  <td>$hubphotomap.get("photolink1")</td>
+	  #end
+	  </tr>
+	  #end
+	  #end
+	  </table>
+	</td></tr>
+
+
+      #if($forumidslist)
+      <tr><td>
+      #foreach( $forumid in $forumidslist )
+      #if($hubforumsmap)
+      #set ($forummap=$hubforumsmap.get($forumid) )
+        <table cellpadding="0">
+        <tr>
+        <td align="left" ><span class="medium">Forum</span>
+          $forummap.get("rsslink") $forummap.get("yahoolink")
+       <span class="links">
+       #if($forummap.get("addtopiclink"))
+         »$forummap.get("addtopiclink")
+        #end
+        #if($forummap.get("viewalltopicslink"))
+          »$forummap.get("viewalltopicslink")
+        #end
+        </span>
+        </td></tr>
+
+        #if($hubforumtopicsmap)
+        #set ($forumtopicvector=$hubforumtopicsmap.get($forumid) )
+        <tr><td >
+          <table cellpadding="0">
+          #foreach( $forumtopicmap in $forumtopicvector )
+          <tr><td>$forumtopicmap.get("topicslink") ($forumtopicmap.get("repliescount")) - $forumtopicmap.get("topicownerlink") $forumtopicmap.get("postedat")</td></tr>
+          #end
+          </table>
+        </td></tr>
+        #end
+
+        </table>
+      #end
+      #end
+      </td></tr>
+      #end
+      </table>
+    </td></tr>
+    <tr><td>#showAds("yahoo")</td></tr>
+    <tr><td>
+      <table>
+      <tr>
+      <td align="left"> <span class="medium">Events</span>
+      #if($listeventlink)
+      <span class="links"> »$listeventlink </span></td>
+      </tr>
+      #if($clubeventsdata)
+        #if($eventstartdatesvec)
+        #foreach( $startdate in $eventstartdatesvec )
+        <tr><td align="left" >$startdate</td></tr>
+        #foreach( $event in $clubeventsdata.get($startdate) )
+        <tr><td align="left" >$event.get("eventtime")  $event.get("location")</td></tr>
+        <tr><td align="left" >$event.get("eventlink")  - $event.get("ownerlink")</td></tr>
+        #end
+        #end
+        #end
+
+      #end
+
+      </table>
+      #end
+
+  </td>
+  </tr>
+  </table>
+ </div>
+</div>
+ <div id="navi">
+  <div align="left">
+   <table align='center' width='100%'>
+   <tr>
+   <td valign="top">
+     <table cellpadding="0"  align='center' width='100%'>
+     <tr><td>
+     #if($loginbeelet)
+       <table>
+       <tr >
+                      <td class="medium">Login</td>
+                    </tr>
+       <tr ><td>$loginbeelet</td></tr>
+       </table>
+     #end
+     <tr><td>
+     #if($memberstatusbeelet)
+       <table>
+       <tr >
+       <td>$memberstatusbeelet</td>
+       </tr>
+       </table>
+     #end
+     </td></tr>
+     <tr ><td>
+       <table>
+       <tr>
+       <td valign="top"><span class="medium"> View $firstname's</span>
+       <span class="txt">
+       #if ( $eventslink)
+	      $eventslink |
+	   #end
+	   #if( $photoslink)
+	       $photoslink |
+	   #end
+
+	   #if( $Bloglink)
+	      $Bloglink |
+	   #end
+
+	   #if( $networklink)
+	      $networklink
+	   #end
+       </span>
+       </td>
+	   </tr>
+	   </table>
+     </td></tr>
+     <tr><td>
+       <table>
+       <tr ><td class="medium">Statistics</td></tr>
+       <tr><td>Members: $memberscount</td></tr>
+       <tr><td>Created on: $createdat</td></tr>
+       <tr><td>Membership:
+       #if($membershipVec)
+         <table cellpadding="0">
+         #foreach( $member in $membershipVec )
+         <tr><td>$member.get("mshipname")-</td><td>$member.get("price")</td></tr>
+         #end
+         </table>
+       #else
+         $clubApprovalType
+       #end
+       </td></tr>
+       <tr><td>Moderator: $moderatorstr</td></tr>
+       </table>
+     </td></tr>
+     <tr><td>
+     #if($hubmemberlist)
+       <table>
+       <tr ><td class="medium">Members</td></tr>
+       #foreach( $hubmembersublist in $hubmemberlist )
+       <tr>
+       #foreach( $hubmembermap in $hubmembersublist )
+       <td>$hubmembermap.get("memberlink")</td>
+       #end
+       </tr>
+       #end
+       </table>
+     #end
+     </td></tr>
+     <tr><td>
+     #if($hubnoticevec)
+       <table>
+       <tr ><td><div class="medium">Noticeboard</div></td></tr>
+       #foreach( $hubnoticemap in $hubnoticevec )
+       <tr>
+       <td>$hubnoticemap.get("noticetype")</td><td>$hubnoticemap.get("postedat1")</td>
+       </tr>
+       <tr><td></td><td>$hubnoticemap.get("notice")</td></tr>
+       #end
+       </table>
+     #end
+     #if($partnerstreamer)
+       <table>
+	   <tr>
+	   <td class="str">$partnerstreamer</td>
+	   </tr>
+	   <tr><td></td></tr>
+	   <tr><td>#showAds("google")</td></tr>
+	   </table>
+     #end
+     </td></tr>
+     </table>
+   </td>
+   </tr>
+   </table>
+ </div>
+</div>
+ #if($basicDesihubFooter)
+ <div id="footer">
+ $basicDesihubFooter
+ </div>
+ #end
+</div>
+</body>
+</html>

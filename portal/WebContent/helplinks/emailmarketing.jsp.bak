@@ -1,0 +1,323 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META Http-Equiv="Cache-Control" Content="no-cache">
+<META Http-Equiv="Pragma" Content="no-cache">
+<META Http-Equiv="Expires" Content="0">
+
+<title>Eventbee - Your Online Registration, Email Marketing and Event Promotion solution</title>
+
+<meta name="Description" content="Easy to use web based Event Management solution that includes Event Ticketing, Email Marketing, Event Promotion and Membership Management" />
+
+<meta name="Keywords" content="online registration, registration software, online ticketing, event ticketing, email marketing, membership management, association management, club management, event community, event networking, event social networking, event marketing, event promotion, event listing, local events, meetings, conferences, trade shows, seminars" />
+<link rel="stylesheet" type="text/css" href="/home/index.css" />
+
+<link rel="stylesheet" type="text/css" href="/home/homepage.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/niftyCorners.css" />
+</head>
+<body>
+<script type="text/javascript" src="/home/js/niftycube.js">
+</script>
+<script type="text/javascript">
+window.onload=function(){
+Nifty("div#eventsblock","transparent");
+Nifty("div#servicesblock","transparent");
+Nifty("div#classblock","transparent");
+Nifty("div#hubsblock","transparent");
+Nifty("div#featureblock","transparent");
+Nifty("div#content1a","transparent");
+Nifty("div#content1b","transparent");
+Nifty("div#content1c","transparent");
+Nifty("div#content2a","transparent");
+Nifty("div#content2c","transparent");
+Nifty("div#networkticketeventsblock","transparent");
+}
+</script>
+<script>
+function dummy(){}
+</script> 
+
+<script type="text/javascript" src="/home/js/getcontent.js">
+function dummy(){}
+
+</script>
+
+
+<!------------------ Header--------->
+
+
+   <%@ include file="/common/commonheader.jsp" %>
+
+	
+
+
+<style>
+
+.FB_ImgLogoContainer{position:relative;width:50px;height:45px;display:block;float:left;}
+ img.FB_ImgLogo{height:15px;width:15px;bottom:0;right:0;position:absolute;margin:0;}
+
+</style>
+
+
+<link rel="stylesheet" type="text/css"  href="/home/css/webintegration.css" />
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript">
+	function fbdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/advajax.js">
+        function advajxdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/ajax.js">
+        function ajaxdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/dhtmlpopup.js">
+        function dhtmlpopupdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/authentication.js">
+        function authdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/fbconnect.js">
+        function fbpopupdummy(){ }
+</script>
+<script language="javascript" src="/home/js/popup.js">
+ 	function popupdummy(){}
+</script>
+<script>
+ 	
+ 	function ShowLinkingscreen(){
+		var fbuid;
+		  if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null){
+			fbuid=FB.Facebook.apiClient.get_session().uid;
+			getEventbeeLinkscreen("/portal/fbauth/linkFBaccount.jsp?fbuid="+fbuid);
+		}
+	}
+	function logout(onLogoutURL){
+		if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null)
+			FB.Connect.logoutAndRedirect(onLogoutURL);
+		else
+			window.location.href=onLogoutURL;		
+		
+	}
+	function createFBSectionForHeader(){
+		FB_RequireFeatures(["XFBML"], function(){
+		FB.Facebook.init("578ea8f7fdc0ab02b19d74c53d21a0c4", "/portal/xd_receiver.jsp");
+		if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null){
+			ShowFBProfile();
+		} 
+		});
+	}
+	
+</script>
+   
+
+<script>
+ 	createFBSectionForHeader();
+</script>
+			
+
+<table width='1' border='0' cellpadding='0' cellspacing='0' align="center" valign="top" id="container">			
+
+<tr><td >
+
+<div id="mylinks">
+
+
+
+
+		<table width='1' border='0' cellpadding='0' cellspacing='0' >
+		<tr><td ></td></tr>
+		</table>
+
+
+
+	
+</div>
+</td></tr>			
+</table>			
+
+
+
+
+
+
+<div id="center" >
+<div  align="center"  >
+        <table width="100%" border="0" cellpadding="10" cellspacing="0">
+          <tr> 
+                      
+            <td height="63" valign="top" align="left"> 
+              <p><font face="Verdana, Arial, Helvetica, sans-serif" size="4" color="#FF0000">Eventbee 
+                Email Marketing</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Eventbee Email 
+                Marketing is a self-service web-based email marketing solution 
+                that allow you to create, send and measure your email marketing 
+                campaigns. </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Take advantage 
+                of Email Marketing software tight integration with <a href="http://www.eventbee.com/portal/helplinks/onlineregistration.jsp">Eventbee 
+                Online Registration</a> to convert your campaigns into event registrations.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Follow these 
+                three simple steps to manage your Email Marketing</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>1. Create 
+                Campaign</b></font></p>
+              <blockquote> 
+                <p> <font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                  Design email campaign by importing HTML code, or use built in 
+                  WYSYWIG editor to create one instantly</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Include specially created Event Registration URLs in your campaign 
+                  to track click-throughs</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Select mailing lists to send email campaign</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Preview your campaign</font></p>
+              </blockquote>
+              <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>2. 
+                Schedule Blast</b></font></p>
+              <blockquote> 
+                <p> <font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                  Send yourself test mail to check if everything is OK!</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Blast email campaign right away or schedule it for future blast</font></p>
+              </blockquote>
+              <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif"><b>3. 
+                Measure Results</b> </font></p>
+              <blockquote> 
+                <p> <font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                  Know how many emails are really sent, and how many emails are 
+                  bounced</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Track how many emails are opened, and how many people clicked 
+                  on Registration or Survey link</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Generate campaign reports in PDF, Excel and graphical format</font></p>
+              </blockquote>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Eventbee 
+                Advantage </b></font></p>
+              <blockquote> 
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Targeted 
+                  Email Campaigns within minutes</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Secured 
+                  and hosted solution</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- No Software 
+                  or Hardware to buy</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Affordable 
+                  per use pricing</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Integration 
+                  with <a href="http://www.eventbee.com/portal/helplinks/onlineregistration.jsp">Eventbee 
+                  Online Registration </a></font></p>
+              </blockquote>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">New to Eventbee? 
+                <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579">Sign 
+                Up</a> now to start saving</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">For more information, 
+                visit <a href="http://help.eventbee.com">Eventbee Help Cente</a>r</font><font face="Verdana, Arial, Helvetica, sans-serif"></font><font face="Verdana, Arial, Helvetica, sans-serif"></font></p>
+                        </td>
+                    </tr>
+                    <tr> 
+                      <td> 
+                        
+              <table width="100%" cellpadding="5">
+                <tr> 
+                            <td bgcolor="#CCCCFF" width="30%" align="left" valign="top"> 
+                              
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">Pricing</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif">1000 
+                      Email Quota - $25 <br>
+                      2500 Email Quota - $40 <br>
+                      5000 Email Quota - $60 <br>
+                      10000 Email Quota - $80</font></p>
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">For 
+                      More Information</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Email:</b> 
+                      support at eventbee.com<br>
+                      <br>
+                      <b>Phone:</b> 408 310 6768<br>
+                      <br>
+                      <b>Live Chat:</b> <a href="javascript:popupwindow('http://www.eventbee.com/home/links/livechat.html','Tags','600','400')">Click 
+                      here</a><br>
+                      <br>
+                      <b>Help Center:</b> <a href="http://help.eventbee.com">Click 
+                      here</a></font></p>
+                            </td>
+                            <td width="5%"/> 
+                            
+                  <td bgcolor="#CCCCFF" width="30%" valign="top" align="left"> 
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">Highlights</font></p>
+                    <p><font color="#FF0000" face="Verdana, Arial, Helvetica, sans-serif"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif"> 
+                      Import HTML or use WYSIWYG editor to create campaigns</font></p>
+                    <p><font color="#FF0000" face="Verdana, Arial, Helvetica, sans-serif"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif"> 
+                      Upload Email IDs from Microsoft Outlook, ACT or Text files 
+                      to build mailing lists</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Mailing list management that includes bounce management, 
+                      unsubscribes, manual entry and merging of multiple lists</font></p>
+                    <p><font color="#FF0000" face="Verdana, Arial, Helvetica, sans-serif"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif"> 
+                      Real time graphical representation of campaign tracking 
+                      information such as who opened your email and who clicked 
+                      on a link within your email</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Easily collect opt-in Email IDs and useful information from 
+                      your website visitors</font></p>
+                    <p><font color="#FF0000" face="Verdana, Arial, Helvetica, sans-serif"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif"> 
+                      Make use of Email Marketing to send out event invitations 
+                      with online registration link</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Generate reports in Microsoft Excel, PDF</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      DomainKeys are implemented to avoid spam filtration</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Compliant with the Federal CAN-SPAM Act</font></p>
+                        </td>
+                            <td width="5%"/> 
+                            
+                  <td bgcolor="#D8FFC0" width="30%" valign="top" align="left"> 
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="4"> 
+                      <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579"><img src="http://www.eventbee.com/home/images/signup.jpg" border="0"/></a></font></p>
+                    <p align="left"><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">Try 
+                      it Free!</font></p>
+                    <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">We 
+                      already credited 100 Free Email Quota in your account, use 
+                      it to experience power of Eventbee Email Marketing</font></p>
+                    <p><font size="4" color="#FF3300" face="Verdana, Arial, Helvetica, sans-serif">Learn 
+                      More</font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/onlineregistration.jsp">Online 
+                      Registration &amp; Network Ticket Selling</a></font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/membershipmanagement.jsp">Community 
+                      Building &amp; Membership Management</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/eventpromotion.jsp">Event 
+                      Promotion</a></font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/partnernetwork.jsp">Eventbee 
+                      Partner Network</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://help.eventbee.com">Eventbee Help Center</a></font></p>
+                      </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+      <div> </div>
+
+      <div id="content2b"> </div>
+ 
+ <!----------- footer ------------->
+
+
+  <%@ include file="/common/commonfooter.jsp" %>
+</body>
+
+</html>
+

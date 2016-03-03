@@ -1,0 +1,328 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META Http-Equiv="Cache-Control" Content="no-cache">
+<META Http-Equiv="Pragma" Content="no-cache">
+<META Http-Equiv="Expires" Content="0">
+
+<title>Eventbee - Your Online Registration, Email Marketing and Event Promotion solution</title>
+
+<meta name="Description" content="Easy to use web based Event Management solution that includes Event Ticketing, Email Marketing, Event Promotion and Membership Management" />
+
+<meta name="Keywords" content="online registration, registration software, online ticketing, event ticketing, email marketing, membership management, association management, club management, event community, event networking, event social networking, event marketing, event promotion, event listing, local events, meetings, conferences, trade shows, seminars" />
+
+
+<link rel="stylesheet" type="text/css" href="/home/index.css" />
+
+<link rel="stylesheet" type="text/css" href="/home/homepage.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/niftyCorners.css" />
+
+</head>
+<body>
+<script type="text/javascript" src="/home/js/niftycube.js">
+</script>
+<script type="text/javascript">
+window.onload=function(){
+Nifty("div#eventsblock","transparent");
+Nifty("div#servicesblock","transparent");
+Nifty("div#classblock","transparent");
+Nifty("div#hubsblock","transparent");
+Nifty("div#featureblock","transparent");
+Nifty("div#content1a","transparent");
+Nifty("div#content1b","transparent");
+Nifty("div#content1c","transparent");
+Nifty("div#content2a","transparent");
+Nifty("div#content2c","transparent");
+Nifty("div#networkticketeventsblock","transparent");
+}
+</script>
+<script>
+function dummy(){}
+</script> 
+
+<script type="text/javascript" src="/home/js/getcontent.js">
+function dummy(){}
+
+</script>
+
+<!-------------------------- header --------------------->
+
+
+     <%@ include file="/common/commonheader.jsp" %>
+
+
+
+<style>
+
+.FB_ImgLogoContainer{position:relative;width:50px;height:45px;display:block;float:left;}
+ img.FB_ImgLogo{height:15px;width:15px;bottom:0;right:0;position:absolute;margin:0;}
+
+</style>
+
+
+<link rel="stylesheet" type="text/css"  href="/home/css/webintegration.css" />
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript">
+	function fbdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/advajax.js">
+        function advajxdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/ajax.js">
+        function ajaxdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/dhtmlpopup.js">
+        function dhtmlpopupdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/authentication.js">
+        function authdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/fbconnect.js">
+        function fbpopupdummy(){ }
+</script>
+<script language="javascript" src="/home/js/popup.js">
+ 	function popupdummy(){}
+</script>
+<script>
+ 	
+ 	function ShowLinkingscreen(){
+		var fbuid;
+		  if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null){
+			fbuid=FB.Facebook.apiClient.get_session().uid;
+			getEventbeeLinkscreen("/portal/fbauth/linkFBaccount.jsp?fbuid="+fbuid);
+		}
+	}
+	function logout(onLogoutURL){
+		if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null)
+			FB.Connect.logoutAndRedirect(onLogoutURL);
+		else
+			window.location.href=onLogoutURL;		
+		
+	}
+	function createFBSectionForHeader(){
+		FB_RequireFeatures(["XFBML"], function(){
+		FB.Facebook.init("578ea8f7fdc0ab02b19d74c53d21a0c4", "/portal/xd_receiver.jsp");
+		if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null){
+			ShowFBProfile();
+		} 
+		});
+	}
+	
+</script>
+
+<script>
+ 	createFBSectionForHeader();
+</script>
+<table width='1' border='0' cellpadding='0' cellspacing='0' align="center" valign="top" id="container">			
+
+<tr><td >			
+
+<div id="mylinks">
+
+
+	<table width='1' border='0' cellpadding='0' cellspacing='0' >
+		<tr><td ></td></tr>
+		</table>
+
+
+
+	
+</div>
+</td></tr>			
+</table>			
+
+
+
+
+
+
+<div id="center" >
+<div  align="center"  >
+        <table width="100%" border="0" cellpadding="10" cellspacing="0">
+          <tr> 
+                      
+            <td height="63" valign="top" align="left"> 
+              <p><font face="Verdana, Arial, Helvetica, sans-serif" size="4" color="#FF0000">Eventbee 
+                Partner Network</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Webmasters 
+                and Bloggers, monetize your traffic and generate revenues multiple 
+                ways by joining Eventbee Partner Network.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Follow these 
+                two simple steps to join our network</font></p>
+              <blockquote> 
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">1. <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579">Join 
+                  Eventbee</a>, by default Eventbee membership gives you partner 
+                  status</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">2. Copy 
+                  paste Eventbee streamer code (javascript) to your website. You 
+                  can customize streamer look &amp; feel to match with your website, 
+                  and select specific categories of the events to display. Eventbee 
+                  automatically displays events in the streamer that can generate 
+                  maximum revenues for you, and match with your selected category</font></p>
+              </blockquote>
+              <p><img src="http://www.eventbee.com/home/images/new.gif"/><font face="Verdana, Arial, Helvetica, sans-serif">Now any Facebook 
+                user can become a Partner and promote events hosted at Eventbee, 
+                without ever having to sign-up with Eventbee. </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">You can generate 
+                revenues in three ways:</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>1. Network 
+                Ticket Selling</b></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Each time 
+                Attendee registers for the event by clicking event link in the 
+                streamer displayed on your site, you get paid commission set by 
+                the Event Manager.</font></p>
+              <p><img src="http://www.eventbee.com/home/images/new.gif"/><font face="Verdana, Arial, Helvetica, sans-serif">Promote 
+                events across your Social Graph through social interactions, for 
+                more information <a href="http://www.eventbee.com/portal/helplinks/ntssocial.jsp">click 
+                here</a></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>2. Network 
+                Event Listing</b></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Enable Network 
+                Event Listing in your account by setting your own listing fee 
+                based on duration of listing, streamer automatically displays 
+                &quot;List your event here&quot; link on your site. Event Managers 
+                click on this link, and pay listing fee set by you to display 
+                event on your site.</font></p>
+              <p align="left"><img src="http://www.eventbee.com/home/images/streamer.jpg" border="0"/></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>3. Network 
+                Event Advertising</b></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Each impression 
+                and click in your streamer may result in revenue generation for 
+                you. We automatically display events that pay high CPM, CPC and 
+                that match with your selected category to maximize your revenues. 
+                </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font size="3" color="#FF3300">Frequently 
+                Asked Questions</font></b></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i><b>Is this 
+                service FREE?</b></i></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">YES, there 
+                is NO setup fee, NO hosting fee, NO software fee...NONE to join 
+                Eventbee Partner Network. </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i><b>How 
+                much I get paid?</b></i></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i>Network 
+                Ticket Selling</i><b> </b>commissions are set by Event Manager, 
+                it can range anywhere from 50c to $100 per ticket sale. </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i>Network 
+                Event Listing</i> prices are set by you. Login to your account 
+                and set prices based on duration of listing.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i>Network 
+                Event Advertising</i> CPC, CPM values are set by Event Manager, 
+                the minimum CPC you can expect is 50c, and the minimum CPM is 
+                $10.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">We keep $25 
+                on every $250 you earn from Network Ticket Selling to cover our 
+                costs. We keep 29% of your earnings from Network Event Listing 
+                and Network Event Advertising as our commission to run this service.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i><b>How 
+                do I receive payment?</b></i></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">We handle 
+                all payment processing, mail out check to you whenever your total 
+                earnings reach $250.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i><b>What 
+                events are displayed in my streamer on my site?</b></i></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">First we display 
+                events that are paid to be listed on your site, next we display 
+                events that match with your selected category and have high Network 
+                Ticket Selling commission, CPC, CPM values. Our goal is to maximize 
+                your earning potential as a valued partner.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i><b>I don't 
+                have website, can I still join Eventbee Partner Network?</b></i></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Yes, you can 
+                distribute event links with your partner ID to your friends and 
+                affiliate groups, and earn Network Ticket Selling commission on 
+                each ticket sale.</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><i><b>Can 
+                I pass commission to my friends as a event registration discount?</b></i></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Yes, with 
+                the introduction of <a href="http://www.eventbee.com/portal/helplinks/ntssocial.jsp">Network 
+                Ticket Selling - Social</a>, if allowed by Event Manager, you 
+                can pass commission to friends as a event discount. <br>
+                </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">New to Eventbee? 
+                <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579">Sign 
+                Up</a> now to start earning</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">For more information, 
+                visit <a href="http://sites.google.com/a/eventbee.com/help/">Eventbee 
+                Help Cente</a>r</font><font face="Verdana, Arial, Helvetica, sans-serif"></font></p>
+              </td>
+                    </tr>
+                    <tr> 
+                      <td> 
+                        
+              <table width="100%" cellpadding="5">
+                <tr> 
+                            <td bgcolor="#CCCCFF" width="30%" align="left" valign="top"> 
+                              
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">Eventbee 
+                      Advantage </font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif">Since 
+                      2003, over 8000 Event Managers sold tickets using Eventbee 
+                      Platform</font></p>
+                    <p>&nbsp;</p>
+                              </td>
+                            <td width="5%"/> 
+                            
+                  <td bgcolor="#CCCCFF" width="30%" valign="top" align="left"> 
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">For 
+                      More Information</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Email:</b> 
+                      support at eventbee.com<br>
+                      <br>
+                      <b>Phone:</b> 408 310 6768<br>
+                      <br>
+                      <b>Live Chat:</b> <a href="javascript:popupwindow('http://www.eventbee.com/home/links/livechat.html','Tags','600','400')">Click 
+                      here</a><br>
+                      <br>
+                      <b>Help Center:</b> <a href="http://help.eventbee.com">Click 
+                      here</a></font></p>
+                            </td>
+                            <td width="5%"/> 
+                            
+                  <td bgcolor="#D8FFC0" width="30%" valign="top" align="left"> 
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="4">
+                      <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579"><img src="http://www.eventbee.com/home/images/signup.jpg" border="0"/></a></font></p>
+                    <p><font size="4" color="#FF3300" face="Verdana, Arial, Helvetica, sans-serif">Learn 
+                      More</font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/onlineregistration.jsp">Online 
+                      Registration &amp; Network Ticket Selling</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/membershipmanagement.jsp">Community 
+                      Building &amp; Membership Management</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/eventpromotion.jsp">Event 
+                      Promotion</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/emailmarketing.jsp">Email 
+                      Marketing</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://help.eventbee.com">Eventbee Help Center</a></font></p>
+                      </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+      <div> </div>
+
+      <div id="content2b"> </div>
+ 
+
+<!---------------- footer ---------------------->
+
+	<%@ include file="/common/commonfooter.jsp" %>	
+     
+</body>
+
+</html>
+

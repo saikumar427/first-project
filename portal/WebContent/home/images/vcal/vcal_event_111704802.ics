@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+METHOD:PUBLISH
+CALSCALE:GREGORIAN
+Content-Type:text/calendar
+PRODID:-//www.eventbee.com//EN
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:20140510T090000
+DTEND:20141129T100000
+LOCATION:Hyderabad
+UID:20140509T061500@eventbee.com
+SUMMARY:IllegalStateException: getAttribute: Session already invalidated
+URL:http://pwrams.citypartytix.com/event?eventid=111704802
+END:VEVENT
+END:VCALENDAR

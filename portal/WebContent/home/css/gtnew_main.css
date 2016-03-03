@@ -1,0 +1,49 @@
+
+#header{
+color:#666666;
+font-family:Verdana,sans-serif;
+font-size:24px;
+font-weight:bold;
+line-height:140%;
+height:100px;
+overflow:hidden;
+}
+
+.click_here{
+	-moz-border-radius:10px 10px 10px 10px;
+	border-radius:10px 10px 10px 10px;
+	border:2px solid #ccffee;
+	background-color:BlanchedAlmond;
+	width:123px;
+	margin-left:25px;
+	
+}
+.slide {
+    position: relative;
+	margin-right:5px;
+	margin-bottom: 5px;
+    }
+	
+#details {
+	border:3px solid grey;
+	background-color:Aqua;
+	margin-left:300px;
+	margin-top:-50px;
+	width:225px;
+	-moz-border-radius:10px 10px 10px 10px;
+	border-radius:10px 10px 10px 10px;
+}
+#values{
+	background-color:Aqua;
+	margin-left:300px;
+	
+	width:200px;
+
+}
+.smalltext{
+background-color:Aqua;
+padding-left:10px;
+
+font-size: 12px;
+font-family:Georgia;
+}

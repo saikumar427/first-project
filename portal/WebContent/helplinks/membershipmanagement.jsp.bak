@@ -1,0 +1,416 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<META Http-Equiv="Cache-Control" Content="no-cache">
+<META Http-Equiv="Pragma" Content="no-cache">
+<META Http-Equiv="Expires" Content="0">
+
+<title>Eventbee - Your Online Registration, Email Marketing and Event Promotion solution</title>
+
+<meta name="Description" content="Easy to use web based Event Management solution that includes Event Ticketing, Email Marketing, Event Promotion and Membership Management" />
+
+<meta name="Keywords" content="online registration, registration software, online ticketing, event ticketing, email marketing, membership management, association management, club management, event community, event networking, event social networking, event marketing, event promotion, event listing, local events, meetings, conferences, trade shows, seminars" />
+
+
+<link rel="stylesheet" type="text/css" href="/home/index.css" />
+
+<link rel="stylesheet" type="text/css" href="/home/homepage.css" />
+<link rel="stylesheet" type="text/css" href="/home/css/niftyCorners.css" />
+
+</head>
+<body>
+<script type="text/javascript" src="/home/js/niftycube.js">
+</script>
+<script type="text/javascript">
+window.onload=function(){
+Nifty("div#eventsblock","transparent");
+Nifty("div#servicesblock","transparent");
+Nifty("div#classblock","transparent");
+Nifty("div#hubsblock","transparent");
+Nifty("div#featureblock","transparent");
+Nifty("div#content1a","transparent");
+Nifty("div#content1b","transparent");
+Nifty("div#content1c","transparent");
+Nifty("div#content2a","transparent");
+Nifty("div#content2c","transparent");
+Nifty("div#networkticketeventsblock","transparent");
+}
+</script>
+<script>
+function dummy(){}
+</script> 
+
+<script type="text/javascript" src="/home/js/getcontent.js">
+function dummy(){}
+
+</script>
+
+<style>
+
+.FB_ImgLogoContainer{position:relative;width:50px;height:45px;display:block;float:left;}
+ img.FB_ImgLogo{height:15px;width:15px;bottom:0;right:0;position:absolute;margin:0;}
+
+</style>
+
+
+<link rel="stylesheet" type="text/css"  href="/home/css/webintegration.css" />
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript">
+	function fbdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/advajax.js">
+        function advajxdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/ajax.js">
+        function ajaxdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/dhtmlpopup.js">
+        function dhtmlpopupdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/authentication.js">
+        function authdummy(){ }
+</script>
+<script type="text/javascript" language="JavaScript" src="/home/js/fbconnect.js">
+        function fbpopupdummy(){ }
+</script>
+<script language="javascript" src="/home/js/popup.js">
+ 	function popupdummy(){}
+</script>
+<script>
+ 	
+ 	function ShowLinkingscreen(){
+		var fbuid;
+		  if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null){
+			fbuid=FB.Facebook.apiClient.get_session().uid;
+			getEventbeeLinkscreen("/portal/fbauth/linkFBaccount.jsp?fbuid="+fbuid);
+		}
+	}
+	function logout(onLogoutURL){
+		if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null)
+			FB.Connect.logoutAndRedirect(onLogoutURL);
+		else
+			window.location.href=onLogoutURL;		
+		
+	}
+	function createFBSectionForHeader(){
+		FB_RequireFeatures(["XFBML"], function(){
+		FB.Facebook.init("578ea8f7fdc0ab02b19d74c53d21a0c4", "/portal/xd_receiver.jsp");
+		if(FB.Facebook.apiClient!=null && FB.Facebook.apiClient.get_session()!=null){
+			ShowFBProfile();
+		} 
+		});
+	}
+	
+</script>
+ <!------------- header ------------------>
+<%@ include file="/common/commonheader.jsp" %>
+
+
+
+<table border="0" width="840" cellspacing="0" cellpadding="0" background="/home/images/header.jpg" >
+<tr><td align="center">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+<tr height="10">
+<td width="450" height="0" />
+<td width="390" />
+</tr>
+<tr>
+<td width="53%" valign="top" height="60" >
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+<tr>
+<td height="16" valign="bottom" width="19%">
+<div align="left"><a href="http://www.eventbee.com/portal/home.jsp">
+<img src="/home/images/logo_big.jpg" border="0"/><br/><img src="/home/images/caption.jpg" border="0"/></a></div>
+</td></tr>
+</table>
+</td>
+<td width="47%" height="60" valign="top" >
+
+                        <table width="100%" align="center" border="0" cellpadding="5" cellspacing="0">
+                          <tr> 
+                            <td height="5" valign="top"> 
+                              <div align="right"> </div>
+                            </td>
+                          </tr>
+         
+                        </table>
+</td></tr>
+<tr bgcolor="blue"><td height="1" colspan="2"  ></td></tr> 
+</table>
+</td>
+</tr>
+</table>
+<script>
+ 	createFBSectionForHeader();
+</script>
+			
+</div></td></tr>
+<tr><td >
+<div id="mylinks">
+
+
+
+
+		<table width='1' border='0' cellpadding='0' cellspacing='0' >
+		<tr><td ></td></tr>
+		</table>
+
+
+
+	
+</div>
+</td></tr>			
+</table>			
+
+
+
+
+
+
+<div id="center" >
+<div  align="center"  >
+        <table width="100%" border="0" cellpadding="10" cellspacing="0">
+          <tr> 
+                      
+            <td height="63" valign="top" align="left"> 
+              <p><font face="Verdana, Arial, Helvetica, sans-serif" size="4" color="#FF0000">Eventbee 
+                Communities</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Eventbee allows 
+                you to build community around your events, and increase your ticket 
+                sales. Make use of following community building tools to build 
+                your community, and enable member interaction through Forums and 
+                Social networking features. Customize your community pages to 
+                match with your website look &amp; feel, give seamless user experience 
+                to your website visitors.</font></p>
+              <blockquote> 
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Discussion 
+                  Forums</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Photo 
+                  Sharing</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Member 
+                  Networking</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Customized 
+                  Community Home Page</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Member 
+                  Management</font></p>
+              </blockquote>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Community 
+                Types </b></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Eventbee provides 
+                three types of communities:</font></p>
+              <ul>
+                <li> <font face="Verdana, Arial, Helvetica, sans-serif"><i>Public 
+                  Community,</i> any one can join this community, visible across 
+                  Eventbee<br>
+                  </font></li>
+              </ul>
+              <ul>
+                <li><font face="Verdana, Arial, Helvetica, sans-serif"><i>Moderated 
+                  Community,</i> joining this community requires manager's approval</font></li>
+              </ul>
+              <ul>
+                <li><font face="Verdana, Arial, Helvetica, sans-serif"><i>Paid 
+                  Community,</i> joining this community requires payment of membership 
+                  fee</font></li>
+              </ul>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Which type 
+                of community is right for me?</b></font></p>
+              <blockquote> 
+                <p><font face="Verdana, Arial, Helvetica, sans-serif"> - If you 
+                  are building community to promote your events to broader audience, 
+                  we recommend you to build Public Community<br>
+                  </font><font face="Verdana, Arial, Helvetica, sans-serif"><br>
+                  - If you are building niche community and restrict who to allow 
+                  etc. build Moderated Community<br>
+                  <br>
+                  - If you already have association, club or special interest 
+                  group with paid memberships, we recommend you to use Paid Community 
+                  to streamline your membership management operations</font></p>
+              </blockquote>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Default 
+                community</b></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">By default 
+                we create Public Community for every user. Anyone can visit your 
+                public community by visiting http://&lt;Bee ID &gt;.eventbee.com/community. 
+                </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Paid Communities 
+                &amp; Membership Management</b></font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Make use of 
+                Paid Communities feature to manage your existing Association or 
+                Club. You can create multiple types of paid Memberships and collect 
+                Membership Fee on regular basis. </font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">Follow these 
+                simple steps to start using Eventbee Membership Management feature</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif" color="#666666"><i>1. 
+                Setup Paid Memberships</i></font></p>
+              <blockquote> 
+                <p> <font color="#FF0000" size="3" face="Verdana, Arial, Helvetica, sans-serif"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif"> 
+                  Use default Community or create a new one</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                  Set community type to Paid</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Create Membership Types including pricing and term information</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" ><b><font color="#FF0000">::</font></b> 
+                  Customize community look and feel</font></p>
+              </blockquote>
+              <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif" color="#666666"><i>2. 
+                Manage Members</i></font><font face="Verdana, Arial, Helvetica, sans-serif" size="4" color="#666666"> 
+                </font></p>
+              <blockquote> 
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" size="3" color="#FF0000"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif" > 
+                  Invite members to join your community and pay membership fee 
+                  </font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" size="3" color="#FF0000"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif" > 
+                  Manage members and generate membership reports</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" size="3" color="#FF0000"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif" > 
+                  Manage community forums and content</font></p>
+              </blockquote>
+              <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif" color="#666666"><i>3. 
+                Increase Memberships </i></font></p>
+              <blockquote> 
+                <p> <font face="Verdana, Arial, Helvetica, sans-serif" size="3" color="#FF0000"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif" > 
+                  Host events and build community around your events</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" size="3" color="#FF0000"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif" > 
+                  Enable interaction between community members through forums 
+                  and other collaboration tools</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" size="3" color="#FF0000"><b>::</b></font><font face="Verdana, Arial, Helvetica, sans-serif" > 
+                  Provide maximum benefits of being a member with no additional 
+                  cost and increase your membership count</font></p>
+              </blockquote>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font size="3" color="#FF3300">Eventbee 
+                Advantage </font></b></font></p>
+              <blockquote> 
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Secured 
+                  and hosted solution</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- No Software 
+                  or Hardware to buy</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Free software, 
+                  only pay for paid memberships per user basis</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Integration 
+                  with Event Management</font></p>
+                <p><font face="Verdana, Arial, Helvetica, sans-serif">- Build 
+                  community around your existing members</font></p>
+              </blockquote>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">New to Eventbee? 
+                <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579">Sign 
+                Up</a> now to start saving</font></p>
+              <p><font face="Verdana, Arial, Helvetica, sans-serif">For more information, 
+                visit <a href="http://help.eventbee.com">Eventbee Help Cent</a></font></p>
+                        </td>
+                    </tr>
+                    <tr> 
+                      <td> 
+                        
+              <table width="100%" cellpadding="5">
+                <tr> 
+                            <td bgcolor="#CCCCFF" width="30%" align="left" valign="top"> 
+                              
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">Pricing</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif">Free 
+                      for Public and Moderated communities</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><i>Paid 
+                      Communities:</i></font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif">$5/member
+                      </font></p>
+                        
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">For 
+                      More Information</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b>Email:</b> 
+                      support at eventbee.com<br>
+                      <br>
+                      <b>Phone:</b> 408 310 6768<br>
+                      <br>
+                      <b>Live Chat:</b> <a href="javascript:popupwindow('http://www.eventbee.com/home/links/livechat.html','Tags','600','400')">Click 
+                      here</a><br>
+                      <br>
+                      <b>Help Center:</b> <a href="http://help.eventbee.com">Click 
+                      here</a></font></p>
+                            </td>
+                            <td width="5%"/> 
+                            
+                  <td bgcolor="#CCCCFF" width="30%" valign="top" align="left"> 
+                    <p><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">Highlights</font></p>
+                    <p><font face="Times New Roman, Times, serif"><b><font color="#FF0000" face="Verdana, Arial, Helvetica, sans-serif">::</font></b><font face="Verdana, Arial, Helvetica, sans-serif"> 
+                      Unique Email ID - Every community can have unique Email 
+                      ID. Community members can post messages to community forum 
+                      by sending email to unique Email ID</font></font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Email alerts - Community members can choose to receive Community 
+                      forum postings in an email</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Customization - You can customize your community look and 
+                      feel to match with your group or association website or 
+                      theme</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      RSS Feeds - Members can subscribe to community forum RSS 
+                      Feeds to receive forum postings</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Automatic member mailing list creation, and easy one click 
+                      email communication with all members</font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif"><b><font color="#FF0000">::</font></b> 
+                      Generate Real Time Member reports in Microsoft Excel and 
+                      PDF</font></p>
+                      </td>
+                            <td width="5%"/> 
+                            
+                  <td bgcolor="#D8FFC0" width="30%" valign="top" align="left"> 
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif" size="4"> 
+                      <a href="/portal/guesttasks/signup.jsp?isnew=yes&entryunitid=13579"><img src="http://www.eventbee.com/home/images/signup.jpg" border="0"/></a></font></p>
+                    <p align="left"><font color="#FF3300" size="4" face="Verdana, Arial, Helvetica, sans-serif">Featured 
+                      Community </font></p>
+                    <p align="left"><font face="Times New Roman, Times, serif"><a href="http://www.eventbee.com/hub/clubview.jsp?GROUPID=46542">VC 
+                      Taskforce</a><br>
+                      <a href="http://www.eventbee.com/hub/clubview.jsp?GROUPID=46542"><img src="http://www.eventbee.com/home/images/vctaskforce.jpg" border="0"/></a> 
+                      </font></p>
+                    <p align="left"><font face="Verdana, Arial, Helvetica, sans-serif">Power 
+                      your Association or Club with Eventbee Paid Communities, 
+                      and collect membership payments on regular basis</font></p>
+                    <p><font size="4" color="#FF3300" face="Verdana, Arial, Helvetica, sans-serif">Learn 
+                      More</font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/onlineregistration.jsp">Online 
+                      Registration &amp; Network Ticket Selling</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/eventpromotion.jsp">Event 
+                      Promotion</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/emailmarketing.jsp">Email 
+                      Marketing</a></font></p>
+                    <p><font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://www.eventbee.com/portal/helplinks/partnernetwork.jsp">Eventbee 
+                      Partner Network</a></font></p>
+                    <p> <font face="Verdana, Arial, Helvetica, sans-serif">&raquo; 
+                      <a href="http://help.eventbee.com">Eventbee Help Center</a></font></p>
+                      </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+      <div> </div>
+
+      <div id="content2b"> </div>
+</div>
+ 
+
+ <!------------ footer -------------->
+
+		
+   
+
+		<%@ include file="/common/commonfooter.jsp" %>
+
+
+</body>
+
+</html>
+

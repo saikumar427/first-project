@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head profile="http://gmpg.org/xfn/1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Language" content="en">
+
+    <script type="text/javascript" src="$customappctx/theme/scripts/roller.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="$customappctx/themes/base.css" />
+
+   <title>$pageTitle</title>
+      	<style type="text/css">
+   	$customcss
+        </style>
+
+</head>
+
+ <body >
+<div id="page">
+<div id="main">
+
+
+<ul id="menu">
+
+
+
+#set ( $links = $headerLinks )
+	#foreach( $link in $links )
+	<li><font size="1">$link</font></li>
+	#end
+
+</ul>
+        <div id="header">
+        <div id="headerimg">
+
+<table width="95%">
+<tr>
+<td align="right" width="75%">
+<font color="#000000" size="2">
+<!-- $firstName's lifestyle-->
+$lifestyletitle
+</font>
+<br/>
+<font color="#BA9830" size="1">
+
+[#set ( $links = $lifestyleLinks )
+	#foreach( $link in $links )
+	$link
+		#if( $velocityCount < $links.size() )
+		 |
+		#end
+
+	#end
+   ]
+</font>
+</td>
+</tr>
+</table>
+
+<div align="right">
+<h1 ><a href="$publicProfileLink" title="Home">$pageTitle</a></h1>
+</div>
+
+        </div>
+        </div>
+
+
+<div id="content">
+
+<br/>
+
+<!-- start of snapshot content -->
+<table align='center' width='100%'>
+
+<tr><td>
+<div class="post">
+
+<div align='left'>
+$lifestylephoto.get("photolink")
+
+</div>
+<div id="entry">
+$lifestylephoto.get("photocaption")
+</div>
+</div>
+</td></tr>
+
+
+#if( $invitationhandler)
+<tr><td align='center' width='100%'>
+<div class="post">
+
+$invitationhandler
+</div>
+</td></tr>
+#end
+
+
+<tr><td>
+<!--start of profile -->
+<div class="post">
+
+<h2>Profile</h2>
+
+<div id="entry">
+$profilecontent
+</div>
+</div>
+<!--end of profile -->
+</td></tr>
+<tr><td>
+<!--start of pitch -->
+<div class="post">
+$pitch
+</div>
+<!--end of pitch  -->
+</td></tr>
+
+
+
+
+<tr><td>
+
+<div class="post">
+<h2 >Listed Events</h2>
+<!--start of memberlistedevents -->
+#foreach( $event in $listedevents )
+   $event<br />
+#end
+</div>
+<!--end of memberlistedevents -->
+</td></tr>
+
+
+
+<tr><td>
+
+<div class="post">
+<h2 >Registered Events</h2>
+<!--start of memberregistered events -->
+#foreach( $event in $registeredevents )
+   $event<br />
+#end
+</div>
+<!--end of memberregistered events -->
+</td></tr>
+
+
+<tr><td>
+
+<div class="post">
+<h2 >RSVPd Events</h2>
+<!--start of memberrsvpd events -->
+#foreach( $event in $rsvpevents )
+   $event<br />
+#end
+</div>
+<!--end of memberrsvpd events -->
+</td></tr>
+
+<tr><td>
+<div class="post">
+<h2 >Posted Reviews</h2>
+
+<!--start of weblogs -->
+#foreach( $weblog in $weblogs )
+   $weblog<br />
+#end
+</div>
+<!--end of weblogs  -->
+</td></tr>
+
+
+
+
+
+<tr><td >
+<!--start of guestbook -->
+<div class="post">
+<h2>Guestbook</h2>
+<span float='right'>$guestbooksignuplink</span>
+
+<div float='left'>
+
+#foreach( $entry in $guestbookentries )
+<div class='$entry.get("class")'>
+   $entry.get("userlink"),  $entry.get("msgdate")<br/>
+   $entry.get("message")
+   </div>
+#end
+</div>
+</div>
+<!--end of guestbook  -->
+</td>
+</tr>
+
+</table>
+
+
+<!--end of snapshot content -->
+
+</div>
+</div>
+
+        <div id="sidebar">
+
+  <ul>
+    <li>
+	<h2></h2>
+	<ul>
+  #set ( $links = $loginLinks )
+  	#foreach( $link in $links )
+  <li>$link</li>
+
+	#end
+
+	</ul>
+    </li>
+
+
+<li id="meta">
+<h2>Networking Links</h2>
+<ul>
+#foreach( $feature in $featuresofunit )
+   <li>$feature </li>
+#end
+</ul></li>
+
+
+<li id="meta">
+   <h2>Friends</h2>
+	<ul>
+	#foreach( $entry in $friends )
+        <br/>
+        <li>$entry.get("imgsrc")<br/>
+        $entry.get("name")</li>
+        #end
+	</ul></li>
+
+
+<!--start of moderated hubs -->
+<li id="meta">
+<h2 >Moderated Hubs</h2>
+<ul>
+#foreach( $hub in $moderatedhubs )
+   <li>$hub</li>
+#end
+</ul></li>
+
+
+<!--end of moderated hubs -->
+
+<!--start of member in hubs -->
+<li id="meta">
+<h2 >Member Hubs</h2>
+<ul>
+#foreach( $hub in $memberinhubs )
+   <li>$hub</li>
+#end
+</ul></li>
+
+#showAds("google")
+</div>
+
+
+
+        <a name =" bottom"></a>
+
+<div id="footer"><p></p></div>
+ <!--<hr/><div id="footer">
+<p>
+  Ported by <a href="http://desihub.com">Desihub.com</a> for use at <a href="ctxPath/page/swapna">Desihub Yogi</a>
+
+ </p>
+</div>-->
+
+<div align="center">#foreach( $link in $footerLinks )
+ 		<font size="1">$link</font>
+  	 #if( $velocityCount < $footerLinks.size() )
+ 		 |
+ 		#end
+ 	#end<br/>
+
+ 	$copyright
+  	<div align='right'>$poweredby</div></div>
+
+</div>
+
+<!-- Gorgeous design by BigheaD - http://www.bighead.cn -->
+</body>
+</html>
+
+
+<!-- now print decorator footer/close html -->
+</body>
+</html>

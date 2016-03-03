@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="Network Ticket Selling"
+                directory_title=" Event Register"
+		title_url="http://www.eventbee.com/home/ning/networkticketselling.xml"
+		author="eventbee"
+	        author_email="support@eventbee.com"
+		author_affiliation="bee"
+	        author_location="USA"
+		thumbnail="http://eventbee.com/home/images/ningimages/logosmall.jpg"
+		screenshot="http://eventbee.com/home/images/ningimages/screenshot.jpg"
+		summary ="Sell tickets from your Ning pages, and thousands of other Eventbee partner websites. Pay only $1 per ticket service fee, regardless of your ticket price. We support PayPal, Google credit card processing to further reduce your ticketing costs." 
+		description="Eventbee Inc., provides state-of-the-art web-based event management and event promotion tools to the Events Industry. Since 2003, over 7000 Event Managers sell tickets using the Eventbee Platform. Eventbee operates with the single mission of maximizing ticket sales while providing easy to use web-based software to the Events Industry." 
+	        icon="http://eventbee.com/home/images/ningimages/favicon.jpg" >
+	        <Require feature="opensocial-0.7" />
+		<Require feature='views' />					
+	        <Require feature='dynamic-height' />		
+	        <Require feature="skins"/>
+		<Require feature="analytics"/>
+		<Locale />
+    </ModulePrefs>
+
+    <Content type="html" view="canvas">
+    
+    <![CDATA[
+		<script>
+		gadgets.window.adjustHeight("700");
+		function response(data) 
+		{
+		  var viewer		= data.get("viewer").getData();
+		  var owner			= data.get("owner").getData();
+		  var vname			= encodeURIComponent(viewer.getDisplayName());
+		  var vid			= viewer.getId();
+		  var oid			= owner.getId();
+		  var oname                 = encodeURIComponent(owner.getDisplayName());
+		  var ownerstatus	= viewer.isOwner();
+		  var domain=opensocial.getEnvironment().getDomain();
+		  if(ownerstatus==true){				    
+			document.getElementById('canvasframe').src = "http://test.eventbee.com:9090/ningapp/nts/canvas_owner?vid="+vid+"&oid="+oid+"&oname="+oname+"&vname="+vname+"&domain="+domain;
+		  }else if(ownerstatus==false){
+			document.getElementById('canvasframe').src = "http://test.eventbee.com:9090/ningapp/nts/canvas_viewer?vid="+vid+"&oid="+oid+"&oname="+oname+"&vname="+vname+"&domain="+domain;
+		  }
+		};
+
+		function init() 
+		{
+		  var req = opensocial.newDataRequest();
+		  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+		  req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+		  req.send(response);
+		};
+		init();
+		</script>
+	<iframe id="canvasframe" src="" width="100%" height="700px"/>
+
+	]]>				
+    </Content>
+
+    <Content type="html" view="profile">
+    		<![CDATA[
+    			<script type="text/javascript">				
+    			
+    			function response(data) 
+    			{ 								
+    			  var viewer		= data.get("viewer").getData();
+    			  var owner			= data.get("owner").getData();
+     			  var vname			= encodeURIComponent(viewer.getDisplayName());
+    			  var vid			= viewer.getId();
+    			  var oid			= owner.getId();
+    			  var oname                 = encodeURIComponent(owner.getDisplayName());				 
+    			  var ownerstatus	= viewer.isOwner();
+    			  var domain=opensocial.getEnvironment().getDomain(); 				
+    			  if(ownerstatus==true)
+    			  {
+    				document.getElementById('profileframe').src = "http://test.eventbee.com:9090/ningapp/nts/profile_owner?vid="+vid+"&oid="+oid+"&vname="+vname+"&oname="+oname+"&domain="+domain;
+    				gadgets.window.adjustHeight("700");
+    			  }
+    			  else if(ownerstatus==false)
+    			  {
+    				document.getElementById('profileframe').src = "http://test.eventbee.com:9090/ningapp/nts/profile_viewer?vid="+vid+"&oid="+oid+"&vname="+vname+"&oname="+oname+"&domain="+domain;
+    				document.getElementById('profileframe').height = "500";
+    				gadgets.window.adjustHeight("500");
+    			  }
+    			};
+    
+    			function init() 
+    			{ 
+    				var req = opensocial.newDataRequest();
+    				req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.OWNER), "owner");
+    				req.add(req.newFetchPersonRequest(opensocial.DataRequest.PersonId.VIEWER), "viewer");
+    				req.send(response);
+    			};
+    			init();
+    			</script>
+      		    <iframe id="profileframe" src="" width="100%" height="700px"/ >	
+    
+    		]]>
+	</Content>	
+</Module>

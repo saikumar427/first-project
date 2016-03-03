@@ -1,0 +1,137 @@
+<!--
+
+body {
+//background: #**BACKGROUND**#
+repeat-x fixed;
+text-align: center;
+padding: 0;
+font: 62.5% verdana, sans-serif;
+}
+
+#container {
+margin: 0 auto;
+text-align: left;
+width: 390px;
+//border-bottom: 5px solid #eee;
+background: #**BACKGROUND**#;
+line-height: 150%;
+}
+
+#container h1 {
+font-family:#**BIGGER_FONT_TYPE**#;font-size:#**BIGGER_FONT_SIZE**#;color:#**BIGGER_TEXT_COLOR**#;
+padding: 5px;
+letter-spacing: 1px;
+}
+
+#container h2 {
+font-family:#**MEDIUM_FONT_TYPE**#;font-size:#**MEDIUM_FONT_SIZE**#;color:#**MEDIUM_TEXT_COLOR**#;
+padding: 5px;
+letter-spacing: 1px;
+}
+#container h3 {
+padding: 5px;
+font-family:#**SMALL_FONT_TYPE**#;font-size:#**SMALL_FONT_SIZE**#;color:#**SMALL_TEXT_COLOR**#;
+letter-spacing: 1px;
+}
+
+
+
+a {
+color: #ffc;
+}
+
+a:hover {
+color: #fff;
+text-decoration: none;
+}
+
+
+#header {
+height: 100px;
+background: #0033FF;
+}
+
+#header h1 {
+font: 22px georgia, serif;
+color: #fff;
+margin-top: 10px;
+line-height: 50px;
+text-align: center;
+padding: 0 15px;
+}
+
+#header h1 a {
+color: #fff;
+text-decoration: none;
+}
+
+#navi {
+float: right;
+width: 200px;
+}
+
+#navi-innen {
+padding: 0 15px 10px 15px;
+}
+
+
+#navi h3 {
+
+font-size: 15px;
+}
+
+#navi ul {
+
+margin: .4em 0 1em 0;
+padding: 0;
+}
+
+#navi ul li ul {
+margin: .2em 0 .4em .5em;
+}
+
+#navi a {
+text-decoration: none;
+font-weight: bold;
+}
+
+
+#content {
+margin: 5px;
+width: 350px;
+height: 280px;
+font-family:#**SMALL_FONT_TYPE**#;font-size:#**SMALL_FONT_SIZE**#;color:#**SMALL_TEXT_COLOR**#;
+}
+
+
+
+#content h2 a {
+font-family:#**MEDIUM_FONT_TYPE**#;font-size:#**MEDIUM_FONT_SIZE**#;color:#**MEDIUM_TEXT_COLOR**#
+}
+
+#content h3 {
+
+font-family:#**SMALL_FONT_TYPE**#;font-size:#**SMALL_FONT_SIZE**#;color:#**SMALL_TEXT_COLOR**#;
+}
+
+
+#sidebarBox h3 {
+font-family:#**SMALL_FONT_TYPE**#;font-size:#**SMALL_FONT_SIZE**#;color:#**SMALL_TEXT_COLOR**#;
+}
+
+#sidebarBox ul li{
+
+font-family:#**SMALL_FONT_TYPE**#;font-size:#**SMALL_FONT_SIZE**#;color:#**SMALL_TEXT_COLOR**#;
+}
+
+#footer {
+clear: both;
+margin: 3em 15px 0 15px;
+padding: 5px;
+text-align: center;
+font-size: .8em;
+}
+-->
+
+
+

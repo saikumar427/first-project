@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+
+  <!-- =========================== Components ================================ -->
+  <map:components> 
+   <map:serializers default="xhtml"/>
+    <map:actions>
+        <map:action name="EventRegisterAction" src="org.eventbee.sitemap.xform.eventregister.EventRegisterForm"/>
+	<map:action name="HttpHttps" src="org.eventbee.sitemap.action.util.HttpHttpsTransformer"/>
+    </map:actions>
+
+  </map:components>
+
+  <!-- =========================== Pipelines ================================= -->
+
+  <map:pipelines>
+
+	<map:pipeline>
+	
+	
+	<map:match pattern="register">
+	        <map:act type="EventRegisterAction">
+        		<map:parameter name="xmlform-id" value="form-register-event"/>
+          		<map:parameter name="xmlform-scope" value="session"/>
+          		<map:parameter name="xmlform-model" value="com.eventbee.event.EventRegisterBean"/>
+			<map:select type="parameter">
+				<map:parameter name="parameter-selector-test" value="{page}"/>
+				 <map:when test="payment">
+				 	<map:redirect-to  uri="{session-attr:HTTPS_SERVER_ADDRESS}/eventregister/reg/payment.jsp;jsessionid={session:id}?UNITID={request-param:UNITID}&amp;GROUPID={request-param:GROUPID}&amp;eid={request-param:eid}"/>
+				</map:when>
+				
+				 <map:when test="httpsend">
+				 	<map:redirect-to  uri="{session-attr:HTTPS_SERVER_ADDRESS}/eventregister/reg/end.jsp;jsessionid={session:id}?UNITID={request-param:UNITID}&amp;GROUPID={request-param:GROUPID}&amp;eid={request-param:eid}"/>
+				</map:when>
+				
+				<map:otherwise>
+				<map:redirect-to  uri="{session-attr:HTTP_SERVER_ADDRESS}/eventregister/reg/{page}.jsp;jsessionid={session:id}?UNITID={request-param:UNITID}&amp;GROUPID={request-param:GROUPID}&amp;eid={request-param:eid}"/>
+				</map:otherwise>
+			</map:select>
+       		</map:act>
+            
+         </map:match>
+	
+	 <map:match pattern="*">
+		<map:generate src="cocoon://cocoonhack/test" />
+		<map:serialize />
+	</map:match>
+	 
+	 
+ </map:pipeline>
+
+</map:pipelines>
+
+</map:sitemap>

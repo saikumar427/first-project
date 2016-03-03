@@ -1,0 +1,178 @@
+body {
+font:12px/1.4 verdana,arial,helvetica,clean,sans-serif;
+*font-size:small;
+*font:x-small;
+background:#f5f5f5;
+margin: 0px;
+padding: 0px;
+}
+
+.background{
+text-align: center;
+}
+
+.background .inner,#trends{
+width:974px;
+margin:0 auto; 
+}
+
+.background .inner{
+position:relative;
+text-align:left;
+}
+
+#topnav{
+position:absolute;
+width:300px;
+top:15px;
+right:10px;
+z-index:40;
+padding:0;
+font-size:14px;
+text-align:center;
+color:#444;
+}
+
+#topnav a {
+color:#444;;
+}
+
+.overlay{
+position:absolute;
+z-index:20;
+right:0;
+top:53px;
+width:300px;
+background:#fff;
+padding:10px;
+-webkit-border-radius:12px;
+-moz-border-radius:12px;
+border-radius:12px;
+}
+
+.logo {
+align:left;
+padding-top: 10px; 
+padding-bottom:10px;
+padding-left: 0px;
+margin: 0px; width:280; 
+height:80;
+}
+
+#header{
+width:100%;
+}
+
+#bar {
+margin:0px;
+padding: 0px;
+height:1px;
+background: #FFAC0B;
+opacity:0.9;
+}
+
+#content-wrapper{
+width: 974px; 
+background: #fff; 
+margin:0 auto;
+}
+
+#rectbox {
+background: #9cc0ff;
+padding: 0px;
+margin: 10px;
+width:644px;
+}
+
+#footer {
+border-top: #26598C solid 0px;
+clear: both;
+margin: auto;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 0px;
+padding-right: 0px;
+text-align: center;
+font-size: 10px;
+font-valign: center;
+background: #777;
+color: #fff;
+}
+
+#footer a {
+color:#FFF;
+text-decoration: none;
+}
+
+#footer a:hover{
+color:#FFF;
+font-style: none;
+text-decoration: underline;
+}
+
+.footertab { 
+font-size: 11px; 
+font-family: Verdana; 
+color :#EEE
+}
+/* begin of styles for nifty corners */
+.rtop,.rbottom{
+display:block;
+}
+.rtop *,.rbottom *{
+display:block;
+height: 1px;
+overflow: hidden;
+}
+.r1{
+margin: 0 5px; 
+}
+.r2{
+margin: 0 3px;
+}
+.r3{
+margin: 0 2px;
+}
+.r4{
+margin: 0 1px;
+height: 2px;
+}
+.rs1{
+margin: 0 2px;
+}
+.rs2{
+margin: 0 1px
+}
+
+.roundedbox {
+margin-bottom: 10px;
+padding: 0px; 
+background: #e5e5e5; 
+}
+
+/* end of styles for nifty corners #FFE898 */
+.niftyboxcontent{
+padding: 5px 10px 5px 10px;
+}
+
+.content2d{
+padding-top: 5px;
+padding-left: 5px;
+padding-right:5px;
+padding-bottom:5px; 
+background: #dce8ff url(http://eventbee.com/home/images/gradient_lightblue.gif) repeat-x 0 -5px; color:#000;
+}
+
+.content2b{
+padding-top: 5px;
+padding-left: 5px;
+padding-right:5px;
+padding-bottom:5px; 
+background: #FFE696  url(../images/home/gradient_lightorange.gif) repeat-x 0 -5px; 
+color:#0000;
+}
+
+#container {
+width: 974px;
+background: #fff;
+}

@@ -1,0 +1,371 @@
+<%@ page import="java.util.*,java.sql.*,java.net.URLEncoder,com.eventbee.general.*,com.eventbee.authentication.*" %>
+<%@ page import="com.eventbee.pagenating.*" %>
+<%@ page import="com.eventbee.streamer.*"%>
+<%@ page import="com.eventbee.eventpartner.*" %>
+<%!
+public static Vector getEventPartnerList(String serveraddress,HashMap param){
+	Vector mainvec=new Vector();
+	Vector v=new Vector();
+	Vector v1=new Vector();
+	Vector vec=new Vector();
+	DBManager dbmanager=new DBManager();
+	HashMap eventidhmap=new HashMap();
+        String retrievecount="10";
+
+	String query="select a.eventid ,a.eventname,to_char(a.start_date,'MM/DD')as startdate, a.created_at"
+		+" from eventinfo a,partner_listing p"
+		+" where a.status='ACTIVE' "
+		+"  and p.refid=a.eventid  and p.partnerid=? and p.enddate>=now() order by created_at desc";
+
+	List paramlist=new ArrayList();
+	String partnerid=(String)param.get("partnerid");
+	
+	try{
+		if (param!=null){
+		retrievecount=(String)param.get("retrievecount");
+		if(retrievecount==null)retrievecount="10";
+			
+
+			if ((String)param.get("partnerid")!=null){
+
+				paramlist.add((String)param.get("partnerid"));
+				 query=query+"  limit "+retrievecount+" offset 0";
+		
+				StatusObj stobj=dbmanager.executeSelectQuery(query,(String [])paramlist.toArray(new String [paramlist.size()]));
+				if(stobj.getStatus()){
+					for(int i=0;i<stobj.getCount();i++){
+						HashMap hm=new HashMap();
+						eventidhmap.put(dbmanager.getValue(i,"eventid",""),"");
+						hm.put("startdate",dbmanager.getValue(i,"startdate",""));
+						hm.put("eventurl","<a href=\""+serveraddress+"eventdetails/event.jsp?eventid="+dbmanager.getValue(i,"eventid","")+"&partnerid="+partnerid+"\">"+dbmanager.getValue(i,"eventname","").replaceAll("'","&#39;")+"</a>");
+						hm.put("eventid",dbmanager.getValue(i,"eventid",""));
+						hm.put("purpose","NETWORK_LISTING");
+		 				hm.put(	"partnerid",partnerid);
+						v.addElement(hm);
+					}
+				}
+			}
+
+		}
+
+	 }catch(Exception e){
+	 }
+	
+	
+			 if(v.size()<Integer.parseInt(retrievecount)){
+				  
+			retrievecount=String.valueOf(Integer.parseInt(retrievecount)-v.size());
+			
+		
+	
+	
+	
+	
+	String Query="select distinct a.eventid,a.eventname, to_char(a.start_date,'MM/DD')as startdate,  "
+				+"  cpc,cpm from eventinfo a, network_adv_listing_settings b where "
+				+" b.status='ACTIVE' "
+				+"  and b.groupid=a.eventid "
+				+" and a.listtype='PBL' and a.end_date>=now() ";
+					
+		List paramslst1=new ArrayList();
+		
+		try{
+		if (param!=null){
+		
+			EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"userid----->"+(String)param.get("userid"),null);
+			if("All".equalsIgnoreCase((String)param.get("category"))){
+			}else if ((String)param.get("category")!=null){
+				String catlist=(String)param.get("category");
+				String[] cats=GenUtil.strToArrayStr(catlist, ",");
+	
+				catlist="'A'";
+				for(int i=0;i<cats.length;i++){
+					EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"cat11111----->"+cats[i],null);
+					catlist+=",'"+cats[i]+"'";
+				}
+				EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"catlist----->"+catlist,null);
+				 Query=Query+" and a.category in ("+catlist+") order by cpc desc";
+	
+			}
+		}
+		
+		
+		
+		
+
+		
+		 Query=Query+"  limit "+retrievecount+" offset 0";
+		
+
+		 	StatusObj statobj1=dbmanager.executeSelectQuery(Query,(String [])paramslst1.toArray(new String [paramslst1.size()]));
+		 	
+		 
+		 	if(statobj1.getStatus()){
+		 		String [] columnname=dbmanager.getColumnNames();
+		 		for(int i=0;i<statobj1.getCount();i++){
+		 			HashMap hmp=new HashMap();
+		 				if(eventidhmap.get(dbmanager.getValue(i,"eventid",""))==null){
+		 					eventidhmap.put(dbmanager.getValue(i,"eventid",""),"");
+		 					hmp.put("startdate",dbmanager.getValue(i,"startdate",""));
+		 					hmp.put("eventurl","<a href=\""+serveraddress+"eventdetails/event.jsp?eventid="+dbmanager.getValue(i,"eventid","")+"&partnerid="+partnerid+"\">"+dbmanager.getValue(i,"eventname","").replaceAll("'","&#39;")+"</a>");
+		 					hmp.put("eventid",dbmanager.getValue(i,"eventid",""));
+		 					hmp.put("purpose","NETWORK_ADVERTISING");
+		 					hmp.put("partnerid",partnerid);
+		 					hmp.put("cpm",dbmanager.getValue(i,"cpm","0"));
+		 					hmp.put("cpc",dbmanager.getValue(i,"cpc","0"));
+		 					vec.addElement(hmp);
+		 				}
+		 			
+		 		}
+		}
+		}catch(Exception e){
+		}
+		
+           }
+           
+          if(vec.size()<Integer.parseInt(retrievecount)){
+	  
+		retrievecount=String.valueOf(Integer.parseInt(retrievecount)-vec.size());
+		
+	String Query1="select distinct a.eventid,a.eventname, to_char(a.start_date,'MM/DD')as startdate,  "
+			+" p.networkcommission from eventinfo a, "
+			+" price p "
+			+" where(a.eventid,p.networkcommission ) in (select evt_id,max(networkcommission)"
+			+" from price where networkcommission is not null group by evt_id "
+			+" order by max(networkcommission) desc ) and "
+			+" a.status='ACTIVE' "
+			+" and a.listtype='PBL' and a.end_date>=now() ";
+			//+" and a.eventid not in(select refid from partnerlisting where partnerid=?)" ;
+	List paramslst=new ArrayList();
+	
+	try{
+	if (param!=null){
+		
+		EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"userid----->"+(String)param.get("userid"),null);
+		if("All".equalsIgnoreCase((String)param.get("category"))){
+		}else if ((String)param.get("category")!=null){
+			String catlist=(String)param.get("category");
+			String[] cats=GenUtil.strToArrayStr(catlist, ",");
+
+			catlist="'A'";
+			for(int i=0;i<cats.length;i++){
+				EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"cat11111----->"+cats[i],null);
+				catlist+=",'"+cats[i]+"'";
+			}
+			EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"catlist----->"+catlist,null);
+			 Query1=Query1+" and a.category in ("+catlist+")";
+
+		}
+	}
+	 EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"retrievecount----->"+retrievecount,null);
+	 Query1=Query1+" order by p.networkcommission desc,startdate limit "+retrievecount+" offset 0";
+	 EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"Query1----->"+Query1,null);
+	 EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"paramslstsize----->"+paramslst.size(),null);
+	 	StatusObj statobj1=dbmanager.executeSelectQuery(Query1,(String [])paramslst.toArray(new String [paramslst.size()]));
+	 	EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"statusobj1 isss======>"+statobj1.getStatus(),null);
+	 	 Query1=Query1+"  limit "+retrievecount+" offset 0";
+		
+	 
+	 	if(statobj1.getStatus()){
+	 		String [] columnname=dbmanager.getColumnNames();
+	 		for(int i=0;i<statobj1.getCount();i++){
+	 			HashMap hm1=new HashMap();
+	 				if(eventidhmap.get(dbmanager.getValue(i,"eventid",""))==null){
+	 					hm1.put("startdate",dbmanager.getValue(i,"startdate",""));
+	 					hm1.put("eventurl","<a href=\""+serveraddress+"eventdetails/event.jsp?eventid="+dbmanager.getValue(i,"eventid","")+"&partnerid="+partnerid+"\">"+dbmanager.getValue(i,"eventname","").replaceAll("'","&#39;")+"</a>");
+	 					hm1.put("eventid",dbmanager.getValue(i,"eventid",""));
+						hm1.put("purpose","NETWORK_TICKET_SELLING");
+		 				hm1.put("partnerid",partnerid);
+		 				v1.addElement(hm1);
+	 				}
+	 				
+	 				 
+	 			EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.DEBUG,"StreamingDB.java",null,"in the first vector issss issss"+v1,null);
+	 		}
+	}
+	}catch(Exception e){
+	}
+	
+	}
+     
+	mainvec.addElement(v);
+	mainvec.addElement(vec);
+	mainvec.addElement(v1);
+
+	return mainvec;
+}
+
+String getSettingValue(HttpServletRequest req, String key, String defaultval,Map attribmap,String dbkey){
+
+	String value=req.getParameter(key);
+	if((value==null||value.trim().length()==0)){
+		value=GenUtil.getHMvalue(attribmap,dbkey,defaultval);
+		
+	}
+	if("null".equals(value)||value.trim().length()==0)
+	 value=defaultval;
+	return value;
+}
+
+%>
+<%
+
+String sessionid=request.getRequestedSessionId();
+
+String serveraddress="http://"+EbeeConstantsF.get("serveraddress","")+"/";
+
+String partnerid=request.getParameter("partnerid");
+Map attribmap=null;
+
+if(partnerid!=null)
+attribmap=PartnerDB.getStreamingAttributes(partnerid);
+
+
+String category=getSettingValue(request,"category","All",attribmap,"CATEGORY");
+String displaypowerlink=getSettingValue(request,"displaypowerlink","yes",attribmap,"DISPLAYEBEELINK");
+//String StreamerTitle=getSettingValue(request,"title","Recommended Events",attribmap,"TITLE");
+String StreamerTitle=getSettingValue(request,"title"," ",attribmap,"TITLE");
+
+if(StreamerTitle.indexOf("'")>-1){
+
+	StreamerTitle=StreamerTitle.replaceAll("'","&#39;");
+}
+StringBuffer stylecontent=new StringBuffer("");
+StringBuffer streamercontent=new StringBuffer("");
+
+
+String background=getSettingValue(request,"background","#dce8ff",attribmap,"BACKGROUND");
+String bordercolor=getSettingValue(request,"bordercolor","#660033",attribmap,"BORDERCOLOR");
+String linkcolor=getSettingValue(request,"linkcolor","#3300CC",attribmap,"LINKCOLOR");
+
+String bigtextcolor=getSettingValue(request,"bigtextcolor","#3300CC",attribmap,"BIGGER_TEXT_COLOR");
+String bigfonttype=getSettingValue(request,"bigfonttype","Verdana",attribmap,"BIGGER_FONT_TYPE");
+String bigfontsize=getSettingValue(request,"bigfontsize","21px",attribmap,"BIGGER_FONT_SIZE");
+
+String medtextcolor=getSettingValue(request,"medtextcolor","#3300CC",attribmap,"MEDIUM_TEXT_COLOR");
+String medfonttype=getSettingValue(request,"medfonttype","Verdana",attribmap,"MEDIUM_FONT_TYPE");
+String medfontsize=getSettingValue(request,"medfontsize","15px",attribmap,"MEDIUM_FONT_SIZE");
+
+String smalltextcolor=getSettingValue(request,"smalltextcolor","#FF6600",attribmap,"SMALL_TEXT_COLOR");
+String smallfonttype=getSettingValue(request,"smallfonttype","Verdana",attribmap,"SMALL_FONT_TYPE");
+String smallfontsize=getSettingValue(request,"smallfontsize","11px",attribmap,"SMALL_FONT_SIZE");
+
+String width=getSettingValue(request,"streamsize","250",attribmap,"STREAMERSIZE");
+
+String retrievecount=getSettingValue(request,"retrievecount","10",attribmap,"NO_OF_ITEMS");
+
+String padding=getSettingValue(request,"padding","5px",attribmap,"PADDING");
+
+
+HashMap params=new HashMap();
+params.put("category",category);
+params.put("retrievecount",retrievecount);
+params.put("partnerid",partnerid);
+
+String partnerstyle=DbUtil.getVal("select stylecode from hardcoded_streamer_styles where partnerid=?", new String[] {partnerid});
+	
+
+if(!"".equals(partnerstyle)&&partnerstyle!=null){
+       stylecontent.append(partnerstyle);
+       
+
+}else{
+       
+	stylecontent.append("<style type=\"text/css\">");
+	stylecontent.append(".PartnerItemBody {font-family: "+medfonttype+";font-size:"+medfontsize+";padding: 0px;color: "+medtextcolor+";margin-top: 0px;margin-left: "+padding+";margin-right: "+padding+";margin-bottom: 10px;}");
+	stylecontent.append(".PartnerEventBody {font-family: "+medfonttype+";font-size:"+medfontsize+";font-weight:bold;padding: 0px;color: "+medtextcolor+";margin-top: 0px;margin-left: "+padding+";margin-right: "+padding+";margin-bottom: 10px;}");
+	//stylecontent.append(".partnertitletop {font-family: "+bigfonttype+";font-size:"+bigfontsize+";font-weight:bold;text-align:center;color: "+bigtextcolor+";margin-top: 0px;margin-bottom: 15px;}");
+	stylecontent.append(".partnertitletop {font: bold 20px veradana, sans-serif;color: black;;margin-top: 0px;margin-bottom: 15px;;margin-left: 2px;}");
+	stylecontent.append(".partnerbottom {text-align:center;font-family: "+smallfonttype+";font-size: "+smallfontsize+";color: "+smalltextcolor+";padding: 5px;}");
+	stylecontent.append(".blockpartnerblock{border: solid 0px "+bordercolor+";width:"+width+";font-size:11px;background:"+background+";}");
+	stylecontent.append(".blockpartnerlist{margin-top: 0;margin-bottom: 0;margin-left: 0;margin-right: 0;padding: 0;border: solid 0px "+bordercolor+";background:"+background+";}");
+	stylecontent.append(".blockpartneritem {display: inline;list-style-type: none;list-style-image: none;padding: 0;margin-right: 0;margin-left: 0;margin-top: 0;margin-bottom: 0;background:"+background+";line-height:16px;}");
+
+	stylecontent.append(".blockpartneritem a { color: "+linkcolor+" }");
+	stylecontent.append(".partnerbottom a { text-decoration: none;font-family: Verdana;color: "+linkcolor+"; }");
+	stylecontent.append("</style>");
+      }	
+
+
+Vector events=new Vector();
+HashMap partner=new HashMap();
+events =getEventPartnerList(serveraddress,params);
+
+if(events.size()>0){
+
+	streamercontent.append("<div class=\"blockpartnerblock\" >");
+	streamercontent.append("<ul class=\"blockpartnerlist\">");
+	streamercontent.append("<li class=\"blockpartneritem\" >");
+	if(!"".equals(StreamerTitle)){
+		streamercontent.append("<div class=\"partnertitletop\" >");
+		streamercontent.append(StreamerTitle);
+		streamercontent.append("</div>");
+	}
+	Vector networkevents=(Vector)events.get(0);
+	ArrayList eventmap=new ArrayList();
+	
+	for(int i=0;i<networkevents.size();i++){
+		HashMap networkeventsmap=(HashMap)networkevents.get(i);
+		eventmap.add((String)networkeventsmap.get("eventid"));
+		String evnturl=(String)GenUtil.getHMvalue(networkeventsmap,"eventurl","0");
+		streamercontent.append("<div class=\"PartnerEventBody\" >");
+		streamercontent.append((String)GenUtil.getHMvalue(networkeventsmap,"startdate","0"));
+		streamercontent.append("&nbsp;&nbsp;");
+		streamercontent.append(evnturl);
+		streamercontent.append("</div>");
+		
+	}
+	partner.put("netlistingevents",eventmap);
+	networkevents=(Vector)events.get(1);
+	ArrayList eventmap1=new ArrayList();
+	
+	for(int i=0;i<networkevents.size();i++){
+		HashMap networkeventsmap=(HashMap)networkevents.get(i);
+		eventmap1.add((String)networkeventsmap.get("eventid"));
+		String evnturl=(String)GenUtil.getHMvalue(networkeventsmap,"eventurl","0");
+		streamercontent.append("<div class=\"PartnerItemBody\" >");
+		streamercontent.append((String)GenUtil.getHMvalue(networkeventsmap,"startdate","0"));
+		streamercontent.append("&nbsp;&nbsp;");
+		streamercontent.append(evnturl);
+		streamercontent.append("</div>");		
+	}
+	partner.put("netadvevents",eventmap1);
+	
+	networkevents=(Vector)events.get(2);
+	ArrayList eventmap2=new ArrayList();
+	
+	for(int i=0;i<networkevents.size();i++){
+			HashMap networkeventsmap=(HashMap)networkevents.get(i);
+			eventmap2.add((String)networkeventsmap.get("eventid"));
+			String evnturl=(String)GenUtil.getHMvalue(networkeventsmap,"eventurl","0");
+			streamercontent.append("<div class=\"PartnerItemBody\" >");
+			streamercontent.append((String)GenUtil.getHMvalue(networkeventsmap,"startdate","0"));
+			streamercontent.append("&nbsp;&nbsp;");
+			streamercontent.append(evnturl);
+			streamercontent.append("</div>");		
+	}
+	
+	partner.put("nettktevents",eventmap2);
+	streamercontent.append("</li>");
+	streamercontent.append("</ul>");
+	streamercontent.append("<div class=\"partnerbottom\">");
+	String isPaidListing=DbUtil.getVal("select amount from partner_listing_price where partnerid=? and amount>0",new String []{partnerid});
+	if(isPaidListing!=null)
+		streamercontent.append("<a href=\""+serveraddress+"networkeventlisting/networkevtlistauth.jsp?partnerid="+partnerid+"\" >List your event here</a><br/>");
+	if("yes".equals(displaypowerlink))
+		streamercontent.append("<a href=\""+serveraddress+"\" target=\"_parent\" >Powered by Eventbee</a>");
+	streamercontent.append("</div>");
+	streamercontent.append("</div>");
+	
+	session.setAttribute(sessionid+"_Visited_events",partner);
+
+	
+}
+%>
+document.write('<%=stylecontent%>');
+document.write('<%=streamercontent%>');
+
+<%@ include file="partnertracking.jsp" %>
+
+
+

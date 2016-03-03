@@ -1,0 +1,7 @@
+#if($promotionSection)<tr>
+ <td><b>$promotionSectionLabel</b>
+ </td>
+ </tr>
+<tr ><td>$promotionSection</td></tr>
+#end
+<tr height="10"><td></td></tr>
