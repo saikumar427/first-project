@@ -86,7 +86,8 @@ public class PayULatamPayProcess{
 			if(!"".equals(ccm.getProfiledata().getStreet1()))address1=ccm.getProfiledata().getStreet1()+"";
 			if(!"".equals(ccm.getProfiledata().getStreet2()))address2=ccm.getProfiledata().getStreet2()+"";
 			if(!"".equals(ccm.getProfiledata().getCity()))city=ccm.getProfiledata().getCity()+"";
-			if(!"".equals(ccm.getProfiledata().getState()))state=ccm.getProfiledata().getState()+"";
+			//if(!"".equals(ccm.getProfiledata().getState()))state=ccm.getProfiledata().getState()+"";
+			state="";
 			if(!"".equals(ccm.getProfiledata().getCountry()))country=ccm.getProfiledata().getCountry()+"";
 			if(!"".equals(ccm.getProfiledata().getZip()))zipcode=ccm.getProfiledata().getZip()+"";
 			if(!"".equals(ccm.getProfiledata().getEmail()))email=ccm.getProfiledata().getEmail()+"";

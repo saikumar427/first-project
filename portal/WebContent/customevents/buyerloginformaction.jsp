@@ -5,6 +5,7 @@
 <%@page import="com.eventbee.general.DateUtil"%>
 <%@page import="com.eventbee.general.DbUtil"%>
 <%@page import="com.eventbee.general.EncodeNum"%>
+<%@ include file='/globalprops.jsp' %>
 
 <%!
 
@@ -31,6 +32,7 @@ String refkey = request.getParameter("refkey");
 String profilekey = request.getParameter("profilekey");
 String tid = request.getParameter("tid");
 String accessmode = request.getParameter("accessmode");
+String eid=request.getParameter("eid");
 boolean flag=true;
 String statusmsg="";
 
@@ -45,7 +47,7 @@ if(refkey==null) refkey="";
 			
 			if("".equals(isFBLoginReg) || !isFBLoginReg.equals(refkey)){
 				json.put("status","fail");
-				json.put("error","Please logout your FB session and login with registered FB account");
+				json.put("error",getPropValue("byer.fb.lgn.nt.mtch.wth.reg",eid));
 			}else{
 				String token=generateToken(profilekey,accessmode);
 				if(!"".equals(token)){
@@ -53,7 +55,7 @@ if(refkey==null) refkey="";
 					json.put("token",token);
 				}else{
 					json.put("status","fail");
-					json.put("error","There is a problem. Please try back later.");
+					json.put("error",getPropValue("byer.there.problm.try.latr",eid));
 				}
 			}
 			
@@ -70,7 +72,7 @@ if(refkey==null) refkey="";
 					if(otp==null) otp="";
 					if("Y".equals(isExpired)){
 						json.put("status","fail");
-						json.put("error","Access token is expired");
+						json.put("error",getPropValue("byer.access.tkn.expired",eid));
 					}else{
 						if((refkey.trim()).equals(otp)){
 							String otpToken=generateToken(profilekey,accessmode);
@@ -79,26 +81,26 @@ if(refkey==null) refkey="";
 								json.put("token",otpToken);
 							}else{
 								json.put("status","fail");
-								json.put("error","There is a problem. Please try back later.");
+								json.put("error",getPropValue("byer.there.problm.try.latr",eid));
 							}
 						}else{
 							json.put("status","fail");
-							json.put("error","Invalid access token");
+							json.put("error",getPropValue("byer.invld.access.tken",eid));
 						}
 					}
 				}else{
 					json.put("status","fail");
-					json.put("error","Invalid access token");
+					json.put("error",getPropValue("byer.invld.access.tken",eid));
 				}
 				
 			}catch(Exception e){
 				json.put("status","fail");
-				json.put("error","Invalid access token");
+				json.put("error",getPropValue("byer.invld.access.tken",eid));
 			}
 		}
 	}catch(Exception e){
 		json.put("status","fail");
-		json.put("error","Invalid access token");
+		json.put("error",getPropValue("byer.invld.access.tken",eid));
 	}
 out.println(json.toString());
 %>

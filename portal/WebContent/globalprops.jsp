@@ -114,6 +114,24 @@ props.put("pri.reg.limit.reg.single.errmsg_en_US","This code is already used");
 props.put("pri.reg.limit.reg.mul.errmsg_en_US","This code reached maximum usage");
 props.put("pri.reg.limit.reg.errmsg_en_US","Limited registrations are over");
 
+/*BuyerPage login */
+props.put("byer.lgt.fb.lgin.reged.fb.acct_en_US","Sorry! Your Facebook login doesn't match with the Facebook login used to register for this event.");
+props.put("byer.there.problm.try.latr_en_US","There is a problem. Please try back later");
+props.put("byer.ur.pg.crntly.unavble_en_US","Your page is currently unavailable");
+props.put("byer.aces.tkn.sent.success_en_US","Access Token sent successfully");
+props.put("byer.fb.lgn.nt.mtch.wth.reg_en_US","Sorry! Your Facebook login doesn't match with the Facebook login used to register for this event.");
+props.put("byer.invld.access.tken_en_US","Invalid Access Token");
+props.put("byer.to.vst.byr.page_en_US","To visit buyer page");
+props.put("byer.eml.byr.access.tkn_en_US","Email me buyer page Access Token");
+props.put("byer.lgn.wth.fb_en_US","Login with my Facebook");
+props.put("byer.access.tkn.snt.mail_en_US","Access Token is sent to email");
+props.put("byer.access.tkn_en_US","Access Token");
+props.put("byer.u.hv.regd.wth.fb.acc_en_US","You have registered for this event with your Facebook login.");
+props.put("byer.access.tkn.expired_en_US","Access Token is expired");
+props.put("byer.resend.btn_en_US","Resend");
+props.put("byer.continue.btn_en_US","Continue");
+props.put("byer.or.lbl_en_US","OR");
+
 /*eventhandler.jsp*/
 props.put("evh.footer.lnk_es_CO", "Desarrollado por Eventbee - Tu plataforma online para el registro y venta de tiquetes de eventos. Para más información, visita");
 
@@ -225,4 +243,22 @@ props.put("pri.reg.invalid.errmsg_es_CO","Código no válido o código de acceso");
 props.put("pri.reg.limit.reg.single.errmsg_es_CO","Este código se utiliza ya");
 props.put("pri.reg.limit.reg.mul.errmsg_es_CO","Este código alcanzó el máximo uso");
 props.put("pri.reg.limit.reg.errmsg_es_CO","Inscripciones limitadas son más de");
+		
+/*BuyerPage login */		
+props.put("byer.u.hv.regd.wth.fb.acc_es_CO","Te has registrado para este evento con tu cuenta de Facebook");
+props.put("byer.access.tkn_es_CO","Señal de acceso");
+props.put("byer.access.tkn.snt.mail_es_CO","Señal de Acceso enviada a esta dirección de correo electrónico");
+props.put("byer.lgn.wth.fb_es_CO","Iniciar sesión con mi cuenta de Facebook");
+props.put("byer.eml.byr.access.tkn_es_CO","Mandarme por correo electrónico la Señal de Acceso de la página del comprador");
+props.put("byer.to.vst.byr.page_es_CO","Para visitar la página del comprador");
+props.put("byer.invld.access.tken_es_CO","Señal de Acceso Inválida");
+props.put("byer.fb.lgn.nt.mtch.wth.reg_es_CO","Lo sentimos! Tu información de inicio de sesión de Facebook no coincide con la información de Facebook proporcionada para el registro de este evento.");
+props.put("byer.aces.tkn.sent.success_es_CO","Señal de Acceso enviada exitosamente");
+props.put("byer.there.problm.try.latr_es_CO","Hay un problema. Por favor inténtalo de nuevo más tarde");
+props.put("byer.lgt.fb.lgin.reged.fb.acct_es_CO","Lo sentimos! Tu información de inicio de sesión de Facebook no coincide con la información de Facebook proporcionada para el registro de este evento.");
+props.put("byer.ur.pg.crntly.unavble_es_CO","Tu página no está disponible en estos momentos");
+props.put("byer.access.tkn.expired_es_CO","Token de acceso ha caducado");
+props.put("byer.resend.btn_es_CO","Reenviar");
+props.put("byer.continue.btn_es_CO","Continuar");
+props.put("byer.or.lbl_es_CO","O");
 %>

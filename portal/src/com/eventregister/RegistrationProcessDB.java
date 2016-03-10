@@ -172,7 +172,7 @@ public class RegistrationProcessDB{
 			paymentStatus ="Authorized";
 		else
 			paymentStatus ="Completed";
-		if(paymenttype.equalsIgnoreCase("other")){
+		if("other".equalsIgnoreCase(paymenttype)){
 			String subtype=DbUtil.getVal("select attrib_4 from payment_types where refid =? and paytype='other'", new String[]{eid});
 			if("manual".equals(subtype))
 				paymentStatus="Need Approval";

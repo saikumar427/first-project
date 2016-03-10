@@ -151,7 +151,7 @@ src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3ml
 				<%}%>
 
 
-				<%if(vendor!=null &&  ("authorize.net".equals(vendor) || vendor.contains("braintree") || "stripe".equals(vendor))){%>				
+				<%if(vendor!=null &&  ("authorize.net".equals(vendor) || vendor.contains("braintree") || "stripe".equals(vendor) || "payulatam".equals(vendor))){%>				
 				<tr><%if(!"authorize.net".equals(vendor)){ %>
 				  <input type='hidden' name='state' id='state' value='default'>
 				  <input type='hidden' name='non_us_state' id='non_us_state' value='default'>
@@ -181,7 +181,7 @@ src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3ml
 					<td height='30' class="bigfont"><%=getPropValue("ccs.city",eventid)%> *</td> 
 					<td height='30'><%=getXfTextBox("city",GenUtil.getEncodedXML(ccm.getProfiledata().getCity() ),"25")%></td>
 				</tr>
-			  <%if(vendor !=null &&   (vendor.contains("braintree") || "stripe".equals(vendor))){}else{%>	
+			  <%if(vendor !=null &&   (vendor.contains("braintree") || "stripe".equals(vendor) || "payulatam".equals(vendor))){}else{%>	
 				<tr id='st_prv'>
 					<td height='30' class="bigfont"><%=getPropValue("ccs.state",eventid)%> *</td> 
 					<td height='30'><%=getXfSelectListBox("state",EventbeeStrings.getUSStateCodes(),EventbeeStrings.getUSStateNames(),  GenUtil.getEncodedXML(ccm.getProfiledata().getState()))%>

@@ -175,7 +175,7 @@ public class RegistrationDBHelper{
 		String extpayid="";
 		String paytype=(String)eventRegData.get("selectedpaytype");
 		String tid=(String)eventRegData.get("tid");
-		if("eventbee".equals(paytype) || "authorize.net".equals(paytype) || "braintree".equals(paytype) || "stripe".equals(paytype))
+		if("eventbee".equals(paytype) || "authorize.net".equals(paytype) || "braintree".equals(paytype) || "stripe".equals(paytype) || "payulatam".equals(paytype))
 			extpayid=DbUtil.getVal("select response_id  from cardtransaction where internal_ref=? and proces_status=?",new String[]{tid,"Success"});
 		else if("paypal".equals(paytype))
 			extpayid=DbUtil.getVal("select paypal_tran_id   from paypal_payment_backup_data where ebee_tran_id=?",new String[]{tid});

@@ -180,6 +180,8 @@ if(sobj.getStatus()){
 		HashMap<String,String> resultMap=payu.processPayuPayment(ccm,request,"");
 		if("failure".equals(resultMap.get("status"))){
 			 v.add(resultMap.get("failuremessage"));
+			 if("This transaction can not be processed at this time, please try back later".equalsIgnoreCase(resultMap.get("failuremessage")))
+				 carderrormsg=getCardErrorMessage(eid);
 		}	 
 	}
  }

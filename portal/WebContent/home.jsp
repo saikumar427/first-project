@@ -431,7 +431,6 @@ var obj=document.getElementById('priceIframe');
 		 <div class="col-md-4"> &nbsp;</div>
 			  <div class="col-md-3">&nbsp; </div>
 				   <div class="col-md-3">
-				   <span style="display:none;">
 					 <%if(lang.equals("en-us")){%>
 					   <a style="position:relative;top:470px;left: 8px;"><select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
 		   				<option value="es-co" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
@@ -440,7 +439,6 @@ var obj=document.getElementById('priceIframe');
 					 </select>      
 				 </a> 
            	<%} %>
-           	</span>
        </div>
 </div>
 

@@ -245,7 +245,7 @@ hr {
 <div id="fb-root"></div>
 <script type="text/javascript">
 var fbLoginRegEmail='<%=FBLoginRegEmail %>';
-var fbUserId=<%=FBUserId %>;
+var fbUserId='<%=FBUserId %>';
 
 function login(){
 	FB.api('/me', function(response) {
@@ -256,8 +256,8 @@ function login(){
 		$('#conitnue').click(function(){
 			if(fbuserid==fbUserId)
 				validateLoginForm('FB',fbuserid);
-			else{
-				notification("fbstmsg","Please logout your FB session and login with registered FB account", "danger");
+			else{                                    
+				notification("fbstmsg","<%=getPropValue("byer.lgt.fb.lgin.reged.fb.acct",eventid)%>", "danger");
 			}
 		});
 		$('#nybtn').click(function(){fblogout();});
@@ -301,7 +301,7 @@ var fblogin=function(){
     					validateLoginForm('FB',fbuserid);
     				else{ 
     					//login();
-    					notification("fbstmsg","Please logout your FB session and login with registered FB account", "danger");
+    					notification("fbstmsg","<%=getPropValue("byer.lgt.fb.lgin.reged.fb.acct",eventid)%>", "danger");
     				}
 				});
 			//} 
@@ -356,15 +356,15 @@ function fblogout(){
 				
 				<div align="center"  id="fbstmsg"></div>
 				<div style="clear:both"></div>
-				<div align="center" style="line-height:30px;" >To visit buyer page</div>
+				<div align="center" style="line-height:30px;" ><%=getPropValue("byer.to.vst.byr.page",eventid)%></div>
 				<div id="sendotp" class="col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:15px;margin-bottom:15px;">
-					<button id="send" class='btn btn-primary saveButton sendButton'>Email me buyer page access token</button>
+					<button id="send" class='btn btn-primary saveButton sendButton'><%=getPropValue("byer.eml.byr.access.tkn",eventid)%></button>
 				</div>
 				<%if(!"".equals(FBLoginRegEmail)){%>
-				<%-- <div align="center" style="line-height:30px;" >You have registered to the event with your FB account (<span style="color:blue;"><%=FBLoginRegEmail %></span>)</div> --%>
-				<div align="center">OR</div>
+				<%-- <div align="center" style="line-height:30px;" ><%=getPropValue("byer.u.hv.regd.wth.fb.acc",eventid)%> (<span style="color:blue;"><%=FBLoginRegEmail %></span>)</div> --%>
+				<div align="center"><%=getPropValue("byer.or.lbl",eventid)%></div>
 				<div id="fbcontent" class="col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:15px;" style="margin-top:15px;">
-	        		<a id="btn-fblogin" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp;Login with my Facebook</a>
+	        		<a id="btn-fblogin" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp;<%=getPropValue("byer.lgn.wth.fb",eventid)%></a>
 	        	</div>
 	        	<%}%>
 				<div style="clear:both"></div>
@@ -373,18 +373,18 @@ function fblogout(){
 				<div align="center" class="col-md-12 col-sm-12 col-xs-12 text-center" id="stmsg"></div>
 				<div style="clear:both"></div>
 				     <form action="/customevents/BuyerLoginFormAction.jsp" name="buyer_otp_frm" id="buyer_otp_frm" method="post" onsubmit="validateOTPForm();return false;">
-						<div align="center" style="line-height:30px;margin-bottom:8px;">Access token is sent to email</div>
+						<div align="center" style="line-height:30px;margin-bottom:8px;"><%=getPropValue("byer.access.tkn.snt.mail",eventid)%></div>
 							<div class="col-md-12 col-xs-12 col-sm-12" align="center" style="line-height:30px;">
 							<div id="errormsg" class="alert alert-danger col-md-4 col-sm-4 col-xs-6 col-md-offset-4 form-group" style="display:none;padding:0px;margin-bottom:20px;text-align:left;padding-left:10px;"></div>		
 							<div class="col-md-4 col-sm-4 col-xs-6 col-md-offset-4 form-group">
-							<input type="text" name="title"  class="form-control" placeholder="Access token" id="otptext" size="30" />
+							<input type="text" name="title"  class="form-control" placeholder="<%=getPropValue("byer.access.tkn",eventid)%>" id="otptext" size="30" />
 								</div>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 							<!-- <input type="button" name="resend" class='btn btn-primary saveButton' value="Resend" id="resendbtn" onClick="resendOTP();"> -->
-							<button id="resendbtn" type="button" class='btn btn-primary saveButton sendButton'>Resend</button>
+							<button id="resendbtn" type="button" class='btn btn-primary saveButton sendButton'><%=getPropValue("byer.resend.btn",eventid)%></button>
 							<!-- <input type="button" name="continue" class='btn btn-primary saveButton' value="Continue" id="continue" onClick="validateOTPForm();"> -->
-							<button id="continue" type="button" class='btn btn-primary saveButton sendButton'>Continue</button>
+							<button id="continue" type="button" class='btn btn-primary saveButton sendButton'><%=getPropValue("byer.continue.btn",eventid)%></button>
 							</div>
 					</form>
 				<div style="clear:both"></div>
@@ -392,7 +392,7 @@ function fblogout(){
 			
 			<%}else{ %>
 				<div class="widget-content" style='padding-top:135px;border-radius:5px;'>
-					<div align="center" style="line-height:30px;" >Your page is currently unavailable</div>
+					<div align="center" style="line-height:30px;" ><%=getPropValue("byer.ur.pg.crntly.unavble",eventid)%></div>
 				</div>
 			<%}%>
 			</div>
@@ -451,9 +451,9 @@ function fblogout(){
 		    $('#enterOtp').show();
 		}else if(type=='resend' && msg.status.lastIndexOf("success")>-1){
 			$('#resendbtn').hide();
-			notification("stmsg","Access token sent successfully","success");
+			notification("stmsg","<%=getPropValue("byer.aces.tkn.sent.success",eventid)%>","success");
 		}else{
-			alert("There is a problem. Please try back later");
+			alert("<%=getPropValue("byer.there.problm.try.latr",eventid)%>");
 		}
 	}
 	
@@ -475,7 +475,7 @@ function fblogout(){
 			},
 			error:function(){
 				requestRunning = false;
-				alert("There is a problem. Please try back later");
+				alert("<%=getPropValue("byer.there.problm.try.latr",eventid)%>");
 			}
 		});
 	}
@@ -500,7 +500,7 @@ function fblogout(){
 		var profilekey='<%=profilekey%>'; 
     	var eid='<%=eventid%>';
     	var tid='<%=tid%>';
-    	var url = '/customevents/buyerloginformaction.jsp?refkey='+refkey+'&profilekey='+profilekey+'&tid='+tid+'&accessmode='+accessMode;
+    	var url = '/customevents/buyerloginformaction.jsp?refkey='+refkey+'&profilekey='+profilekey+'&tid='+tid+'&accessmode='+accessMode+'&eid='+eid;
 		$.ajax({
 			type:'POST',
 			url:url,
@@ -521,13 +521,13 @@ function fblogout(){
 					}
 					$('#continue').removeAttr('disabled');
 				}else{
-					alert("There is a problem. Please try back later");
+					alert("<%=getPropValue("byer.there.problm.try.latr",eventid)%>");
 					$('#continue').removeAttr('disabled');
 				}
 			},
 			error:function(){
 				requestRunning = false;
-				alert("There is a problem. Please try back later");
+				alert("<%=getPropValue("byer.there.problm.try.latr",eventid)%>");
 				$('#continue').removeAttr('disabled');
 			}
 		});

@@ -1,3 +1,4 @@
+<%@page import="com.eventbee.general.EbeeConstantsF"%>
 <%@page import="com.payu.sdk.model.TransactionResponse"%>
 <%@page import="com.payu.sdk.PayUPayments"%>
 <%@page import="com.payu.sdk.PayU"%>
@@ -8,7 +9,15 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%!
-   public HashMap<String,String> refundPayuPayment(String tid,String amount,String eid,String payment_type){
+
+String env=EbeeConstantsF.get("BRAINTREE_ENVIRONMENT","SANDBOX");
+
+String paymentsUrl=EbeeConstantsF.get("payulatam.payments.url","https://stg.api.payulatam.com/payments-api/");
+String reportsUrl = EbeeConstantsF.get("payulatam.reports.url","https://stg.api.payulatam.com/reports-api/");
+String apiKey= EbeeConstantsF.get("payulatam.ebee.apikey","676k86ks53la6tni6clgd30jf6"); // eventbee API key
+String apiLogin = EbeeConstantsF.get("payulatam.ebee.apilogin","403ba744e9827f3"); // eventbee API login
+
+public HashMap<String,String> refundPayuPayment(String tid,String amount,String eid,String payment_type){
 	HashMap<String,String> resultMap=new HashMap<String,String>();
 	HashMap<String,String> mapApiKey=new HashMap<String,String>();
 	String api_key=null;
@@ -16,6 +25,17 @@
 	String transactionId=null;
 	String orderId=null;
 	String lang="";
+	
+	PayU.paymentsUrl = paymentsUrl;
+	PayU.reportsUrl = reportsUrl;
+	PayU.apiKey = apiKey;
+	PayU.apiLogin = apiLogin;
+	
+	if("SANDBOX".equalsIgnoreCase(env)) //in live it should be false.
+		PayU.isTest = true; 
+	else 
+		PayU.isTest = false;
+	
 	lang=language(eid);
 	mapApiKey=getManagerAPIKey(eid,tid);
 	api_key=mapApiKey.get("api_key");
@@ -23,35 +43,26 @@
 	transactionId=mapApiKey.get("transactionId");
 	orderId=mapApiKey.get("orderId");
 	Map<String, String> parameters = new HashMap<String, String>();
-	parameters.put("language",lang);
-	parameters.put("command","SUBMIT_TRANSACTION");
-	parameters.put("type","REFUND");
+	parameters.put(PayU.PARAMETERS.LANGUAGE, lang); 
 	parameters.put(PayU.PARAMETERS.API_KEY,api_key);
 	parameters.put(PayU.PARAMETERS.API_LOGIN,api_login);
 	parameters.put(PayU.PARAMETERS.ORDER_ID,orderId);
-	parameters.put(PayU.PARAMETERS.REASON,"");
+	parameters.put(PayU.PARAMETERS.REASON,"Refund");
 	parameters.put(PayU.PARAMETERS.TRANSACTION_ID,transactionId);
-	parameters.put(PayU.PARAMETERS.VALUE, "12");
-	PayU.isTest = true; 
-	PayU.apiKey="676k86ks53la6tni6clgd30jf6";
-	PayU.apiLogin = "403ba744e9827f3";
-	PayU.paymentsUrl = "https://stg.api.payulatam.com/payments-api/";
-	PayU.reportsUrl = "https://stg.api.payulatam.com/reports-api/";
-	
+	parameters.put(PayU.PARAMETERS.VALUE, amount);
 	try{
-	TransactionResponse response = PayUPayments.doRefund(parameters);
-	System.out.println("OrderId: "+response.getOrderId());
-	System.out.println("State: "+response.getState());
-	System.out.println("PendingReason: "+response.getPendingReason());
-	System.out.println("ResponseMessage: "+response.getResponseMessage());
-	if (response != null){
-	    response.getOrderId();
-	    response.getState();
-	    response.getPendingReason();
-	    response.getResponseMessage();
-	}
-	}
-	catch(Exception e){
+		TransactionResponse response = PayUPayments.doRefund(parameters);
+		System.out.println("OrderId: "+response.getOrderId());
+		System.out.println("State: "+response.getState());
+		System.out.println("PendingReason: "+response.getPendingReason());
+		System.out.println("ResponseMessage: "+response.getResponseMessage());
+		if (response != null){
+		    response.getOrderId();
+		    response.getState();
+		    response.getPendingReason();
+		    response.getResponseMessage();
+		}
+	}catch(Exception e){
 		System.out.println("Exception while refund payulatam: "+e);
 	}
 	System.out.println("resultMap : "+resultMap);
