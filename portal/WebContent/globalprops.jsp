@@ -109,7 +109,7 @@ props.put("buy.btn.lbl_en_US","Buy Tickets");
 props.put("reg.btn.lbl_en_US","Register");
 
 //priority registration
-props.put("pri.reg.invalid.errmsg_en_US","Invalid code or passcode");
+props.put("pri.reg.invalid.errmsg_en_US","Invalid Code or Passcode");
 props.put("pri.reg.limit.reg.single.errmsg_en_US","This code is already used");
 props.put("pri.reg.limit.reg.mul.errmsg_en_US","This code reached maximum usage");
 props.put("pri.reg.limit.reg.errmsg_en_US","Limited registrations are over");
