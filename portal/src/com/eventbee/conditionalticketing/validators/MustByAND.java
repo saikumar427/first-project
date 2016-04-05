@@ -2,10 +2,8 @@ package com.eventbee.conditionalticketing.validators;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MustByAND implements ConditionalTicketing {
@@ -15,8 +13,7 @@ public class MustByAND implements ConditionalTicketing {
 
 		ArrayList<String> warningsList= new ArrayList<String>();
 		try {
-
-			System.out.println("selectedTickets: "+selectedTickets);
+			System.out.println("MustByAND selectedTickets: "+selectedTickets);
 			HashMap<String,Integer> targetAllowMap=new HashMap<String, Integer>();
 			String srcTicket=condition.getJSONObject("src").getString("id");
 			if(selectedTickets.has(srcTicket)){
@@ -99,7 +96,7 @@ public class MustByAND implements ConditionalTicketing {
 
 
 				}
-				System.out.println(targetAllowMap.toString());
+				//System.out.println(targetAllowMap.toString());
 				if(!containStatus){
 					if(trgArray.length() > 1 )
 						warningsList.add(" If you want to buy "+srcTicket+",  you have to buy all of the tickets - "+dependantTickets.toString()+".");
@@ -107,12 +104,12 @@ public class MustByAND implements ConditionalTicketing {
 					warningsList.add(" If you want to buy "+srcTicket+",  you have to buy "+dependantTickets.toString()+".");
 					return warningsList;
 				}
-				if(targetAllowMap!=null && selectedTickets.getInt(srcTicket)<targetAllowMap.get(srcTicket+"_min")){
+				if(targetAllowMap.containsKey(srcTicket+"_min") && selectedTickets.getInt(srcTicket)<targetAllowMap.get(srcTicket+"_min")){
 					//warningsList.add("You can't  buy "+srcTicket+" less than "+targetAllowMap.get(srcTicket+"_min") +" if you  select  "+selTickets.toString()+".");
 					warningsList.add("For "+selTickets.toString()  +",  you  have to buy at least "+targetAllowMap.get(srcTicket+"_min") +" " +srcTicket+"." );
 					return warningsList;
 				}
-				if(targetAllowMap!=null && selectedTickets.getInt(srcTicket)>targetAllowMap.get(srcTicket+"_max")){
+				if(targetAllowMap.containsKey(srcTicket+"_max") && selectedTickets.getInt(srcTicket)>targetAllowMap.get(srcTicket+"_max")){
 					warningsList.add("For "+selTickets.toString()  +",  you can buy upto "+targetAllowMap.get(srcTicket+"_max") +" " +srcTicket+"." );
 					return warningsList;
 				}

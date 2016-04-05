@@ -65,7 +65,7 @@ if(hm!=null)
 	out.println("Map is empty");
 }
 /*===== below code removes event cache data from cache manager (which refresh data using InstantWatcher)==== */
-System.out.println("serveraddress is:"+serveraddr);
+/* System.out.println("serveraddress is:"+serveraddr);
 String URL="";
 if("www.eventbee.com".equals(serveraddr)){
 	URL="http://www.eventbee.com/main/utiltools/cleareventpagecache.jsp";
@@ -79,5 +79,5 @@ CoreConnector cc1=new CoreConnector(URL);
 cc1.setArguments(inputparams);
 cc1.setTimeout(10000);
 cc1.MGet(); 
-out.println("success");
+out.println("success"); */
 %>

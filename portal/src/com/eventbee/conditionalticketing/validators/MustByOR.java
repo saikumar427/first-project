@@ -14,6 +14,7 @@ public class MustByOR implements ConditionalTicketing {
 		public ArrayList<String> validateCondition(JSONObject condition, JSONObject selectedTickets) {
 			ArrayList<String> warningsList= new ArrayList<String>();
 			try {
+				System.out.println("MustByOR selectedTickets: "+selectedTickets);
 				HashMap<String,Integer> targetAllowMap=new HashMap<String, Integer>();
 				String srcTicket=condition.getJSONObject("src").getString("id");
 				if(selectedTickets.has(srcTicket)){
@@ -114,12 +115,12 @@ public class MustByOR implements ConditionalTicketing {
 							warningsList.add(" If you want to buy "+srcTicket+",  you have to buy "+dependantTickets.toString()+".");
 						return warningsList;
 					}
-					if(targetAllowMap!=null && selectedTickets.getInt(srcTicket)<targetAllowMap.get(srcTicket+"_min")){
+					if(targetAllowMap.containsKey(srcTicket+"_min") && selectedTickets.getInt(srcTicket)<targetAllowMap.get(srcTicket+"_min")){
 						//warningsList.add("You can't  buy "+srcTicket+" less than "+targetAllowMap.get(srcTicket+"_min") +" if you  select  "+selTickets.toString()+".");
 						warningsList.add("For "+selTickets.toString()  +",  you  have to buy at least "+targetAllowMap.get(srcTicket+"_min") +" " +srcTicket+"." );
 						return warningsList;
 					}
-					if(targetAllowMap!=null && selectedTickets.getInt(srcTicket)>targetAllowMap.get(srcTicket+"_max")){
+					if(targetAllowMap.containsKey(srcTicket+"_max") && selectedTickets.getInt(srcTicket)>targetAllowMap.get(srcTicket+"_max")){
 						
 						warningsList.add("For "+selTickets.toString()  +",  you can buy upto "+targetAllowMap.get(srcTicket+"_max") +" " +srcTicket+"." );
 						//warningsList.add("you can't  buy "+srcTicket+" more than "+targetAllowMap.get(srcTicket+"_max") +" if you  select  "+selTickets.toString()+".");

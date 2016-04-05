@@ -105,6 +105,7 @@ if("removeAll".equals(mode))
 		CacheManager.clearData(rmkey+"_baseprofiles");
 		CacheManager.clearData(rmkey+"_i18nlang");
 		CacheManager.clearData(rmkey+"_layoutmanage");
+		CacheManager.clearData(rmkey+"_seatingvenuedetails");
 		
 	}
 }
