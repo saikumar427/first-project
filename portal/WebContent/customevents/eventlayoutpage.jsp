@@ -406,7 +406,7 @@ var isSeating = document.getElementById('isseatingevent').value;
 	 <div class="header">
 	
 		<%headerTheme=headerTheme
-				.replace("$$eventTitle$$", "Y".equals(titleShowHide) ? dataHash.get("eventname") : "")
+				.replace("$$eventTitle$$", !"Y".equals(titleShowHide) ? "" : dataHash.get("eventname")==null ? "" : dataHash.get("eventname"))
 				.replace("$$coverPhotoURL$$", coverPhoto==null || "".equals(coverPhoto) ? "":coverPhoto)
 			    .replace("$$logoUrl$$",logoURL==null || "".equals(logoURL) ? "":"<img src='"+logoURL+"' style='width:150px !important;height:150px !important'/>")
 				.replace("$$logoMsg$$",logoMsg==null || "".equals(logoMsg) ? "":"<span class='small'>"+logoMsg+"</span>")

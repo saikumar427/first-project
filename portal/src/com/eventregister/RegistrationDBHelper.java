@@ -77,7 +77,8 @@ public class RegistrationDBHelper{
 		HashMap attendeeDetails=getAttendeeDetails(tid);
 		ArrayList ticketlist=new ArrayList();
 		try{
-			String attendeeQuery="select *,(finalprice+finalfee)*qty as total from event_reg_ticket_details_temp where tid=?";
+			//String attendeeQuery="select *,(finalprice+finalfee)*qty as total from event_reg_ticket_details_temp where tid=?";
+			String attendeeQuery="select *,(ticketprice-fee) as originalprice,discount/ticketqty as disc from transaction_tickets where tid=?";//updated on 11th April 2016
 			DBManager db=new DBManager();
 			StatusObj sb=db.executeSelectQuery(attendeeQuery,new String[]{tid});
 			if(sb.getStatus()){
@@ -86,11 +87,16 @@ public class RegistrationDBHelper{
 					hm.put("ticketId",db.getValue(k,"ticketid",""));
 					hm.put("ticketName",db.getValue(k,"ticketname",""));
 					hm.put("ticketPrice",db.getValue(k,"originalprice",""));
-					hm.put("discount",db.getValue(k,"discount",""));
-					hm.put("ticketQuantity",db.getValue(k,"qty",""));
-					hm.put("processingFee",db.getValue(k,"finalfee",""));
-					hm.put("totalAmount",db.getValue(k,"total",""));
-					hm.put("ticketType",db.getValue(k,"tickettype",""));
+					//hm.put("discount",db.getValue(k,"discount",""));
+					hm.put("discount",CurrencyFormat.getCurrencyFormat("",db.getValue(k,"disc",""),true));
+					//hm.put("ticketQuantity",db.getValue(k,"qty",""));
+					hm.put("ticketQuantity",db.getValue(k,"ticketqty",""));
+					//hm.put("processingFee",db.getValue(k,"finalfee",""));
+					hm.put("processingFee",db.getValue(k,"fee",""));
+					//hm.put("totalAmount",db.getValue(k,"total",""));
+					hm.put("totalAmount",db.getValue(k,"ticketstotal",""));
+					//hm.put("ticketType",db.getValue(k,"tickettype",""));
+					hm.put("ticketType","attendeeType");
 					if(attendeeDetails.containsKey(db.getValue(k,"ticketid",""))){
 						hm.put("profiles",attendeeDetails.get(db.getValue(k,"ticketid","")));
 					}

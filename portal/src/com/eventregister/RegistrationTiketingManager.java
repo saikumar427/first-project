@@ -25,7 +25,7 @@ final String GET_PAYMENT_TYPES_QUERY="select distinct paytype,attrib_1 from paym
 final String GET_TICKETS_QUERY="select groupname,ticket_groupid,price_id,ticket_name from tickets_info where eventid=?";
 final String BUYER_BASE_INFO="select fname,lname,email,phone from buyer_base_info where transactionid=?";
 final String BUYER_CUSTOM_QUESTIONS="select attribid from buyer_custom_questions where eventid=CAST(? AS BIGINT)";
-final String GET_SELECTED_TICKETS="select *  from event_reg_ticket_details_temp where tid=?";
+final String GET_SELECTED_TICKETS="select * from event_reg_ticket_details_temp where tid=? order by transaction_at";
 
 private String  transactionid=null;
 private int selectedTicketsQty=0;
