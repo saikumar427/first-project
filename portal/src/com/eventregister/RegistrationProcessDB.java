@@ -38,7 +38,7 @@ public class RegistrationProcessDB{
 		RegistrationDBHelper regdbhelper=new RegistrationDBHelper();
 		EventRegData=regdbhelper.getRegistrationData(tid,eid);
 		buyerDetails=regdbhelper.getBuyerInfo(tid,eid);
-		TicketInfo=regdbhelper.getpurchasedTickets(tid);
+		// TicketInfo=regdbhelper.getpurchasedTickets(tid); // commented on 14-04-2016 (this line shipped to line no:92)
 		String externalpayid="";
 		String nts_commission="0.00";
 		String paymenttype=EventRegData.get("selectedpaytype");
@@ -89,6 +89,8 @@ public class RegistrationProcessDB{
 		EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "RegistrationProcessDB.java", "order seq   insertion into transaction_sequence for the transactionid---->"+tid, ""+paddedorderseq, null);
 		eventdate=EventRegData.get("eventdate");
 		StatusObj status=null;
+		TicketInfo=regdbhelper.getpurchasedTickets(tid);
+		System.out.println("TicketInfo : -  = : "+TicketInfo);
 		if(TicketInfo!=null&&TicketInfo.size()>0){
 			for(int k=0;k<TicketInfo.size();k++){
 				HashMap hmap=(HashMap)TicketInfo.get(k);
