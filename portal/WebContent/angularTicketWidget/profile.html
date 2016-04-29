@@ -1,0 +1,103 @@
+<style>
+.animate-show,
+.animate-hide {
+  -webkit-transition:all linear 1s;
+  -moz-transition:all linear 1s;
+  -ms-transition:all linear 1s;
+  -o-transition:all linear 1s;
+  transition:all linear 1s;
+}
+
+.animate-show.ng-hide-remove,
+.animate-hide.ng-hide-add.ng-hide-add-active {
+  opacity: 0;
+  display: block !important;
+}
+
+.animate-hide.ng-hide-add,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+  display: block !important;
+}
+.question-title{
+	font-weight: bold;
+}
+</style>
+<div class="text-center center-block" style="padding:30px 0" ng-show="loadingQuestions">
+    <img src="/angularTicketWidget/images/loading.gif" />&nbsp;Loading...
+</div>
+<div ng-hide="loadingQuestions">
+	<div class="col-md-10 col-sm-10 xol-xs-10 row" ><h4 >Order Summary</h4></div>
+	<div class="col-md-2 col-sm-2 col-xs-2 row"><b>{{currencyLbl}} {{ticketsCost}}</b></div>
+	<div style="clear: both;"></div>
+	
+	<div style="cursor:pointer" ng-click="animate = !animate;" ><b ng-hide="animate" class="animate-show animate-hide ">Show more</b></div>
+	<div ng-show="animate" class="animate-show animate-hide row"  style=" margin: 0px; border-radius: 5px; padding: 5px; border: 1px solid #000;">
+		<div class="col-md-4 col-sm-4 col-xs-4"><b>Ticket Name</b></div>
+		<div class="col-md-4 col-sm-4 col-xs-4"><b>Quantity</b></div>
+		<div class="col-md-4 col-sm-4 col-xs-4"><b>Price</b></div>
+		<span ng-repeat="question in profileQuestions.attendee_questions">
+		<div class="col-md-4 col-sm-4 col-xs-4">{{question.ticket_name}}</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">{{question.qty}}</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">Price</div>
+		</span>
+	</div>
+	<div style="cursor:pointer" ng-click="animate = !animate;" ><b ng-show="animate" class="animate-show animate-hide ">Show less</b></div>
+	<!-- <div style="cursor:pointer" ng-click="showSummary = showSummary ? false : true" ><b>Show <span ng-hide="showSummary">more</span> <span ng-show="showSummary">less</span></b></div>
+	<div ng-show="showSummary" class="row" style=" margin: 0px; border-radius: 5px; padding: 5px; border: 1px solid #000;">
+		<div class="col-md-4 col-sm-4 col-xs-4"><b>Ticket Name</b></div>
+		<div class="col-md-4 col-sm-4 col-xs-4"><b>Quantity</b></div>
+		<div class="col-md-4 col-sm-4 col-xs-4"><b>Price</b></div>
+		<span ng-repeat="question in profileQuestions.attendee_questions">
+		<div class="col-md-4 col-sm-4 col-xs-4">{{question.ticket_name}}</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">{{question.qty}}</div>
+		<div class="col-md-4 col-sm-4 col-xs-4">Price</div>
+		</span>
+	</div> -->
+ 	<div style="clear: both;"></div>
+	<div class="col-md-12" style="padding:0px;">
+	
+		<form class="form-horizontal" name="questionForm" ng-submit="sub()">
+			<!-- profileQuestions start -->
+			<h4 class="">{{profileQuestions.buyerheader}}</h4>
+			<hr>
+			
+			<div ng-repeat="question in profileQuestions.buyer_questions">
+                <div ng-include="'/angularTicketWidget/buyerQuestions.html'"></div>
+            </div>
+            <br>
+            <!-- profileQuestions end -->
+            
+            <!-- attendee_questions start -->
+            <span ng-if="profileQuestions.attendee_questions.length>0"> 
+            	<h4 class="bodyheaders">Attendee information:</h4><hr>
+            </span>
+            <div ng-repeat="ticket in profileQuestions.attendee_questions" ng-init="ticketIndex = $index">
+                <h5 class="bodyheaders">Ticket: {{ ticket.ticket_name }}</h5>
+                <div ng-repeat="profile in ticket.profiles" ng-init="profileIndex = $index">
+                    <h5 class="bodyheaders">Profile #{{ $index+1 }}</h5>
+					<div ng-repeat="question in ticket.questions">
+                        <div ng-include="'/angularTicketWidget/attendeeQuestions.html'"></div>
+                    </div>
+                </div>
+                <hr ng-hide="$last">
+            </div>
+            <!-- attendee_questions end -->
+            
+            <!-- promotion section start -->
+            <hr>
+              <h4 class="bodyheaders">{{profileQuestions.promotionsectionheader}}</h4>
+              <label class="checkbox-inline bodyheaders">
+                  <input type="checkbox" ng-model="promotions" />{{profileQuestions.promotionsectionmessage}}
+              </label>
+            <!-- promotion section end -->
+            <div style="clear:both"></div>
+            
+            <div class="">
+            	<img src="/angularTicketWidget/images/loading.gif" style="float:right" ng-show="loadingSubmit" />
+            	<button class="btn btn-warning pull-right" type="submit" ng-hide="loadingSubmit">{{profileQuestions.profilecountinue}}</button>
+            </div>
+            
+        </form>
+	</div>
+</div>

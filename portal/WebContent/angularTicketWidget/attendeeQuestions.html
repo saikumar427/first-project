@@ -1,0 +1,90 @@
+<datalist id="suggestions"></datalist>
+
+<!-- Type is text box start -->
+<div class="form-group" ng-if="question.type=='text'" ng-form="subForm">
+	<div class="col-md-12 col-sm-12">
+		<span ng-hide="!profile.response[question.id]" class="animate-show animate-hide">
+			<label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
+		</span>
+		 <div ng-if="question.id!='email'" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
+			<input type="text" name="name" ng-model="profile.response[question.id]" class="form-control " ng-required="question.required=='y'" 
+			placeholder="{{question.label}}" list="suggestions" ng-blur="pushTempData(profile.response[question.id])" autocomplete="off" />
+			<p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+		</div>
+		<div ng-if="question.id=='email'" ng-class="{'has-error':subForm.name.$error.email && !subForm.name.$pristine}">
+			 <input type="email" name="name" ng-model="profile.response[question.id]" class="form-control" ng-required="question.required=='y'" placeholder="{{question.label}}" />
+	        <p ng-show="subForm.name.$error.email && !subForm.name.$pristine" class="help-block">This field is required.</p>
+		</div>
+	</div>
+</div>
+<!-- Type is text box start -->
+
+
+<!-- Type is text area start -->
+<div class="form-group" ng-if="question.type=='textarea'" ng-form="subForm">
+	<div class="col-md-12 col-sm-12">
+		<span ng-hide="!profile.response[question.id]" class="animate-show animate-hide">
+				<label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
+		</span>
+		<div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
+	        <textarea class="form-control" name="name" ng-model="profile.response[question.id]" ng-required="question.required=='y'" placeholder="{{question.label}}"></textarea>
+	        <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+	    </div>
+    </div>
+</div>
+<!-- Type is text area end -->
+
+<!-- Type is radio start -->
+<div class="form-group" ng-if="question.type=='radio'" ng-form="subForm" ng-init="tempoptions=question.options">
+	<div class="col-md-12 col-sm-12">
+		<label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
+		<div class="" ng-class="{'has-error':subForm.name.$error.required}">
+	   	 <span ng-repeat="option in question.options">
+	        <label class="radio-inline" >
+	        	<input type="radio" name="{{ticketIndex + '_' + profileIndex + '_' + question.id }}" ng-model="profile.response[question.id]" 
+            value="{{ option.value }}" ng-required="question.required=='y'" />{{ option.display }}
+	        </label><br/>
+	     </span>
+	    </div>
+	</div>
+	
+	 <div ng-repeat="subqns in tempoptions" class="col-md-12 col-sm-12" style="border-left:4px solid #3C60AA;padding-left: 40px;">
+     <div ng-if="profile.response[question.id]==subqns.value" style="margin-left:20px;">
+       <span ng-repeat="subQuestion in subqns.sub_questions">
+	 		<div ng-include="'/angularTicketWidget/subAttendeeQuestions.html'"></div>
+     	</span> 
+     </div> 
+     </div>
+</div>
+<!-- Type is radio end -->
+
+<!-- Type is check box start -->
+<div class="form-group" ng-if="question.type=='checkbox'" ng-form="subForm" ng-init="checkboxoptions=question.options">
+	<div class="col-md-12 col-sm-12">
+		<label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
+		<div  ng-init="assignEmpty(profile.response,question.id)">
+			<div ng-repeat="option in question.options">
+	        <label class="checkbox-inline">
+	            <input type="checkbox" name="checkboxgroup[]" ng-model="(profile.response[question.id])[option.value]" ng-required="(question.required == 'y' && !atleastOneTrue(profile.response[question.id]))" />{{ option.display }}
+	        </label><br/>
+	        </div>
+        </div>
+    </div>
+</div>
+<!-- Type is check box end -->
+
+<!-- Type is select box start -->
+<div class="form-group" ng-if="question.type=='select'" ng-form="subForm" ng-init="selectoptions=question.options">
+	<div class="col-md-12 col-sm-12">
+		<span ng-init="getSubQuestions(question)">
+			<label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
+		</span>
+		<div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
+	        <select class="form-control" name="name" ng-model="profile.response[question.id]" ng-required="question.required=='y'" ng-options="option.value as option.display for option in question.options">
+            	<option value="">-- Select an option --</option>
+        	</select>
+	        <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">Select an option</p>
+	    </div>
+	</div>
+</div>
+<!-- Type is select box start -->

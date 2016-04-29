@@ -162,6 +162,24 @@ if(singleWidgets.has("whosAttending") || wideWidgets.has("whosAttending") || nar
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%=getEventName(groupid)%></title>
 <link href="/main/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<script type="text/javascript" src="/angularTicketWidget/js/jquery-1.12.3.min.js"></script>
+<script src="/home/layout/eventPage.js"></script>
+<!-- angular ticket widget start -->
+
+<!-- <script type="text/javascript" src="/angularTicketWidget/customJsCss/iframehelper.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/bootstrap.min.css" /> -->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="/angularTicketWidget/customJsCss/style.css" />
+<!-- <link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/ticket-widget.css" /> -->
+<script type="text/javascript" src="/angularTicketWidget/js/angular.min.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/js/angular-route.min.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/js/angular-animate.min.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/js/angular-sanitize.min.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/js/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/js/dialogs.js"></script>
+
+<!-- angular ticket widget end -->
+
 <style>
 table {
     border-collapse: separate !important;
@@ -382,7 +400,7 @@ hr {
     max-width: 100%;
 }
 </style>
-<script src="/home/layout/eventPage.js"></script>
+
 </head>
 <body > 
 <div id="rootDiv">
@@ -538,6 +556,19 @@ var singleBottomWidget = <%=singleBottomWidget%>;
 	getAllWidgets('narrow_widgets', narrowWidgets, narrow_widgets,eventid);
 	getAllWidgets('single_bottom_widgets', singleBottomWidget, single_bottom_widgets,eventid);
 </script>
+
+<!-- angular ticket widget start -->
+
+
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/app.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/services.js"></script>
+
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.tickets.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.profile.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.payment.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.confirmation.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/filters.js"></script>
+<!-- angular ticket widget end -->
 </div>
 </body>
 </html>

@@ -1,0 +1,167 @@
+<div class="text-center center-block" ng-show="loadingMetadata" style="padding:30px 0">
+    <img src="/angularTicketWidget/images/loading.gif"/>
+    Loading...
+</div>
+<div class="center-block text-center" ng-hide="eventMetadata.do_continue" style="padding:30px 0">
+    <h3>
+        {{ eventMetadata.message }}
+    </h3>
+</div>
+<div ng-show="eventMetadata.do_continue">
+
+<div class="text-center" ng-show="eventMetadata.is_recurring">
+    {{ eventMetadata.date_select_label }}
+    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" style="float:none;margin: 0 auto;">
+        <select class="form-control" id="recurDate" ng-model="selectedDate.value" ng-options="date.name as date.value for date in eventMetadata.dates">
+            <option value="">
+                {{ eventMetadata.date_default_option }}
+            </option>
+        </select>
+    </div>
+</div>
+
+<div class="text-center center-block" ng-show="loadingTickets" style="padding:30px 0">
+    <img src="/angularTicketWidget/images/loading.gif"/>
+    Loading....
+</div>
+
+    <div class="" id="app" ng-hide="loadingTickets" style="width:100%">
+        <!-- <hr ng-show="ticketsData.items.length &gt; 0"> -->
+            
+            <form name="ticketsForm" ng-submit="">
+                <div ng-repeat="ticket in ticketsData.items">
+                    <div class="row" ng-if="ticket.type=='ticket'">
+                        <div ng-include="'/angularTicketWidget/ticket.html'">
+                        </div>
+                    </div>
+                    <div ng-if="ticket.type=='group'">
+                        <div class="groupTickets">
+                            <h4 class="bodytextstyle">
+                                {{ticket.name}}
+                                <span ng-hide="ticket.desc==''">
+                                    <i class="fa fa-plus-square" ng-click="showGroupDesc=!showGroupDesc" ng-hide="showGroupDesc">
+                                    </i>
+                                    <i class="fa fa-minus-square" ng-click="showGroupDesc=!showGroupDesc" ng-show="showGroupDesc">
+                                    </i>
+                                </span>
+                            </h4>
+                            <p class="bodytextstyle" ng-bind-html="ticket.desc" ng-show="showGroupDesc">
+                            </p>
+                            <hr>
+                                <div ng-repeat="ticket in ticket.tickets">
+                                <hr ng-hide="$first">
+                                    <div class="row">
+                                        <div ng-include="'/angularTicketWidget/ticket.html'">
+                                        </div>
+                                    </div>
+                                    <hr ng-hide="$last">
+                                </div>
+                            </hr>
+                        </div>
+                    </div>
+                    <hr ng-hide="$last &amp;&amp; ticketsData.disc_exists">
+                    </hr>
+                </div>
+                <br ng-hide="ticketsData.items.length == 0 &amp;&amp; !eventMetadata.is_recurring">
+                    <div class="row discountCode" ng-show="ticketsData.disc_exists">
+                        <!-- <div class="col-md-3 col-sm-3 col-xs-12">
+                            <h6 class="bodytextstyle">
+                                {{ ticketsData.reg_flow_wordings.disc_box_label }}
+                            </h6>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            <input class="form-control" ng-model="discountCode" type="text"/>
+                        </div> -->
+                        <div class="col-md-12 col-sm-12 col-xs-12" ng-hide="!discountCode">
+                        	<h6 class="bodytextstyle">
+                                {{ ticketsData.reg_flow_wordings.disc_box_label }}
+                            </h6>
+                        </div>
+                        <div class="col-md-5 col-sm-7 col-xs-6">
+                        	<input class="form-control" ng-model="discountCode" type="text" placeholder="{{ ticketsData.reg_flow_wordings.disc_box_label }}" />
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-6">
+                            <button class="btn btn-primary" ng-click="applyDiscount()">
+                                {{ ticketsData.reg_flow_wordings.apply_button_label }}
+                            </button>
+                            <img ng-show="loadingDiscount" src="/angularTicketWidget/images/loading.gif"/>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <h6 class="bodytextstyle">
+                                {{ discountsData.disc_msg }}
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12 col-xs-12">
+                                <div ng-show="ticketsData.items.length &gt; 0" style="float:right">
+                                    <h4 class="bodytextstyle">
+                                        {{ ticketsData.reg_flow_wordings.total_amount_label }} : {{ total() | currency:ticketsData.currency }}
+                                    </h4>
+                                </div>
+                                <div style="clear:both">
+                                </div>
+                                <button class="btn btn-warning" ng-click="buy()" ng-disabled="!(total() &gt; 0 || atleastOneTicketSelected())" ng-show="ticketsData.items.length &gt; 0 &amp;&amp; !loadingTransaction" style="float:right">
+                                    
+                                        {{ ticketsData.reg_flow_wordings.order_button_label }}
+                                   
+                                </button>
+                                <img ng-show="loadingTransaction" src="/angularTicketWidget/images/loading.gif" style="float:right"/>
+                            </div>
+                    </div>
+                    <div class="text-center center-block" ng-show="ticketsData.items.length &gt; 0 &amp;&amp; loadSeating" style="padding:30px 0">
+                        <img src="/angularTicketWidget/images/loading.gif"/>
+                        Loading Seats...
+                    </div>
+                    <div id="seatingsection" ng-if="ticketsData.items.length &gt; 0 &amp;&amp; isSeatingEvent" style="width: 100%">
+                        <div id="tooltip" ng-show="showPopup" ng-style="popupStyle" style="border: 1px solid red;  background: none repeat scroll 0px 0px #FBFFAF;">
+                            <span ng-bind-html="tooltipHtml">
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1" ng-show="getSectionsLength() &gt; 1" style="width:10%;padding-top:7px;">
+                                Select Section :
+                            </div>
+                            <div class="col-md-2" ng-show="getSectionsLength() &gt; 1">
+                                <select class="form-control" ng-change="setSection(sectionId)" ng-init="initSectionId();setSection(sectionId)" ng-model="sectionId" ng-options="key as value for (key , value) in allSectionObj">
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4 pull-right" ng-if="venuePath!=''">
+                                <a ng-click="getLayOutImage();" style="cursor:pointer;text-decoration: none;">
+                                    {{venueName}}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <br ng-hide="ticketsData.items.length == 0 &amp;&amp; !eventMetadata.is_recurring">
+                <table ng-style="backgroundCSS">
+                    <tr ng-repeat="row in getRowSize()">
+                        <td ng-class="{'NA':!seats.completeseats['s_'+row+'_'+col]}" ng-repeat="col in getColSize()">
+                            <img ng-class="getImageCss(seats.completeseats['s_'+row+'_'+col]) &amp;&amp; seats.completeseats['s_'+row+'_'+col].seatSelected ? 'selectedSeat' : 'nonSelectedSeat' " ng-click="seats.completeseats['s_'+row+'_'+col].seatSelected=!seats.completeseats['s_'+row+'_'+col].seatSelected; clickSeat(seats.completeseats['s_'+row+'_'+col],seatSectionId+'_'+row+'_'+col)" ng-if="seats.completeseats['s_'+row+'_'+col]" ng-mouseout="hideSeatDetails()" ng-mouseover="showSeatDetails(seats.completeseats['s_'+row+'_'+col],$event)" ng-src="{{getSeatImage(seats.completeseats['s_'+row+'_'+col])}}" style="height: 17px; width: 17px;" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            </hr>
+            <div ng-show="ticketsData.items.length == 0 &amp;&amp; !eventMetadata.is_recurring">
+                <!-- <br/> -->
+                <div class="text-center">
+                    <h5>
+                        Tickets are currently unavailable
+                    </h5>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <img alt="Powered by Eventbee Online Registration &amp; Ticketing" border="0" src="http://www.eventbee.com/main/images/home/poweredbyeventbee.jpg" title="Powered by Eventbee" />
+        <span id="siteseal" >
+        	<script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3mlfoHSPjcEHprez8Nf5vp"></script>
+        </span>
+    </div>
+</div>

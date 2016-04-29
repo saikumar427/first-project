@@ -1,6 +1,7 @@
 function getAllWidgets(widgetId, obj, idArray,eid){ 
+	alert('hi');
 	var html = '';
-	jQuery.each(idArray, function(key, object){
+	$.each(idArray, function(key, object){
 		for(var mKey in object){
 				var date1 = new Date();
 				
@@ -13,9 +14,9 @@ function getAllWidgets(widgetId, obj, idArray,eid){
 				}
 				
 				//html = '<div id="'+mKey+'">'+'</div>';
-				jQuery('#'+widgetId).append(html);
+				$('#'+widgetId).append(html);
 				var widgetHtml = obj[mKey];
-				jQuery('#'+mKey).html(widgetHtml);
+				$('#'+mKey).html(widgetHtml);
 		}
 	});
 }

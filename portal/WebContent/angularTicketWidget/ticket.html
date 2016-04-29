@@ -1,0 +1,125 @@
+<div ng-if="ticket.is_donation=='n'" ng-init="pushTickets(ticket.id,ticket.availability_msg)">
+    <div class="col-md-7 col-sm-7 col-xs-12">
+        <h5>
+            <span class="bodytextstyle" ng-class="{'cutname':ticket.strike=='Y'||ticket.strike=='y'}">{{ ticket.name }}</span>
+            <span ng-hide="ticket.desc==''">
+                <i class="fa fa-plus-square" ng-hide="showDesc" ng-click="showDesc=!showDesc"></i>
+                <i class="fa fa-minus-square" ng-show="showDesc" ng-click="showDesc=!showDesc"></i>
+            </span>
+        </h5>
+         <p ng-if="ticket.mgr_config_msg!=''" class="small"><small >{{ ticket.mgr_config_msg }}</small></p>
+        <p>
+        <p>
+            <small class="small">{{ ticket.small_desc }}</small>
+           
+        </p>
+        <p class="bodytextstyle" ng-show="showDesc" ng-bind-html="ticket.desc"></p>
+         <img ng-repeat="src in seatingdata.ticketseatcolor[ticket.id]" ng-src="{{'/main/images/seatingimages/'+src+'.png'}}" style="margin-right:5px" /> 
+    </div>
+
+    <div ng-if="ticket.available=='y'">
+        <div class="col-md-2 col-sm-2 col-xs-6">
+            <h5>
+            <span class="bodytextstyle" ng-class="{'cut':parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)}">{{ ticket.actual_price | currency:ticketsData.currency }}</span>
+            <span class="bodytextstyle" ng-show="parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)">{{ ticket.charging_price | currency:ticketsData.currency }}</span>
+           
+           <span ng-if="ticketsData.feecolrequeired=='Y'">
+            <br>
+             <small class="bodytextstyle" ng-hide="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">
+                {{ ticketsData.reg_flow_wordings.process_fee_label }}:
+                <span ng-class="{'cut':parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)}">{{ ticket.actual_fee | currency:ticketsData.currency }}</span>
+            </small>
+            <br>
+            <small class="bodytextstyle" ng-hide="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">
+                <span style="visibility:hidden;">
+                    {{ ticketsData.reg_flow_wordings.process_fee_label }}:
+                </span>
+                <span ng-show="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">{{ ticket.charging_fee | currency:ticketsData.currency }}</span>
+            </small> 
+            
+            </span>
+        </h5>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div ng-if="ticket.availability_msg!='NA' && isSeatingEvent && ticketsData.seatticketid.indexOf(ticket.id) != -1" class="float-right bodytextstyle" >
+            <div style="height:10px;"></div>
+               <span style="margin-left:35px">{{ticket.ticket_selected}}</span> <br/><span ng-click="scrollToSeats()" style="cursor:pointer">Select Tickets</span>
+            </div>
+            
+             <div ng-if="ticket.availability_msg!='NA' && isSeatingEvent && ticketsData.seatticketid.indexOf(ticket.id) == -1" class="float-right" ng-init="ticket.qtyoptions=getQtyOptions(ticket.min,ticket.max,ticket.ticket_selected)">
+                <select class="form-control" style="width:100px" ng-model="ticket.ticket_selected" ng-options="o for o in ticket.qtyoptions"></select> 
+            </div>
+            
+            
+             <div ng-if="ticket.availability_msg!='NA' && !isSeatingEvent" class="float-right" ng-init="ticket.qtyoptions=getQtyOptions(ticket.min,ticket.max,ticket.ticket_selected)">
+                <select class="form-control" style="width:100px" ng-model="ticket.ticket_selected" ng-options="o for o in ticket.qtyoptions"></select> 
+            </div>
+            
+            <!--  <div ng-if="ticket.availability_msg!='NA' && !isSeatingEvent && ticketsData.seatticketid.indexOf(ticket.id) != -1" class="float-right" ng-init="ticket.qtyoptions=getQtyOptions(ticket.min,ticket.max)">
+                <select class="form-control" style="width:100px" ng-model="ticket.ticket_selected" ng-options="o for o in ticket.qtyoptions"></select> 
+            </div> -->
+            
+            <div ng-if="ticket.availability_msg=='NA'" class="float-right bodytextstyle">
+              <h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ticket.availability_msg}}</h4>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="col-md-5 col-sm-5 col-xs-12" ng-if="ticket.available=='n'">
+        <div class="text-center bodytextstyle">
+            <h4>{{ ticket.availability_msg }}</h4>
+        </div>
+    </div>
+
+</div>
+
+<div ng-if="ticket.is_donation=='y'">
+    <div class="col-md-7 col-sm-7 col-xs-12">
+        <h5>
+            <span class="bodytextstyle"ng-class="{'cutname':ticket.strike=='Y'||ticket.strike=='y'}">{{ ticket.name }}</span>
+            <span ng-hide="ticket.desc==''">
+                <i class="fa fa-plus-square" ng-hide="showDesc" ng-click="showDesc=!showDesc"></i>
+                <i class="fa fa-minus-square" ng-show="showDesc" ng-click="showDesc=!showDesc"></i>
+            </span>
+        </h5>
+        
+        <p ng-if="ticket.mgr_config_msg!=''"><small  class="small">{{ ticket.mgr_config_msg }}</small></p>
+        <p>
+           
+            <small class="small">{{ ticket.small_desc }}</small>
+        </p>
+        <p class="bodytextstyle" ng-show="showDesc" ng-bind-html="ticket.desc"></p>
+    </div>
+    
+    <div class="col-md-2 col-sm-2 col-xs-6" ng-if="ticket.available=='y' && ticket.availability_msg!='NA'">
+         <div ng-if="ticket.availability_msg!='NA'" ng-form="subForm">
+		        <input type="number" step="any" min="0" name="name" class="form-control" placeholder="{{ ticketsData.currency }}" style="width:100px" ng-model="ticket.donation_amount" />
+		    </div>
+		    <div class="bodytextstyle" ng-if="ticket.availability_msg=='NA'" >
+		       <h4>{{ ticket.availability_msg }}</h4>
+		    </div>
+		   
+		    </div>
+		    
+    <!-- <div class="col-md-3 col-sm-3 col-xs-6" ng-if="ticket.available=='y' && ticket.availability_msg!='NA' "></div> -->
+    
+     <div class="col-md-2 col-sm-2 col-xs-6" ng-if="ticket.available=='y' && ticket.availability_msg=='NA' ">
+     <input type="number" step="any" min="0" name="name" class="form-control" placeholder="{{ ticketsData.currency }}" style="width:100px" ng-model="ticket.donation_amount" disabled="disabled"/>
+     </div>
+    
+    
+    <div class="col-md-1 col-sm-1 col-xs-6" ng-if="ticket.available=='y' && ticket.availability_msg=='NA'">
+		    <div class="text-center bodytextstyle" ><h4>{{ ticket.availability_msg }}</h4> </div>
+    </div>
+    
+    
+    <div class="col-md-5 col-sm-5 col-xs-12" ng-if="ticket.available=='n'">
+        <div class="text-center" class="bodytextstyle">
+            <h4>{{ ticket.availability_msg }}</h4>
+        </div>
+    </div>
+    
+    
+    
+</div>
