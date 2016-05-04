@@ -2,12 +2,12 @@ angular.module('ticketsapp.controllers.confirmation', [])
     .controller('confirmation', ['$scope', '$location', '$rootScope','$sce','$window','$timeout','$http','$compile',
         function($scope, $location, $rootScope,$sce,$window,$timeout,$http,$compile) {
 
-            if ($location.search().eid) $rootScope.eid = $location.search().eid;
+            if ($rootScope.eid) $rootScope.eid = $rootScope.eid;
             else $location.url('/event');
-
-            if ($location.search().tid) $rootScope.transactionId = $location.search().tid;
-            else $location.url('/event?eid=' + $rootScope.eid);
-
+            $rootScope.pageLocation = 'Confirmation';
+            if ($rootScope.transactionId) $rootScope.transactionId = $rootScope.transactionId;
+            else $location.url('/event');
+            $rootScope.css3 = 'active';$rootScope.css4 ="";
             $rootScope.showTimeoutBar = false;
             $scope.config = '';
             $scope.templateHtml='';
@@ -16,7 +16,6 @@ angular.module('ticketsapp.controllers.confirmation', [])
             $scope.display_ntscode ='';
             $scope.shareData = {};       
             $scope.emailData = {};
-            $rootScope.pageLocation = 'Confirmation';
             
             	try{
                 $rootScope.timeWatcher();
@@ -53,13 +52,13 @@ angular.module('ticketsapp.controllers.confirmation', [])
             }
             	jQuery('#toplink a#reflink').on('click',function(event){
         			//$location.url($rootScope.serverAddress+'tktwidget/public/index.html/event?eid=' + $rootScope.eid);
-        			window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
+        			window.location.href=$rootScope.serverAddress+'event?eid='+$rootScope.eid;
         			event.preventDefault();
         		});
             	
             	jQuery('#btmlink a').on('click',function(event){
         			//$location.url($rootScope.serverAddress+'tktwidget/public/index.html/event?eid=' + $rootScope.eid);
-        			window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
+        			window.location.href=$rootScope.serverAddress+'event?eid='+$rootScope.eid;
         			event.preventDefault();
         		});
             	
@@ -302,7 +301,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             
             
             var refreshPage = function(){
-            	window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
+            	window.location.href=$rootScope.serverAddress+'/event?eid='+$rootScope.eid;
             	//$location.url('/event?eid=' + $rootScope.eid);
             };
             

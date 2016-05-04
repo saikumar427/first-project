@@ -1,25 +1,55 @@
 angular.module('ticketsapp.controllers.profile', [])
-	.controller('profile', ['$rootScope', '$scope', '$http', '$timeout', '$filter', '$location', '$interval', '$window',
+    .controller('profile', ['$rootScope', '$scope', '$http', '$timeout', '$filter', '$location', '$interval', '$window',
         function($rootScope, $scope, $http, $timeout, $filter, $location, $interval, $window) {
-		if($rootScope.transactionId==''){
-        	$location.url('/tickets');
-        }
-    	 	try{
-            $rootScope.timeWatcher();
-            }catch(err){
+    	$rootScope.pageLocation = 'Profiles';
+            if ($rootScope.transactionId == '') {
+                $location.url('/tickets');
             }
-            $rootScope.css = 'active';$rootScope.css1 = 'active';$rootScope.css2 ="";$rootScope.css3 ="";$rootScope.css4 ="";
+            try {
+                $rootScope.timeWatcher();
+            } catch (err) {}
             
-            $rootScope.$on('eventName', function (event, args) {
-            	 $scope.message = args.message;
-            	 console.log($scope.message);
-            	 });
-            
+            $rootScope.css = 'active';
+            $rootScope.css1 = 'active';
+            $rootScope.css2 = "";
+            $rootScope.css3 = "";
+            $rootScope.css4 = "";
+
+            $rootScope.$on('eventName', function(event, args) {
+                $scope.message = args.message;
+                console.log($scope.message);
+            });
+
             $rootScope.showTimeoutBar = false;
             $rootScope.globalTimer = $interval(function() {
                 $rootScope.timeRemaining = $rootScope.millis - (+new Date);
             }, 500);
-            var eleData='';
+
+            $scope.suggestionData = [];
+            $scope.pushTempData = function(ele) {
+                $scope.suggestionData.push(ele);
+            };
+            $scope.complete = function() {
+                $scope.data = $scope.eliminateDuplicates($scope.suggestionData);
+                $(".suggestion-list").autocomplete({
+                    source: $scope.data
+                });
+            };
+            $scope.eliminateDuplicates = function(arr) {
+                var i,
+                    len = arr.length,
+                    out = [],
+                    obj = {};
+                for (i = 0; i < len; i++) {
+                    obj[arr[i]] = 0;
+                }
+                for (i in obj) {
+                    out.push(i);
+                }
+                return out;
+            }
+
+            /*var eleData='';
             $scope.profileData=[];
             $scope.pushTempData= function(ele){
             	if(undefined!=ele){
@@ -33,58 +63,58 @@ angular.module('ticketsapp.controllers.profile', [])
                 	}
             	}
             };
-              
-            
+              */
+
 
             if ($rootScope.eid) $rootScope.eid = $rootScope.eid;
-            else{
-            	$location.url('/tickets');
+            else {
+                $location.url('/tickets');
             }
-            	
+
             /*if ($location.search().tid) $rootScope.transactionId = $location.search().tid;
             else{
             	$location.url('/event?eid=' + $rootScope.eid);
             }*/
-            
+
             $http.get($rootScope.baseUrl + 'getProfileJSON.jsp', {
-                params: {
-                    api_key: '123',
-                    event_id: $rootScope.eid,
-                    transaction_id: $rootScope.transactionId
-                }
-            })
+                    params: {
+                        api_key: '123',
+                        event_id: $rootScope.eid,
+                        transaction_id: $rootScope.transactionId
+                    }
+                })
                 .success(function(data, status, headers, config) {
                     $scope.profileQuestions = data;
                     $scope.loadingQuestions = false;
-                    $rootScope.menuTitles=true;
+                    $rootScope.menuTitles = true;
                     $rootScope.totalMinutes = Number(data.timediffrence);
                     $rootScope.secondsRemaining = Number(data.secdiffrence);
-                    $rootScope.timeRemaining = ($rootScope.totalMinutes*60000) + ($rootScope.secondsRemaining*1000);
-                    $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000) + ($rootScope.secondsRemaining*1000);
+                    $rootScope.timeRemaining = ($rootScope.totalMinutes * 60000) + ($rootScope.secondsRemaining * 1000);
+                    $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000) + ($rootScope.secondsRemaining * 1000);
                     $rootScope.showTimeoutBar = true;
                     $rootScope.backLinkWording = data.backbutton;
-                    if(data.enablepromotion=='false' && $scope.fromPage=='payments')
-                    	$scope.promotions=false;
-                    	
+                    if (data.enablepromotion == 'false' && $scope.fromPage == 'payments')
+                        $scope.promotions = false;
+
                     $rootScope.timeWatcher = $rootScope.$watch('timeRemaining', function(newVal, oldVal) {
                         if (newVal < 0) {
                             $interval.cancel($rootScope.globalTimer);
                             $rootScope.timeWatcher();
-                            $rootScope.timeOutBg = true;
-                           // $window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
+                           $rootScope.timeOutBg = true;
+                            // $window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
                         }
                     });
-                    
+
                 })
                 .error(function(data, status, headers, config) {
                     alert('Unknown error occured. Please try reloading the page.');
                 });
-            
-            $scope.assignEmpty = function(Obj,qid){
-            	if(!Obj[qid])
-            		Obj[qid]=new Object();
+
+            $scope.assignEmpty = function(Obj, qid) {
+                if (!Obj[qid])
+                    Obj[qid] = new Object();
             };
-            
+
 
             $scope.fblogin = function() {
                 var getUserInfo = function(response) {
@@ -110,14 +140,62 @@ angular.module('ticketsapp.controllers.profile', [])
                 FB.getLoginStatus(getUserInfo);
                 FB.Event.subscribe('auth.statusChange', getUserInfo);
             };
-
-            $scope.sub = function() {
-
-                $scope.loadingSubmit = true;
-
-                var buyer_info = {};
-                var attendee_info = {};
-
+            /* for collecting temp data buyer and attendee start */
+            $scope.buyerAnswers = $rootScope.buyerAnswers;
+            $scope.attendeeAnswers = $rootScope.attendeeAnswers;
+            //console.log('scope.buyerAnswers - '+ $scope.buyerAnswers);
+            //console.log('scope.attendeeAnswers - '+ $scope.attendeeAnswers);
+            $scope.isAnsStored=function(){
+            	if($scope.buyerAnswers)
+            		return true;
+            	else
+            		return false;
+            };
+            $scope.getBuyerAnswers=function(id,type){
+                if(type == 'checkbox'){
+              	  if($scope.buyerAnswers)
+    	            	return $scope.buyerAnswers[''+id] ? $scope.buyerAnswers[''+id]['value'] : []; 	
+                }else{ 
+              	  if($scope.buyerAnswers){
+  	            	return $scope.buyerAnswers[''+id] ? $scope.buyerAnswers[''+id]['value'] : '';
+              	}
+              	else
+              		return "";
+                }
+              };
+              $scope.isAttAnsStored=function(){
+              	if($scope.attendeeAnswers)
+              		return true;
+              	else
+              		return false;
+              };
+              $scope.getAttendeeAnswers=function(id,type,qtyindex,ticketid){
+                  if(type == 'checkbox'){
+                	  if($scope.attendeeAnswers && $scope.attendeeAnswers[''+ticketid] && (qtyindex <= $scope.attendeeAnswers[''+ticketid]['qty']))
+      	            	return $scope.attendeeAnswers[''+ticketid] ? $scope.attendeeAnswers[''+ticketid]['qty_'+qtyindex][id] ['value'] : []; 	
+                  }else{ 
+                	  if($scope.attendeeAnswers && $scope.attendeeAnswers[''+ticketid] && (qtyindex <= $scope.attendeeAnswers[''+ticketid]['qty'])){
+    	            	return $scope.attendeeAnswers[''+ticketid] ? $scope.attendeeAnswers[''+ticketid]['qty_'+qtyindex][id] ['value'] : '';
+                	}
+                	else
+                		return "";
+                  }
+                };
+           /* $scope.getSubQuestions = function(mainQuestion){
+            	angular.forEach(mainQuestion.options,function(eachOption,index){
+            		if(eachOption.sub_questions){
+            			angular.forEach(eachOption.sub_questions,function(subqns,keyval){
+            				if(!($scope.subQuestionsArray.indexOf(subqns.id)>-1))
+            					$scope.subQuestionsArray.push(subqns.id);
+            			});
+            		}
+            	});
+            };*/
+            var buyer_info = {};
+            var attendee_info = {};
+            $rootScope.getDetails = function() {
+            	buyer_info = {};
+                attendee_info = {};
                 //collect buyer_info
                 angular.forEach($scope.profileQuestions.buyer_questions, function(item, index) {
                     switch (item.type) {
@@ -135,6 +213,25 @@ angular.module('ticketsapp.controllers.profile', [])
                             buyer_info[item.id] = {
                                 value: item.response
                             }
+                            angular.forEach(item.options, function(eachVal, index) {
+                                if(eachVal.sub_questions && eachVal.value==item.response){
+                                	angular.forEach(eachVal.sub_questions,function(eachquestion,ind){
+                                		if(eachquestion.type=='checkbox'){
+                                			 var value = [];
+                                             angular.forEach(Object.keys(eachquestion.response), function(el, index) {
+                                                 if (eachquestion.response[el])
+                                                     value.push(el);
+                                             });
+                                             if (value.length > 0)
+                                                 buyer_info[eachquestion.id] = {
+                                                     value: value
+                                                 };
+                                             else buyer_info[eachquestion.id] = {};
+                                		}else
+                                		buyer_info[eachquestion.id] = {value : eachquestion.response};
+                                	});
+                                }
+                            });
                             break;
                         case 'checkbox':
                             var value = [];
@@ -147,14 +244,54 @@ angular.module('ticketsapp.controllers.profile', [])
                                     value: value
                                 };
                             else buyer_info[item.id] = {};
+                            angular.forEach(item.options, function(eachVal, index) {
+                            	if(eachVal.sub_questions && item.response.hasOwnProperty(eachVal.value)==item.response[eachVal.value]){
+                            		angular.forEach(eachVal.sub_questions,function(eachquestion,ind){
+                                 		if(eachquestion.type=='checkbox'){
+                                 			 var value = [];
+                                              angular.forEach(Object.keys(eachquestion.response), function(el, index) {
+                                                  if (eachquestion.response[el])
+                                                      value.push(el);
+                                              });
+                                              if (value.length > 0)
+                                                  buyer_info[eachquestion.id] = {
+                                                      value: value
+                                                  };
+                                              else buyer_info[eachquestion.id] = {};
+                                 		}else
+                                 		buyer_info[eachquestion.id] = {value : eachquestion.response};
+                                 	});
+                            	}
+                            });
                             break;
                         case 'select':
                             buyer_info[item.id] = {
                                 value: item.response
                             }
+                            angular.forEach(item.options, function(eachVal, index) {
+                                if(eachVal.sub_questions && eachVal.value==item.response){
+                                	angular.forEach(eachVal.sub_questions,function(eachquestion,ind){
+                                		if(eachquestion.type=='checkbox'){
+                                			 var value = [];
+                                             angular.forEach(Object.keys(eachquestion.response), function(el, index) {
+                                                 if (eachquestion.response[el])
+                                                     value.push(el);
+                                             });
+                                             if (value.length > 0)
+                                                 buyer_info[eachquestion.id] = {
+                                                     value: value
+                                                 };
+                                             else buyer_info[eachquestion.id] = {};
+                                		}else
+                                		buyer_info[eachquestion.id] = {value : eachquestion.response};
+                                	});
+                                }
+                            });
                             break;
                     }
                 });
+                $rootScope.buyerAnswers=buyer_info;
+                //console.log('buyer_info - '+JSON.stringify(buyer_info))
 
                 //collect attendee_info
                 angular.forEach($scope.profileQuestions.attendee_questions, function(ticket, index) {
@@ -184,25 +321,31 @@ angular.module('ticketsapp.controllers.profile', [])
                         });
                     });
                 });
+                $rootScope.attendeeAnswers=attendee_info;
+                //console.log('attndeee_info - '+JSON.stringify(attendee_info))
 
+            };
+            $scope.sub = function() {
+                $scope.loadingSubmit = true;
+                $rootScope.getDetails();
                 //alert("promotion value is::"+$scope.promotions);
                 $http.get($rootScope.baseUrl + 'submitProfileInfo.jsp', {
-                    params: {
-                        api_Key: '123',
-                        event_id: $rootScope.eid,
-                        event_date: $rootScope.selectDate,
-                        seating_enabled: $rootScope.isSeatingEvent==true?'y':'n',
-                        transaction_id: $rootScope.transactionId,
-                        buyer_info: JSON.stringify(buyer_info),
-                        attendee_info: JSON.stringify(attendee_info),
-                        enablepromotion : $scope.promotions == true ? 'yes':'no'
-                    }
-                })
+                        params: {
+                            api_Key: '123',
+                            event_id: $rootScope.eid,
+                            event_date: $rootScope.selectDate,
+                            seating_enabled: $rootScope.isSeatingEvent == true ? 'y' : 'n',
+                            transaction_id: $rootScope.transactionId,
+                            buyer_info: JSON.stringify(buyer_info),
+                            attendee_info: JSON.stringify(attendee_info),
+                            enablepromotion: $scope.promotions == true ? 'yes' : 'no'
+                        }
+                    })
                     .success(function(data, status, headers, config) {
                         $scope.loadingSubmit = false;
                         if (data.status == 'success')
                         //$location.url('/event/payment?eid=' + $rootScope.eid + '&tid=' + $rootScope.transactionId);
-                            $location.path('/event/payment');
+                            $location.path('/payment');
                         else
                             alert('Unknown error occured. Please try again.');
                     })
@@ -231,7 +374,7 @@ angular.module('ticketsapp.controllers.profile', [])
                 angular.forEach($scope.profileQuestions.attendee_questions, function(item, index) {
                     for (i = 0; i < item.profiles.length; i++)
                         allProfiles.push({
-                        	ticketname: item.ticket_name,
+                            ticketname: item.ticket_name,
                             ticketid: item.ticket_id,
                             profileid: 'Profile #' + (i + 1),
                             response: item.profiles[i].response
@@ -245,8 +388,8 @@ angular.module('ticketsapp.controllers.profile', [])
                 if (from.copyFrom == 'buyerinfo') {
                     angular.forEach($scope.profileQuestions.buyer_questions, function(item, index) {
                         if ($filter('filter')(toquestions, {
-                            id: item.id
-                        }).length > 0)
+                                id: item.id
+                            }).length > 0)
                             to.response[item.id] = angular.copy(item.response);
                     });
                     return;
@@ -258,8 +401,8 @@ angular.module('ticketsapp.controllers.profile', [])
 
                 angular.forEach(from.response, function(value, key) {
                     if ($filter('filter')(toquestions, {
-                        id: key
-                    }).length > 0)
+                            id: key
+                        }).length > 0)
                         to.response[key] = angular.copy(from.response[key]);
                 });
 

@@ -1,5 +1,5 @@
 <div ng-if="ticket.is_donation=='n'" ng-init="pushTickets(ticket.id,ticket.availability_msg)">
-    <div class="col-md-7 col-sm-7 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
         <h5>
             <span class="bodytextstyle" ng-class="{'cutname':ticket.strike=='Y'||ticket.strike=='y'}">{{ ticket.name }}</span>
             <span ng-hide="ticket.desc==''">
@@ -18,7 +18,7 @@
     </div>
 
     <div ng-if="ticket.available=='y'">
-        <div class="col-md-2 col-sm-2 col-xs-6">
+        <div class="col-md-3 col-sm-3 col-xs-6">
             <h5>
             <span class="bodytextstyle" ng-class="{'cut':parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)}">{{ ticket.actual_price | currency:ticketsData.currency }}</span>
             <span class="bodytextstyle" ng-show="parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)">{{ ticket.charging_price | currency:ticketsData.currency }}</span>

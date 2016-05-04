@@ -1,0 +1,127 @@
+<div class="text-center center-block" style="padding:30px 0" ng-show="loadingPayment">
+    <img src="/angularTicketWidget/images/loading.gif" />&nbsp;Loading...
+</div>
+
+<div class="" ng-hide="loadingPayment">
+    <b class="">{{paymentsData.refund_policy}}</b>
+    <p class="">{{ paymentsData.refund_policy_text }}</p>
+    <b class="">{{ paymentsData.payment_header_label }}</b>
+    <div style="clear: both;"></div>
+    <div class=" col-md-6 col-sm-6 col-xs-12">
+    
+    <span class="" ng-repeat="item in paymentsData.payment_details" ng-class="{'active':$last}">
+    	<div class="col-md-6 col-sm-6 col-xs-6 text-right">{{ item.label }} :</div>
+    	<div class="col-md-6 col-sm-6 col-xs-6 text-left" >{{ item.value | currency:paymentsData.currency_format }}</div>
+    	<div style="clear:both;"></div>
+    </span>
+    
+    	<!-- <table class="table table-responsive paymentDetails">
+        <tr ng-repeat="item in paymentsData.payment_details" ng-class="{'active':$last}">
+            <td class="text-right">{{ item.label }}</td>
+            <td class="text-right"> {{ item.value | currency:paymentsData.currency_format }}</td>
+        </tr>
+    </table> -->
+    </div>
+    <div class=" col-md-6 col-sm-6 col-xs-12 arrow_box">
+    <div ><b>Payment Method</b></div>
+    	<div class="row" ng-repeat="payment_type in paymentsData.payment_types" ng-hide="isTotalZero()">
+    		<div ng-if="payment_type.type == 'paypal'">
+	    		<div class="col-md-6 col-sm-6 col-xs-6">
+	    			<button class="btn btn-warning" ng-click="paypalPayment();" ng-disabled="paypalDisable">
+	                    {{ payment_type.label }}
+	                </button>
+	                <span ng-show="paypalDisable"> <img src="/angularTicketWidget/images/loading.gif" /></span>
+	             </div>
+	             <div class="col-md-6 col-sm-6 col-xs-6">
+	              	<img src="/angularTicketWidget/images/paypalcc.gif" />
+	             </div>
+    		</div>
+    		<br>
+    		<div ng-if="payment_type.type == 'cc'">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <button class="btn btn-warning" ng-click="eventbeeCC();" ng-disabled="ebeeDisable">
+                    {{ payment_type.label }}
+                </button>
+                <span ng-show="ebeeDisable"> <img src="/angularTicketWidget/images/loading.gif" /></span>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <img src="/angularTicketWidget/images/eventbeecc.gif" />
+            </div>
+        </div>
+        <br>
+        <div ng-if="payment_type.type == 'other'">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <button class="btn btn-warning" ng-click="other($event)" ng-disabled="otherDisable">
+                    {{ payment_type.label }}
+                </button>
+                <span ng-show="otherDisable"> <img src="/angularTicketWidget/images/loading.gif" /></span>
+            </div>
+            
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <h5 class="bodyheaders">
+                    {{ payment_type.text }}<br>
+                    <small>{{ payment_type.small_text }}</small>
+                </h5> 
+            </div>
+        </div>
+    	</div>
+    </div>
+    <br style="clear: both;">
+    
+    
+    <!-- <div class="row" ng-repeat="payment_type in paymentsData.payment_types" ng-hide="isTotalZero()">
+
+        <div ng-if="payment_type.type == 'paypal'">
+            <div class="col-md-4 col-sm-4">
+                <button class="btn btn-warning" ng-click="paypalPayment();" ng-disabled="paypalDisable">
+                    {{ payment_type.label }}
+                </button>
+                <span ng-show="paypalDisable"> <img src="/angularTicketWidget/images/loading.gif" /></span>
+            </div>
+            <br class="visible-xs">
+            <div class="col-md-6 col-sm-6">
+                <img src="/angularTicketWidget/images/paypalcc.gif" />
+            </div>
+        </div>
+
+        <div ng-if="payment_type.type == 'cc'">
+            <div class="col-md-4 col-sm-4">
+                <button class="btn btn-warning" ng-click="eventbeeCC();" ng-disabled="ebeeDisable">
+                    {{ payment_type.label }}
+                </button>
+                <span ng-show="ebeeDisable"> <img src="/angularTicketWidget/images/loading.gif" /></span>
+            </div>
+            <br class="visible-xs">
+            <div class="col-md-6 col-sm-6">
+                <img src="/angularTicketWidget/images/eventbeecc.gif" />
+            </div>
+        </div>
+
+        <div ng-if="payment_type.type == 'other'">
+            <div class="col-md-4 col-sm-4">
+                <button class="btn btn-warning" ng-click="other($event)" ng-disabled="otherDisable">
+                    {{ payment_type.label }}
+                </button>
+                <span ng-show="otherDisable"> <img src="/angularTicketWidget/images/loading.gif" /></span>
+            </div>
+            
+            <div class="col-md-6 col-sm-6">
+                <h5 class="bodyheaders">
+                    {{ payment_type.text }}<br>
+                    <small>{{ payment_type.small_text }}</small>
+                </h5> 
+            </div>
+        </div>
+
+        <div style="clear:both"></div>
+        <hr style="margin:20px 0 !important" ng-hide="$last">
+
+    </div> -->
+
+    <div ng-show="isTotalZero()">
+        <button class="btn btn-success btn-lg" ng-click="zero();">
+            {{ paymentsData.continue_zero_payment }}
+        </button>
+    </div>
+
+</div>

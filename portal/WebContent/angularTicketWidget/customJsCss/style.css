@@ -396,4 +396,138 @@ cursor:pointer;
     color: #666;
 }
 /* ------------------------------For top menu end-------------------------------------------------- */
+.sub-module{
+	border-left: 4px solid #ddd;
+    padding: 0px 40px 0px 40px;
+    border-right: 4px solid #ddd;
+}
+.arrow_box {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 10px;	
+}
+.arrow_box:after, .arrow_box:before {
+	right: 100%;
+	top: 23%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-right-color: #fff;
+	border-width: 33px;
+	margin-top: -33px;
+}
+.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-right-color: #ddd;
+	border-width: 36px;
+	margin-top: -36px;
+}
+@media only screen and (max-width : 768px) {
+.arrow_box {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	margin-top: 35px;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	top: -14%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 33px;
+	margin-left: -33px;
+}
+.arrow_box:before {
+	border-color: rgba(221, 221, 221, 0);
+	border-bottom-color: #ddd;
+	border-width: 33px;
+	margin-left: -33px;
+}
+}
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 540px) {
+.arrow_box {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	margin-top: 35px;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	top: -13%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 33px;
+	margin-left: -33px;
+}
+.arrow_box:before {
+	border-color: rgba(221, 221, 221, 0);
+	border-bottom-color: #ddd;
+	border-width: 33px;
+	margin-left: -33px;
+}
+}
+@media only screen and (max-width : 320px) {
+.arrow_box {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	margin-top: 35px;
+}
+.arrow_box:after, .arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	top: -13%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.arrow_box:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 33px;
+	margin-left: -33px;
+}
+.arrow_box:before {
+	border-color: rgba(221, 221, 221, 0);
+	border-bottom-color: #ddd;
+	border-width: 33px;
+	margin-left: -33px;
+}
+}
+
+
+
 

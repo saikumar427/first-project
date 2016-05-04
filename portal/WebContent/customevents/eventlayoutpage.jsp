@@ -166,7 +166,7 @@ if(singleWidgets.has("whosAttending") || wideWidgets.has("whosAttending") || nar
 <script src="/home/layout/eventPage.js"></script>
 <!-- angular ticket widget start -->
 
-<!-- <script type="text/javascript" src="/angularTicketWidget/customJsCss/iframehelper.js"></script> -->
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/iframehelper.js"></script>
 <!-- <link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="/angularTicketWidget/customJsCss/style.css" />
@@ -177,6 +177,9 @@ if(singleWidgets.has("whosAttending") || wideWidgets.has("whosAttending") || nar
 <script type="text/javascript" src="/angularTicketWidget/js/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/js/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/js/dialogs.js"></script>
+
+<script type="text/javascript" src="/angularTicketWidget/js/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/jquery-ui.css" />
 
 <!-- angular ticket widget end -->
 
@@ -559,15 +562,13 @@ var singleBottomWidget = <%=singleBottomWidget%>;
 
 <!-- angular ticket widget start -->
 
-
-<script type="text/javascript" src="/angularTicketWidget/customJsCss/app.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/filters.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/services.js"></script>
-
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.tickets.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.profile.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.payment.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.confirmation.js"></script>
-<script type="text/javascript" src="/angularTicketWidget/customJsCss/filters.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/app.js"></script>
 <!-- angular ticket widget end -->
 </div>
 </body>

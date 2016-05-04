@@ -5,22 +5,22 @@ angular.module('ticketsapp', [
     'ngSanitize',
     'ticketsapp.controllers.tickets',
     'ticketsapp.controllers.profile',
-    /*'ticketsapp.controllers.payment',
-    'ticketsapp.controllers.confirmation',*/
+    'ticketsapp.controllers.payment',
+    'ticketsapp.controllers.confirmation',
     'ticketsapp.filters',
     'ticketsapp.services'
 ])
 
 // GLOBAL CONFIGURATIONS
-.config(['$routeProvider', '$locationProvider', '$sceDelegateProvider','$provide',
+.config(['$routeProvider', '$locationProvider', '$sceDelegateProvider', '$provide',
 
-    function($routeProvider, $locationProvider, $sceDelegateProvider,$provide) {
+    function($routeProvider, $locationProvider, $sceDelegateProvider, $provide) {
 
-	$provide.decorator('$sniffer', ['$delegate', function ($delegate) {
-		$delegate.history = false;
-		return $delegate;
-		}]);
-	
+        $provide.decorator('$sniffer', ['$delegate', function($delegate) {
+            $delegate.history = false;
+            return $delegate;
+        }]);
+
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
             '**'
@@ -40,7 +40,7 @@ angular.module('ticketsapp', [
                 controller: 'profile',
                 reloadOnSearch: false
             })
-           /* .when('/event/payment', {
+            .when('/payment', {
                 templateUrl: '/angularTicketWidget/payment.html',
                 controller: 'payment',
                 reloadOnSearch: false
@@ -49,7 +49,7 @@ angular.module('ticketsapp', [
                 templateUrl: '/angularTicketWidget/confirmation.html',
                 controller: 'confirmation',
                 reloadOnSearch: false
-            })*/
+            })
             .otherwise({
                 redirectTo: '/tickets'
             });
@@ -58,39 +58,36 @@ angular.module('ticketsapp', [
 
 
 // ROOT SCOPE
-.run(['$rootScope', '$location', '$window', '$document','$http',
-    function($rootScope, $location, $window, $document,$http) {
-
-	$rootScope.back = function() {
-		//alert($rootScope.pageLocation);
-		if($rootScope.pageLocation == 'Profiles')
-            $location.path('/event');
-		else if($rootScope.pageLocation == 'Payments'){
-			$location.search('tid',$rootScope.transactionId);
-			$location.path('/profile/');
-		}else if($rootScope.pageLocation == 'Confirmation')
-			$location.path('/event/payment/');
-		else
-			$location.path('/tickets');
+.run(['$rootScope', '$location', '$window', '$document', '$http',
+    function($rootScope, $location, $window, $document, $http) {
+        $rootScope.back = function() {
+        	
+            if ($rootScope.pageLocation == 'Profiles') {
+            	 $rootScope.getDetails();
+                $location.path('/event');
+            } else if ($rootScope.pageLocation == 'Payments') {
+                //$location.search('tid',$rootScope.transactionId);
+                $location.path('/profile/');
+            } else if ($rootScope.pageLocation == 'Confirmation')
+                $location.path('/payment/');
+            else
+                $location.path('/tickets');
         };
-        
-       /* if($rootScope.pageLocation=='tickets'){$rootScope.css = 'active';$rootScope.css2 ="";$rootScope.css3 ="";$rootScope.css4 ="";$rootScope.css1 ="";}
-		if($rootScope.pageLocation=='profile'){$rootScope.css1 = 'active';$rootScope.css2 ="";$rootScope.css3 ="";$rootScope.css4 ="";}
-		if($rootScope.pageLocation=='payment'){$rootScope.css2 = 'active';$rootScope.css3 ="";$rootScope.css4 ="";}
-		if($rootScope.pageLocation=='confirm'){$rootScope.css3 = 'active';$rootScope.css4 ="";}*/
+
+       
         $rootScope.baseUrl = 'http://localhost/tktwidget/registration/';
-        $rootScope.serverAddress = 'localhost/';
+        $rootScope.serverAddress = 'http://localhost/';
         //$rootScope.eid = $location.search().eid;
-        $rootScope.eid =eventid;
+        $rootScope.eid = eventid;
         $rootScope.fbUserData = {};
         $rootScope.transactionDetails = {};
         $rootScope.transactionId = '';
-      /*  $rootScope.totalMinutes = 100;
-        $rootScope.timeRemaining = 100;
-        $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000);*/
+        /*  $rootScope.totalMinutes = 100;
+          $rootScope.timeRemaining = 100;
+          $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000);*/
         $rootScope.showTimeoutBar = false;
         $rootScope.isSeatingEvent = false;
-        $rootScope.selectDate='';
+        $rootScope.selectDate = '';
         $rootScope.templateMsg = '';
         $rootScope.timeWatcher;
         $rootScope.context = $location.search().context;
@@ -99,36 +96,38 @@ angular.module('ticketsapp', [
         $rootScope.fromPage = 'tickets';
         $rootScope.secondsRemaining = 00;
         $rootScope.globalTimer;
-        $rootScope.timeOutBg=false;
-        $rootScope.menuTitles=false;
+        $rootScope.timeOutBg = false;
+        $rootScope.menuTitles = false;
         $rootScope.ticketsCost = '';
         $rootScope.currencyLbl = '';
-        
+        $rootScope.buyerAnswers;
+        $rootScope.attendeeAnswers;
+
         /*var sectime=$interval(function() {
             $rootScope.secondsRemaining = $rootScope.secondsRemaining - 1;
             if($rootScope.secondsRemaining<=0)
             	$rootScope.secondsRemaining=60;
         },1000);*/
-        
-        $rootScope.tryAgain = function(){
-        	 $http.get($rootScope.serverAddress+'embedded_reg/seating/delete_temp_locked_tickets.jsp', {
-                 params: {
-                     eid: $rootScope.eid,
-                     tid: $rootScope.transactionId
-                 }
-             }).success(function(data,status,headers,config){
-            	 $window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
-             	 $rootScope.timeOutBg = false;
-             });
+
+        $rootScope.tryAgain = function() {
+            $http.get($rootScope.serverAddress + 'embedded_reg/seating/delete_temp_locked_tickets.jsp', {
+                params: {
+                    eid: $rootScope.eid,
+                    tid: $rootScope.transactionId
+                }
+            }).success(function(data, status, headers, config) {
+                $window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
+                $rootScope.timeOutBg = false;
+            });
         };
-        
-        
-        $rootScope.cancelTimeOut = function(){
-        	$window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
-        	$rootScope.timeOutBg = false;
+
+
+        $rootScope.cancelTimeOut = function() {
+            $window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
+            $rootScope.timeOutBg = false;
         };
-        
-        
+
+
         /*if($rootScope.context!='FBApp'){
         $http.get($rootScope.baseUrl + 'getThemesJSON.jsp', {
             params: {
@@ -172,7 +171,7 @@ angular.module('ticketsapp', [
                 xfbml: true
             });
         };
-        
+
         (function(d) {
             var js,
                 id = 'facebook-jssdk',

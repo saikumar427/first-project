@@ -8,16 +8,37 @@
     </h3>
 </div>
 <div ng-show="eventMetadata.do_continue">
-
+<style>
+/* .rec-date{
+    background-color: transparent;
+    color: #000;
+    border: 2px solid #ddd;
+   
+    border-radius: 15px;
+    
+}
+.rec-date:hover{
+	background-color: #F5F5F5;
+	color:#000;
+	border: 2px solid #ddd;
+} */
+</style>
 <div class="text-center" ng-show="eventMetadata.is_recurring">
-    {{ eventMetadata.date_select_label }}
-    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" style="float:none;margin: 0 auto;">
+    {{ eventMetadata.date_select_label }}<br>
+    <span ng-repeat="date in eventMetadata.dates">
+    <!-- <span class=" rec-date">{{date.name}}</span> -->
+    
+    	<input type="button" class="btn btn-primary btn-sm rec-date" value="{{date.name}}" style="margin-top: 5px;" />
+    </span>
+    
+    <br><br>
+    <!-- <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" style="float:none;margin: 0 auto;">
         <select class="form-control" id="recurDate" ng-model="selectedDate.value" ng-options="date.name as date.value for date in eventMetadata.dates">
             <option value="">
                 {{ eventMetadata.date_default_option }}
             </option>
         </select>
-    </div>
+    </div> -->
 </div>
 
 <div class="text-center center-block" ng-show="loadingTickets" style="padding:30px 0">
@@ -47,7 +68,6 @@
                             </h4>
                             <p class="bodytextstyle" ng-bind-html="ticket.desc" ng-show="showGroupDesc">
                             </p>
-                            <hr>
                                 <div ng-repeat="ticket in ticket.tickets">
                                 <hr ng-hide="$first">
                                     <div class="row">
@@ -156,7 +176,7 @@
         
     </div>
 </div>
-
+<!-- 
 <div class="row">
     <div class="col-md-12 col-xs-12">
         <img alt="Powered by Eventbee Online Registration &amp; Ticketing" border="0" src="http://www.eventbee.com/main/images/home/poweredbyeventbee.jpg" title="Powered by Eventbee" />
@@ -164,4 +184,4 @@
         	<script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3mlfoHSPjcEHprez8Nf5vp"></script>
         </span>
     </div>
-</div>
+</div> -->

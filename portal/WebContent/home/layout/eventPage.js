@@ -1,5 +1,4 @@
 function getAllWidgets(widgetId, obj, idArray,eid){ 
-	alert('hi');
 	var html = '';
 	$.each(idArray, function(key, object){
 		for(var mKey in object){
