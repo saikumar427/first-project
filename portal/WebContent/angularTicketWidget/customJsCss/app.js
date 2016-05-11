@@ -102,7 +102,11 @@ angular.module('ticketsapp', [
         $rootScope.currencyLbl = '';
         $rootScope.buyerAnswers;
         $rootScope.attendeeAnswers;
-
+        $rootScope.ticketsAuthentication = false;
+		$rootScope.pritoken ='';
+		$rootScope.priorityType='';
+		$rootScope.listid= '';
+		$rootScope.ifPri = false;
         /*var sectime=$interval(function() {
             $rootScope.secondsRemaining = $rootScope.secondsRemaining - 1;
             if($rootScope.secondsRemaining<=0)

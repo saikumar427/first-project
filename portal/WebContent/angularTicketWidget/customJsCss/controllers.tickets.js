@@ -2,17 +2,12 @@ angular.module('ticketsapp.controllers.tickets', [])
     .controller('tickets', ['$scope', '$http', '$location', '$timeout', '$rootScope', '$window', '$sce', '$filter', '$interval',
         function($scope, $http, $location, $timeout, $rootScope, $window, $sce, $filter, $interval) {
             $rootScope.showTimeoutBar = false;
-            $rootScope.css = 'active';
-            $rootScope.css2 = "";
-            $rootScope.css3 = "";
-            $rootScope.css4 = "";
-            $rootScope.css1 = "";
+            $rootScope.css = 'active';$rootScope.css2 = ""; $rootScope.css3 = ""; $rootScope.css4 = ""; $rootScope.css1 = "";
             $scope.seats = {};
-            $scope.eventDate = '';
+            $scope.priorityData;
             $scope.loadSeating = false;
             $scope.allTickets = [];
             $scope.availabelTickets = [];
-            // $scope.allTicketsMsg = {};
             $scope.allSectionObj = {};
             $scope.venuePath = '';
             $scope.venueName = '';
@@ -29,66 +24,62 @@ angular.module('ticketsapp.controllers.tickets', [])
             $scope.ticketsData = {
                 items: []
             };
-
+            $scope.highVolume;
+            $scope.ticketsUnavailable = false;
+            $scope.eventMetadata.is_priority = false;
             $scope.loadingMetadata = true;
             $scope.feecolrequeired = 'Y';
-
+            $scope.priorityData = '';
+            $scope.prioritykey1 = '';
+            $scope.prioritykey2 = '';
+            $scope.prioritylist='';
+            $scope.selectedPriority = '';
+            $scope.selectLabel1='';
+            $scope.selectLabel2='';
+            $scope.no_of_flds = '';
+            $scope.selectError = '';
+            $scope.tempDate = '';
+            
             try {
                 $interval.cancel($rootScope.globalTimer);
                 $rootScope.timeWatcher();
             } catch (err) {}
             
-$scope.widthCh = function(){
-	
-};
-            if ($rootScope.eid)
-                $http.get($rootScope.baseUrl + 'getEventMetaData.jsp?api_key=123&event_id=' + $rootScope.eid)
+			$scope.widthCh = function(){
+				
+			};
+			
+			/* meta data start */
+			if ($rootScope.eid)
+                $http.get('http://localhost/ticketwidget/getEventMetaData.jsp?api_key=123&event_id=' + $rootScope.eid)
                 .success(function(data, status, headers, config) {
                     $rootScope.showTimeoutBar = false;
                     $scope.eventMetadata = data;
                     $scope.loadingMetadata = false;
-                    // $rootScope.menuTitles=false;
+                    if($rootScope.ticketsAuthentication)
+                    	$scope.eventMetadata.is_priority = false;
                     $scope.venueid = data.venueid;
                     $rootScope.isSeatingEvent = data.has_seating;
-                    if (!$scope.eventMetadata.do_continue)
-                        return;
-
-                    if (!$scope.eventMetadata.is_recurring)
-                        loadTicketsData($rootScope.baseUrl + 'getEventTickets.jsp?api_key=123&seating_enable=' + $rootScope.isSeatingEvent + '&event_id=' + $rootScope.eid + ($rootScope.transactionId ? '&transaction_id=' + $rootScope.transactionId : ''));
-                    else {
-
-                        $scope.$watch('selectedDate.value', function(newVal, oldVal) {
-                            console.log(newVal + ' - ' + oldVal);
-                            if (newVal == null) {
-                                $scope.ticketsData = {
-                                    items: []
-                                };
-                            }
-                            $scope.seatingdata = {
-                                allsections: []
-                            };
-                            $scope.seats = {};
-                            $scope.noofcols = '';
-                            $scope.noofrows = '';
-                            $scope.backgroundCSS = {};
-                            if (newVal) {
-                                $scope.eventDate = newVal;
-                                $rootScope.selectDate = newVal;
-                                if ($location.search().evtDate == newVal)
-                                    loadTicketsData($rootScope.baseUrl + 'getEventTickets.jsp?api_key=123&seating_enable=' + $rootScope.isSeatingEvent + '&event_id=' + $rootScope.eid + '&event_date=' + encodeURIComponent(newVal) + ($rootScope.transactionId ? '&transaction_id=' + $rootScope.transactionId : ''));
-                                else
-                                    loadTicketsData($rootScope.baseUrl + 'getEventTickets.jsp?api_key=123&seating_enable=' + $rootScope.isSeatingEvent + '&event_id=' + $rootScope.eid);
-                            }
-                        });
-
-                        if ($location.search().evtDate) {
-                            $scope.selectedDate = {
-                                "name": $location.search().evtDate,
-                                "value": $location.search().evtDate
-                            };
-                        }
+                    if (!$scope.eventMetadata.do_continue){
+                    	if($scope.eventMetadata.remaintime)
+                    		$scope.highVolume($scope.eventMetadata.remaintime);
+                    	return;
                     }
-
+                    if($scope.eventMetadata.is_priority && !$scope.eventMetadata.is_recurring){
+                    	$scope.eventMetadata.is_priority = true;
+                    	$scope.getPriorityReg();
+                    	return;
+                    }else if($scope.eventMetadata.is_priority && $scope.eventMetadata.is_recurring){
+                    	$scope.eventMetadata.is_priority = true;
+                    	$scope.getPriorityReg();
+                    	$scope.getRecDate();
+                    	return;
+                    }else if($scope.eventMetadata.is_recurring){
+                    	$scope.getRecDate();
+                    	return;
+                    }else
+                    	$scope.getTicketSection();
+                   
                 })
                 .error(function(data, status, headers, config) {
                     alert('Unknown error occured. Please try reloading the page.');
@@ -97,8 +88,216 @@ $scope.widthCh = function(){
                 $scope.loadingMetadata = false;
                 $scope.eventMetadata.message = 'Event unavailable';
             }
+			/* meta data start */
+			
+			/*highVolume start*/
+			$scope.highVolume = function(min){
+            	$timeout(function () {
+            		$location.path('/event');
+            	  }, min+'000');
+            };
+            /*highVolume end*/
+			
+            /*Priority registration start*/
+            $scope.getPriorityReg = function(){
+            	$http.get('http://localhost/ticketwidget/PriorityRegBlock.jsp?eid=' + $rootScope.eid)
+            	.success(function(data, status, headers, config) {
+            		$scope.priorityData = data;
+            		if($scope.priorityData.list_data.length == 1){
+            			$scope.selectLabel1=$scope.priorityData.list_data[0].label1;
+                        $scope.selectLabel2=$scope.priorityData.list_data[0].label2;
+                        $scope.no_of_flds = $scope.priorityData.list_data[0].no_of_flds;
+                        $rootScope.listid = $scope.priorityData.list_data[0].list_id;
+            		}
+            	})
+            	.error(function(){
+            		alert('Unknown error occured. Please try reloading the page.');
+            	});
+            };
+            $scope.$watch('prioritylist',function(nVal,oVal){
+            	if(nVal==null){
+            		$scope.selectLabel1='';
+                    $scope.selectLabel2='';
+            	}
+            	if(nVal){
+            		var index = selectIdex.selectedIndex;
+            		$scope.selectedPriority = $scope.priorityData.list_data[index-1];
+            		$scope.selectLabel1=$scope.selectedPriority.label1;
+                    $scope.selectLabel2=$scope.selectedPriority.label2;
+                    $scope.no_of_flds = $scope.selectedPriority.no_of_flds;
+                    $rootScope.listid = $scope.selectedPriority.list_id;
+            		
+            	}
+            });
+            $scope.submitPriority = function(){
+            	$http.get('http://localhost/ticketwidget/PriorityRegFormAction.jsp',{
+                    params: {
+                    	eid: $rootScope.eid,
+                		listId : $rootScope.listid,
+                		prioritykey1 : $scope.prioritykey1,
+                		prioritykey2 : $scope.prioritykey2,
+                		noofflds : $scope.no_of_flds,
+                		evtdate : $rootScope.selectDate
+                	}
+                })
+            	.success(function(data, status, headers, config){
+            		$scope.resultPriorityReg = data;
+            		$rootScope.pritoken = $scope.resultPriorityReg.prireg_token
+            		if($scope.resultPriorityReg.status=='success'){
+            			$rootScope.listid = $scope.resultPriorityReg.pri_list_id;
+            			$rootScope.ifPri= true;
+            			$rootScope.priorityType='Continue';
+            			$scope.getTicketSection();
+            			$rootScope.ticketsAuthentication = true;
+            		}
+            		
+            	})
+            	.error(function(data, status, headers, config){
+            		
+            	});
+            };
+            $scope.skipPriority = function(){
+            	if($scope.eventMetadata.is_recurring){
+            		if(!$scope.tempDate){
+            			$scope.selectError='Please select date';
+            			return;
+            		}
+            	}
+            	$scope.selectError='';
+            	$rootScope.ticketsAuthentication = true;
+        		$rootScope.priorityType = 'Skip';
+        		$rootScope.ifPri= true;
+        		$scope.getTicketSection();
+             };
+            /*Priority registration end*/
+			
+			/*rec date start*/
+             $scope.getRecDate = function(){
+ 				$scope.$watch('selectedDate.value', function(newVal, oldVal){
+ 					$scope.tempDate = newVal;
+             		if (newVal == null) {
+                         $scope.ticketsData = {
+                             items: []
+                         };
+                     }
+                     $scope.seatingdata = {
+                         allsections: []
+                     };
+                     $scope.seats = {};
+                     $scope.noofcols = '';
+                     $scope.noofrows = '';
+                     $scope.backgroundCSS = {};
+                     
+                     if (newVal) {
+                     	$rootScope.selectDate = newVal;
+                     	$rootScope.ticketsAuthentication = true;
+                     	if(!$scope.eventMetadata.is_priority){
+                     		$rootScope.ticketsAuthentication = true;
+                     		$scope.getTicketSection();
+                     	}
+                     }
+             	});
+ 				if($rootScope.selectDate){
+                	$scope.selectedDate = {"name":$rootScope.selectDate,"value":$rootScope.selectDate};
+                }
+ 			};
+            /*rec date end*/
+			
+			/* Ticket data start */
+            $scope.getTicketSection = function(){
+            	$scope.loadingTickets = true;
+            	$http.get('http://localhost/ticketwidget/getEventTickets.jsp',{
+            		params: {
+            			api_key : 123,
+        				seating_enable : $rootScope.isSeatingEvent,
+        				event_id : $rootScope.eid,
+        				transaction_id : $rootScope.transactionId,
+        				event_date :$rootScope.selectDate,
+        				Priregtoken: $rootScope.pritoken,
+        				Priregtype: $rootScope.priorityType,
+        				Prilistid: $rootScope.listid,
+        				ticketurl: null
+        					/*wid:*/
 
+                	}
+            	})
+            	.success(function(data,status,headers,config){
+            		$scope.eventMetadata.is_priority=false;
+            		$scope.ticketsData = data;
+            		$scope.loadingMetadata = false;
+                    $scope.ticketsData.currency = data.currency;
+                    $rootScope.currencyLbl = data.currency;
+                    $scope.showDesc = $scope.ticketsData.ticket_desc_mode != 'collapse';
+                    $scope.showGroupDesc = $scope.ticketsData.ticket_group_desc_mode != 'collapse';
+                    $scope.feecolrequeired = data.feecolrequeired;
+                    $scope.loadingTickets = false;
+                    $rootScope.totalMinutes = Number(data.timeremaining);
+                    $rootScope.timeRemaining = Number(data.timeremaining);
+                    $rootScope.secondsRemaining = 0;
+                    $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000);
+                    if($scope.ticketsData.items.length == 0 && !$scope.eventMetadata.is_recurring)
+                    	$scope.ticketsUnavailable = true;
+                    if($scope.ticketsData.items.length == 0)
+                    	$scope.ticketsUnavailable = true;
+                    
+                    if (!$scope.discountAppliedFromURL && $location.search().discountCode) {
+                        $scope.discountCode = $location.search().discountCode;
+                        $timeout(function() {
+                            $scope.applyDiscount();
+                        });
+                        $scope.discountAppliedFromURL = true;
+                    }
 
+                    var temp = $scope.discountsData;
+
+                    $timeout(function() {
+                        $scope.discountsData = {};
+                    });
+                    $timeout(function() {
+                        $scope.discountsData = temp;
+                    });
+
+                    //code for seating event  
+
+                    if ($rootScope.isSeatingEvent) {
+                        $scope.loadSeating = true;
+                        $http.get($rootScope.baseUrl + 'getSeatingInfo.jsp?&timestamp=' + new Date().getTime(), {
+                                params: {
+                                    eid: $rootScope.eid,
+                                    tid: $location.search().tid,
+                                    venueid: $scope.venueid,
+                                    evtdate: $rootScope.selectDate
+                                }
+                            })
+                            .success(function(seatingdata, seatingstatus, seatingheaders, seatingconfig) {
+                                $scope.loadSeating = false;
+                                $scope.seatingdata = seatingdata;
+                                $scope.allSections = seatingdata.allsectionid;
+                                $scope.seatSectionId = seatingdata.allsectionid[0];
+                                $scope.sectionId = seatingdata.allsectionid[0];
+                                $scope.venuePath = seatingdata.venuepath;
+                                $scope.venueName = seatingdata.venuelinklabel;
+                                $scope.allSectionObj = seatingdata.allsectionidnames;
+                                //alert("json::"+JSON.stringify($scope.allSectionObj));
+                                $scope.seats = seatingdata.allsections[0];
+                                $scope.backgroundCSS = {
+                                        'background-image': 'url(' + $scope.seats.background_image + ')'
+                                    },
+                                    $scope.noofcols = seatingdata.allsections[0].noofcols;
+                                $scope.noofrows = seatingdata.allsections[0].noofrows;
+                            });
+                    }
+            	})
+            	.error(function(data,status,headers,config){
+            		alert('Unknown error occured. Please try reloading the page.');
+            	});
+            };	
+            
+            /* Ticket data end */
+            
+           
+			
+			
             $scope.discountAppliedFromURL = false;
 
             $scope.ticketGroups = {};
@@ -111,86 +310,6 @@ $scope.widthCh = function(){
                     }
                 });
             });
-
-
-            var loadTicketsData = function(url) {
-                $scope.loadingTickets = true;
-                $http.get(url)
-                    .success(function(data, status, headers, config) {
-
-                        $scope.ticketsData = data;
-                        $scope.ticketsData.currency = data.currency;
-                        $rootScope.currencyLbl = data.currency;
-                        // $rootScope.$broadcast('abc',{currency:$scope.ticketsData.currency});
-                        // collapse variables
-                        $scope.showDesc = $scope.ticketsData.ticket_desc_mode != 'collapse';
-                        $scope.showGroupDesc = $scope.ticketsData.ticket_group_desc_mode != 'collapse';
-                        $scope.feecolrequeired = data.feecolrequeired;
-                        $scope.loadingTickets = false;
-                        $rootScope.totalMinutes = Number(data.timeremaining);
-                        $rootScope.timeRemaining = Number(data.timeremaining);
-                        $rootScope.secondsRemaining = 0;
-                        $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000);
-
-                        if (!$scope.discountAppliedFromURL && $location.search().discountCode) {
-                            $scope.discountCode = $location.search().discountCode;
-                            $timeout(function() {
-                                $scope.applyDiscount();
-                            });
-                            $scope.discountAppliedFromURL = true;
-                        }
-                        //alert("the url is::"+url);
-
-                        var temp = $scope.discountsData;
-
-                        // alert("in scopr::"+JSON.stringify($scope.discountsData));
-
-                        $timeout(function() {
-                            $scope.discountsData = {};
-                        });
-                        $timeout(function() {
-                            $scope.discountsData = temp;
-                        });
-
-                        //code for seating event  
-
-                        // alert($rootScope.transactionId);
-
-                        if ($rootScope.isSeatingEvent) {
-                            $scope.loadSeating = true;
-                            $http.get($rootScope.baseUrl + 'getSeatingInfo.jsp?&timestamp=' + new Date().getTime(), {
-                                    params: {
-                                        eid: $rootScope.eid,
-                                        tid: $location.search().tid,
-                                        venueid: $scope.venueid,
-                                        evtdate: $scope.eventDate
-                                    }
-                                })
-                                .success(function(seatingdata, seatingstatus, seatingheaders, seatingconfig) {
-                                    $scope.loadSeating = false;
-                                    $scope.seatingdata = seatingdata;
-                                    $scope.allSections = seatingdata.allsectionid;
-                                    $scope.seatSectionId = seatingdata.allsectionid[0];
-                                    $scope.sectionId = seatingdata.allsectionid[0];
-                                    $scope.venuePath = seatingdata.venuepath;
-                                    $scope.venueName = seatingdata.venuelinklabel;
-                                    $scope.allSectionObj = seatingdata.allsectionidnames;
-                                    //alert("json::"+JSON.stringify($scope.allSectionObj));
-                                    $scope.seats = seatingdata.allsections[0];
-                                    $scope.backgroundCSS = {
-                                            'background-image': 'url(' + $scope.seats.background_image + ')'
-                                        },
-                                        $scope.noofcols = seatingdata.allsections[0].noofcols;
-                                    $scope.noofrows = seatingdata.allsections[0].noofrows;
-                                });
-                        }
-                    })
-                    .error(function(data, status, headers, config) {
-                        alert('Unknown error occured. Please try reloading the page.');
-                    });
-            };
-
-
 
             $scope.setSection = function(sectionId) {
                 $scope.seats = $filter('filter')($scope.seatingdata.allsections, {
@@ -303,7 +422,7 @@ $scope.widthCh = function(){
                             event_id: $rootScope.eid,
                             code: $scope.discountCode,
                             tid: trasactionid,
-                            evtdate: $scope.eventDate
+                            evtdate: $rootScope.selectDate
                         }
                     }).success(function(data, status, headers, config) {
                         //alert("the data is::"+JSON.stringify(data));
@@ -601,9 +720,11 @@ $scope.widthCh = function(){
                 if (seat) {
                     $scope.popupStyle = {
                         position: 'absolute',
-                        left: (mouseevent.pageX + 5) + 'px',
-                        top: (mouseevent.pageY + 5) + 'px'
+                        left: (mouseevent.pageX -125) + 'px',
+                        top: (mouseevent.pageY -160) + 'px'
                     };
+                    //console.log(mouseevent.pageX+' - '+mouseevent.pageY);
+                    //console.log(JSON.stringify($scope.popupStyle));
                     if (seat.type && isTicketExists(seat) && isTicketAvailable(seat)) {
                         if (seat.type.indexOf('SO') > -1) {
                             $scope.tooltipHtml = '&nbsp;Seat Number : ' + seat.seatcode + '&nbsp;<br/><font color=#FF0000><b>&nbsp;Sold Out</b></font>';
@@ -627,6 +748,8 @@ $scope.widthCh = function(){
                             $scope.tooltipHtml = '&nbsp;Seat Number : ' + seat.seatcode + '&nbsp;<br/><font color=#FF0000><b>&nbsp;Not Available</b></font>';
                     }
                 } else $scope.showPopup = false;
+                
+                //console.log($scope.tooltipHtml);
             };
 
 
@@ -701,7 +824,6 @@ $scope.widthCh = function(){
                     api_Key: '123'
                 };
 
-
                 angular.forEach($scope.ticketsData.items, function(item, index) {
                     if (item.type == 'ticket') {
                         if (item.is_donation == 'n') {
@@ -770,6 +892,7 @@ $scope.widthCh = function(){
                         $scope.loadingTransaction = false;
                         if (data.status == 'success') {
                             $rootScope.ticketsCost = data.details.tickets_cost;
+                            $('#tickets .widget h2').hide();
                             $rootScope.menuTitles = true;
                             $scope.loadingTransaction = true;
                             $rootScope.transactionDetails = data.details;
@@ -782,9 +905,9 @@ $scope.widthCh = function(){
                                 $location.search('discountCode', null);
 
                             if ($scope.eventMetadata.is_recurring)
-                                $location.search('evtDate', $scope.selectedDate.value);
+                            	$rootScope.selectDate = $rootScope.selectDate;
                             else
-                                $location.search('evtDate', null);
+                            	$rootScope.selectDate = '';
 
                             $location.path('/profile');
                         } else if (data.status == 'fail' && data.reason == 'event-level-qty-criteria') {

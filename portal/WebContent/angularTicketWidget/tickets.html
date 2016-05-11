@@ -2,44 +2,72 @@
     <img src="/angularTicketWidget/images/loading.gif"/>
     Loading...
 </div>
-<div class="center-block text-center" ng-hide="eventMetadata.do_continue" style="padding:30px 0">
-    <h3>
-        {{ eventMetadata.message }}
-    </h3>
+
+<div ng-hide="eventMetadata.do_continue">
+	<div class="text-center">
+		<div ng-bind-html="eventMetadata.message"></div>
+	</div>
 </div>
-<div ng-show="eventMetadata.do_continue">
-<style>
-/* .rec-date{
-    background-color: transparent;
-    color: #000;
-    border: 2px solid #ddd;
-   
-    border-radius: 15px;
-    
-}
-.rec-date:hover{
-	background-color: #F5F5F5;
-	color:#000;
-	border: 2px solid #ddd;
-} */
-</style>
+<div ng-show="eventMetadata.do_continue ">
+
+<!-- recurring event block start -->
 <div class="text-center" ng-show="eventMetadata.is_recurring">
-    {{ eventMetadata.date_select_label }}<br>
-    <span ng-repeat="date in eventMetadata.dates">
-    <!-- <span class=" rec-date">{{date.name}}</span> -->
-    
-    	<input type="button" class="btn btn-primary btn-sm rec-date" value="{{date.name}}" style="margin-top: 5px;" />
-    </span>
-    
-    <br><br>
-    <!-- <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" style="float:none;margin: 0 auto;">
-        <select class="form-control" id="recurDate" ng-model="selectedDate.value" ng-options="date.name as date.value for date in eventMetadata.dates">
+<div ng-show="selectError" style="color:red;">{{selectError}}</div>
+    {{ eventMetadata.date_select_label }}
+    <br>
+     <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" style="float:none;margin: 0 auto;">
+        <select class="form-control" id="recurDate" ng-disabled="ifPri" style="margin-bottom: 10px;" ng-model="selectedDate.value" ng-options="date.name as date.value for date in eventMetadata.dates">
             <option value="">
                 {{ eventMetadata.date_default_option }}
             </option>
         </select>
-    </div> -->
+    </div>
 </div>
+
+<!-- recurring event block end -->
+
+<!-- priority block start -->
+<div ng-show="eventMetadata.is_priority">
+	<div class="taxt-cener" ng-show="priorityData.list_data.length > 1">
+		<select style=" margin: 10px 0px;" class="form-control" id="selectIdex"  ng-model="prioritylist" ng-options="listData.list_id as listData.list_name for listData in priorityData.list_data">
+			<option  value="">Select List</option>
+		</select>
+	</div>
+<div class="taxt-cener">
+	<div class="col-md-4 col-md-offset-4" ng-show="resultPriorityReg.reason" style="color:red;">{{resultPriorityReg.reason}}</div>
+	
+		<div class="col-md-4 col-md-offset-4 " ng-show="selectLabel1" style="margin-bottom: 10px;">
+		<div ng-form="code">
+			<span ng-show="prioritykey1"><label ng-bind-html="selectLabel1"></label></span>
+			<div class="" ng-class="{'has-error':code.name.$error.required && !code.name.$pristine}">
+				<input type="text" name="name" class="form-control" ng-model="prioritykey1" placeholder="{{selectLabel1}}" 
+				title="{{selectLabel1}}" ng-required="true" autocomplete="off"/>
+				<p ng-show="code.name.$error.required && !code.name.$pristine" class="help-block">This field is required.</p>
+			</div>
+		</div>
+	</div>
+	<br style="clear:both;">
+	
+		<div class="col-md-4 col-md-offset-4 " ng-show="selectLabel2">
+		<div ng-form="password">
+			<span ng-show="prioritykey2"><label ng-bind-html="selectLabel2"></label></span>
+			<div class="" ng-class="{'has-error':password.name.$error.required && !password.name.$pristine}">
+				<input type="text" name="name" class="form-control" ng-model="prioritykey2" placeholder="{{selectLabel2}}" 
+				title="{{selectLabel2}}" ng-required="true" autocomplete="off"/>
+				<p ng-show="password.name.$error.required && !password.name.$pristine" class="help-block">This field is required.</p>
+			</div> 
+		</div>
+	</div>
+	
+	<div class="col-md-12 col-sm-12 text-center" ng-show="selectLabel1" style="margin-top: 10px;">
+		<button class="btn btn-primary btn-sm" ng-show="no_of_flds == 1" ng-disabled="!prioritykey1" ng-click="submitPriority();">Continue</button>
+		<button class="btn btn-primary btn-sm" ng-show="no_of_flds == 2"
+		ng-disabled="result  = !prioritykey1 ? true : !prioritykey2 ? true : false" ng-click="submitPriority();">Continue</button>
+		<button class="btn btn-primary btn-sm" ng-show="priorityData.skip_btn_req == 'Y'" ng-click="skipPriority();">Skip</button>
+	</div>
+</div>
+</div>
+<!-- priority block end -->
 
 <div class="text-center center-block" ng-show="loadingTickets" style="padding:30px 0">
     <img src="/angularTicketWidget/images/loading.gif"/>
@@ -79,10 +107,10 @@
                             </hr>
                         </div>
                     </div>
-                    <hr ng-hide="$last &amp;&amp; ticketsData.disc_exists">
+                    <hr ng-hide="$last && ticketsData.disc_exists">
                     </hr>
                 </div>
-                <br ng-hide="ticketsData.items.length == 0 &amp;&amp; !eventMetadata.is_recurring">
+                <br ng-hide="ticketsData.items.length == 0 && !eventMetadata.is_recurring">
                     <div class="row discountCode" ng-show="ticketsData.disc_exists">
                         <!-- <div class="col-md-3 col-sm-3 col-xs-12">
                             <h6 class="bodytextstyle">
@@ -121,7 +149,7 @@
                                 </div>
                                 <div style="clear:both">
                                 </div>
-                                <button class="btn btn-warning" ng-click="buy()" ng-disabled="!(total() &gt; 0 || atleastOneTicketSelected())" ng-show="ticketsData.items.length &gt; 0 &amp;&amp; !loadingTransaction" style="float:right">
+                                <button class="btn btn-warning" ng-click="buy()" ng-disabled="!(total() &gt; 0 || atleastOneTicketSelected())" ng-show="ticketsData.items.length &gt; 0 && !loadingTransaction" style="float:right">
                                     
                                         {{ ticketsData.reg_flow_wordings.order_button_label }}
                                    
@@ -129,11 +157,11 @@
                                 <img ng-show="loadingTransaction" src="/angularTicketWidget/images/loading.gif" style="float:right"/>
                             </div>
                     </div>
-                    <div class="text-center center-block" ng-show="ticketsData.items.length &gt; 0 &amp;&amp; loadSeating" style="padding:30px 0">
+                    <div class="text-center center-block" ng-show="ticketsData.items.length &gt; 0 && loadSeating" style="padding:30px 0">
                         <img src="/angularTicketWidget/images/loading.gif"/>
                         Loading Seats...
                     </div>
-                    <div id="seatingsection" ng-if="ticketsData.items.length &gt; 0 &amp;&amp; isSeatingEvent" style="width: 100%">
+                    <div id="seatingsection" ng-if="ticketsData.items.length &gt; 0 && isSeatingEvent" style="width: 100%">
                         <div id="tooltip" ng-show="showPopup" ng-style="popupStyle" style="border: 1px solid red;  background: none repeat scroll 0px 0px #FBFFAF;">
                             <span ng-bind-html="tooltipHtml">
                             </span>
@@ -155,18 +183,20 @@
                             </div>
                         </div>
                     </div>
-                <br ng-hide="ticketsData.items.length == 0 &amp;&amp; !eventMetadata.is_recurring">
+                <br ng-hide="ticketsData.items.length == 0 && !eventMetadata.is_recurring">
+                <div style="width=100%;overflow: auto;">
                 <table ng-style="backgroundCSS">
                     <tr ng-repeat="row in getRowSize()">
                         <td ng-class="{'NA':!seats.completeseats['s_'+row+'_'+col]}" ng-repeat="col in getColSize()">
-                            <img ng-class="getImageCss(seats.completeseats['s_'+row+'_'+col]) &amp;&amp; seats.completeseats['s_'+row+'_'+col].seatSelected ? 'selectedSeat' : 'nonSelectedSeat' " ng-click="seats.completeseats['s_'+row+'_'+col].seatSelected=!seats.completeseats['s_'+row+'_'+col].seatSelected; clickSeat(seats.completeseats['s_'+row+'_'+col],seatSectionId+'_'+row+'_'+col)" ng-if="seats.completeseats['s_'+row+'_'+col]" ng-mouseout="hideSeatDetails()" ng-mouseover="showSeatDetails(seats.completeseats['s_'+row+'_'+col],$event)" ng-src="{{getSeatImage(seats.completeseats['s_'+row+'_'+col])}}" style="height: 17px; width: 17px;" />
+                            <img ng-class="getImageCss(seats.completeseats['s_'+row+'_'+col]) && seats.completeseats['s_'+row+'_'+col].seatSelected ? 'selectedSeat' : 'nonSelectedSeat' " ng-click="seats.completeseats['s_'+row+'_'+col].seatSelected=!seats.completeseats['s_'+row+'_'+col].seatSelected; clickSeat(seats.completeseats['s_'+row+'_'+col],seatSectionId+'_'+row+'_'+col)" ng-if="seats.completeseats['s_'+row+'_'+col]" ng-mouseout="hideSeatDetails()" ng-mouseover="showSeatDetails(seats.completeseats['s_'+row+'_'+col],$event)" ng-src="{{getSeatImage(seats.completeseats['s_'+row+'_'+col])}}" style="height: 17px; width: 17px;" />
                         </td>
                     </tr>
                 </table>
+                </div>
             </form>
             </hr>
-            <div ng-show="ticketsData.items.length == 0 &amp;&amp; !eventMetadata.is_recurring">
-                <!-- <br/> -->
+            
+            <div ng-show="ticketsUnavailable">
                 <div class="text-center">
                     <h5>
                         Tickets are currently unavailable
@@ -179,7 +209,7 @@
 <!-- 
 <div class="row">
     <div class="col-md-12 col-xs-12">
-        <img alt="Powered by Eventbee Online Registration &amp; Ticketing" border="0" src="http://www.eventbee.com/main/images/home/poweredbyeventbee.jpg" title="Powered by Eventbee" />
+        <img alt="Powered by Eventbee Online Registration & Ticketing" border="0" src="http://www.eventbee.com/main/images/home/poweredbyeventbee.jpg" title="Powered by Eventbee" />
         <span id="siteseal" >
         	<script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3mlfoHSPjcEHprez8Nf5vp"></script>
         </span>
