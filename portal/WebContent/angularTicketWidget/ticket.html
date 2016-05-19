@@ -17,7 +17,7 @@
          <img ng-repeat="src in seatingdata.ticketseatcolor[ticket.id]" ng-src="{{'/main/images/seatingimages/'+src+'.png'}}" style="margin-right:5px" /> 
     </div>
 
-    <div ng-if="ticket.available=='y'">
+    <div ng-if="ticket.available=='y' || ticket.wait_li_type=='Y' || ticket.wid_status">
         <div class="col-md-3 col-sm-3 col-xs-6">
             <h5>
             <span class="bodytextstyle" ng-class="{'cut':parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)}">{{ ticket.actual_price | currency:ticketsData.currency }}</span>
@@ -40,7 +40,7 @@
             </span>
         </h5>
         </div>
-        <div class="col-md-3 col-sm-3 col-xs-6">
+        <div class="col-md-3 col-sm-3 col-xs-6" ng-if="ticket.available=='y'">
             <div ng-if="ticket.availability_msg!='NA' && isSeatingEvent && ticketsData.seatticketid.indexOf(ticket.id) != -1" class="float-right bodytextstyle" >
             <div style="height:10px;"></div>
                <span style="margin-left:35px">{{ticket.ticket_selected}}</span> <br/><span ng-click="scrollToSeats()" style="cursor:pointer">Select Tickets</span>
@@ -66,10 +66,24 @@
         </div>
     </div>
 
-    <div class="col-md-5 col-sm-5 col-xs-12" ng-if="ticket.available=='n'">
-        <div class="text-center bodytextstyle">
+<div ng-if="ticket.wid_status!='In Process'">
+    <div class="col-md-5 col-sm-5 col-xs-12" ng-if="ticket.available=='n' && !ticket.wait_li_type">
+        <div class="text-center bodytextstyle" >
             <h4>{{ ticket.availability_msg }}</h4>
         </div>
+    </div>
+ </div>
+    
+    
+  
+  <div class="col-md-3 col-sm-3 col-xs-6 text-center" ng-if="ticket.wid_status" ng-init="ticket.ticket_selected = ticket.wid_tktqty">
+  	<span ng-bind-html="ticket.ticket_selected"></span>
+  </div>
+    
+    
+    
+    <div class="col-md-3 col-sm-3 col-xs-6 " ng-if="ticket.wait_li_type=='Y'">
+    	<button class="btn btn-sm btn-primary" ng-click="waitlistPop(ticket.name,ticket.id,ticket.wait_li_limit)">put me in waitlist</button>
     </div>
 
 </div>
@@ -119,7 +133,8 @@
             <h4>{{ ticket.availability_msg }}</h4>
         </div>
     </div>
-    
-    
-    
 </div>
+
+
+  
+

@@ -175,6 +175,8 @@ if(singleWidgets.has("whosAttending") || wideWidgets.has("whosAttending") || nar
 <script type="text/javascript" src="/angularTicketWidget/js/angular-route.min.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/js/angular-animate.min.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/js/angular-sanitize.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="/angularTicketWidget/js/ui-bootstrap-tpls-1.3.2.min.js"></script> -->
 <script type="text/javascript" src="/angularTicketWidget/js/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/js/dialogs.js"></script>
 
@@ -558,6 +560,56 @@ var singleBottomWidget = <%=singleBottomWidget%>;
 	getAllWidgets('wide_widgets', wideWidgets, wide_widgets,eventid);
 	getAllWidgets('narrow_widgets', narrowWidgets, narrow_widgets,eventid);
 	getAllWidgets('single_bottom_widgets', singleBottomWidget, single_bottom_widgets,eventid);
+	
+var waitlistId = '',trackCode = '',discountcode = '',registrationsource = '',venueid = '',isseatingevent = '',fbsharepopup = '',nts_enable = '';
+var login_popup = '',fbappid = '',ticketurlcode = '',context = '',nts_commission = '',referral_ntscode = '',priregtoken = '';var prilistid='';
+var fname='',lname='',email='',actiontype='Order Now';
+if($('#waitlistId').val())
+	waitlistId = $('#waitlistId').val();
+if($('#trackcode').val())
+	trackCode = $('#trackcode').val();
+if($('#discountcode').val())
+	discountcode = $('#discountcode').val();
+if($('#registrationsource').val())
+	registrationsource = $('#registrationsource').val();
+if($('#venueid').val())
+	venueid = $('#venueid').val();
+if($('#isseatingevent').val())
+	isseatingevent = $('#isseatingevent').val();
+if($('#fbsharepopup').val())
+	fbsharepopup = $('#fbsharepopup').val();
+if($('#nts_enable').val())
+	nts_enable = $('#nts_enable').val();
+if($('#login-popup').val())
+	login_popup = $('#login-popup').val();
+if($('#fbappid').val())
+	fbappid = $('#fbappid').val();
+if($('#ticketurlcode').val())
+	ticketurlcode = $('#ticketurlcode').val();
+if($('#context').val())
+	context = $('#context').val();
+if($('#nts_commission').val())
+	nts_commission = $('#nts_commission').val();
+if($('#referral_ntscode').val())
+	referral_ntscode = $('#referral_ntscode').val();
+var eventDetailsList = {
+		waitlistId : waitlistId,
+		trackCode : trackCode,
+		registrationsource : registrationsource,
+		venueid : venueid,
+		isseatingevent : isseatingevent,
+		fbsharepopup : fbsharepopup,
+		nts_enable : nts_enable,
+		login_popup : login_popup,
+		fbappid : fbappid,
+		ticketurlcode : ticketurlcode,
+		context : context,
+		nts_commission : nts_commission,
+		referral_ntscode : referral_ntscode,
+		priregtoken : priregtoken,
+		prilistid : prilistid,
+		actiontype : actiontype
+	};
 </script>
 
 <!-- angular ticket widget start -->

@@ -76,6 +76,8 @@ public HashMap getregularticketsAvailibility(HashMap hm,JSONObject jobj){
 		DBManager db=new DBManager();
 		StatusObj sb=null;
 		
+		//eid,tid,allticketIDs,wid
+		//{'tktID':qty}
 	/****strt eventlevelcheck****/
 	int sel_qty=0;
     try{	 
@@ -297,11 +299,6 @@ public HashMap getrecurringticketsAvailibility(HashMap hm,JSONObject jobj){
 		int totalQty=0;
 		if(eventdate==null || "".equals(eventdate))
 			statusObj=dbManager.executeSelectQuery("select a.wait_list_id, a.ticket_qty,a.ticketid from wait_list_tickets a, wait_list_transactions b where  a.wait_list_id= b.wait_list_id and  b.status in('In Process','Waiting')  and a.eventid=cast(? as integer)", new String[]{eid});
-
-
-
-
-
 		else
 			statusObj=dbManager.executeSelectQuery("select a.wait_list_id, a.ticket_qty,a.ticketid from wait_list_tickets a, wait_list_transactions b where  a.wait_list_id= b.wait_list_id and  b.status in('In Process','Waiting')  and b.eventid=cast(? as integer) and b.eventdate=?", new String[]{eid,eventdate});
 		for(int i=0;i<statusObj.getCount();i++){
@@ -402,16 +399,14 @@ HashMap hm= new HashMap();
 hm.put("eid",eid);
 hm.put("tid",tid);
 hm.put("allticketids",allticketids);
-HashMap notavailabletktids=new HashMap();
-
 hm.put("wid",  waitListID);
-//removeWaitListTransactionIds(hm);
+HashMap notavailabletktids=new HashMap();
+//removeWaitListTransactionIds(hm); 
 JSONObject jobj=new JSONObject();
 
 ConditionalTicketingValidator condTickValidator = new ConditionalTicketingValidator();
 try{
 	//{"condition":"Block","src":"T1","trg":[{"id":"T2"},{"id":"T3"}]}
-	
 	if (selectedtickets.length() > 0 && selectedtickets.charAt(selectedtickets.length()-2)==',') 
 		selectedtickets=selectedtickets.substring(0,selectedtickets.length()-2)+selectedtickets.substring(selectedtickets.length()-1);
 	System.out.println("selectedtickets222: "+selectedtickets);

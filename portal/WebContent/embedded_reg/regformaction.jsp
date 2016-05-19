@@ -97,8 +97,9 @@ obj=(JSONObject)new JSONTokener(selected_ticketid).nextValue();
 EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "Regformaction.jsp", "Registration Strated for the  event---->"+eid, "", null);
 HashMap ticketDetailsMap=getTicketDetails(eid);
 String actionname=request.getParameter("actiontype");
-String tid=Presentation.GetRequestParam(request,  new String []{"tid","transactionid"});
-double disAmount=0.0;
+String tid=Presentation.GetRequestParam(request,  new String []{"tid","transactionid"}); //no need;
+
+double disAmount=0.0; // need to check
 	HashMap ntsdata=new HashMap();
 	HashMap ntsdetails=new HashMap();
 	System.out.println("fbuserid in regformaction: "+fbuserid);
@@ -122,30 +123,30 @@ if(!"0".equals(fbuserid)){
 	}
 }
 if(tid==null||"".equals(tid)){
-HashMap contextdata=new HashMap();
-String customerIp=request.getHeader("x-forwarded-for");
-if(customerIp==null || "".equals(customerIp)) customerIp=request.getRemoteAddr();
-contextdata.put("useragent",request.getHeader("User-Agent")+"["+customerIp+"]");
-contextdata.put("trackurl",track);
-contextdata.put("clubuserid",clubuserid);
-contextdata.put("ticketurlcode",ticketurlcode);
-contextdata.put("eventdate",eventdate);
-contextdata.put("registrationsource",registrationsource);
-contextdata.put("wid",waitlistid);
-contextdata.put("prilistid",prilistId);
-contextdata.put("pritoken",priorityToken);
-System.out.println("wid in regformaction::"+waitlistid);
-if(context==null||"".equals(context))
-context="EB";
-contextdata.put("context",context);
-if(discountcode==null)
-discountcode="";
-contextdata.put("discountcode",discountcode);
-if("ning".equals(context)){
-contextdata.put("oid",request.getParameter("oid"));
-contextdata.put("domain",request.getParameter("domain"));
-}
-tid=regTktMgr.createNewTransaction(eid,contextdata);
+	HashMap contextdata=new HashMap();
+	String customerIp=request.getHeader("x-forwarded-for");
+	if(customerIp==null || "".equals(customerIp)) customerIp=request.getRemoteAddr();
+	contextdata.put("useragent",request.getHeader("User-Agent")+"["+customerIp+"]");
+	contextdata.put("trackurl",track);
+	contextdata.put("clubuserid",clubuserid);
+	contextdata.put("ticketurlcode",ticketurlcode);
+	contextdata.put("eventdate",eventdate);
+	contextdata.put("registrationsource",registrationsource);
+	contextdata.put("wid",waitlistid);
+	contextdata.put("prilistid",prilistId);
+	contextdata.put("pritoken",priorityToken);
+	System.out.println("wid in regformaction::"+waitlistid);
+	if(context==null||"".equals(context))
+		context="EB";
+	contextdata.put("context",context);
+	if(discountcode==null)
+		discountcode="";
+	contextdata.put("discountcode",discountcode);
+	if("ning".equals(context)){
+	contextdata.put("oid",request.getParameter("oid"));
+	contextdata.put("domain",request.getParameter("domain"));
+	}
+	tid=regTktMgr.createNewTransaction(eid,contextdata);
 }
 
 if(!"{}".equals(obj+"")){
@@ -153,9 +154,12 @@ String trackquery="insert into querystring_temp (tid,useragent,created_at,querys
 DbUtil.executeUpdateQuery(trackquery,new String[]{tid,request.getHeader("User-Agent"),obj+"","regformaction"});
 }
 
+
+
 EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "Regformaction.jsp", "Registration Strated for the  event---"+eid+" and transactionid is"+tid, "", null);
 String ticketids=request.getParameter("ticketids");
 EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "Regformaction.jsp", "ticketids---"+ticketids, "", null);
+
 StatusObj locked_tickets_sb=DbUtil.executeUpdateQuery("delete from event_reg_locked_tickets where eventid=? and tid=?",new String[]{eid,tid});
 StatusObj blockseats_del=DbUtil.executeUpdateQuery("delete from event_reg_block_seats_temp where eventid=? and transactionid=?", new String[]{eid,tid});
 ArrayList <String>selectedTicketsList=new ArrayList();

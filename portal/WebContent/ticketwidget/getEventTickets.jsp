@@ -25,6 +25,7 @@ String discountCode=request.getParameter("disc_code");
 String priregtoken = request.getParameter("Priregtoken");
 String priregtype = request.getParameter("Priregtype");
 String prilistid = request.getParameter("Prilistid");
+String wid = request.getParameter("wid");
 HashMap<String, String> params = new HashMap<String, String>();
 
 params.put("evtdate", edate);
@@ -35,6 +36,7 @@ params.put("source", "widget");
 params.put("pri_reg_token", priregtoken);
 params.put("pri_reg_type", priregtype);
 params.put("pri_listid", prilistid);
+params.put("wid",wid);
 String uid=UUID.randomUUID().toString();
 
 

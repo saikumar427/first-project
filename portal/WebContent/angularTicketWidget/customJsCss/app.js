@@ -79,6 +79,7 @@ angular.module('ticketsapp', [
         $rootScope.serverAddress = 'http://localhost/';
         //$rootScope.eid = $location.search().eid;
         $rootScope.eid = eventid;
+        $rootScope.waitListId = waitlistId;
         $rootScope.fbUserData = {};
         $rootScope.transactionDetails = {};
         $rootScope.transactionId = '';
@@ -90,7 +91,7 @@ angular.module('ticketsapp', [
         $rootScope.selectDate = '';
         $rootScope.templateMsg = '';
         $rootScope.timeWatcher;
-        $rootScope.context = $location.search().context;
+        //$rootScope.context = $location.search().context;
         $rootScope.pageLocation = 'Tickets';
         $rootScope.backLinkWording = 'Back To Tickets Page';
         $rootScope.fromPage = 'tickets';
@@ -107,6 +108,8 @@ angular.module('ticketsapp', [
 		$rootScope.priorityType='';
 		$rootScope.listid= '';
 		$rootScope.ifPri = false;
+		$rootScope.eventDetailsList = eventDetailsList;
+		//console.log($rootScope.eventDetailsList);
         /*var sectime=$interval(function() {
             $rootScope.secondsRemaining = $rootScope.secondsRemaining - 1;
             if($rootScope.secondsRemaining<=0)
@@ -176,7 +179,7 @@ angular.module('ticketsapp', [
             });
         };
 
-        (function(d) {
+       /* (function(d) {
             var js,
                 id = 'facebook-jssdk',
                 ref = d.getElementsByTagName('script')[0];
@@ -187,7 +190,7 @@ angular.module('ticketsapp', [
             js.async = true;
             js.src = "//connect.facebook.net/en_US/all.js";
             ref.parentNode.insertBefore(js, ref);
-        }(document));
+        }(document));*/
 
     }
 ]);

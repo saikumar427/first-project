@@ -19,10 +19,12 @@ public class CTicketsJson {
 		JSONObject ticketsJSON=new JSONObject(); 	
 		JSONArray tickets=new JSONArray();
 		HashMap<String, String> lockedQuantity=new HashMap<String, String>();
-		
+		HashMap<String, String> waitlistDetailsMap=new HashMap<String, String>();
 		try{
 			String tid=params.get("tid");
 			ticketInfo.intialize(eid,params);
+			if(!"".equals(params.get("wid")))
+				waitlistDetailsMap=ticketInfo.getWaitListDetails(eid,params.get("wid"));
 			ticketsJSON.put("disc_exists",ticketInfo.isDiscountExists);			
 			
 			HashMap<String,String> configMap=BDisplayAttribsDB.getAttribValues(eid,"TicketDisplayOptions");
@@ -81,7 +83,7 @@ public class CTicketsJson {
 			
 			for(int i=0;i<ticketsArray.size();i++){
 				CTicketGroup eachGroup=(CTicketGroup)ticketsArray.get(i);
-				BEventTicket eventTicketsArray[]=(BEventTicket[])eachGroup.getGroupTicketsArray();
+				CEventTicket eventTicketsArray[]=(CEventTicket[])eachGroup.getGroupTicketsArray();
 				ArrayList<JSONObject> eachGroupTicketsJSON=new ArrayList<JSONObject>();			
 
 				for(int k=0;k<eventTicketsArray.length;k++){
@@ -152,6 +154,20 @@ public class CTicketsJson {
 							else if("NOT_STARTED".equalsIgnoreCase(eventTicketsArray[k].getTicketStatus())){							
 								eachTicketJSON.put("available_msg","Not yet started, will start on "+eventTicketsArray[k].getTicketStartDate());
 							}	*/
+						
+						Boolean flag = true;
+						if(!"".equals(params.get("wid")) && waitlistDetailsMap.containsKey(eventTicketsArray[k].getTicketId())){//for waitlist transaction
+							eachTicketJSON.put("wid_status",waitlistDetailsMap.get("status"));
+							if(!"Expired".equals(waitlistDetailsMap.get("status"))){
+								eachTicketJSON.put("wid",waitlistDetailsMap.get("wid"));
+								eachTicketJSON.put("wid_tktqty",waitlistDetailsMap.get("tktqty"));
+								flag = false;
+							}
+						}else if("Y".equals(eventTicketsArray[k].getWaitListType())){//for put me waitlist
+							eachTicketJSON.put("wait_li_type",eventTicketsArray[k].getWaitListType());
+							eachTicketJSON.put("wait_li_limit",eventTicketsArray[k].getWaitListLimit());
+							flag = false;
+						}
 						if("Closed".equals(eventTicketsArray[k].getTicketStatus())&&"yes".equalsIgnoreCase(GenUtil.getHMvalue(configMap,"event.closedtickets.status","yes"))){
 							eachTicketJSON.put("availability_msg",GenUtil.getHMvalue(configMap,"event.closedtickets.statusmessage","Closed"));
 							if("yes".equals(GenUtil.getHMvalue(configMap,"event.closedtickets.strikethrough","no")))
@@ -160,8 +176,11 @@ public class CTicketsJson {
 							eachGroupTicketsJSON.add(eachTicketJSON);
 						}
 						else if("Sold Out".equals(eventTicketsArray[k].getTicketStatus())&&"yes".equalsIgnoreCase(GenUtil.getHMvalue(configMap,"event.soldouttickets.status","yes"))){
-							if("yes".equals(GenUtil.getHMvalue(configMap,"event.soldouttickets.strikethrough","no")))
-								eachTicketJSON.put("strike","y");
+							if("yes".equals(GenUtil.getHMvalue(configMap,"event.soldouttickets.strikethrough","no"))){
+								if(flag)
+									eachTicketJSON.put("strike","y");
+								
+							}
 							eachTicketJSON.put("availability_msg",GenUtil.getHMvalue(configMap,"event.soldouttickets.statusmessage","SOLD OUT"));
 							eachTicketJSON.put("available","n");
 							eachGroupTicketsJSON.add(eachTicketJSON);

@@ -1,0 +1,82 @@
+<!-- PriorityTimeCheck start -->
+<div class="modal" ng-show="timeCheckShow">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+	            <button type="button" class="close" ng-click="close_priTimeCheck();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+         	</div>
+         	<div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
+            	<button type="button" class="btn btn-default btn-sm" ng-click="close_priTimeCheck();">{{timeCheckShow}}</button>
+         	</div>
+		</div>
+	</div>
+</div>
+<!-- PriorityTimeCheck end -->
+<!-- Conditional Ticketing Pop-Up Start -->
+<div class="modal" ng-show="conditional_ticketing">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+	            <button type="button" class="close" ng-click="close_condition();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+         	</div>
+         	<div class="modal-body">
+         		<div ng-bind-html="conditional_ticketing"></div>
+         	</div>
+         	<div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
+            	<button type="button" class="btn btn-default btn-sm" ng-click="close_condition();">OK</button>
+         	</div>
+		</div>
+	</div>
+</div>
+<!-- Conditional Ticketing Pop-Up End -->
+
+<!-- Wait List Pop-Up Start -->
+<div class="modal "  ng-show="showWaitPop" >
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" ng-click="closeWaitList();" >
+            	<img src='/home/images/images/close.png'>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form name="myForm">
+               <div ng-show="waitListResponse.status=='success'" class="alert alert-success">{{waitListResponse.msg}}</div>
+               <div ng-show="waitListResponse.status=='fail'" class="alert alert-danger">{{waitListResponse.status}}</div>
+               <div class="col-sm-9">
+                  <b>Ticket Name</b><br>
+                  <label>{{waitListData.tktName}}</label>
+               </div>
+               <div class="col-sm-3 text-right">
+                  <b>Quantity</b><br>
+                  <span >
+                  <select class="form-control"  ng-model="wait_select" ng-options="o for o in waitListData.waitlistQty"></select>
+                  </span>
+               </div>
+               <div class="col-sm-12 ">
+                  <hr>
+               </div>
+               <div ng-show="waitListData.error" style="color:red;">{{waitListData.error}}</div>
+               <div class="form-group">
+                  <input type="text" name="wname" class="form-control" ng-model="userWaitListDetails.name" placeholder="Name" required/>
+                  <span class="error" ng-show="myForm.wname.$error.required">Required!</span>
+               </div>
+               <div class="form-group">
+                  <input type="email" name="wemail" class="form-control" ng-model="userWaitListDetails.email" placeholder="Email" required ng-pattern="waitListData.pattern"/>
+                  <span class="error" ng-show="myForm.wemail.$error.required">Required!</span>
+                  <span class="error" ng-show="myForm.wemail.$error.email">Not valid email!</span>
+               </div>
+               <div class="form-group">
+                  <input type="text" class="form-control" ng-model="userWaitListDetails.mnumber" placeholder="Mobile Number"/>
+               </div>
+               <textarea class="form-control" ng-model="userWaitListDetails.message"  placeholder="Message to manager"></textarea>
+            </form>
+         </div>
+         <div class="modal-footer">
+            <button type="button" ng-show="waitListData.showBtn" class="btn btn-warning btn-sm" ng-disabled="wbtn = wait_select == 0 ? true : false" ng-click="submitWaitList();">Submit</button>
+            <button type="button" class="btn btn-default btn-sm" ng-click="closeWaitList();">Cancel</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- Wait List Pop-Up End -->

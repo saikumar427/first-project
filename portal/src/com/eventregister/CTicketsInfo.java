@@ -3,6 +3,8 @@ package com.eventregister;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONObject;
+
 import com.eventbee.general.DBManager;
 import com.eventbee.general.DbUtil;
 import com.eventbee.general.GenUtil;
@@ -19,6 +21,7 @@ public class CTicketsInfo {
 	private String eventDate=null;
 	private HashMap<String,HashMap<String, String>> detailsMap=null;
 	private HashMap<String,String> maxMinMap=null;
+	HashMap<String,Integer> waitlistQtyMap=null;
 	CTicketsDB ticketsDB=new CTicketsDB();
 	public void intialize(String evtid,HashMap<String, String> params){
 		this.eventDate=params.get("evtdate");
@@ -29,6 +32,12 @@ public class CTicketsInfo {
 			regtktmgr.autoLocksAndBlockDelete(eventid, "", "jsonlevel",GenUtil.getHMvalue(configMap,"timeout","14"),GenUtil.getHMvalue(configMap,"event.seating.enabled","NO"));
 		
 		maxMinMap=checkTicket(evtid,eventDate);
+		
+		if(!"".equals(params.get("wid")))
+			getWaitListDetails(eventid,params.get("wid")); 
+			
+		waitlistQtyMap=getWaitListHoldQty(evtid,params.get("evtdate"));
+		
 		groupTickets.put("tickets",getGroupsAndTickets(eventid,params));
 		requiredTicketGroups=(ArrayList<CTicketGroup>)groupTickets.get("tickets");
 		isDiscountExists=ticketsDB.isCouponcodeExists(eventid);
@@ -54,11 +63,12 @@ public class CTicketsInfo {
 
 		HashMap<String,String> hashMapRef=new HashMap<String,String>();
 		CTicketGroup tktGrp=null;
-		ArrayList<BEventTicket> groupTicketsArray=null;
+		ArrayList<CEventTicket> groupTicketsArray=null;
 		int groupIndex=0;
 		StatusObj sb=db.executeSelectQuery(query,(String[])paramList.toArray(new String[paramList.size()]));
 		try{
 			if(sb.getStatus()){
+				
 				//priority reg block start
 				ArrayList<String> allPriTickets=null;
 				ArrayList<String> listIdPriTickets=null;
@@ -91,7 +101,7 @@ public class CTicketsInfo {
 					if(hashMapRef.get(db.getValue(i,"ticket_groupid",""))==null){
 						groupIndex++;
 						tktGrp=new CTicketGroup();
-						groupTicketsArray=new ArrayList<BEventTicket>();
+						groupTicketsArray=new ArrayList<CEventTicket>();
 						tktGrp.setTicketGroupName(db.getValue(i,"groupname",""));
 						if(!"".equals(db.getValue(i,"groupname","")))
 							tktGrp.setAutoGroup(false);
@@ -99,7 +109,7 @@ public class CTicketsInfo {
 						tktGrp.setTicketGroupDescription(db.getValue(i, "grpdescription", "")); //optional
 					}
 
-					BEventTicket eventTicketObj=new BEventTicket();
+					CEventTicket eventTicketObj=new CEventTicket();
 					if("Yes".equals(db.getValue(i,"isdonation","")))
 						eventTicketObj.setTicketType("donationType");
 					else if("Yes".equalsIgnoreCase(db.getValue(i,"isattendee","")))
@@ -117,6 +127,7 @@ public class CTicketsInfo {
 					String tkktid="";
 					int max=Integer.parseInt(db.getValue(i,"max_qty","0"));
 					int min=Integer.parseInt(db.getValue(i,"min_qty","0"));
+					int originalMax=max;
 					tkktid=db.getValue(i,"price_id","");
 					int rem=0;
 					if(maxMinMap.get("seat_"+tkktid)==null){
@@ -132,6 +143,7 @@ public class CTicketsInfo {
 					}					
 					eventTicketObj.setTicketMaxQty(max);
 					eventTicketObj.setTicketMinQty(min);
+					
 					HashMap<String,String> timeHm=new HashMap<String,String>();
 
 					if(eventDate!=null&&!"".equals(eventDate)){
@@ -174,11 +186,59 @@ public class CTicketsInfo {
 						eventTicketObj.setTicketStatus("NOT_STARTED");
 					else
 						eventTicketObj.setMemberTicketFlag(false);
+					
+					
+					if("NO".equalsIgnoreCase(db.getValue(i,"wait_list_type","NO")))
+						eventTicketObj.setWaitListType("N");
+					else{
+						try{
+							int waitListCapacity=0;
+							try{
+								waitListCapacity=Integer.parseInt(db.getValue(i,"wait_list_max_qty","0"));
+							}catch(Exception e){waitListCapacity=0;}
+							
+							if(waitlistQtyMap.containsKey("inprocess_"+db.getValue(i,"price_id","")))
+								rem=rem-waitlistQtyMap.get("inprocess_"+db.getValue(i,"price_id",""));
+							if(waitListCapacity==100000){
+								if(rem<=0){
+									eventTicketObj.setWaitListType("Y");
+									eventTicketObj.setWaitListLimit(waitListCapacity);
+								}
+							}else{
+								int usedQty=0;
+								if(waitlistQtyMap.containsKey(db.getValue(i,"price_id","")))
+									usedQty=waitlistQtyMap.get(db.getValue(i,"price_id",""));
+								if(waitListCapacity>usedQty && rem<=0){
+									eventTicketObj.setWaitListType("Y"); 
+									eventTicketObj.setWaitListLimit(waitListCapacity-usedQty);
+								}else{
+									eventTicketObj.setWaitListType("N");
+									eventTicketObj.setWaitListLimit(0);
+								}
+							}
+							
+							if(rem<=0){
+								if(!"".equals(eventDate) && "YES".equals(GenUtil.getHMvalue(configMap,"event.seating.enabled",""))){}
+								else eventTicketObj.setTicketStatus("Sold Out");
+							}
+							if("Sold Out".equals(eventTicketObj.getTicketStatus()) && "Y".equals(eventTicketObj.getWaitListType())){
+								int waitListLimit=eventTicketObj.getWaitListLimit();
+								waitListLimit=waitListLimit==100000?originalMax:waitListLimit;
+								waitListLimit=waitListLimit>originalMax?originalMax:waitListLimit;
+								eventTicketObj.setWaitListLimit(waitListLimit);
+							}
+							
+							}catch(Exception e){
+								System.out.println("exception occured at waitlist info::-- "+e.getMessage());
+							}
+						}
+					
+					
 					groupTicketsArray.add(eventTicketObj);
 					if(groupTicketsArray!=null){
-						BEventTicket eventTicketsArray[]=new BEventTicket[groupTicketsArray.size()];
+						CEventTicket eventTicketsArray[]=new CEventTicket[groupTicketsArray.size()];
 						for(int k=0;k<groupTicketsArray.size();k++){
-							eventTicketsArray[k]=(BEventTicket)groupTicketsArray.get(k);
+							eventTicketsArray[k]=(CEventTicket)groupTicketsArray.get(k);
 						}
 						tktGrp.setGroupTicketsArray(eventTicketsArray);
 					}
@@ -376,5 +436,80 @@ public class CTicketsInfo {
 		}
 		
 		return priorityTicketsMap;
+	}
+	
+	public HashMap<String, Integer> getWaitListHoldQty(String eid, String eventdate) {
+		HashMap<String, Integer> totalHoldTickets = new HashMap<String, Integer>();
+		DBManager dbManager=new DBManager();
+		StatusObj statusObj=null;
+		int totalQty=0;
+		if(eventdate==null || "".equals(eventdate))
+		statusObj=dbManager.executeSelectQuery("select a.wait_list_id, a.ticket_qty,a.ticketid,b.status from wait_list_tickets a, wait_list_transactions b where  a.wait_list_id= b.wait_list_id and a.eventid=cast(? as integer)", new String[]{eid});
+		else
+		statusObj=dbManager.executeSelectQuery("select a.wait_list_id, a.ticket_qty,a.ticketid,b.status from wait_list_tickets a, wait_list_transactions b where  a.wait_list_id= b.wait_list_id and b.eventid=cast(? as integer) and b.eventdate=?", new String[]{eid,eventdate});
+		for(int i=0;i<statusObj.getCount();i++){
+		totalQty=totalQty+Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0"));
+		if(totalHoldTickets.containsKey(dbManager.getValue(i, "ticketid", "")))
+		totalHoldTickets.put(dbManager.getValue(i, "ticketid", ""), totalHoldTickets.get(dbManager.getValue(i, "ticketid", ""))+Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0")));	
+		else
+		totalHoldTickets.put(dbManager.getValue(i, "ticketid", ""), Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0")));
+
+
+		if("In Process".equalsIgnoreCase(dbManager.getValue(i,"status", "")) || "Waiting".equalsIgnoreCase(dbManager.getValue(i,"status", ""))){
+			if(totalHoldTickets.containsKey("inprocess_"+dbManager.getValue(i, "ticketid", "")))
+				totalHoldTickets.put("inprocess_"+dbManager.getValue(i, "ticketid", ""), totalHoldTickets.get("inprocess_"+dbManager.getValue(i, "ticketid", ""))+Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0")));	
+				else
+				totalHoldTickets.put("inprocess_"+dbManager.getValue(i, "ticketid", ""), Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0")));
+		}	
+		}
+
+
+
+
+		totalHoldTickets.put("all_tickets_qty", totalQty);
+		return totalHoldTickets;
+		}
+	
+	public HashMap<String,String> getWaitListDetails(String eid,String waitListId){
+		String waitListQuery="select tk.ticketid,tr.status,tk.wait_list_id,tk.ticket_name,tk.ticket_qty,tr.exp_date,tr.exp_time,tr.eventdate from wait_list_tickets tk,wait_list_transactions tr where "+
+		                     " tk.wait_list_id=tr.wait_list_id and tk.wait_list_id=? and tk.eventid=?::bigint and tr.status in('In Process','Expired')";
+		DBManager dbm=new DBManager();
+		StatusObj sbj=dbm.executeSelectQuery(waitListQuery,new String[]{waitListId,eid});
+		HashMap<String,String> waitListObj=new HashMap<String,String>();
+		try{
+		if(sbj.getStatus() && sbj.getCount()>0){
+			String expdate=dbm.getValue(0,"exp_date","");
+			String exptime=dbm.getValue(0,"exp_time","");
+			waitListObj.put(dbm.getValue(0,"ticketid",""),dbm.getValue(0,"ticketid",""));
+			waitListObj.put("wid",dbm.getValue(0,"wait_list_id",""));
+			waitListObj.put("tktqty",dbm.getValue(0,"ticket_qty",""));
+			waitListObj.put("status",dbm.getValue(0,"status",""));
+			boolean flag=true;
+			flag=checkTimeDiffrence(expdate,exptime);
+			if(!flag){
+				waitListObj.put("status","Expired");
+				makeWaitListExpired(eid,waitListId);
+			}
+		}
+		}catch(Exception e){
+			System.out.println("the exception occured in getWaitListDetails :"+e.getMessage());
+		}
+		
+		return waitListObj;
+	}
+	
+	boolean checkTimeDiffrence(String expdate,String exptime){
+	    boolean flag=false;
+	    String time=expdate+" "+exptime;
+	    String timequery="select '"+time+"'>now()";
+	    System.out.println("timequery: "+timequery);
+	    String val=DbUtil.getVal(timequery,null);
+	    if("t".equals(val))
+	        flag=true;
+	return flag;
+	}
+
+	public void makeWaitListExpired(String eid,String waitlistId){
+		DbUtil.executeUpdateQuery("update wait_list_transactions set status='Expired' where eventid=?::BIGINT and wait_list_id=?",new String[]{eid,waitlistId});
 	}
 }

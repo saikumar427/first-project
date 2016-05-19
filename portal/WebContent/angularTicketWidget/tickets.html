@@ -134,7 +134,7 @@
                             </button>
                             <img ng-show="loadingDiscount" src="/angularTicketWidget/images/loading.gif"/>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-12">
+                        <div class="col-md-5 col-sm-3 col-xs-12">
                             <h6 class="bodytextstyle">
                                 {{ discountsData.disc_msg }}
                             </h6>
@@ -206,12 +206,4 @@
         
     </div>
 </div>
-<!-- 
-<div class="row">
-    <div class="col-md-12 col-xs-12">
-        <img alt="Powered by Eventbee Online Registration & Ticketing" border="0" src="http://www.eventbee.com/main/images/home/poweredbyeventbee.jpg" title="Powered by Eventbee" />
-        <span id="siteseal" >
-        	<script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3mlfoHSPjcEHprez8Nf5vp"></script>
-        </span>
-    </div>
-</div> -->
+<div ng-include="'/angularTicketWidget/popUps.html'"></div>

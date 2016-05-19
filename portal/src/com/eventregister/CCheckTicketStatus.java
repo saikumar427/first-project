@@ -1,18 +1,33 @@
 package com.eventregister;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import com.eventbee.general.DBManager;
 import com.eventbee.general.DbUtil;
 import com.eventbee.general.EventbeeLogger;
 import com.eventbee.general.StatusObj;
 
-public class BCheckTicketStatus {
+public class CCheckTicketStatus {
+	
 	public static String TICKET_LEVEL_QTY_CRITERIA_MSG= "ticket-level-qty-criteria";
 	public static String EVENT_LEVEL_QTY_CRITERIA_MSG= "event-level-qty-criteria";
 	String GET_TICKETS_QUERY="select groupname,ticket_groupid,price_id,ticket_name,networkcommission from tickets_details_view where eventid=?";
-
+	
+	public JSONArray getConditionalTicketingRules(String eid){
+		JSONArray conditionJsonAry=new JSONArray();
+		String conditions = DbUtil.getVal("select rules from conditional_ticketing_rules where eventid=CAST(? AS BIGINT)", new String[]{eid});
+		if(conditions==null) conditions="";
+		try{
+			conditionJsonAry = new JSONArray(conditions);
+		}catch(Exception e){
+		}
+		return conditionJsonAry;
+	}
+	
 	public HashMap<String,HashMap<String, String>> eventLevelCheck(String eid,String tid,String eventdate,String sel_qty){
 		HashMap<String,HashMap<String, String>> result=new HashMap<String,HashMap<String, String>>();
 		String limitCount=DbUtil.getVal("select value from config where config_id=(select config_id from eventinfo where eventid=?::bigint) and name='event.reg.eventlevelcheck.count'",new String[]{eid});
@@ -23,6 +38,7 @@ public class BCheckTicketStatus {
 		System.out.println("(Box Office) eventdate::"+eventdate);
 		System.out.println("(Box Office) el_qty::"+sel_qty);
 		System.out.println(eid+"limitcount::"+limitCount);
+		
 		if("".equals(limitCount))
 			return result;
 
@@ -71,14 +87,14 @@ public class BCheckTicketStatus {
 		System.out.println("result:::::::"+result);
 		return result;	
 	}
-	public HashMap<String,HashMap<String,String>> getNONRecurringEventTicketsAvailibility(String eid,String tid,JSONArray ticketsQtyArray,HashMap<String,HashMap<String, String>> eventTickets){
+	
+	public HashMap<String,HashMap<String,String>> getNONRecurringEventTicketsAvailibility(String eid,String tid,JSONArray ticketsQtyArray,HashMap<String,HashMap<String, String>> eventTickets,String waitListID,String edate){
 		HashMap<String,HashMap<String,String>> qtyDetails=new HashMap<String,HashMap<String,String>>();
 		HashMap<String,String> remainingCountMap=new HashMap<String,String>();
 		try{			
-
 			DBManager db=new DBManager();
 			StatusObj sb=null;
-
+			ArrayList<HashMap<String,Integer>> waitListHoldQty=null;
 			///event level check
 			int sel_qty=0;
 			try{	 
@@ -91,6 +107,8 @@ public class BCheckTicketStatus {
 						sel_qty=sel_qty+Integer.parseInt(ticketsQtyArray.getJSONObject(i).getString("qty"));
 				}				
 			}catch(Exception e){System.out.println("error qty cal::"+tid);sel_qty=0;}	
+			
+			waitListHoldQty = getWaitListHoldQty(eid,edate,waitListID);
 
 			qtyDetails=eventLevelCheck(eid, tid,"",sel_qty+"");
 			if(!qtyDetails.isEmpty()){//event level quantity  criteria has reached 
@@ -126,9 +144,20 @@ public class BCheckTicketStatus {
 						+"group by ticketid, a.max_ticket, a.sold_qty";
 				sb=db.executeSelectQuery(pricequery,new String[]{eid,eid,eid});
 			}
+			
+			
+			
 			if(sb.getStatus() && sb.getCount()>0){
 				for(int i=0;i<sb.getCount();i++){
-					remainingCountMap.put(db.getValue(i,"ticketid",""),db.getValue(i,"remaining_qty",""));
+					if( !"".equals(waitListID) && waitListHoldQty.get(0).containsKey(waitListID) ){
+						remainingCountMap.put(db.getValue(i,"ticketid",""),db.getValue(i,"remaining_qty",""));
+					}else{
+						int waitedQty=0;
+						if(waitListHoldQty!=null)
+							waitedQty=waitListHoldQty.get(1).get(db.getValue(i,"ticketid",""))==null?0:waitListHoldQty.get(1).get(db.getValue(i,"ticketid",""));
+						remainingCountMap.put(db.getValue(i,"ticketid",""),(Integer.parseInt(db.getValue(i,"remaining_qty",""))-waitedQty)+"");
+					}
+					//remainingCountMap.put(db.getValue(i,"ticketid",""),db.getValue(i,"remaining_qty",""));
 				}
 			}
 
@@ -161,6 +190,7 @@ public class BCheckTicketStatus {
 
 		return qtyDetails;
 	}
+	
 	public HashMap<String,HashMap<String,String>> getRecurringEventTicketsAvailibility(String eventid,String eventdate,String tid,JSONArray ticketsQtyArray,HashMap<String,HashMap<String, String>> eventTickets){
 		HashMap<String,HashMap<String,String>> qtyDetails=new HashMap<String,HashMap<String,String>>();
 		HashMap<String,String> remainingCountMap=new HashMap<String,String>();
@@ -192,7 +222,7 @@ public class BCheckTicketStatus {
 			/****end eventlevel check****/
 
 
-			String price_qry="select price_id,max_ticket from price where evt_id=CAST(? AS BIGINT)";
+			String price_qry="select price_id,max_ticket,min_qty,max_qty from price where evt_id=CAST(? AS BIGINT)";
 			price_sb=Db.executeSelectQuery(price_qry,new String[]{eventid});
 			String rec_sold_qty_qry="select ticketid,soldqty from reccurringevent_ticketdetails where eventid=CAST(? AS BIGINT) and eventdate=?";
 
@@ -201,6 +231,8 @@ public class BCheckTicketStatus {
 			if(price_sb.getStatus()&&price_sb.getCount()>0){
 				for(int i=0;i<price_sb.getCount();i++){
 					remainingCountMap.put("p_"+Db.getValue(i,"price_id",""),Db.getValue(i,"max_ticket",""));
+					remainingCountMap.put("min_"+Db.getValue(i,"price_id",""),Db.getValue(i,"min_qty","0"));
+					remainingCountMap.put("max_"+Db.getValue(i,"price_id",""),Db.getValue(i,"max_qty","0"));
 				}
 			}
 			rec_sb=Db.executeSelectQuery(rec_sold_qty_qry,new String[]{eventid,eventdate});
@@ -231,6 +263,9 @@ public class BCheckTicketStatus {
 
 				int qty=Integer.parseInt(eachTicketQtyJSON.getString("qty"));
 				int l_qty=0,p_qty=0,r_qty=0;
+				int minqty=0;
+				int maxqty=0;
+				
 				try{
 					if(remainingCountMap.get("p_"+ticketId)!=null)
 						p_qty=Integer.parseInt((String)remainingCountMap.get("p_"+ticketId));
@@ -243,8 +278,19 @@ public class BCheckTicketStatus {
 					if(remainingCountMap.get("r_"+ticketId)!=null)
 						r_qty=Integer.parseInt((String)remainingCountMap.get("r_"+ticketId));
 				}catch(Exception e){System.out.println("exception is"+e.getMessage());}
+				
+				try{
+					if(remainingCountMap.get("min_"+ticketId)!=null)
+						minqty = Integer.parseInt((String)remainingCountMap.get("min_"+ticketId));
+				}catch(Exception e){minqty=0;}
+				try{
+					if(remainingCountMap.get("max_"+ticketId)!=null)
+						maxqty = Integer.parseInt((String)remainingCountMap.get("max_"+ticketId));
+				}catch(Exception e){maxqty=0;}
+				
+				
 				int remainingQty=p_qty-l_qty-r_qty;
-				if(qty>remainingQty){
+				if(qty>remainingQty || qty<minqty || qty>maxqty){
 					HashMap<String, String> temp=new HashMap<String, String>();
 					temp.put("ticket_id",ticketId+"");
 					temp.put("selected_qty",qty+"");
@@ -253,6 +299,7 @@ public class BCheckTicketStatus {
 				}
 
 			}
+			
 			if(!qtyDetails.isEmpty()){
 				HashMap<String, String> temp=new HashMap<String, String>();
 				temp.put("criteria", TICKET_LEVEL_QTY_CRITERIA_MSG);
@@ -263,6 +310,36 @@ public class BCheckTicketStatus {
 
 		return qtyDetails;
 	}
+
+	public ArrayList<HashMap<String, Integer>> getWaitListHoldQty(String eid, String eventdate,String waitListID) {
+		ArrayList<HashMap<String, Integer>> returnMap=new  ArrayList<HashMap<String, Integer>>();
+		HashMap<String, Integer> totalHoldTickets = new HashMap<String, Integer>();
+		HashMap<String, Integer> allWids = new HashMap<String, Integer>();
+		DBManager dbManager=new DBManager();
+		StatusObj statusObj=null;
+		int totalQty=0;
+		if(eventdate==null || "".equals(eventdate))
+			statusObj=dbManager.executeSelectQuery("select a.wait_list_id, a.ticket_qty,a.ticketid from wait_list_tickets a, wait_list_transactions b where  a.wait_list_id= b.wait_list_id and  b.status in('In Process','Waiting')  and a.eventid=cast(? as integer)", new String[]{eid});
+		else
+			statusObj=dbManager.executeSelectQuery("select a.wait_list_id, a.ticket_qty,a.ticketid from wait_list_tickets a, wait_list_transactions b where  a.wait_list_id= b.wait_list_id and  b.status in('In Process','Waiting')  and b.eventid=cast(? as integer) and b.eventdate=?", new String[]{eid,eventdate});
+		for(int i=0;i<statusObj.getCount();i++){
+			totalQty=totalQty+Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0"));
+			if(waitListID.equalsIgnoreCase(dbManager.getValue(i, "wait_list_id", "0")))
+				allWids.put(dbManager.getValue(i, "wait_list_id", "0"),0);			
+			if(totalHoldTickets.containsKey(dbManager.getValue(i, "ticketid", "")))
+				totalHoldTickets.put(dbManager.getValue(i, "ticketid", ""), totalHoldTickets.get(dbManager.getValue(i, "ticketid", ""))+Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0")));			
+			else
+				totalHoldTickets.put(dbManager.getValue(i, "ticketid", ""), Integer.parseInt(dbManager.getValue(i, "ticket_qty", "0")));
+		}	
+		totalHoldTickets.put("all_tickets_qty", totalQty);
+		returnMap.add(allWids);
+		returnMap.add(totalHoldTickets);
+	
+		System.out.println("returnMap:"+returnMap);
+
+		return returnMap;
+	}
+	
 	public	HashMap<String,HashMap<String, String>> getTicketDetails(String eid){
 		HashMap<String,HashMap<String, String>> ticketsMap=new HashMap<String,HashMap<String, String>>();
 		DBManager db=new DBManager();
@@ -284,38 +361,25 @@ public class BCheckTicketStatus {
 		}
 
 		return ticketsMap;
-	}	
-
-/*	private HashMap<String, String> getProcessFees(String eventId){
-		String query="select * from eventinfo where eventid=?";
-		
-		
-	}*/
-	
-	
-	public HashMap<String,String> doRegformAction(HashMap<String, String> paramsData,BRegistrationTiketingManager regManager,BDiscountManager discountManager, HashMap<String,HashMap<String, String>> eventTickets){
+	}
+	public HashMap<String,String> doRegformAction(HashMap<String, String> paramsData,RegistrationTiketingManager regManager,CDiscountManager discountManager, HashMap<String,HashMap<String, String>> eventTickets){
 		HashMap<String, String> returnParams=new HashMap<String, String>();
 		System.out.println("in registration form action");
-		String trackQuery="insert into querystring_temp (tid,useragent,created_at,querystring,jsp ) values(?,?,now(),?,?)";
-		DbUtil.executeUpdateQuery(trackQuery,new String[]{paramsData.get("tid"),paramsData.get("user_agent"),paramsData.get("json")+"","regformaction"});
-		EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "Regformaction.jsp", "Registration Strated for the  event---"+paramsData.get("eid")+" and transactionid is"+paramsData.get("tid"), "", null);
 
-		//String ticketids=request.getParameter("ticketids");
-
-		//EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "Regformaction.jsp", "ticketids---"+ticketids, "", null);
-
+		EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "CCheckTicketStatus.java", "Registration Strated for the event :- "+paramsData.get("eid")+" & transactionid :- "+paramsData.get("tid"), "", null);
+		
+		
+		
 		DbUtil.executeUpdateQuery("delete from event_reg_locked_tickets where eventid=? and tid=?",new String[]{paramsData.get("eid"),paramsData.get("tid")});
 		DbUtil.executeUpdateQuery("delete from event_reg_block_seats_temp where eventid=? and transactionid=?", new String[]{paramsData.get("eid"),paramsData.get("tid")});
 		DbUtil.executeUpdateQuery("delete from event_reg_ticket_details_temp where tid=?",new String[]{paramsData.get("tid")});
 
-		
 		//String processFee=DbUtil.getVal("select current_fee from eventinfo where eventid=?::integer", new String[]{paramsData.get("eid")});
 		
-		HashMap<String, HashMap<String, String>> ticketIDsWithGroupNames=getGroupDetailsOfTickets(paramsData.get("eid"));
+		HashMap<String, HashMap<String, String>> ticketIDsWithGroupNames=getTicketDetails(paramsData.get("eid"));
 		
 		try{
-				JSONArray ticketsQtyArray=new JSONArray(paramsData.get("json"));
-				
+				JSONArray ticketsQtyArray=new JSONArray(paramsData.get("selected_tickets"));
 				
 				for(int i=0;i<ticketsQtyArray.length();i++){					
 					JSONObject eachTicketQtyJSON=ticketsQtyArray.getJSONObject(i);
@@ -323,81 +387,87 @@ public class BCheckTicketStatus {
 					
 					HashMap<String, String> ticketDetails=eventTickets.get(ticketId);
 					HashMap<String, String> paramsSet=new HashMap<String,String>();
-				
 					
 					if("yes".equalsIgnoreCase(ticketDetails.get("isdonation"))||"y".equalsIgnoreCase(ticketDetails.get("isdonation"))){
-					
 						paramsSet.put("qty", "1");
-						paramsSet.put("original_price", eachTicketQtyJSON.getString("amount"));
-						paramsSet.put("final_price", eachTicketQtyJSON.getString("amount"));
+						paramsSet.put("originalPrice", eachTicketQtyJSON.getString("amount"));
+						paramsSet.put("finalPrice", eachTicketQtyJSON.getString("amount"));
 					
-					}
-					else{
+					}else{
 						String qty=eachTicketQtyJSON.getString("qty");
 						paramsSet.put("qty", qty);
-						paramsSet.put("original_price", ticketDetails.get("price"));
-						paramsSet.put("final_price", ticketDetails.get("final_price"));
+						paramsSet.put("originalPrice", ticketDetails.get("price"));
+						paramsSet.put("finalPrice", ticketDetails.get("final_price"));
 					}
 					if(Double.parseDouble(ticketDetails.get("final_price"))==0){
-						paramsSet.put("original_fee", "0");
-						paramsSet.put("final_fee","0");
+						paramsSet.put("originalFee", "0");
+						paramsSet.put("finalFee","0");
 					}else{
-						paramsSet.put("original_fee", ticketDetails.get("process_fee"));
-						paramsSet.put("final_fee",ticketDetails.get("process_fee"));
+						paramsSet.put("originalFee", ticketDetails.get("process_fee"));
+						paramsSet.put("finalFee",ticketDetails.get("process_fee"));
 					}
+					paramsSet.put("nts_enable",paramsData.get("nts_enable"));
+					paramsSet.put("nts_commission","0");
+					paramsSet.put("referral_ntscode",paramsData.get("referral_ntscode"));
 					paramsSet.put("ticketid",ticketId);
-					paramsSet.put("ticket_groupid",ticketIDsWithGroupNames.get(ticketId).get("group_id"));
-					paramsSet.put("ticket_name",ticketDetails.get("ticket_name"));
-					paramsSet.put("group_name",ticketIDsWithGroupNames.get(ticketId).get("group_name"));
-			
-					paramsSet.put("ticket_type",ticketDetails.get("isdonation"));
+					paramsSet.put("ticketName",ticketDetails.get("ticket_name"));
+					
+					paramsSet.put("ticketGroupId",ticketIDsWithGroupNames.get(ticketId).get("ticket_groupid"));
+					paramsSet.put("groupname",ticketIDsWithGroupNames.get(ticketId).get("groupname"));
+					paramsSet.put("ticket_nts_commission",ticketIDsWithGroupNames.get(ticketId).get("nts_commission"));
+					if("Yes"==ticketDetails.get("isdonation"))
+						paramsSet.put("ticketType","donationType");
+					else
+						paramsSet.put("ticketType","attendeeType");
 					paramsSet.put("discount",ticketDetails.get("discount"));
 					try{
-						paramsSet.put("seat_ids", eachTicketQtyJSON.getString("seat_ids"));
+						paramsSet.put("seat_index", eachTicketQtyJSON.getString("seat_ids"));
 					}catch(Exception e){
-						paramsSet.put("seat_ids", "[]");
+						paramsSet.put("seat_index", "[]");
 					}
+				paramsSet.put("eventdate",paramsData.get("eventdate"));
+				System.out.println("InsertTicketDetailsToDb in CCheckTicketStatus.java");
 				
-					regManager.InsertTicketDetailsToDb(paramsSet,paramsData.get("tid"),paramsData.get("eid"),paramsData.get("edate"));					
+				regManager.InsertTicketDetailsToDb(paramsSet,paramsData.get("tid"),paramsData.get("eid"));	
 				}	
 			
 				regManager.setTransactionAmounts(paramsData.get("eid"), paramsData.get("tid"));
 			
 				HashMap<String,String> amounts=regManager.getRegTotalAmounts(paramsData.get("tid"));
 				
-				
-				DbUtil.executeUpdateQuery("update event_reg_details_temp set discountcode=? where tid=?",new String[]{paramsData.get("disc_code"),paramsData.get("tid")});
-				
-				if(paramsData.get("disc_code")!=null && !"".equals(paramsData.get("disc_code")))
-				{ 							
-				    HashMap<String, String> discAppliedDetMap=discountManager.isDiscountApplied(paramsData.get("disc_code"), paramsData.get("eid"));
+				DbUtil.executeUpdateQuery("update event_reg_details_temp set discountcode=? where tid=?",new String[]{paramsData.get("discountcode"),paramsData.get("tid")});
+				if(paramsData.get("discountcode")!=null && !"".equals(paramsData.get("discountcode")))
+				{ 	
+				    HashMap<String, String> discAppliedDetMap=discountManager.isDiscountApplied(paramsData.get("discountcode"), paramsData.get("eid"));
 					String discFlag=(String)discAppliedDetMap.get("disc_applied_flag");
-					String discountMsg=(String)discAppliedDetMap.get("message");					
+					String discountMsg=(String)discAppliedDetMap.get("message");
+					String remainingCount = (String)discAppliedDetMap.get("remainingCount");
+					
 					if("false".equals(discFlag)){
 						DbUtil.executeUpdateQuery("delete from event_reg_locked_tickets where tid=? ",new String[]{paramsData.get("tid")});
 						returnParams.put("status", "fail");
 						returnParams.put("reason", discountMsg);
 						return returnParams;
+					}else{
+						returnParams.put("discountStatus","success");
+						returnParams.put("discountMsg", discountMsg);
+						returnParams.put("remainingCount", remainingCount);
 					}
-			/*V**	else{
-						returnParams.put("status", "success");
-					}*/
-
 				}
-	    /*V*     else{
-					returnParams.put("status", "success");
-				}*/
+				
 				returnParams.put("tid",paramsData.get("tid"));
-		////returnParams.put("total_amount",amounts.get("totamount"));
 				returnParams.put("disc_amount",amounts.get("disamount"));
 				returnParams.put("tickets_cost",amounts.get("netamount"));
 				returnParams.put("tax",amounts.get("tax"));
-				returnParams.put("total_amount",amounts.get("grandtotamount"));					
+				returnParams.put("total_amount",amounts.get("grandtotamount"));
+				//returnParams.put("ntscode",ntscode);
+				//returnParams.put("display_ntscode",display_ntscode);
+							
 				
 			}
 			catch (Exception e) {
 				// TODO: handle exception
-				System.out.println("error in  doing regform action");
+				System.out.println("Exception In CCheckTicketStatus.java Error :- " + e.getMessage());
 			}	
 				
 		return returnParams;

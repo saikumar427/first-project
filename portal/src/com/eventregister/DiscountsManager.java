@@ -61,7 +61,6 @@ return ticketList;
 
 public HashMap getDiscountInfo(String discountcode, String eid, String tid,HashMap DiscountLabels){
      String  discountfalg="true";
-
 	String discountMsg="";
 	String discountcodeapplied="";
 	HashMap discountinfomap = new HashMap();

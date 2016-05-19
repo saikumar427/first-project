@@ -97,7 +97,7 @@ public class BDiscountManager{
 	
 	
 
-public 	HashMap<String,String> getDiscountDetails(String code,String groupid){
+	public 	HashMap<String,String> getDiscountDetails(String code,String groupid){
 		String query="select discount,discounttype from coupon_master where couponid in (select couponid from coupon_codes where couponcode=?) and groupid=?";
 		HashMap<String,String> discountsMap=new HashMap<String,String>();
 		DBManager db=new DBManager();
@@ -249,8 +249,6 @@ public 	HashMap<String,String> getDiscountDetails(String code,String groupid){
 
 		String  discountSuccessFlag="true";
 		String discountMsg="";
-		//HashMap<String,ArrayList<HashMap<String, String>>> discountInfo = new HashMap<String,ArrayList<HashMap<String, String>>>();
-	
 		int remainingCount=0;
 		if(discountCode!=null){discountCode=discountCode.trim();}
 		HashMap<String,String> discountsMap=getDiscountDetails(discountCode,eid);

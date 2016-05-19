@@ -140,6 +140,8 @@ angular.module('ticketsapp.controllers.profile', [])
                 FB.getLoginStatus(getUserInfo);
                 FB.Event.subscribe('auth.statusChange', getUserInfo);
             };
+            $scope.fblogin();
+            
             /* for collecting temp data buyer and attendee start */
             $scope.buyerAnswers = $rootScope.buyerAnswers;
             $scope.attendeeAnswers = $rootScope.attendeeAnswers;

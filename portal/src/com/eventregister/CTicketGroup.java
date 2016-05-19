@@ -9,7 +9,7 @@ private String m_Ticket_GroupId="";
 private String m_GroupName="";
 private String m_Groupdescription="";
 private boolean TicketsExist=true;
-private BEventTicket GroupTickets[]=null;
+private CEventTicket GroupTickets[]=null;
 private boolean m_isAutoGroup=true;
 private HashMap ticketGroupHashMap=null;
 public String getTicketGroupName(){
@@ -38,11 +38,11 @@ public void setTicketGroupDescription(String p_GroupDesc){
 }
 
 
-public BEventTicket[] getGroupTicketsArray(){
+public CEventTicket[] getGroupTicketsArray(){
  return GroupTickets;
 }
 
-public void setGroupTicketsArray(BEventTicket[] Tickets){
+public void setGroupTicketsArray(CEventTicket[] Tickets){
  GroupTickets=Tickets;
 }
 
