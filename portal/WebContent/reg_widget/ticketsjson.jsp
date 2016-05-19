@@ -40,6 +40,7 @@ try{
 	//HashMap configMap=(HashMap)CacheManager.getData(eid, "ticketsettings").get("configmap");
 if(configMap!=null && configMap.get("event.buybutton.beside.discount")!=null)
 	jsonObj.put("buybuttonbeside",configMap.get("event.buybutton.beside.discount"));
+	jsonObj.put("i18nActualLang",GenUtil.getHMvalue(configMap,"event.i18n.actual.lang","en-us"));
 }catch(Exception e){
 	System.out.println("Exception in ticketsjson page for buybuttonbeside msg ERROR: "+e.getMessage());
 }

@@ -75,7 +75,9 @@ completedcount=getcompletedcount(eventid,rsvprecurring);
 if("Y".equals(rsvprecurring)){
 	System.out.println("RSVP Recurring Event");
 	
-	String Rsvp_RECURRING_EVEBT_DATES = "select date_display,date_key from event_dates where eventid=CAST(? AS BIGINT) and (zone_startdate+cast(cast(to_timestamp(COALESCE(zone_start_time,'00'),'HH24:MI:SS') as text) as time ))>=current_date order by date_key";
+	String Rsvp_RECURRING_EVEBT_DATES = "select date_display,date_key from event_dates where eventid=CAST(? AS BIGINT) "+
+				"and (zone_startdate+cast(cast(to_timestamp(COALESCE(zone_start_time,'00'),'HH24:MI:SS') as text) as time ))>=current_date "+
+				"order by cast(zone_startdate||' '|| zone_start_time AS timestamp)";
 			DBManager dbmanager = new DBManager();
 			StatusObj statobj = dbmanager.executeSelectQuery(Rsvp_RECURRING_EVEBT_DATES, new String[]{eventid});
 			int rsvpcount = statobj.getCount();

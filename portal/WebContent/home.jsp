@@ -1,6 +1,5 @@
 <%@include file="getresourcespath.jsp" %>
 <%@include file="common.jsp" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,24 +24,291 @@
 <script src="<%=resourceaddress%>/main/js/jquery-1.11.2.min.js"></script>
 <script src="<%=resourceaddress%>/main/js/jquery.inview.min.js"></script>
 <script src="<%=resourceaddress%>/main/user/login?lang=<%=lang%>"></script>
-
-
-<script>
-/*function searcheventname(){
-var str=document.getElementById('searchcontent').value;*/
-/* str=str.replace(/^\s+|\s+$/g,'');
-if(str.length<=3){
-document.getElementById('searchevtbtn').setAttribute('disabled','disabled');
-return;
-}else{
-document.getElementById('searchevtbtn').removeAttribute('disabled'); */
-/*document.getElementById('searchcontent').value=str;
-document.searchevent.submit();
-localStorage.setItem("result_label", str);
-//}
-}*/
-
-</script>
+<link href="/main/homepage/css/homepage.css?id=2" rel="stylesheet"/>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="/main/homepage/js/background.cycle.js"></script>
+		<script>
+			$(document).ready(function(){
+				if (Modernizr.touch) {
+					// show the close overlay button
+					$(".close-overlay").removeClass("hidden");
+					// handle the adding of hover class when clicked
+					$(".img").click(function(e){
+						if (!$(this).hasClass("hover")) {
+							$(this).addClass("hover");
+						}
+					});
+					// handle the closing of the overlay
+					$(".close-overlay").click(function(e){
+						e.preventDefault();
+						e.stopPropagation();
+						if ($(this).closest(".img").hasClass("hover")) {
+							$(this).closest(".img").removeClass("hover");
+						}
+					});
+					} else {
+					// handle the mouseenter functionality
+					$(".img").mouseenter(function(){
+						$(this).addClass("hover");
+						//$(this).find('img').css({ 'max-width': '25%'});
+						//$(this).find('.setTop').css({'margin-top':'30px'});
+					})
+					// handle the mouseleave functionality
+					.mouseleave(function(){ 
+						$(this).removeClass("hover");
+						//$(this).find('img').css({ 'max-width': '100%'});
+						//$(this).find('.setTop').css({'margin-top':'0px'});
+					});
+					
+				}
+			});
+		</script>
+<style type="text/css">
+    body{
+    	margin-top:0px !important;
+    }
+		.footerlinks a, .footertab a {
+			color: #ccc;
+			font-size: 12px;
+			line-height: 200%;
+		}
+        .form-control-signup {
+            background: transparent !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none;
+            color: #fff !important;
+            padding-left: 0px;
+			font-size:13px;
+        }
+		 .form-control{
+			font-size:13px !important;
+		 }
+		input:-webkit-autofill,textarea:-webkit-autofill, select:-webkit-autofill {
+		    padding-left: 0px;
+            border-color: #fff !important;
+            background: transparent !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+            color: #fff !important;
+            outline: none !important;
+		}
+		.help-block{
+			background:#9d2d3a !important;
+			color:#fff !important;
+			font-size:12px;
+			padding-left:10px;
+		}        
+        .has-error .form-control-feedback {
+            color: #df0101 !important;
+        }        
+        .form-control-signup::-moz-placeholder {
+            color: #e4e4e4 !important;
+            opacity: 1;
+        }		
+		.form-control-signup:focus::-moz-placeholder {
+            color: #e4e4e4 !important;
+            opacity: 1;
+        }		
+		
+		.form-control-signup::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: #e4e4e4 !important;
+            opacity: 1;
+		}
+		.form-control-signup::-moz-placeholder { /* Firefox 19+ */
+			color: #e4e4e4 !important;
+            opacity: 1;
+		}
+		.form-control-signup:-ms-input-placeholder { /* IE 10+ */
+			color: #e4e4e4 !important;
+            opacity: 1;
+		}
+		.form-control-signup:-moz-placeholder { /* Firefox 18- */
+			color: #e4e4e4 !important;
+            opacity: 1;
+			}
+        .form-control-signup:focus {
+            padding-left: 0px;
+            border-color: #fff;
+            background: transparent !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+            color: #fff !important;
+            outline: none !important;
+        }        
+        .has-error .checkbox,
+        .has-error .checkbox-inline,
+        .has-error .control-label,
+        .has-error .help-block,
+        .has-error .radio,
+        .has-error .radio-inline,
+        .has-error.checkbox label,
+        .has-error.checkbox-inline label,
+        .has-error.radio label,
+        .has-error.radio-inline label {
+            color: #df0101;
+            #background: transparent !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none;
+            #color: #fff !important;
+            #padding-left: 0px;
+            text-align: left !important;
+        }        
+        .has-success .form-control-feedback {
+            color: #04b404;
+        }        
+        .has-success .form-control {
+            background: transparent !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none;
+            border-color: #fff !important;
+            color: #fff !important;
+            padding-left: 0px;
+        }        
+        .has-error .form-control {
+            #color: #df0101;
+            background: transparent !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            border-color: #fff !important;
+            box-shadow: none;
+            color: #fff !important;
+            padding-left: 0px;
+            text-align: left !important;
+        }        
+        .fixed {
+            background-color: #eeeeee;
+            border: medium none;
+            display: none;
+            position: fixed;
+            top: 0;
+            z-index: 999999999;
+        }        
+        .section_header {
+            color: #999999;
+            font-size: 42px;
+            font-weight: 500;
+        }        
+        .main_header_orange {
+            color: #f27d2f;
+            font-size: 42px;
+            font-weight: 800;
+            text-align: center;
+        }        
+        .caption_header_blue {
+            color: #428bca;
+            font-size: 32px;
+            text-align: center;
+        }        
+        .select-active {
+            background: #ddd none repeat scroll 0 0 !important;
+            color: #000 !important;
+        }        
+        .select-active:hover {
+            background: #ddd none repeat scroll 0 0 !important;
+            color: #000 !important;
+        }        
+        .caption_header_blue_faq {
+            color: #428bca;
+            font-size: 32px;
+        }        
+        .medium_desc_grey {
+            color: #999999;
+            font-size: 20px;
+        }        
+        .normal_desc_grey {
+            color: #333333;
+            font-size: 14px;
+            text-align: center;
+        }        
+        .normal_desc_grey_ans {
+            color: #333333;
+            font-size: 14px;
+        }        
+        .dropdown {
+            background-color: white;
+            border: 1px solid white;
+            border-radius: 11px;
+            height: 182px;
+            margin: 26px;
+            width: 212px;
+        }        
+        .subevent {
+            background-color: #f3f6fa;
+            border: 1px solid #f3f6fa;
+            border-radius: 27px;
+            color: #ffffff;
+            cursor: pointer;
+            height: 45px;
+            margin: 7px;
+            padding: 5px;
+            width: 315px;
+        }        
+        .textbox {
+            margin: 10px;
+            padding-left: 30px;
+        }        
+        .input-field {
+            background-color: #ffffff;
+            border: medium none #ffffff;
+            height: 30px;
+            width: 50px;
+        }        
+        .avgtooltip {
+            background-color: #f27a28;
+            bottom: 18px;
+            box-shadow: 0 0 1px 1px #dddddd;
+            color: #ffffff;
+            left: 218px;
+            padding: 17px 0 5px;
+            position: absolute;
+            text-align: center;
+            width: 50px;
+        }        
+        .range-max {
+            font-size: 20px;
+        }        
+        .range-min {
+            font-size: 20px;
+        }        
+        li {}        
+        .media-heading > a {
+            color: #428bca;
+            text-decoration: none;
+        }        
+        h1,h2,h3,h4,h5,h6 {
+            font-family: Muli-Regular;
+        }        
+        .media-body > h4,
+        .media-body > .h4 {
+            font-size: 18px;
+        }        
+        .media-body > p {
+            font-size: 14px;
+            font-family: Muli-Regular;
+        }        
+        @font-face {
+            font-family: "Heiti TC";
+            src: url("http://db.onlinewebfonts.com/t/91764cfbfb9049ea89665b0ac8f0ee41.eot");
+            src: url("http://db.onlinewebfonts.com/t/91764cfbfb9049ea89665b0ac8f0ee41.eot?#iefix") format("embedded-opentype"), url("http://db.onlinewebfonts.com/t/91764cfbfb9049ea89665b0ac8f0ee41.woff2") format("woff2"), url("http://db.onlinewebfonts.com/t/91764cfbfb9049ea89665b0ac8f0ee41.woff") format("woff"), url("http://db.onlinewebfonts.com/t/91764cfbfb9049ea89665b0ac8f0ee41.ttf") format("truetype"), url("http://db.onlinewebfonts.com/t/91764cfbfb9049ea89665b0ac8f0ee41.svg#Heiti TC") format("svg");
+        }		
+    </style>
 
 <style>
 .fixed{
@@ -176,252 +442,324 @@ li{
 <script src="<%=resourceaddress%>/main/js/html5shiv.js"></script>
 <script src="<%=resourceaddress%>/main/js/respond.min.js"></script>
 <![endif]-->
-<body>
+<body id="page-top" class="index site-wrapper">
 <!-- responsive navbar
 ===============================-->
-<div class="navbar navbar-default navbar-fixed-top" style="background:#f3f6fa">
-<div class="container">
-<div class="navbar-header">
-<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-<span class="icon-bar"></span>
-</button><br/>
-<a href="/" class="navbar-brand" style="margin-top:-6px;margin-bottom:-16px"><img src="<%=resourceaddress%>/main/images/logo.png" alt="Eventbee" height="50" /></a></div>
-<div class="navbar-collapse collapse">
-<ul class="nav navbar-nav">
-<li><a href="/main/pricing">Pricing and features</a></li>
-<li><a href="/main/how-it-works">How it works</a></li>
-<!--<li><a href="/main/event-creation">Features</a></li>-->
-<li><a href="/main/faq">FAQ</a></li>
-<li><a href="javascript:;" id="contact">Contact</a></li></ul>
-<ul class="nav navbar-nav navbar-right">
-             <li style="display:none">	
-				  <div id="i18nLang" style="display:none;width:330px;position: absolute;top: 16px; right: 2px;  background-color: white;   padding: 20px 30px 20px 20px;   border: 1px solid #EEE;">
-				     <div> 
-				       <div style="float:left;padding-right:20px;border-right: 1px solid #EEE;">
-				         <span class="sub-text">Countries</span>
-				         <ul style="padding:0px" id="countries" class="sm-font">
-				          
-				         </ul>				       
-				       </div>
-				        <div style="float:left;padding-left:20px">
-				         <span class="sub-text">Languages</span>
-					         <ul style="padding:0px;font-size:12px" class="sm-font" id="languages">
-					           
-					         </ul>					        
-				        </div>   
-				        <div style="clear:both"></div>
-				      </div>    
-			       </div>		
-				   <a href="javascript:;" id="i18nLangToggle" ><span style="margin-right:3px"><i class="fa fa-globe" style="color:#5388c4"></i></span><i class="fa fa-sort-down" style="font-size:14px !important;position: relative;top: -4px;"></i></a>
-				  </li>
-<li><a href="javascript:;" id="getTickets">Get my tickets</a></li>
-<li id="sinbtn"><a href="/main/user/login">Login</a></li>  
-<li id="supbtn"><a href="/main/user/signup"><button class="btn btn-primary">Sign Up</button></a></li> </ul>
-</div></div></div><br><br>
-<div class="row-fluid">
-<a href="/main/user/signup">  <img src="<%=resourceaddress%>/main/images/award.jpg" width="100%" alt="SBIEC Award Winning Event Ticketing Platform" border="0"> </a></div>
+<div>
+        <!-- Navigation -->
+       <div class="image-div" id="main-img" style="padding:0px;">
+			<div class="layer">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container" style="width:100%">
 
+                    <div class="navbar-header ">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand " style="padding-top:0px;padding-bottom:0px;" href="/"><img src="/main/homepage/img/logo.png" /></a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav nav-list " style="float:none !important;">
+                            <li class="active-class"><a onclick="showPlatform();" class="font-class">platform</a></li>
+                            <li><a class="font-class" onclick="showPricing();">PRICING</a></li>
+                            <li><a class="font-class" onclick="showSignup();">SIGN UP</a></li>
+                            <li class="navbar-right"><a href="javascript:;" id="contact" class="font-class">CONTACT</a></li>
+                            <li class="navbar-right"><a href="/main/user/login" id="sinbtn" class="font-class">LOGIN</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header -->
+            <header class="img-div fullscreen-platform" id="platform">
+                <div class="content-a">
+                    <div class="content-b">
+                        <div class="container">
+                            <div class="intro-text platform-intro">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                        <div class="block-text-platform padding-text">
+                                            <div class="intro-lead-in intro-lead-in-platform" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Award winning</div>
+											<div class="intro-lead-in intro-lead-in-platform" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">online registration platform.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="block-box-platform block padding-box" id="platform_div">
+                                            <div class="intro-lead-in-right intro-lead-in-right-platform" style="font-family:Muli-Light !important;">Introducing</div>
+											<div class="intro-lead-in-right intro-lead-in-right-platform" style="font-family:Muli-Light !important;">Eventbee for Business</div><br/>
+                                            <a href="/main/eventbee-for-business" class="page-scroll btn btn-xz" 
+                                            style="border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;">Learn More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <header class="img-div  fullscreen-pricing" id="pricing" style="display:none;">
+                <div class="content-a">
+                    <div class="content-b">
+                        <div class="container">
+                            <div class="intro-text  pricing-intro" id="platform">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                        <div class="block-text-pricing padding-text">
+                                            <div class="intro-lead-in intro-lead-in-signup " style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Save big with</div>
+                                            <div class="intro-lead-in intro-lead-in-signup " style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">our flat fee pricing.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="block-box-pricing block padding-box" id="pricing_tab" style="font-family:Muli-Light !important;">
+                                            <div>
+                                                <ul style="list-style:none;display:inline;padding-left:0px;">
+                                                    <li style="display:inline-block;margin-right:8px;">
+                                                        <div class="price-tag" style="font-family:Muli-Light !important;">Basic ticketing</div>
+                                                    </li>
+                                                    <li style="display:inline-block;">
+                                                        <div class="colored-circle"><sup style=" right: 1px;
+    top: -15px;">$</sup><span style="font-size: 39px;
+    position: relative;
+    right: 5px;">1</span>
+                                                            <br/><span style="font-size:12px;position:relative;top:-15px;">per ticket</span></div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <hr class="hr-line" />
+                                            <ul style="list-style:none;display:inline;padding-left:0px;">
+                                                <li class="margin-class" style="display:inline-block;">
+                                                    <div class="no-colored-circle"><sup>$</sup><span style="font-size:42px;">1</span><sup style="font-size:14px;left:-6px;top:-18px;">50</sup></div>Pro</li>
+                                                <li class="margin-class" style="display:inline-block;">
+                                                    <div class="no-colored-circle"><sup style="right:1px;">$</sup><span style="font-size:42px;font-size: 42px;
+    position: relative;
+    right: 2px;">2</span></div>Advanced</li>
+                                                <li style="display:inline-block;">
+                                                    <div class="no-colored-circle"><sup style="right:1px;">$</sup><span style="font-size:42px;font-size: 42px;
+    position: relative;
+    right: 2px;">3</span></div>Business</li>
+                                            </ul>
+                                            <br/>
+
+                                            <div style="clear:both;"></div>
+                                            <br/>
+                                            <a href="/main/pricing" class="page-scroll btn btn-xz" 
+                                            style="border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;">Learn More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <header class="img-div fullscreen-signup" id="signup" style="display:none;">
+                <div class="content-a">
+                    <div class="content-b">
+                        <div class="container">
+                            <div class="intro-text signup-intro">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                        <div class="block-text-signup padding-text">
+                                            <div class="intro-lead-in intro-lead-in-signup" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Trusted by 50,000</div>
+                                            <div class="intro-lead-in intro-lead-in-signup" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">event managers across the world.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="block-box-signup block padding-box" id="platform_div">
+                                             <form id="signupform" name="signupform" action="/main/user/signup!hmPgSignUpProcess" method="post" 
+                                             style="margin-bottom:0px;" class="form-horizontal" >
+                                             	<div class="form-group">
+                                                    <div class="col-xs-12">
+													
+                                                        <input type="text" id="emailid" class="form-control form-control-signup" placeholder="Email, account verification email goes here" name="email"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+														
+                                                        <input type="text" id="beeid" class="form-control form-control-signup" placeholder="Bee ID, enter 4-20 alphanumeric characters" name="beeId" />
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+														
+                                                        <input type="password" id="pwdid" class="form-control form-control-signup" placeholder="Password, enter 4-20 characters" name="password" />
+                                                    </div>
+                                                </div>
+                                                <br/>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12 col-xs-offset-0">
+														
+														
+                                                        <button type="button" id="signupbtn"  class="btn btn-default btn-xz" 
+                                                        style="border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;">Sign Up</button>
+                                                    </div>
+                                                </div>
+												<div class="form-group">
+                                                    <div class="col-xs-12 col-xs-offset-0">
+													<label style="font-size:12px;font-weight:normal;text-align:left;">By clicking on Sign Up button, I confirm that I agree with Eventbee <a href="http://www.eventbee.com/main/termsofservice" style="color:#5388c4;" target="_blank">Terms of Service</a></label>
+                                                    </div>
+                                                </div>
+												<div class="form-group"  style="text-align: left;color:red;margin-left: 0;margin-right: 0;">
+                                                	<div class="col-xs-12 col-xs-offset-0" id="signupflderrors" style="padding-top:2px;padding-bottom:2px;font-size:12px;font-weight:normal;background:red;color:#fff;visibility:hidden;text-align:left;">
+														&nbsp;
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+			</div>
+        </div>
+        <section style="padding: 8px 8px;background:#f3f6fa;">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <h4  style=";margin-bottom:12px;"><a class="service-heading" href="/main/how-it-works">How it works<a></a></h4>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <h4 style="margin-bottom:12px;"><a class="service-heading" href="/main/faq">FAQ</a></h4>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <h4 style="margin-bottom:12px;"><a class="service-heading" href="javascript:;" id="getTickets">Get my tickets</a></h4>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <h4 class="service-heading find-events" style="margin-bottom:12px;">Find events</h4>
+                        <form class="searchform" style="display:none;margin-bottom:0px;" method="post" action="/main/search" id="searchform" name="searchevent">
+                            <div class="input-group">
+                                <input type="text" placeholder="Enter event name or venue..." id="searchcontent" name="searchcontent" class="form-control">
+                                <span class="input-group-btn">
+<!-- <button class="btn btn-primary" type="button" id="searchevtbtn" onclick="searcheventname();">Find Events</button> -->
+ <button id="searchevtbtn" type="submit" style="text-transform:uppercase;border-radius:0px !important;font-family: Montserrat Light !important;text-transform:uppercase;font-size:12px;" class="btn btn-default btn-xy">Go</button>
+</span></div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </section>
 
 <!-- featured events start -->
-<div class="container" style="background-color:#F3F6FA;width:100%;padding:60px 0 10px 0px;">
+<div style="background-color:#fff;width:100%;padding:60px 0px 80px 0px;" class="container">
 <div class="container" id="fevents">
 <div class="row">
-<div class="col-md-6"><h1><span class="text-muted">FEATURED EVENTS</span></h1></div>
-<div class="col-md-6"><br>
-<form name="searchevent" id="searchform" action="/main/search" method="post" class="searchform">
-<div class="input-group">
-<input type="text" class="form-control" name="searchcontent" id="searchcontent" placeholder="Enter event name or venue...">
-<span class="input-group-btn">
-<!-- <button class="btn btn-primary" type="button" id="searchevtbtn" onclick="searcheventname();">Find Events</button> -->
-<button class="btn btn-primary" type="submit" id="searchevtbtn" >Find Events</button>
-</span></div>
-</form></div></div>
-<div class="medium_desc_grey" style="text-align:left !important;padding-bottom:50px">Check out current events using Eventbee!</div>
+ <div class="col-md-12" align="center">
+ <h1 style="font-size: 36px;"><span class="text-muted" style="font-size:30px !important;font-family: 'Montserrat ultra Light' !important;">FEATURED EVENTS</span></h1></div>
+</div>
+<div style="text-align:center !important;padding-bottom:50px;font-family:Muli-Regular;" class="medium_desc_grey">Check out current events using Eventbee!</div>
 <div id="featuredevents"></div></div></div>
 <!-- featured events end -->
 
-
-<!--<div class="row-fluid" id="pricingimg">
-<a href="/main/user/signup"><img src="<%=resourceaddress%>/main/images/pricing.jpg" width="100%" alt="No percentage fee, one simple flat rate fee" border="0"></a></div>-->
-
-
-<div id="parentDiv">
-<!---- save big --->
-
-<div class="row-fluid toggle-header" id="pricingimg">
-<a href="javascript:;"><img src="<%=resourceaddress%>/main/images/pricing.jpg" width="100%"  id="" alt="No percentage fee, one simple flat rate fee" border="0" ></a></div>
-<div id="slidedownimg" style="height:30px;display:none"><img src="<%=resourceaddress%>/main/images/pricing.jpg" width="100%" style="position: absolute;z-index: -1;"/></div>
-
-<!---- save big --->
-<div id="calculator" style="background-color:#fff;position: relative;z-index: -1;height:438px;" >
-
-
-<%-- <%@include file="/home/temppromo.jsp" %> --%>
-<script>
-
-function resizePriceIframe(){
-var obj=document.getElementById('priceIframe');
- obj.style.height = obj.contentWindow.document.body.offsetHeight + 'px';
- }
-</script>
-<iframe width="100%" src="pricinghome.jsp" id='priceIframe' style="border: none;"> </iframe>
-
-
-
-
-
-
-</div>
-<!-- end of calculator -->
-</div><!-- end of parentDiv -->
-
-
-
-<!-- facebook ticketing app start -->
-<div class="container" style="background-color:#F3F6FA;width:100%;padding:60px 0px 80px 0px;">
-<div class="container">
-<div class="row">
-<div class="col-md-12"><h1><span class="text-muted">FACEBOOK TICKETING APP</span></h1></div>
-</div>
-<div class="row">
-<div class="col-md-12 medium_desc_grey" style="padding-bottom:50px">Sell tickets directly from your Facebook fan page!</div>
-</div>
-<div class="row">
-<div class="col-md-2"></div>
-<div class="col-md-4" id="fbappimg">
-<img src="<%=resourceaddress%>/main/images/fbapp.png" width="100%" alt="Eventbee Ticketing Application for Facebook">
-</div>
-<div class="col-md-4"><br><br><br><br>
-<a href="http://apps.facebook.com/eventbeeticketing" class="btn btn-lg btn-primary" target="_blank">Install Facebook Ticketing App</a>
-</div>
-</div>
-</div>
-</div>
-
-<!-- facebook ticketing app end -->
-
-<div class="row-fluid" id="fundsimg">
-<a href="/main/user/signup"><img src="<%=resourceaddress%>/main/images/funds.jpg" width="100%" border="0" alt="Credit card processing in over 130 currencies"/></a></div>
-
+<!-- start access to funds, installfbapp and kindlefire widgets -->
+<div style="background-color:#F3F6FA;width:100%;padding:60px 0px 72px 0px;" class="container">
+                <div id="fevents" class="container" style="padding:0px;">
+                    <div class="col-lg-12"  align="center" style="margin:0px;padding:0px;background-color:#F3F6FA;" id="effect-5">
+                        <div class="col-lg-4 col-sm-4 img  effects">
+                            <div class="immediate_access" style="cursor:pointer;">
+                                <div class="col-lg-12" align="center" style="margin-top:10px;">
+                                    <img id="cardImg" class="center mag2" src="/main/homepage/img/immediate_access_hover.png" style="max-width:100%;"/>
+                                    <div class="setTop" style=" font-family: Muli-Regular !important;font-size:14px !important;color:#333 !important;">
+                                        <p class="box-margin">Get immediate access to funds. PayPal, Stripe, Braintree and
+                                        Authorize.net are supported.</p>
+                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="overlay">
+                                    <div align="center" style="">
+                                        <div class="col-lg-6"style=" border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;float:none;padding:0px;" >
+                                            <a href="/main/sell-event-tickets-with-paypal-stripe-braintree-authorize-net" class="btn learn_more_hover  btn-xl">Learn More</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>    
+                        </div>    
+                        <div class="col-lg-4 col-sm-4 img  effects ">
+                            <div class="facebook" style="cursor:pointer;">
+                                <div align="center" style="margin-top:3px;"><img id="facebookImg" class="center mag2" src="/main/homepage/img/facebook_hover.png" style="max-width:100%;"/>
+                                    <div class="setTop" style=" font-family: Muli-Regular !important;font-size:14px !important;color:#333 !important;">
+                                        <p class="box-margin">Sell tickets directly from your Facebook fan page!</p>
+                                    </div>
+                                </div>
+                                <div class="overlay">
+                                    <div align="center" style="">
+                                        <div class="col-lg-12"style="border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;margin:0px auto;float:none;padding:0px;" >
+                                            <a href="http://apps.facebook.com/eventbeeticketing" target="_blank" class="btn learn_more_hover  btn-xl">Install Facebook App</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>    
+                        </div>    
+                        <div class="col-lg-4  col-sm-4 img  effects">
+                            <div class="gift" style="cursor:pointer;">
+                                <div align="center" style="margin-top:3px;"><img id="giftImg" class="center mag2" src="/main/homepage/img/gift_hover.png" style="max-width:100%;"/> 
+                                    <div class="setTop" style=" font-family: Muli-Regular !important;font-size:14px !important;color:#333 !important;">
+                                        <p class="box-margin">Sign up today! Get a free Kindle Fire.</p>
+                                    </div>
+                                </div>
+                                <div class="overlay">
+                                    <div align="center" style="">
+                                        <div class="col-lg-6"style="border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;margin:0px auto;float:none;padding:0px;" >
+                                            <a href="/main/eventbee-ticketing-kindle-promotion" class="btn learn_more_hover btn-xl">Learn More</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>    
+                        </div>    
+                    </div>
+                </div>
+            </div>
+<!-- end access to funds, installfbapp and kindlefire widgets -->
+		
 <!-- social promotions start -->
-<div class="container" style="background-color:#F3F6FA;width:100%;padding:60px 0px 72px 0px;">
+   <div class="container" style="background-color:#fff;width:100%;padding:60px 0px 72px 0px;">
 <div class="container" id="socialpromotions">
 <div class="row">
 <div class="row">
-<div class="col-md-12"><h1><span class="text-muted">SOCIAL PROMOTIONS</span></h1></div>
+<div class="col-md-12" align="center">
+  <h1 style="font-size: 36px;"><span class="text-muted" style="font-size:30px !important;font-family: 'Montserrat ultra Light' !important;">SOCIAL PROMOTIONS</span></h1></div>
 </div>
 <div class="row">
-<div class="col-md-12 medium_desc_grey" style="padding-bottom:50px">Increase ticket sales with our patented attendee social promotions technology!</div>
+ <div class="col-md-12 medium_desc_grey" style="padding-bottom:50px" align="center">Increase ticket sales with our patented attendee social promotions technology!</div>
 </div>
 <div class="row">
 <%@include file="/home/getfbpromotions.jsp" %>
 </div>
 <div class="row">
-<div class="col-md-12"><span style="font-size:0.8em">* Patent number 8712859</span></div>
+<div class="col-md-12" align="center"><span style="font-size:0.8em">* Patent number 8712859</span></div>
 </div>
-<!--<div class="col-md-12">
-<h1><span class="text-muted">SOCIAL SHARING</span></h1>
-<h2 style="margin-top:0"><small>Increase ticket sales with our patented attendee social sharing technology!</small></h2>
-<br>
-
-
-<span style="font-size:0.8em"></span></div> -->
 </div>
 </div>
 </div>
 <!-- social promotions end -->
-
-
-
-<!-- eventbee manager app start -->
-<%-- <div class="container" style="background-color:#EEEEEE;width:100%;padding:60px 0 80px 0px;">
-<div class="container">
-<div class="row">
-<div class="col-md-12" style="text-align:center !important;"><h1><span class="text-muted">EVENTBEE MANAGER APP</span></h1></div>
-</div>
-<br><br>
-<div class="row">
-
-<div class="col-md-6" align="center">
-<img class="img-responsive" src="<%=resourceaddress%>/main/images/Honey_Comb_button_85blue2.png" width="280px" height="233px"/>
-
-<div style="text-align:left !important">
-<br>
-	<ul class="col-md-10 col-md-offset-3">
-		<li style="color:#999999;"><span style="color:#999999;font-size: 20px;">Easy attendee search</span></li>
-		<li style="color:#999999;"><span style="color:#999999;font-size: 20px;">QR code and barcode scanning</span></li>
-		<li style="color:#999999;"><span style="color:#999999;font-size: 20px;">Offline check-in</span></li>
-	</ul>
-</div>
-</div>
-<div class="col-md-6" align="center">
-<img class="img-responsive" src="<%=resourceaddress%>/main/images/Honey_Comb_button_85blue.png" width="280px" height="233px"/>
-
-<div style="text-align:left !important">
-<br>
-	<ul class="col-md-10 col-md-offset-3">
-		<li style="color:#999999;"><span style="color:#999999;font-size: 20px;">Process credit cards</span></li>
-		<li style="color:#999999;"><span style="color:#999999;font-size: 20px;">Cash or check payments</span></li>
-		<li style="color:#999999;"><span style="color:#999999;font-size: 20px;">Sub-manager support</span></li>
-	</ul>
-</div>
-</div>
-</div>
-
-</div><br>
-<div class="container">
-<div class="row">
-	<div class="" align="center">
-	<ul style="list-type:none;">
-		<li style="display:inline-block !important;">
-			<a href="https://play.google.com/store/apps/details?id=com.eventbee.eventbeemanager" style="margin-right:5px" target="_blank">
-				<img  width="150" src="/main/images/googleplayicon.png">
-			</a>
-		</li>
-		<li style="display:inline-block !important;">
-			<a target="_blank" href="http://www.amazon.com/Eventbee-Manager/dp/B00O8L7V5Y/ref=sr_1_1?s=mobile-apps&amp;ie=UTF8&amp;qid=1412689478&amp;sr=1-1&amp;keywords=eventbee">
-				<img width="150" style="margin-right:0px" src="/main/images/amazonappstore.png">
-			</a>
-		</li>
-	</ul>
-	</div>   
- </div>
- </div>
-</div>
- --%>
-<!-- eventbee manager app end -->
-
-<!-- kindle fire section start -->
-<div class="container" style="padding: 0; width: 100%; background-image: url('/main/bootstrap/images/EB_bee_pattern_1600x250.jpg');">
-			<div class="container" align="center">
-			 <a href="/main/eventbee-ticketing-kindle-promotion">
-			 				<img class="img-responsive" border="0" align="middle" src="/main/bootstrap/images/kindle_giveaway2.jpg" alt="Kindle Gateway">
-			 </a>
-			</div>
-</div>
-<!-- kindle fire section end -->
-
-
-
-
 
 <div class="container" style="background-color:#A4A4A4;width: 100%;">
 <div class="container"><br>
 <div class="row">
 <div class="col-sm-6 col-md-3">
 <img width="100%" src="<%=resourceaddress%>/main/images/home/thewashingtonpost.png" alt="Eventbee On Washington Post"><br><br>
-<p><a href="http://www.washingtonpost.com/wp-dyn/content/article/2008/07/09/AR2008070900032.html" target="_blank" style="color:#000000">  "EventBee, introduces a flat $1 fee for all tickets sold. The move may well prove to disrupt this space - most competitors traditionally charge a small percentage of the ticket price rather than a flat fee." &#187;</a></p></div>
+<p><a href="http://www.washingtonpost.com/wp-dyn/content/article/2008/07/09/AR2008070900032.html" target="_blank" style="color:#000000"><span style="font-size:0.8em">"EventBee, introduces a flat $1 fee for all tickets sold. The move may well prove to disrupt this space - most competitors traditionally charge a small percentage of the ticket price rather than a flat fee." &#187;</span></a></p></div>
 <div class="col-sm-6 col-md-3">
 <img width="100%" src="<%=resourceaddress%>/main/images/home/techcrunch.png" alt="Eventbee On Techcrunch"><br><br>
-<p><a href="http://techcrunch.com/2007/08/24/eventbee-adsense-for-events-has-busy-plans/" target="_blank" style="color:#000000">"Their online event promotion tools include a nifty service called Event Network Listing that can only be described as AdSense for events." &#187;</a></p></div>
+<p><a href="http://techcrunch.com/2007/08/24/eventbee-adsense-for-events-has-busy-plans/" target="_blank" style="color:#000000"><span style="font-size:0.8em">"Their online event promotion tools include a nifty service called Event Network Listing that can only be described as AdSense for events." &#187;</span></a></p></div>
 <div class="col-sm-6 col-md-3">
 <img width="100%" src="<%=resourceaddress%>/main/images/home/insidefacebook.png" alt="Eventbee On Inside Facebook"><br><br>
-<p><a href="http://www.insidefacebook.com/2009/01/22/eventbee-integrates-with-facebook-connect-and-introduces-social-ticket-selling/" target="_blank" style="color:#000000" >"Eventbee is perfect solution for your social media event marketing needs." &#187;</a></p></div>
+<p><a href="http://www.insidefacebook.com/2009/01/22/eventbee-integrates-with-facebook-connect-and-introduces-social-ticket-selling/" target="_blank" style="color:#000000" ><span style="font-size:0.8em">"Eventbee is perfect solution for your social media event marketing needs." &#187;</span></a></p></div>
 <div class="col-sm-6 col-md-3">
 <img width="100%" src="<%=resourceaddress%>/main/images/home/mashable.png" alt="Eventbee On Mashable"><br><br>
-<p><a href="http://mashable.com/2009/07/21/facebook-connect-new/" target="_blank" style="color:#000000">"10 Impressive New Implementations of Facebook Connect - "Eventbee solves Facebook ticket sales problem using Facebook Connect in a very clever way." &#187;</a></p>
+<p><a href="http://mashable.com/2009/07/21/facebook-connect-new/" target="_blank" style="color:#000000"><span style="font-size:0.8em">"10 Impressive New Implementations of Facebook Connect - "Eventbee solves Facebook ticket sales problem using Facebook Connect in a very clever way." &#187;</span></a></p>
 </div></div></div></div>
 <!-- full width container footer -->
 <div class="container" style="background-color:#474747;width: 100%;">
@@ -431,6 +769,7 @@ var obj=document.getElementById('priceIframe');
 		 <div class="col-md-4"> &nbsp;</div>
 			  <div class="col-md-3">&nbsp; </div>
 				   <div class="col-md-3">
+				   <span style="display:none;">
 					 <%if(lang.equals("en-us")){%>
 					   <a style="position:relative;top:470px;left: 8px;"><select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
 		   				<option value="es-co" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
@@ -439,6 +778,7 @@ var obj=document.getElementById('priceIframe');
 					 </select>      
 				 </a> 
            	<%} %>
+           	</span>
        </div>
 </div>
 
@@ -496,7 +836,7 @@ var obj=document.getElementById('priceIframe');
 <span class="footertab"><a href="/main/eventbee-ticketing-kindle-promotion">Free Kindle Fire</a></span><br>
 <span class="footertabheader"><h4><strong>More Solutions</strong></h4></span>
 <span class="footertab"><a href="http://apps.facebook.com/eventbeeticketing" target="_blank">Facebook Ticketing - Sell Tickets From Facebook Fan Page</a></span><br/>
-<span class="footertab"><a href="http://www.volumebee.com" target="_blank">Volumebee - Crowd Selling Platform For Tickets & More</a></span><br/>
+<!-- <span class="footertab"><a href="http://www.volumebee.com" target="_blank">Volumebee - Crowd Selling Platform For Tickets & More</a></span><br/> -->
 </div>
 <div class="col-md-3">
 <span class="footertabheader"><h4><strong>Use Cases</strong></h4></span>
@@ -566,7 +906,7 @@ Copyright 2003-2016. Eventbee Inc. All Rights Reserved.
 <a href="/main/privacystatement"> Privacy Statement</a> | <a href="/main/termsofservice">Terms Of Service</a>
 </center></span>
 <center>
-<span style="font-size:12px;color:#ccc">Trusted by 40,000+ Event Managers all over the world for their Online Registration, Event Ticketing and Event Promotion needs!</span></center>
+<span style="font-size:12px;color:#ccc">Trusted by 50,000 Event Managers all over the world for their Online Registration, Event Ticketing and Event Promotion needs!</span></center>
 </div><br/>
 </div></div></div>
 <!-- modal dialog
@@ -589,8 +929,9 @@ Copyright 2003-2016. Eventbee Inc. All Rights Reserved.
 
 
 <script src="<%=resourceaddress%>/main/js/bootstrap.min.js"></script>
-
 <script src="/main/js/select2.js"></script>
+<script src="/main/homepage/js/agency.js"></script> 
+<script src="/main/homepage/js/modernizr.js"></script>
 <script>
         $(document).ready(function() {
             $("#states").select2();   
@@ -605,20 +946,124 @@ Copyright 2003-2016. Eventbee Inc. All Rights Reserved.
   ga('create', 'UA-60215903-1', 'auto');
   ga('send', 'pageview');
 
-</script>
+function signUpFormValidate(){
+		var beeid = $("#beeid").val().trim();  
+		var pwd = $("#pwdid").val().trim();  
+		var email = $("#emailid").val().trim();  
+		
+		if(email==''){
+			$("#signupflderrors").html("Please enter your Email.");
+			$("#signupflderrors").css('visibility','visible');
+			$('#emailid').css('border-color','red');
+			$('#emailid').focus();
+			return false;  
+		}else{
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+			if(!email.match(mailformat)){ 
+				$("#signupflderrors").html("Please enter valid Email.");
+				$("#signupflderrors").css('visibility','visible');
+				$('#emailid').css('border-color','red');
+				$('#emailid').focus();
+				return false;  
+			}  
+		}
+		
+		if(beeid==''){  
+			$("#signupflderrors").html("Please choose a Bee ID.");
+			$("#signupflderrors").css('visibility','visible');
+			$('#beeid').css('border-color','red');
+			$('#beeid').focus();
+		 return false;
+		}else{
+			var letters = /^[0-9a-zA-Z_]+$/;  
+			if(!beeid.match(letters)){ 
+				$("#signupflderrors").html("Spaces, dashes, and special characters are not allowed.");
+				$("#signupflderrors").css('visibility','visible');
+				$('#beeid').css('border-color','red');
+				$('#beeid').focus();
+				return false;  
+			}else if(beeid.length<4||beeid.length>20){
+				$("#signupflderrors").html("Bee ID must be 4-20 alphanumeric characters.");
+				$("#signupflderrors").css('visibility','visible');
+				$('#beeid').css('border-color','red');
+				$('#beeid').focus();
+				return false;  
+			}
+		}
+		
+		if(pwd==''){
+			$("#signupflderrors").html("Please choose a Password.");
+			$("#signupflderrors").css('visibility','visible');
+			$('#pwdid').css('border-color','red');
+			$('#pwdid').focus();
+		 return false;
+		}else if(pwd.length<4||pwd.length>20){
+				$("#signupflderrors").html("Password must be 4-20 characters.");
+				$("#signupflderrors").css('visibility','visible');
+				$('#pwdid').css('border-color','red');
+				$('#pwdid').focus();
+				return false;  
+		}
+		
+		$("#signupflderrors").html("&nbsp;");
+		$("#signupflderrors").css('visibility','hidden');
+		
+		return true;
+	}
 
+$( "#signupbtn" ).click(function() {
+	$(this).attr("disabled", "disabled");
+	$(this).css('background-color','#428bca');
+	if(!signUpFormValidate()){
+		$(this).removeAttr('disabled');
+		return false;
+	}
+$.ajax({
+       		  url: "/main/user/signup!hmPgSignUpProcess",
+       		  type: "post",
+       		  data: $("#signupform").serialize(),
+       		  success: function(response) {
+       			  var obj=JSON.parse(response);
+       			  if(obj.status.lastIndexOf("success")>-1){
+       				$('#signupbtn').removeAttr('disabled');
+       		    	window.location.href="/main/user/signup!hmPgSignUpActivation";
+       			  }else{
+       				  var str="";
+       				  var inputId="";
+       				  if('email' in obj){
+   						str=""+obj.email;
+   						inputId="emailid";
+   					  }else if('beeId' in obj){
+       					str=""+obj.beeId;
+       					inputId="beeid";
+       				  }else if('password' in obj){
+       					str=""+obj.password;
+       					inputId="pwdid";
+       				  }else  if('ip' in obj){
+       					str=""+obj.ip;
+       				  }
+       				  $("#signupflderrors").css('visibility','visible');
+       				  $("#signupflderrors").html(str);
+       				  $('#'+inputId).css('border-color','red');
+       				  $('#'+inputId).focus();
+       				  $('#signupbtn').removeAttr('disabled');
+       			  }
+       		  },
+       		  error: function(xhr) {
+       		    alert('error');
+       		  }
+       		});
+});
 
-<script src="/main/js/select2.js"></script>
-	 <script>
-        $(document).ready(function() {
-            $("#states").select2();   
-        });
-    </script>
-<script>
+       		$("#signupform input").keyup(function(){
+       			$('#beeid').css('border-color','white');
+       			$('#pwdid').css('border-color','white');
+       			$('#emailid').css('border-color','white');
+       			$("#signupflderrors").html("&nbsp;");
+       			$("#signupflderrors").css('visibility','hidden');
+       		});
 
-
-
- var executingModule = "slideup";
+var executingModule = "slideup";
 function closediv(){
 $('#myModal').modal('hide');
 }
@@ -677,7 +1122,7 @@ function showFeaturedEvents(response){
 var data="<div class=\"row\">";
 var json=eval('('+response+')');
 for(var i=0;i<json.fevents.length;i++){
-       if(i%2==0)data=data+"<div class=\"col-md-6 col-sm-6\">";
+       if(i%2==0)data=data+"<div align=\"center\"  class=\"col-md-6 col-sm-6\">";
        data=data+"<div class=\"media\"><a class=\"pull-left\" href="+json.fevents[i].link+" target=\"_blank\"><img class=\"media-object\" src="+json.fevents[i].logo+" alt=\""+json.fevents[i].en+"\" width=\"90px\" height=\"90px\"/></a><div class=\"media-body\"><h4 class=\"media-heading\"><a target=\"_blank\" href="+json.fevents[i].link+">"+json.fevents[i].en+"</a></h4><p>"+json.fevents[i].dt+"<br>"+json.fevents[i].adrs+"</p></div></div>";
 	   if(i%2==0) data=data+"<br>";
 	   else data=data+"<br><br></div>";
@@ -783,6 +1228,135 @@ executingModule = "slidedown";
          $('#currentticket').height($('#ticketssold').height());     
         
 
+$('.find-events').click(function() {
+    $('.find-events').slideUp('slow');
+    $('.searchform').slideDown('slow');
+});
+
+$('.nav-list').on('click', 'li', function() {
+    $('.nav-list li').removeClass('active-class');
+    $('.nav-list li').removeClass('active');
+    $(this).addClass('active-class');
+});
+
+var viewportHeight = $(window).height();
+$(document).ready(function() {
+});
+$(window).resize(function() {
+    var viewportHeight = $(window).height();
+});
+$('.find-events').click(function() {
+    $('.find-events').slideUp('slow');
+    $('.searchform').slideDown('slow');
+});
+
+$('.nav-list').on('click', 'li', function() {
+    $('.nav-list li').removeClass('active-class');
+    $('.nav-list li').removeClass('active');
+    $(this).addClass('active-class');
+});
+
+/*function showPricing() {           
+    $('.find-events').slideDown('slow');
+    $('.searchform').slideUp('slow');
+	$('#main-img').removeClass('image-div');
+	$('#main-img').addClass('image-div1');
+	$('#main-img').removeClass('image-div2');
+	$('#platform').hide();
+    $('#pricing').show();
+    $('#signup').hide();
+}
+
+function showPlatform() {
+	$('#main-img').removeClass('image-div2');
+	$('#main-img').removeClass('image-div1');
+	$('#main-img').addClass('image-div');
+    $('.find-events').slideDown('slow');
+    $('.searchform').slideUp('slow');
+    $('#platform').show();
+    $('#pricing').hide();
+    $('#signup').hide();
+}
+
+function showSignup() {  
+	$('#main-img').removeClass('image-div');
+	$('#main-img').removeClass('image-div1');
+	$('#main-img').addClass('image-div2');
+    $('.find-events').slideDown('slow');
+    $('.searchform').slideUp('slow');
+    $('#signup').show();
+    $('#platform').hide();
+    $('#pricing').hide();
+    $('#emailid').focus();
+}	*/	
+
+function showPricing() {  
+			isPaused = false;
+            $('.find-events').slideDown('slow');
+            $('.searchform').slideUp('slow');
+			$('#platform').hide();
+            $('#pricing').show();
+            $('#signup').hide();  		
+        }
+
+        function showPlatform() {
+			isPaused = false;
+			$('.find-events').slideDown('slow');
+            $('.searchform').slideUp('slow');
+            $('#platform').show();
+            $('#pricing').hide();
+            $('#signup').hide(); 		
+        }
+
+        function showSignup() { 
+			$('.find-events').slideDown('slow');
+            $('.searchform').slideUp('slow');
+            $('#signup').show();
+			$('#platform').hide();
+            $('#pricing').hide();
+			 $('#emailid').focus();
+			
+        }		
+				 
+				 function changeBackground() {
+			   $(".image-div").backgroundCycle({
+                   imageUrls: [
+                    '/main/homepage/img/yoga-1366.jpeg',  
+                    '/main/homepage/img/cooking2-1366.jpg',
+                    '/main/homepage/img/yoga2-1366.jpg',					
+                    '/main/homepage/img/cooking3-1366.jpg',
+                    '/main/homepage/img/cooking-1366.jpg',
+                    '/main/homepage/img/dance4-1366.jpg',
+					'/main/homepage/img/running3-1366.jpg', 
+                    '/main/homepage/img/running2-1366.jpg',
+                    '/main/homepage/img/meeting2-1366.jpg',
+                    '/main/homepage/img/running-1366.jpg',
+                    '/main/homepage/img/meeting-1366.jpg', 
+					'/main/homepage/img/livemusic-1366.jpeg',
+                    '/main/homepage/img/livemusic2-1366.jpeg',
+                    '/main/homepage/img/fitness-1366.jpg',
+                    '/main/homepage/img/dance5-1366.jpg',  
+                    '/main/homepage/img/livemusic3-1366.jpg',
+                   ],
+                   backgroundSize: SCALING_MODE_COVER
+                });
+				
+			}
+			   
+			$(document).ready(function() {
+				changeBackground();  				
+			}); 
+			
+			$('.immediate_access').click(function(){
+				location.href="/main/sell-event-tickets-with-paypal-stripe-braintree-authorize-net";
+			});
+			$('.facebook').click(function(){
+				window.open('http://apps.facebook.com/eventbeeticketing', '_blank');
+			});
+			$('.gift').click(function(){
+				location.href="/main/eventbee-ticketing-kindle-promotion";
+			});
+
 </script>
 <!-- Facebook Conversion Code for fb-homepage -->
 <script>(function() {
@@ -798,8 +1372,11 @@ executingModule = "slidedown";
 })();
 window._fbq = window._fbq || [];
 window._fbq.push(['track', '6019644693365', {'value':'0.00','currency':'USD'}]);
+
+
+	
 </script>
 <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6019644693365&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
-
+</div>
 </body>
 </html>
