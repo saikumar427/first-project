@@ -114,26 +114,33 @@ public class RenderWhenWidgetHTML implements RenderWidgetHTML {
 		try{
 			SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd'T'HHmm'00'");
 			
-			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(new SimpleDateFormat("MMM").parse(dataHash.get("startmon")));
 			int startMonthInt = cal.get(Calendar.MONTH)+1 ; 
 			cal.setTime(new SimpleDateFormat("MMM").parse(dataHash.get("endmon")));
 			int endMonthInt = cal.get(Calendar.MONTH)+1 ;
-			
+			String stampm=dataHash.get("startampm");
+			String endampm=dataHash.get("endampm");
 			Calendar calendar = new GregorianCalendar(
 					Integer.parseInt(dataHash.get("startyear")),	
-					startMonthInt,
+					startMonthInt-1,
 					Integer.parseInt(dataHash.get("startdate")),
 					Integer.parseInt(dataHash.get("starttime").split(":")[0]),
 					Integer.parseInt(dataHash.get("starttime").split(":")[1]));
+			if("PM".equals(stampm))
+				calendar.set(Calendar.AM_PM, Calendar.PM);
+			else
+				calendar.set(Calendar.AM_PM, Calendar.AM);
 	        Calendar calendar1 = new GregorianCalendar(
 	        		Integer.parseInt(dataHash.get("endyear")),
-	        		endMonthInt,
+	        		endMonthInt-1,
 					Integer.parseInt(dataHash.get("enddate")),
 					Integer.parseInt(dataHash.get("endtime").split(":")[0]),
 					Integer.parseInt(dataHash.get("endtime").split(":")[1]));
-	        
+	        if("PM".equals(endampm))
+	        	calendar1.set(Calendar.AM_PM, Calendar.PM);
+	        else
+	        	calendar1.set(Calendar.AM_PM, Calendar.AM);
 					long differenceInMillis = calendar1.getTimeInMillis() - calendar.getTimeInMillis();
 					
 					long diffHours = differenceInMillis/(60*60*1000);

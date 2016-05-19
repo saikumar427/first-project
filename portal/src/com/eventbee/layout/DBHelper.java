@@ -550,7 +550,14 @@ public class DBHelper {
 		*/
 		if(result.has("organizer")){
 			//String orgName = DbUtil.getVal("select value from config where config_id in(select config_id from eventinfo where eventid=?::bigint) and name='event.hostname'", new String[]{eventid});
-			String orgName=(String)((HashMap)(CacheManager.getData(eventid, "eventinfo").get("configmap"))).get("event.hostname");
+			String orgName="";
+			try{
+				orgName=(String)((HashMap)(CacheManager.getData(eventid, "eventinfo").get("configmap"))).get("event.hostname");
+			}catch(Exception e){
+				orgName = DbUtil.getVal("select value from config where config_id in(select config_id from eventinfo where eventid=?::bigint) and name='event.hostname'", new String[]{eventid});
+				System.out.println("Exception while getting event.hostname in getAllWidgetOptions for eventid: "+eventid+" ERROR: "+e.getMessage());
+			}
+			if(orgName==null) orgName="";
 			if(new JSONObject(result.getString("organizer")).has("hostbydata"))
 				if("".equals(new JSONObject(result.getString("organizer")).get("hostbydata")))
 					result.put("organizer",new JSONObject(result.getString("organizer")).put("hostbydata",orgName).toString());
