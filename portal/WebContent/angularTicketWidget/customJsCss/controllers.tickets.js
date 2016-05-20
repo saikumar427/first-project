@@ -176,6 +176,7 @@ angular.module('ticketsapp.controllers.tickets', [])
              
              
              $scope.priorityTimeCheck = function(){
+            	 
             	if($scope.resultPriorityReg.prireg_token!='' && $scope.resultPriorityReg.pri_list_id!='' && $scope.resultPriorityReg.limit_type!='UNLIMIT'){
              		$http.get('http://localhost/ticketwidget/PriorityTimeCheck.jsp?timestamp='+(new Date()).getTime(),{
              			params: {
@@ -188,7 +189,7 @@ angular.module('ticketsapp.controllers.tickets', [])
              			$scope.priTimeCheckData = data;
              			if(!$scope.priTimeCheckData.expired){
              				$scope.timeCheckShow = props.try_again;
-             				return;
+             				return 'false';
              			}
              		})
              		.error(function(data,status,headers,config){
@@ -300,10 +301,10 @@ angular.module('ticketsapp.controllers.tickets', [])
 
                     if ($rootScope.isSeatingEvent) {
                         $scope.loadSeating = true;
-                        $http.get($rootScope.baseUrl + 'getSeatingInfo.jsp?&timestamp=' + new Date().getTime(), {
+                        $http.get('http://localhost/ticketwidget/getSeatingInfo.jsp?&timestamp=' + new Date().getTime(), {
                                 params: {
                                     eid: $rootScope.eid,
-                                    tid: $location.search().tid,
+                                    tid: $rootScope.transactionId,
                                     venueid: $scope.venueid,
                                     evtdate: $rootScope.selectDate
                                 }
@@ -939,11 +940,14 @@ angular.module('ticketsapp.controllers.tickets', [])
             
             
             $scope.buy = function() {
-            	
+            	var flag;
             	/* priorityTimeCheck start */
-            	$scope.priorityTimeCheck();
+            	if('Continue'==$rootScope.priorityType){
+            		flag = $scope.priorityTimeCheck();
+            		if('false'==flag)
+            			return;
+            	}
             	/* priorityTimeCheck end */
-            	
             	
                 var alertMsgCount = 0;
                 var finalTickets = {

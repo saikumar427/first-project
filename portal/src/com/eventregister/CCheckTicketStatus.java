@@ -100,8 +100,10 @@ public class CCheckTicketStatus {
 			try{	 
 				for(int i=0;i<ticketsQtyArray.length();i++){
 					JSONObject eachTicket=ticketsQtyArray.getJSONObject(i);
+					
 					HashMap<String, String> ticketDetails=eventTickets.get(eachTicket.get("ticket_id"));
-					if("yes".equalsIgnoreCase(ticketDetails.get("isdonation"))||"y".equalsIgnoreCase(ticketDetails.get("isdonation"))){
+					
+					if("Yes".equalsIgnoreCase(ticketDetails.get("isdonation"))||"yes".equalsIgnoreCase(ticketDetails.get("isdonation"))||"y".equalsIgnoreCase(ticketDetails.get("isdonation"))){
 						//sel_qty=sel_qty+1;
 					}else
 						sel_qty=sel_qty+Integer.parseInt(ticketsQtyArray.getJSONObject(i).getString("qty"));
@@ -164,9 +166,11 @@ public class CCheckTicketStatus {
 
 			for(int i=0;i<ticketsQtyArray.length();i++){
 				JSONObject eachTicketQtyJSON=ticketsQtyArray.getJSONObject(i);
+				
 				String ticketId=eachTicketQtyJSON.getString("ticket_id");
-
-				int qty=Integer.parseInt(eachTicketQtyJSON.getString("qty"));
+				int qty=0;
+				if(eachTicketQtyJSON.has("qty"))
+					qty=Integer.parseInt(eachTicketQtyJSON.getString("qty"));
 				int remainingQty=Integer.parseInt((String)remainingCountMap.get(ticketId));
 
 				if(qty>remainingQty){
@@ -205,8 +209,8 @@ public class CCheckTicketStatus {
 				for(int i=0;i<ticketsQtyArray.length();i++){					
 					JSONObject eachTicket=ticketsQtyArray.getJSONObject(i);
 					HashMap<String, String> ticketDetails=eventTickets.get(eachTicket.get("ticket_id"));
-					if("yes".equalsIgnoreCase(ticketDetails.get("isdonation"))||"y".equalsIgnoreCase(ticketDetails.get("isdonation"))){
-						sel_qty=sel_qty+1;
+					if("Yes".equalsIgnoreCase(ticketDetails.get("isdonation"))||"yes".equalsIgnoreCase(ticketDetails.get("isdonation"))||"y".equalsIgnoreCase(ticketDetails.get("isdonation"))){
+						//sel_qty=sel_qty+1;
 					}else
 						sel_qty=sel_qty+Integer.parseInt(ticketsQtyArray.getJSONObject(i).getString("qty"));
 				}				
@@ -260,8 +264,9 @@ public class CCheckTicketStatus {
 			for(int i=0;i<ticketsQtyArray.length();i++){
 				JSONObject eachTicketQtyJSON=ticketsQtyArray.getJSONObject(i);
 				String ticketId=eachTicketQtyJSON.getString("ticket_id");
-
-				int qty=Integer.parseInt(eachTicketQtyJSON.getString("qty"));
+				int qty=0;
+				if(eachTicketQtyJSON.has("qty"))
+					qty=Integer.parseInt(eachTicketQtyJSON.getString("qty"));
 				int l_qty=0,p_qty=0,r_qty=0;
 				int minqty=0;
 				int maxqty=0;

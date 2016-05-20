@@ -9,9 +9,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="com.eventbee.general.EventbeeLogger"%>
 <%@page trimDirectiveWhitespaces="true"%>
-<%@ page language="java"
-	contentType="application/json; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="application/json; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="org.json.JSONTokener"%>
@@ -28,18 +26,17 @@
 			String key = (String) iterator.next();
 			totalqstr=totalqstr+key+":{";
 			String[] stringArray = (String[])reqmapnet.get(key);
-			 
-			 for(int i=0;i<stringArray.length;i++)
-			  {
-			  if(i==stringArray.length-1)
-			   totalqstr=totalqstr+stringArray[i];
-			   else
-			  totalqstr=totalqstr+stringArray[i]+",";
+			 for(int i=0;i<stringArray.length;i++){
+				 if(i==stringArray.length-1)
+					 totalqstr=totalqstr+stringArray[i];
+				 else
+					 totalqstr=totalqstr+stringArray[i]+",";
 			  }totalqstr=totalqstr+"} ";
+	}try{
+		StatusObj sb=DbUtil.executeUpdateQuery("insert into querystring_temp(tid,useragent,created_at,querystring,jsp) values (?,?,now(),?,?)",new String[]{tid, request.getHeader("User-Agent"),totalqstr,"setTicketQuantities.jsp 1st step"});
+	}catch(Exception eq){
+		System.out.println("error in setTicketQuantities.jsp(tid: "+tid+") inserting  query string"+eq.getMessage());
 	}
-	 try{
-			StatusObj sb=DbUtil.executeUpdateQuery("insert into querystring_temp(tid,useragent,created_at,querystring,jsp) values (?,?,now(),?,?)",new String[]{tid, request.getHeader("User-Agent"),totalqstr,"setTicketQuantities.jsp 1st step"});
-	 }catch(Exception eq){System.out.println("error in setTicketQuantities.jsp(tid: "+tid+") inserting  query string"+eq.getMessage());}
  
  	String eid = request.getParameter("event_id");
 	String selectedTickets = request.getParameter("selected_tickets");
@@ -81,9 +78,6 @@
 	
 	String[] allticketids=ticketids.split(",");
 	
-
-	
-	
 	JSONObject responseJSON = new JSONObject();
 	if (eid == null||"".equals(eid) || selectedTickets == null||"".equals(selectedTickets)) {
 		responseJSON.put("status", "fail");
@@ -96,9 +90,7 @@
 	try {
 		selTickQty = new JSONArray(selectedTickets);
 	} catch (Exception e) {
-		System.out
-		.println("(Box Office)Error while processing selected ticket:eid:"
-				+ eid + "tid::" + tid + "" + e.getMessage());
+		System.out.println("(Box Office)Error while processing selected ticket:eid:"+ eid + "tid::" + tid + "" + e.getMessage());
 		responseJSON.put("status", "fail");
 		responseJSON.put("reason", "invalid params");
 		out.println(responseJSON.toString(2));
@@ -128,11 +120,12 @@
 	CCheckTicketStatus checkStatus = new CCheckTicketStatus();
 	
 	regtktmgr.autoLocksAndBlockDelete(eid, tid, "ticketspagelevel");
-	 
 	try{
 		//{"condition":"Block","src":"T1","trg":[{"id":"T2"},{"id":"T3"}]}
+		// this condition for convert {"ticketid":qty,} TO {"ticketid":qty}  
 		if (selected_Tickets.length() > 0 && selected_Tickets.charAt(selected_Tickets.length()-2)==',') 
 			selected_Tickets=selected_Tickets.substring(0,selected_Tickets.length()-2)+selected_Tickets.substring(selected_Tickets.length()-1);
+		
 		JSONArray ja = checkStatus.getConditionalTicketingRules(eid);
 		ArrayList<String> errors = condTickValidator.validateConditions(ja, new JSONObject(selected_Tickets),eid);
 		if(errors.size()>0){

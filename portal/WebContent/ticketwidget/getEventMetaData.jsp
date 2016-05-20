@@ -48,6 +48,8 @@
 	String hasSeating=configMap.get("event.seating.enabled");
 	String isRsvp=configMap.get("event.rsvp.enabled");
 	String isPriority = configMap.get("event.priority.enabled");
+	String venueid=configMap.get("event.seating.venueid");
+	venueid=venueid==null?"0":venueid;
 	if(!"Y".equalsIgnoreCase(isPriority)||isPriority==null)
 		responseJSON.put("is_priority",false);
 	else
@@ -61,7 +63,7 @@
 	else
 		responseJSON.put("is_rsvp",true);
 	
-	
+	responseJSON.put("venueid",venueid);
 	if(!"y".equalsIgnoreCase(isRecurring)||isRecurring==null){
 		responseJSON.put("is_recurring",false);
 		//String status = DbUtil.getVal("select status from eventinfo where eventid=CAST(? AS BIGINT)",new String[]{eid});
