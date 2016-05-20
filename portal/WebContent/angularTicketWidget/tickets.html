@@ -188,7 +188,14 @@
                 <table ng-style="backgroundCSS">
                     <tr ng-repeat="row in getRowSize()">
                         <td ng-class="{'NA':!seats.completeseats['s_'+row+'_'+col]}" ng-repeat="col in getColSize()">
-                            <img ng-class="getImageCss(seats.completeseats['s_'+row+'_'+col]) && seats.completeseats['s_'+row+'_'+col].seatSelected ? 'selectedSeat' : 'nonSelectedSeat' " ng-click="seats.completeseats['s_'+row+'_'+col].seatSelected=!seats.completeseats['s_'+row+'_'+col].seatSelected; clickSeat(seats.completeseats['s_'+row+'_'+col],seatSectionId+'_'+row+'_'+col)" ng-if="seats.completeseats['s_'+row+'_'+col]" ng-mouseout="hideSeatDetails()" ng-mouseover="showSeatDetails(seats.completeseats['s_'+row+'_'+col],$event)" ng-src="{{getSeatImage(seats.completeseats['s_'+row+'_'+col])}}" style="height: 17px; width: 17px;" />
+                            <img ng-class="getImageCss(seats.completeseats['s_'+row+'_'+col]) && seats.completeseats['s_'+row+'_'+col].seatSelected ? 'selectedSeat' : 'nonSelectedSeat' " 
+                            ng-click="seats.completeseats['s_'+row+'_'+col].seatSelected=!seats.completeseats['s_'+row+'_'+col].seatSelected; clickSeat(seats.completeseats['s_'+row+'_'+col],seatSectionId+'_'+row+'_'+col)" 
+                            ng-if="seats.completeseats['s_'+row+'_'+col]" 
+                            ng-mouseout="hideSeatDetails()" 
+                            id="seatSectionId+'_'+row+'_'+col"
+                            ng-mouseover="showSeatDetails(seats.completeseats['s_'+row+'_'+col],$event)" 
+                            ng-src="{{getSeatImage(seats.completeseats['s_'+row+'_'+col])}}" 
+                            style="height: 17px; width: 17px;" />
                         </td>
                     </tr>
                 </table>

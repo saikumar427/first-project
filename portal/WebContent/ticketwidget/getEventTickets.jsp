@@ -69,7 +69,7 @@ ticketsJSON.put("currency",currencyFormat);
 	//ticketInfo.getTicketMessage(eid, edate));
 	String discnbuy = "dn";
 	if ("YES".equals(seating_enable)) {
-		ticketsJSON.put("seatticketid",com.eventregister.BSeatingDBHelper.getAllticketid(eid));
+		ticketsJSON.put("seatticketid",com.eventregister.CSeatingDBHelper.getAllticketid(eid));
 		discnbuy = DbUtil.getVal("select value from config where name='event.discBuy.up' and config_id=(select config_id from eventinfo where eventid=?:: bigint limit 1)",
 		new String[] { eid });
 	}

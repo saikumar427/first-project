@@ -12,7 +12,7 @@ import com.eventbee.general.DbUtil;
 import com.eventbee.general.StatusObj;
 import com.eventbee.regcaheloader.SeatingVenueLoader;
 
-public class SeatingDBHelper {
+public class CSeatingDBHelper {
 	public static HashMap glsecseats=new HashMap();
 	public static HashMap getCompleteVenueDetails(HashMap hmap){
 		String venueid=(String)hmap.get("venueid");
@@ -20,50 +20,41 @@ public class SeatingDBHelper {
 		String eventdate=(String)hmap.get("eventdate");
 		String tid=(String)hmap.get("tid");
 		String uid=(String)hmap.get("uid");
-		
 		HashMap completedetailmap=new HashMap();
 		
 		Map seatingVenueDetailsMap = getSeatingVenueDetailsMap(eid,venueid);
-		
+
 		//completedetailmap.put("layoutdetails", GetVenueLayout(venueid));
 		completedetailmap.put("layoutdetails", seatingVenueDetailsMap.get("venue_layout"));
-		
 		
 		//completedetailmap.put("AllcotedTicketidForSeatgroupid", getAllcotedTicketidForSeatgroupid(eid,venueid));
 		completedetailmap.put("AllcotedTicketidForSeatgroupid", seatingVenueDetailsMap.get("allcoted_ticketid_for_seatgroupid"));
 		
-		
 		//completedetailmap.put("getsections", getSection(venueid));
 		completedetailmap.put("getsections", seatingVenueDetailsMap.get("venue_sections"));
-		
 		
 		//completedetailmap.put("AllotedSeats", getAllotedSeats(eid,""));
 		completedetailmap.put("AllotedSeats", seatingVenueDetailsMap.get("allotedseats"));
 		
-		
 		//completedetailmap.put("TicketSeatColors", getTicketSeatColors(eid));
 		completedetailmap.put("TicketSeatColors", seatingVenueDetailsMap.get("ticket_seat_colors"));
 		
-		
 		completedetailmap.put("SoldOutSeats", getSoldOutSeats(eid,"",eventdate));
-		//System.out.println(" end getSoldOutSeats :eid:"+eid+" uid::"+uid);
 		
-		if("".equals(tid))
-			{completedetailmap.put("OnHoldSeats", getOnHoldSeats(eid,eventdate));
-			System.out.println(" end getOnHoldSeats :eid:"+eid+" uid::"+uid);
+		completedetailmap.put("OnHoldSeats", getOnHoldSeats(eid,eventdate));
+		
+		if(!"".equals(tid)){
+			//completedetailmap.put("holdseatstid",getOnHoldSeatsTid(eid,eventdate,tid));
+			completedetailmap.put("holdseatstkts",getHoldSeatTickets(eid,eventdate,tid));
+		}
 			
-			}
-		else
-			{completedetailmap.put("OnHoldSeats", getOnHoldSeatsTid(eid,eventdate,tid));
-			//System.out.println(" end getOnHoldSeatsTid :eid:"+eid+" uid::"+uid);
-			
-			}
+		
 		//completedetailmap.put("TicketGroupdetails", getTicketGroupdetails(eid));
 		completedetailmap.put("TicketGroupdetails", seatingVenueDetailsMap.get("ticket_group_details"));
 		
+		//completedetailmap.put("seatticketgroupdetails", getSeatingTicketGroupdetails(eid));
 		completedetailmap.put("seatticketgroupdetails", seatingVenueDetailsMap.get("seattickets_group_details"));
 		
-
 		return completedetailmap;
 	}
 	
@@ -77,7 +68,6 @@ public class SeatingDBHelper {
 			venuelayout.put("path",db.getValue(0,"layout_display_path",""));
 			venuelayout.put("link",db.getValue(0,"layout_display_link",""));
 		}
-		
 		return venuelayout;
 	}
 	
@@ -98,69 +88,11 @@ public class SeatingDBHelper {
 						hm.put(seat_grpid, tktid);
 					}else{
 						hm.put(seat_grpid, ticketid);
-						
 					}
-					
 				}catch(Exception e){System.out.println("exception in ticketids for each seat groupid is"+e.getMessage());}
-				
 			}
-			
 		}
 		return hm;
-	}
-		
-	public static HashMap<String, String> getAllotedSeats(String eid,String sectionid){
-		HashMap<String, String> seatIndeces=new HashMap<String, String>();
-		DBManager dbmanager=new DBManager();
-		StatusObj sb=dbmanager.executeSelectQuery("select seatindex,seat_groupid from event_seating where eventid=CAST(? AS BIGINT)", new String[]{eid});
-		for(int i=0;i<sb.getCount();i++){
-			seatIndeces.put(dbmanager.getValue(i, "seatindex", ""), dbmanager.getValue(i, "seat_groupid", ""));
-		}
-		return seatIndeces;
-	}
-	
-	public static List getSoldOutSeats(String eid,String sectionid,String eventdate){
-		String query="";
-		List seats=new ArrayList();
-		
-		query="select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT)";
-		if(!"".equals(eventdate)){
-			query="select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and eventdate=?";
-			
-			seats=DbUtil.getValues(query, new String[]{eid,eventdate});
-		}
-		else
-			
-			seats=DbUtil.getValues(query, new String[]{eid});
-		return seats;
-	}
-	
-	public static List getOnHoldSeats(String eid,String eventdate){
-		String query="";
-		DBManager Db=new DBManager();
-		List onholdseats=new ArrayList();
-		query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT))";
-		if(!"".equals(eventdate)){
-			query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and eventdate=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and eventdate=?)";
-			onholdseats=DbUtil.getValues(query,new String[]{eid,eventdate,eid,eventdate});
-		}
-		else
-			onholdseats=DbUtil.getValues(query,new String[]{eid,eid});
-			return onholdseats; 
-	}
-	
-	public static List getOnHoldSeatsTid(String eid,String eventdate,String tid){
-		String query="";
-		DBManager Db=new DBManager();
-		List onholdseats=new ArrayList();
-		query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and transactionid!=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and seatindex is not null)";
-		if(!"".equals(eventdate)){
-			query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and transactionid!=? and eventdate=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and eventdate=? and seatindex is not null)";
-			onholdseats=DbUtil.getValues(query,new String[]{eid,tid,eventdate,eid,eventdate});
-		}
-		else
-			onholdseats=DbUtil.getValues(query,new String[]{eid,tid,eid});
-			return onholdseats; 
 	}
 	
 	public static HashMap getSection(String venueid){
@@ -170,16 +102,14 @@ public class SeatingDBHelper {
 		DBManager db=new DBManager();
 		HashMap sectionseats;
 		StatusObj sb=db.executeSelectQuery("select * from venue_sections where venue_id=CAST(? AS INTEGER) order by section_id", new String[]{venueid});
-		if(!glsecseats.containsKey(venueid))
-		{   sectionseats=getSectionsSeats(venueid);
+		if(!glsecseats.containsKey(venueid)){   
+			sectionseats=getSectionsSeats(venueid);
 			glsecseats.put(venueid,sectionseats);		
 			System.out.println("::sectionseats comming from db:: venueid"+venueid);
+		}else{
+			sectionseats=(HashMap)glsecseats.get(venueid);
+			System.out.println("::sectionseats comming from memory:: venueid"+venueid);
 		}
-		else
-		{sectionseats=(HashMap)glsecseats.get(venueid);
-		 System.out.println("::sectionseats comming from memory:: venueid"+venueid);
-		}
-		
 		if(sb.getStatus()){
 			for(int i=0;i<sb.getCount();i++){
 				HashMap section=new HashMap();
@@ -200,18 +130,15 @@ public class SeatingDBHelper {
 				Sectionheader.put("rowheader",db.getValue(i,"row_header",""));
 				Sectionheader.put("columnheader",db.getValue(i,"col_header",""));
 				section.put("Seats",sectionseats.get(sectionid));
-				
 				allsections.put(db.getValue(i, "section_id", ""),section);
 				allsections.put("header_"+db.getValue(i, "section_id", ""), Sectionheader);
-				
 			}
 			allsections.put("sectionid",sectionids);
 			allsections.put("sectionname",sectionnames);
 		}
-		
 		return allsections;
 	}
-		
+	
 	public static HashMap getSectionsSeats(String venueid) {
 		HashMap sectionseat=new HashMap();
 		
@@ -230,8 +157,7 @@ public class SeatingDBHelper {
 					seat.put("isseat",db.getValue(i, "isseat",""));
 					seat.put("seatcode",db.getValue(i, "seatcode",""));
 					seats.add(seat);
-				}
-				else{
+				}else{
 					ArrayList seats=new ArrayList();
 					HashMap seat=new HashMap();
 					seat.put("row_id",db.getValue(i, "row_id",""));
@@ -241,31 +167,20 @@ public class SeatingDBHelper {
 					seat.put("seatcode",db.getValue(i, "seatcode",""));
 					seats.add(seat);
 					sectionseat.put(sectionid,seats);
-					
 				}
 			}
 		}
 		return sectionseat;
 	}
-
-	public static HashMap getTicketGroupdetails(String eid){
-		DBManager dbmanager=new DBManager();
-		HashMap groupmap=new HashMap();
-		
-		StatusObj sb=dbmanager.executeSelectQuery("select ticket_groupid,groupname from event_ticket_groups where eventid=? and groupname!=?",new String[]{eid,""});
-		if(sb.getStatus()){
-				for(int i=0;i<sb.getCount();i++){
-					groupmap.put(dbmanager.getValue(i,"ticket_groupid",""),dbmanager.getValue(i,"groupname",""));
-				}
-		}
-		
-		return groupmap;
-	}
 	
-	public static String getSeatingTicketGroupdetails(String eid){
-		String seattickets=DbUtil.getVal("select value from config where name='seating.tickets.groups' and config_id=(select config_id from eventinfo where eventid=?::bigint)  ",new String[]{eid});
-		if(seattickets==null)seattickets="";
-	return seattickets;
+	public static HashMap<String, String> getAllotedSeats(String eid,String sectionid){
+		HashMap<String, String> seatIndeces=new HashMap<String, String>();
+		DBManager dbmanager=new DBManager();
+		StatusObj sb=dbmanager.executeSelectQuery("select seatindex,seat_groupid from event_seating where eventid=CAST(? AS BIGINT)", new String[]{eid});
+		for(int i=0;i<sb.getCount();i++){
+			seatIndeces.put(dbmanager.getValue(i, "seatindex", ""), dbmanager.getValue(i, "seat_groupid", ""));
+		}
+		return seatIndeces;
 	}
 	
 	public static HashMap getTicketSeatColors(String eid){
@@ -305,23 +220,102 @@ public class SeatingDBHelper {
 		return detailmap;
 	}
 	
+	public static List getSoldOutSeats(String eid,String sectionid,String eventdate){
+		String query="";
+		List seats=new ArrayList();
+		
+		query="select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT)";
+		if(!"".equals(eventdate)){
+			query="select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and eventdate=?";
+			
+			seats=DbUtil.getValues(query, new String[]{eid,eventdate});
+		}else
+			seats=DbUtil.getValues(query, new String[]{eid});
+		return seats;
+	}
+	
+	public static List getOnHoldSeats(String eid,String eventdate){
+		String query="";
+		DBManager Db=new DBManager();
+		List onholdseats=new ArrayList();
+		query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT))";
+		if(!"".equals(eventdate)){
+			query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and eventdate=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and eventdate=?)";
+			onholdseats=DbUtil.getValues(query,new String[]{eid,eventdate,eid,eventdate});
+		}else
+			onholdseats=DbUtil.getValues(query,new String[]{eid,eid});
+		return onholdseats; 
+	}
+	
+	// May this function not using..
+	public static List getOnHoldSeatsTid(String eid,String eventdate,String tid){
+		String query="";
+		DBManager Db=new DBManager();
+		List onholdseats=new ArrayList();
+		query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and transactionid!=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and seatindex is not null)";
+		if(!"".equals(eventdate)){
+			query="select distinct seatindex from event_reg_block_seats_temp where eventid=? and transactionid!=? and eventdate=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=CAST(? AS BIGINT) and eventdate=? and seatindex is not null)";
+			onholdseats=DbUtil.getValues(query,new String[]{eid,tid,eventdate,eid,eventdate});
+		}else
+			onholdseats=DbUtil.getValues(query,new String[]{eid,tid,eid});
+		return onholdseats; 
+	}
+	
+	public static HashMap getHoldSeatTickets(String eid,String eventdate,String tid){
+		String query="";		DBManager dbm=new DBManager();		StatusObj sbj=null;
+		HashMap blockedSeats=new HashMap();
+		query="select distinct seatindex,ticketid from event_reg_block_seats_temp where eventid=? and transactionid=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=to_number(?,'99999999999') and seatindex is not null)";
+		if(!"".equals(eventdate)){
+			query="select distinct seatindex,ticketid from event_reg_block_seats_temp where eventid=? and transactionid=? and eventdate=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=to_number(?,'999999999') and eventdate=? and seatindex is not null)";
+			sbj=dbm.executeSelectQuery(query,new String[]{eid,tid,eventdate,eid,eventdate});
+			if(sbj.getStatus() && sbj.getCount()>0){
+				for(int i=0;i<sbj.getCount();i++)
+					blockedSeats.put(dbm.getValue(i,"seatindex",""),dbm.getValue(i,"ticketid",""));
+				}	
+		}else{
+			sbj=dbm.executeSelectQuery(query,new String[]{eid,tid,eid});
+			if(sbj.getStatus() && sbj.getCount()>0){
+				for(int i=0;i<sbj.getCount();i++)
+					blockedSeats.put(dbm.getValue(i,"seatindex",""),dbm.getValue(i,"ticketid",""));
+				}
+		}	//return onholdseats; 
+	return blockedSeats;
+	}
+	
+	public static HashMap getTicketGroupdetails(String eid){
+		DBManager dbmanager=new DBManager();
+		HashMap groupmap=new HashMap();
+		
+		StatusObj sb=dbmanager.executeSelectQuery("select ticket_groupid,groupname from event_ticket_groups where eventid=? and groupname!=?",new String[]{eid,""});
+		if(sb.getStatus()){
+				for(int i=0;i<sb.getCount();i++){
+					groupmap.put(dbmanager.getValue(i,"ticket_groupid",""),dbmanager.getValue(i,"groupname",""));
+				}
+		}
+		return groupmap;
+	}
+	
+	public static String getSeatingTicketGroupdetails(String eid){
+		String seattickets=DbUtil.getVal("select value from config where name='seating.tickets.groups' and config_id=(select config_id from eventinfo where eventid=?::bigint)  ",new String[]{eid});
+		if(seattickets==null)seattickets="";
+	return seattickets;
+	}
+	
+	// Tickets settings loader this function using cache
 	public static ArrayList getAllticketid(String eid){
 		String query="select distinct ticketid from seat_tickets where eventid=CAST(? AS BIGINT) and seat_groupid in (select seat_groupid from seat_groups where eventid=CAST(? AS BIGINT) )";
 		ArrayList ticketid=new ArrayList();
 		DBManager db=new DBManager();
 			StatusObj sb=db.executeSelectQuery(query,new String[]{eid,eid});
 			if(sb.getStatus()){
-				
 				for(int i=0;i<sb.getCount();i++){
 					ticketid.add(i,db.getValue(i,"ticketid",""));
 				}
 			}
-			
-			return ticketid;
-		}
+		return ticketid;
+	}
 	
 	public static Map getSeatingVenueDetailsMap(String eid, String venueid){
-		
 		if(!CacheManager.getInstanceMap().containsKey("seatingvenuedetails")){
 			CacheLoader cacheLoader=new SeatingVenueLoader();
 			cacheLoader.setRefreshInterval(3*60*1000);
@@ -340,7 +334,6 @@ public class SeatingDBHelper {
 			    Thread.currentThread().interrupt();
 			}
 		}
-		
 		return seatingVenueDetailsMap;
 	}
 	

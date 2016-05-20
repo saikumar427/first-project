@@ -1,4 +1,4 @@
-<%@page import="com.eventregister.BRegistrationTiketingManager"%>
+<%@page import="com.eventregister.RegistrationTiketingManager"%>
 <%@page import="org.apache.velocity.runtime.log.SystemLogChute"%>
 <%@page import="com.eventbee.general.StatusObj"%>
 <%@page import="com.eventbee.general.DBManager"%>
@@ -6,11 +6,11 @@
 <%@page import="com.eventbee.util.CoreConnector"%>
 <%@page import="java.text.Format"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page import="com.eventregister.BSeatingDBHelper,com.eventregister.CSeatingJSONHelpers,com.eventbee.general.DbUtil,com.eventbee.general.DateUtil"%>
+<%@ page import="com.eventregister.CSeatingDBHelper,com.eventregister.CSeatingJSONHelpers,com.eventbee.general.DbUtil,com.eventbee.general.DateUtil"%>
 <%@ page import="java.util.ArrayList,java.util.HashMap,java.util.List,org.json.JSONArray,org.json.JSONObject,java.util.UUID"%>
 <%@ include file="cors.jsp" %>
 <%
-	BSeatingDBHelper seatingdbhelper=new BSeatingDBHelper();
+CSeatingDBHelper seatingdbhelper=new CSeatingDBHelper();
 CSeatingJSONHelpers seatingjsonhelper=new CSeatingJSONHelpers();
 String eid=request.getParameter("eid");
 String eventid=eid;
@@ -41,7 +41,7 @@ System.out.println("end of 2nd delete:eid:"+eid+" uid::"+uid);
 DbUtil.executeUpdateQuery("delete from event_reg_block_seats_temp where transactionid in (select tid from event_reg_details_temp where eventid=? and transactiondate < (to_timestamp(?,'YYYY-MM-DD HH24:MI:SS.MS')- interval '20 minutes') and current_action is null );",new String[]{eventid,DateUtil.getCurrDBFormatDate()});
 System.out.println("end of 3rd delete:eid:"+eid+" uid::"+uid); */
 
-BRegistrationTiketingManager regtktmgr=new BRegistrationTiketingManager();
+RegistrationTiketingManager regtktmgr=new RegistrationTiketingManager();
 regtktmgr.autoLocksAndBlockDelete(eid, tid, "seatingsectionlevel");
 
 
@@ -94,52 +94,46 @@ if(evids.contains(eid)){
 	return;
 }
 
-
-
 completevenuedetailsmap=seatingdbhelper.getCompleteVenueDetails(hmap);
 
 
-HashMap layoutdetails=(HashMap) completevenuedetailsmap.get("layoutdetails");
+/* for group tickets selection start */
+String seatGroupTickets=(String)completevenuedetailsmap.get("seatticketgroupdetails");
+if(seatGroupTickets==null || "".equals(seatGroupTickets.trim()))
+	seatGroupTickets="{}";
+JSONObject seatGroupTicketsJSON=new JSONObject(seatGroupTickets);
+/* for group tickets selection start */
 
+HashMap layoutdetails=(HashMap) completevenuedetailsmap.get("layoutdetails");
 HashMap hm=(HashMap) completevenuedetailsmap.get("AllcotedTicketidForSeatgroupid");
 HashMap seatingsectionhm=(HashMap) completevenuedetailsmap.get("getsections");
-
 HashMap allotedseatshm=(HashMap) completevenuedetailsmap.get("AllotedSeats");
-
 HashMap ticketcolormap=(HashMap) completevenuedetailsmap.get("TicketSeatColors");
 HashMap allticket_id_name=(HashMap) ticketcolormap.get("ticketnames");
 HashMap ticketseat_colors=(HashMap)ticketcolormap.get("TicketSeatColors");
-hmap.put("getAllotedSeatColors",ticketcolormap.get("AllotedSeatColors"));
 
+hmap.put("getAllotedSeatColors",ticketcolormap.get("AllotedSeatColors"));
 hmap.put("getSoldOutSeats",completevenuedetailsmap.get("SoldOutSeats"));
 hmap.put("getOnHoldSeats",completevenuedetailsmap.get("OnHoldSeats"));
-
 hmap.put("allticket_id_name",allticket_id_name);
 hmap.put("tktid_seat_grpid",hm);
 hmap.put("allotedseats",allotedseatshm);
 hmap.put("holdseatstkts",completevenuedetailsmap.get("holdseatstkts")==null?new HashMap():completevenuedetailsmap.get("holdseatstkts"));
 
-
 ArrayList sectiondetails=new ArrayList();
 String sectionid="";
 HashMap sectionIdNames = new HashMap();
-
 ArrayList sectionids=(ArrayList)seatingsectionhm.get("sectionid");
-
-System.out.println("sectionids start - "+sectionids);
 ArrayList sectionnames=(ArrayList)seatingsectionhm.get("sectionname");
 
-System.out.println("sectionnames start - "+sectionnames);
-
-
-	for(int i=0;i<sectionids.size();i++){	
-		sectionid=sectionids.get(i).toString();
-		hmap.put("sectionid",sectionid);
-		hmap.put("sectionheader",seatingsectionhm.get("header_"+sectionid));
-		hmap.put("getsectiondetails",seatingsectionhm.get(sectionid));
-		sectiondetails.add(seatingjsonhelper.getSectionSeatingDetails(hmap));
-		sectionIdNames.put(sectionid,sectionnames.get(i));
-	}
+for(int i=0;i<sectionids.size();i++){	
+	sectionid=sectionids.get(i).toString();
+	hmap.put("sectionid",sectionid);
+	hmap.put("sectionheader",seatingsectionhm.get("header_"+sectionid));
+	hmap.put("getsectiondetails",seatingsectionhm.get(sectionid));
+	sectiondetails.add(seatingjsonhelper.getSectionSeatingDetails(hmap));
+	sectionIdNames.put(sectionid,sectionnames.get(i));
+}
 	
 HashMap ticketgroupdetails=(HashMap) completevenuedetailsmap.get("TicketGroupdetails");
 
@@ -150,6 +144,7 @@ if(!layoutdetails.isEmpty()){
 	seatingdetailobj.put("venuelinklabel",(String)layoutdetails.get("link"));
 }
 
+seatingdetailobj.put("seatticketgroupdetails",seatGroupTicketsJSON);
 seatingdetailobj.put("ticketseatcolor",ticketseat_colors);
 seatingdetailobj.put("allsections",sectiondetails);
 seatingdetailobj.put("allsectionid",sectionids);

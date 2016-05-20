@@ -323,10 +323,11 @@ angular.module('ticketsapp.controllers.tickets', [])
                                 $scope.backgroundCSS = {
                                         'background-image': 'url(' + $scope.seats.background_image + ')'
                                     },
-                                    $scope.noofcols = seatingdata.allsections[0].noofcols;
+                                $scope.noofcols = seatingdata.allsections[0].noofcols;
                                 $scope.noofrows = seatingdata.allsections[0].noofrows;
                             });
                     }
+                    
                     var allTicketIds='';
                     for(var i=0;i<$scope.ticketsData.items.length;i++){
                     	if($scope.ticketsData.items.length-1!=i)
@@ -629,6 +630,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             };
 
             $scope.clickSeat = function(seat, seatIndex) {
+            	console.log(JSON.stringify(seat)+' - '+seatIndex);
 
                 if (seat && seat.type && !(seat.type.indexOf('SO') > -1) && !(seat.type.indexOf('Hold') > -1) && !(seat.type.indexOf('NA') > -1) && seat.ticketids && isTicketAvailable(seat)) {
                     var tktids = removeNotAvailableTickets(seat.ticketids);

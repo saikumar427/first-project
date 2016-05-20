@@ -112,22 +112,21 @@ JSONObject seatGroupTicketsJSON=new JSONObject(seatGroupTickets);
 //System.out.println("end of all seat queries:eid:"+eid+" uid::"+uid);
 
 HashMap layoutdetails=(HashMap) completevenuedetailsmap.get("layoutdetails");
-
 HashMap hm=(HashMap) completevenuedetailsmap.get("AllcotedTicketidForSeatgroupid");
 HashMap seatingsectionhm=(HashMap) completevenuedetailsmap.get("getsections");
 HashMap allotedseatshm=(HashMap) completevenuedetailsmap.get("AllotedSeats");
-
 HashMap ticketcolormap=(HashMap) completevenuedetailsmap.get("TicketSeatColors");
 HashMap allticket_id_name=(HashMap) ticketcolormap.get("ticketnames");
 HashMap ticketseat_colors=(HashMap)ticketcolormap.get("TicketSeatColors");
-hmap.put("getAllotedSeatColors",ticketcolormap.get("AllotedSeatColors"));
 
+hmap.put("getAllotedSeatColors",ticketcolormap.get("AllotedSeatColors"));
 hmap.put("getSoldOutSeats",completevenuedetailsmap.get("SoldOutSeats"));
 hmap.put("getOnHoldSeats",completevenuedetailsmap.get("OnHoldSeats"));
-
 hmap.put("allticket_id_name",allticket_id_name);
 hmap.put("tktid_seat_grpid",hm);
 hmap.put("allotedseats",allotedseatshm);
+
+
 
 HashMap sectiondetails=new HashMap();
 String sectionid="";
@@ -150,6 +149,9 @@ if(!layoutdetails.isEmpty()){
 	seatingdetailobj.put("venuepath",(String)layoutdetails.get("path"));
 	seatingdetailobj.put("venuelinklabel",(String)layoutdetails.get("link"));
 }
+
+
+
 
 //JSONObject ticketGroupDetails=seatingdbhelper.getTicketGroupDetails(eid);
 seatingdetailobj.put("seatticketgroups",seatGroupTicketsJSON);
