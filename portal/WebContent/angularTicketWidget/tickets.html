@@ -173,6 +173,7 @@
                             <div class="col-md-2" ng-show="getSectionsLength() &gt; 1">
                                 <select class="form-control" ng-change="setSection(sectionId)" ng-init="initSectionId();setSection(sectionId)" ng-model="sectionId" ng-options="key as value for (key , value) in allSectionObj">
                                 </select>
+                                
                             </div>
                             <div class="col-md-4">
                             </div>
@@ -192,7 +193,6 @@
                             ng-click="seats.completeseats['s_'+row+'_'+col].seatSelected=!seats.completeseats['s_'+row+'_'+col].seatSelected; clickSeat(seats.completeseats['s_'+row+'_'+col],seatSectionId+'_'+row+'_'+col)" 
                             ng-if="seats.completeseats['s_'+row+'_'+col]" 
                             ng-mouseout="hideSeatDetails()" 
-                            id="seatSectionId+'_'+row+'_'+col"
                             ng-mouseover="showSeatDetails(seats.completeseats['s_'+row+'_'+col],$event)" 
                             ng-src="{{getSeatImage(seats.completeseats['s_'+row+'_'+col])}}" 
                             style="height: 17px; width: 17px;" />
