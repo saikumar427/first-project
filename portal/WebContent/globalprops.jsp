@@ -14,7 +14,7 @@
 <%
 
 /*eventhandler.jsp*/
-props.put("evh.footer.lnk_en_US", "Powered by Eventbee - Your online registration and event ticketing solution. For more information, visit ");
+props.put("evh.footer.lnk_en_US", "Powered by Eventbee - Your online registration and event ticketing solution. For more information, visit");
 
 
 /*CreditCardScreen.jsp*/

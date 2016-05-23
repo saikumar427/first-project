@@ -24,7 +24,7 @@ var props={
 		"ss_to_invalid_email": "Por favor ingrese un correo válido en el campo Para:",
 		"ss_subject":"Por favor ingrese un asunto para su mensaje",
 		"ss_msg": "Por favor ingrese su mensaje",
-		"ss_from_invalid_email" :"Su correo no es válido"	,
+		"ss_from_invalid_email" :"Su correo no es válido",
 		"ss_email_error" :"este no es un correo válido",			
 		"ss_sending" :"Enviando…",
 		"ss_send" :"Enviar",
@@ -92,5 +92,7 @@ var props={
 		"pri_select_list_lbl":"--Seleccione Lista de Prioridades--",
 		"pri_pls_sel_pri_list_errmsg":"Por favor, seleccione la lista de prioridades",
 		"pri_pls_sel_pri_list_event_date_errmsg":"Por favor seleccione la fecha del evento y la lista de prioridades",
-		"global_prob_errmsg":"There is a problem. Please try back later."
+		"global_prob_errmsg":"There is a problem. Please try back later.",
+		"event_max_capacity_reachd_msg":"Evento ha alcanzado su máxima capacidad, no hay entradas disponibles!",
+		"global_powerd_by_ebee_lbl":"Desarrollado por Eventbee"
 };

@@ -90,5 +90,7 @@ var props={
 			"pri_select_list_lbl":"--Select Priority List--",
 			"pri_pls_sel_pri_list_errmsg":"Please select priority list",
 			"pri_pls_sel_pri_list_event_date_errmsg":"Please select event date and priority list",
-			"global_prob_errmsg":"There is a problem. Please try back later."
+			"global_prob_errmsg":"There is a problem. Please try back later.",
+			"event_max_capacity_reachd_msg":"Event has reached maximum capacity, no tickets are available!",
+			"global_powerd_by_ebee_lbl":"Powered by Eventbee"
 };

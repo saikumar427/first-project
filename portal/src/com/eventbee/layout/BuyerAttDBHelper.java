@@ -252,7 +252,7 @@ public class BuyerAttDBHelper {
 		System.out.println("In DBHelpers.java getDefaultWidgetOptions");
 		HashMap<String, String> hm = new HashMap<String, String>();
 		//String lang=getLanguageFromDB(eventid);
-		String query="select widgetid,config_data from buyer_att_def_widget_options where where lang=? and stage='init'";
+		String query="select widgetid,config_data from buyer_att_def_widget_options where lang=? and stage='init'";
 		DBManager dbm=new DBManager();
 		StatusObj statobj=null;
 		statobj=dbm.executeSelectQuery(query, new String[]{lang});

@@ -364,19 +364,24 @@ border-bottom: 0px !important;
 			</div>
 		</div>
 	</div>
-	
 	<!-- Footer start -->
+	<%
+		String i18nActualLang=GenUtil.getHMvalue(getEventConfigMap(eventid),"event.i18n.actual.lang","en-us");
+		String domain="http://www.eventbee.com";
+		if("es-co".equals(i18nActualLang)) domain="http://www.eventbee.co";
+		else if("es-mx".equals(i18nActualLang))domain="http://www.eventbee.mx";
+	%>
 	<div style="clear:both;"></div>
 	<div>
 		<table align="center" cellpadding="5" style="margin-bottom: 15px;">
 		    <tbody>
 		        <tr>
 		            <td align="left" valign="middle">
-		                <a style="margin-right:15px" href="http://www.eventbee.com/"><img src="http://www.eventbee.com/home/images/poweredby.jpg" border="0">
+		                <a style="margin-right:15px" href="<%=domain%>"><img src="/home/images/<%=i18nActualLang%>/poweredby.jpg" border="0">
 		                </a>
 		            </td>
 		            <td>&nbsp;&nbsp;</td>
-		            <td align="left" valign="middle"><span class="small_s"><%=getPropValue("evh.footer.lnk",eventid)%><a href="http://www.eventbee.com">http://www.eventbee.com</a></span>
+		            <td align="left" valign="middle"><span class="small_s"><%=getPropValue("evh.footer.lnk",eventid)%>&nbsp;<a href="<%=domain%>"><%=domain%></a></span>
 		            </td>
 		        </tr>
 		    </tbody>

@@ -26,11 +26,11 @@ if(profilekey==null || "".equals(profilekey)){
 	response.sendRedirect("/guesttasks/invalidpage.jsp");
 	return;
 }
-String eventid="",eventName="",email="",tid="",otp="",name="",isExpired="",accessMode="OTP",eventstatus="",paymentstatus="",FBLoginRegEmail="",FBUserId="",FBAppId="";
+String eventid="",eventName="",currentLevel="",email="",tid="",otp="",name="",isExpired="",accessMode="OTP",eventstatus="",paymentstatus="",FBLoginRegEmail="",FBUserId="",FBAppId="",powerType="",i18nActLang="";
 
 String checkExpiresQry="select otp,CASE WHEN COALESCE(expires_at, DATE '0001-01-01') < (select now()) THEN 'Y' ELSE 'N' END as isexpired from buyer_att_page_visits where status='Pending' and profilekey=?";
 //String selBuyerInfoQry="select eventid,email,transactionid,fname||' '||lname as buyername from buyer_base_info where profilekey=?";
-String selBuyerInfoQry="select a.eventid,a.email,a.transactionid,a.fname||' '||a.lname as buyername,b.paymentstatus,c.status,c.eventname from buyer_base_info a, "+
+String selBuyerInfoQry="select a.eventid,a.email,a.transactionid,a.fname||' '||a.lname as buyername,b.paymentstatus,c.status,c.eventname,c.current_level from buyer_base_info a, "+
 						"event_reg_transactions b, eventinfo c where a.profilekey=? and b.tid=a.transactionid and a.eventid=c.eventid";
 String insertQuery="insert into buyer_att_page_visits(eventid,tid,profilekey,access_time,access_mode,email,page_type,status,expires_at) values(CAST(? AS BIGINT),?,?,to_timestamp(?,'YYYY-MM-DD HH24:MI:SS.MS'),?,?,'buyer','Pending',to_timestamp(?,'YYYY-MM-DD HH24:MI:SS.MS')+ interval '10 minutes');";
 
@@ -54,10 +54,25 @@ if(stobj.getStatus()){
 	name=dbmanager.getValue(0,"buyername","");
 	eventstatus=dbmanager.getValue(0,"status","");
 	paymentstatus=dbmanager.getValue(0,"paymentstatus","");
+	currentLevel=dbmanager.getValue(0,"current_level","");
 }else{
 	response.sendRedirect("/guesttasks/invalidpage.jsp");
 	return;
 }
+
+/* if("90".equals(currentLevel) || "150".equals(currentLevel)) powerType="RSVP";
+else powerType="Ticketing";
+
+String buyerPageLevel=DbUtil.getVal("SELECT level from feature_upgrade_dates where feature='BuyerPage' and powertype=? order by created_at desc limit 1",new String[]{powerType});
+if(buyerPageLevel==null) buyerPageLevel=""; */
+/*if("400".equals(currentLevel) || "150".equals(currentLevel)){
+}else{
+	response.sendRedirect("/guesttasks/invalidpage.jsp");
+	return;	
+}*/
+	
+i18nActLang=DbUtil.getVal("select value from config where name='event.i18n.actual.lang' and config_id=(select config_id from eventinfo where eventid=CAST(? AS BIGINT))",new String[]{eventid});
+if(i18nActLang==null || "".equals(i18nActLang)) i18nActLang="en-us";
 if(("ACTIVE".equals(eventstatus) || "CLOSED".equals(eventstatus)) && ("Completed".equals(paymentstatus) || "Need Approval".equals(paymentstatus))){
 	FBAppId=DbUtil.getVal("select value from config where name='ebee.fbconnect.appid' and config_id=CAST(? AS INTEGER)",new String[]{"0"});
 	String getFBLoginRegEmailQry="select b.email,b.external_userid from event_reg_transactions a, ebee_nts_partner b where a.buyer_ntscode=b.nts_code and a.buyer_ntscode is not null and a.buyer_ntscode<>'' and a.buyer_ntscode<>'null' and a.tid=?";
@@ -398,17 +413,22 @@ function fblogout(){
 			</div>
 	</div>
 	<!-- Footer start -->
+	<%
+		String domain="http://www.eventbee.com";
+		if("es-co".equals(i18nActLang)) domain="http://www.eventbee.co";
+		else if("es-mx".equals(i18nActLang))domain="http://www.eventbee.mx";
+	%>
 	<div style="clear:both;"></div>
 	<div>
 		<table align="center" cellpadding="5" style="margin-top: 48px;">
 		    <tbody>
 		        <tr>
 		            <td align="left" valign="middle">
-		                <a style="margin-right:15px" href="http://www.eventbee.com/"><img src="http://www.eventbee.com/home/images/poweredby.jpg" border="0">
+		                <a style="margin-right:15px" href="<%=domain%>"><img src="/home/images/<%=i18nActLang %>/poweredby.jpg" border="0">
 		                </a>
 		            </td>
 		            <td>&nbsp;&nbsp;</td>
-		            <td align="left" valign="middle"><span class="small_s"><%=getPropValue("evh.footer.lnk",eventid)%><a href="http://www.eventbee.com">http://www.eventbee.com</a></span>
+		            <td align="left" valign="middle"><span class="small_s"><%=getPropValue("evh.footer.lnk",eventid)%>&nbsp;<a href="<%=domain%>"><%=domain%></a></span>
 		            </td>
 		        </tr>
 		    </tbody>

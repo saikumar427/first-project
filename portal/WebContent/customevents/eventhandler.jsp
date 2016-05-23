@@ -282,7 +282,7 @@ if(!isvalidEvent(groupid)){
 		 System.out.println("Exception While getting i18n lang for eventid: "+groupid+" ERROR: "+e.getMessage());
 	 }
 	 scriptTag.append("<script src='/customevents/customconditionalrule.jsp?eid="+groupid+"'></script>");
-	 scriptTag.append("<script src='/home/js/i18n/"+i18nLang+"/regprops.js?id=2'></script>");
+	 scriptTag.append("<script src='/home/js/i18n/"+i18nLang+"/regprops.js?id=3'></script>");
 	 try{ 
 	//general script order should be like this
 	scriptTag.append(getNTSGenScript(groupid));
