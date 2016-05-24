@@ -1,3 +1,4 @@
+<%@page import="com.event.dbhelpers.CDisplayAttribsDB"%>
 <%@page import="com.eventbee.general.GenUtil"%>
 <%@page import="com.eventbee.cachemanage.CacheManager"%>
 <%@page import="com.eventbee.general.DbUtil"%>
@@ -12,7 +13,7 @@
 <%@page import="org.json.JSONObject"%>
 <%@page import="com.eventbee.general.StatusObj"%>
 <%@page import="com.eventbee.general.DBManager"%>
-<%@ page import="com.eventbee.layout.DBHelper,com.event.dbhelpers.DisplayAttribsDB" %>
+<%@ page import="com.eventbee.layout.DBHelper" %>
 <%@page trimDirectiveWhitespaces="true"%>
 <%@ include file="cors.jsp" %>
 <%@ page language="java" contentType="application/json; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
@@ -85,7 +86,7 @@
 		String lang="en_US";
 		if(!"".equals(eid) && eid !=null) lang=DBHelper.getLanguageFromDB(eid);
 		HashMap<String,String> disAttribsForKeys=new HashMap<String,String>();
-		String selectTitle=DisplayAttribsDB.getAttribValuesForKeys(eid, "RegFlowWordings", lang, new String [] {"event.reg.recurringdates.label"}).get("event.reg.recurringdates.label");
+		String selectTitle=CDisplayAttribsDB.getAttribValuesForKeys(eid, "RegFlowWordings", lang, new String [] {"event.reg.recurringdates.label"}).get("event.reg.recurringdates.label");
 		if(selectTitle!=null)
 			responseJSON.put("date_select_label",selectTitle);
 		else

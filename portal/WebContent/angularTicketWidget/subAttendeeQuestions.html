@@ -10,7 +10,7 @@
          ng-init="profile.response[subQuestion.id] = isAttAnsStored() ? getAttendeeAnswers(subQuestion.id,subQuestion.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
          ng-style="myStyle" ng-click="myStyle={'width':'100%'}" title="{{subQuestion.label}}"/>
          
-      <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+      <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
    </div>
 </div>
 <!-- Type is text box end -->
@@ -26,7 +26,7 @@
       ng-init="profile.response[subQuestion.id] = isAttAnsStored() ? getAttendeeAnswers(subQuestion.id,subQuestion.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
       title="{{subQuestion.label}}"></textarea>
       
-      <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+      <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
    </div>
 </div>
 <!-- Type is text area end -->

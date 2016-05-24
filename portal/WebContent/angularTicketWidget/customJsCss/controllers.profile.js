@@ -76,7 +76,7 @@ angular.module('ticketsapp.controllers.profile', [])
             	$location.url('/event?eid=' + $rootScope.eid);
             }*/
 
-            $http.get($rootScope.baseUrl + 'getProfileJSON.jsp', {
+            $http.get('http://localhost/ticketwidget/getProfileJSON.jsp', {
                     params: {
                         api_key: '123',
                         event_id: $rootScope.eid,
@@ -93,8 +93,11 @@ angular.module('ticketsapp.controllers.profile', [])
                     $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000) + ($rootScope.secondsRemaining * 1000);
                     $rootScope.showTimeoutBar = true;
                     $rootScope.backLinkWording = data.backbutton;
-                    if (data.enablepromotion == 'false' && $scope.fromPage == 'payments')
+                    $scope.requiredError = data.Required;
+                    if (data.enablepromotion == 'false')
                         $scope.promotions = false;
+                    else
+                    	$scope.promotions = true;
 
                     $rootScope.timeWatcher = $rootScope.$watch('timeRemaining', function(newVal, oldVal) {
                         if (newVal < 0) {

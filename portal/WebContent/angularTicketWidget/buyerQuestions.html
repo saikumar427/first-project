@@ -9,11 +9,6 @@ width:90%;
       <span ng-hide="!question.response" class="animate-show animate-hide">
       <label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
       </span>
-      <!-- <div ng-show="question.response" style="margin-bottom: 5px;">
-         <span style="background-color: #ddd; padding: 6px 12px;  border-radius: 5px;">
-         	{{question.response}}
-         </span>
-         </div> -->
       <div ng-if="question.id!='email'" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
          <span ng-if="question.id=='fname'"><span ng-init="question.response = isAnsStored() ? (getBuyerAnswers(question.id,question.type)) : (fbfirstname != '' ? fbfirstname : '')"></span> </span>
          <span ng-if="question.id=='lname'"><span ng-init="question.response = isAnsStored() ? (getBuyerAnswers(question.id,question.type)) : (fbfirstname != '' ? fbfirstname : '')"></span> </span>
@@ -22,7 +17,7 @@ width:90%;
             placeholder="{{question.label}}" ng-keyup="complete()" ng-style="myStyle" ng-click="myStyle={'width':'100%'}" ng-blur="pushTempData(question.response);myStyle={'width':'90%'}" 
             ng-init="question.response = getBuyerAnswers(question.id,question.type);" title="{{question.label}}"/>
          
-         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
       <div ng-if="question.id=='email'" ng-class="{'has-error':subForm.name.$error.email && !subForm.name.$pristine}">
       <span ng-init="question.response = isAnsStored() ? (getBuyerAnswers(question.id,question.type)) : (fbemail != '' ? fbemail : '')"></span> 
@@ -31,7 +26,7 @@ width:90%;
          placeholder="{{question.label}}" ng-init="question.response = getBuyerAnswers(question.id,question.type);" 
          ng-style="myStyle" ng-click="myStyle={'width':'100%'}" ng-blur="myStyle={'width':'90%'}" title="{{question.label}}" />
          
-         <p ng-show="subForm.name.$error.email && !subForm.name.$pristine" class="help-block">This field is required.</p>
+         <p ng-show="subForm.name.$error.email && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
    </div>
 </div>
@@ -46,7 +41,7 @@ width:90%;
       <div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
          <textarea class="form-control" name="name" ng-model="question.response" ng-required="question.required=='y'" 
          placeholder="{{question.label}}" ng-init="question.response = getBuyerAnswers(question.id,question.type);" title="{{question.label}}"></textarea>
-         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
    </div>
 </div>

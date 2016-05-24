@@ -85,11 +85,13 @@
             <!-- attendee_questions end -->
             
             <!-- promotion section start -->
+            <div ng-if="promotions">
             <hr>
               <h4 class="bodyheaders">{{profileQuestions.promotionsectionheader}}</h4>
               <label class="checkbox-inline bodyheaders">
                   <input type="checkbox" ng-model="promotions" />{{profileQuestions.promotionsectionmessage}}
               </label>
+            </div>
             <!-- promotion section end -->
             <div style="clear:both"></div>
             

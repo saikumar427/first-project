@@ -11,7 +11,7 @@
             ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
             ng-style="myStyle" ng-click="myStyle={'width':'100%'}" title="{{question.label}}" />
          
-         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
       <div ng-if="question.id=='email'" ng-class="{'has-error':subForm.name.$error.email && !subForm.name.$pristine}">
          
@@ -19,7 +19,7 @@
          ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
          ng-blur="myStyle={'width':'90%'}" ng-style="myStyle" ng-click="myStyle={'width':'100%'}" title="{{question.label}}"/>
          
-         <p ng-show="subForm.name.$error.email && !subForm.name.$pristine" class="help-block">This field is required.</p>
+         <p ng-show="subForm.name.$error.email && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
    </div>
 </div>
@@ -35,7 +35,7 @@
          <textarea class="form-control" name="name" ng-model="profile.response[question.id]" ng-required="question.required=='y'" placeholder="{{question.label}}"
          ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
          title="{{question.label}}"></textarea>
-         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">This field is required.</p>
+         <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
    </div>
 </div>
