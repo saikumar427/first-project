@@ -367,7 +367,7 @@ public class CCheckTicketStatus {
 
 		return ticketsMap;
 	}
-	public HashMap<String,String> doRegformAction(HashMap<String, String> paramsData,RegistrationTiketingManager regManager,CDiscountManager discountManager, HashMap<String,HashMap<String, String>> eventTickets){
+	public HashMap<String,String> doRegformAction(HashMap<String, String> paramsData,CRegistrationTiketingManager regManager,CDiscountManager discountManager, HashMap<String,HashMap<String, String>> eventTickets){
 		HashMap<String, String> returnParams=new HashMap<String, String>();
 		System.out.println("in registration form action");
 

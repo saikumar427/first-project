@@ -41,7 +41,6 @@ public class CProfilePageDisplay {
 		CRegistrationTiketingManager regTktMgr=new CRegistrationTiketingManager();
 		CCustomAttribsDB ticketCustomAtts = new CCustomAttribsDB();
 		ArrayList selectedTickets=regTktMgr.getSelectedTickets(tid);
-		System.out.println("selectedTickets for profile :- "+selectedTickets);
 		JSONObject profilesetObject=new JSONObject();
 		
 		try{
@@ -65,6 +64,7 @@ public class CProfilePageDisplay {
 			
 			CCustomAttribSet customAttribs=(CCustomAttribSet)ticketCustomAtts.getCustomAttribSet(eid,"EVENT");
 			HashMap<String, CCustomAttribute> attributeSet = customAttribs.getAttributes();
+			
 			
 			HashMap<String,HashMap<String, String>> allTicketAtts=getAttribsForAllTickets(eid);
 			ticketSpecificAttIds=ticketCustomAtts.getTicketLevelAttributes(eid);	
@@ -114,9 +114,8 @@ public class CProfilePageDisplay {
 					ticketAtts=(ArrayList<String>)ticketSpecificAttIds.get(selecedticket);
 
 					if(ticketAtts!=null&&attributeSet!=null&&attributeSet.size()>0){
-
 						for(int k=0;k<ticketAtts.size();k++){ //make loop through all attribute set
-							CCustomAttribute cb=attributeSet.get(ticketAtts.get(k));		
+							CCustomAttribute cb=attributeSet.get(ticketAtts.get(k));
 								JSONObject attributesObj=new JSONObject();
 								fillQuestionObject(cb,questionArray,attributeSet,attributesObj,null,ATTENDEE);	
 						}//k end 
@@ -173,11 +172,11 @@ public class CProfilePageDisplay {
 			buyerAttribs=regTktMgr.getBuyerSpecificAttribs(eid);
 			
 			JSONObject buyerCustomResponses=regTktMgr.getbuyerCustomResponses(eid,tid);
+			
 			if(buyerAttribs!=null && attributeSet!=null&&attributeSet.size()>0){
 				for(int k=0;k<buyerAttribs.size();k++){
 					
 					CCustomAttribute cb=attributeSet.get(buyerAttribs.get(k));
-					
 					JSONObject attributesObj=new JSONObject();
 					
 					fillQuestionObject(cb, buyerDetails, attributeSet,attributesObj,buyerCustomResponses,BUYER);
@@ -244,6 +243,9 @@ public class CProfilePageDisplay {
 						optionObj.put("value",option.getOptionid());
 						if(option.getSubQuestions().length>0){
 							JSONArray subQuestions=new JSONArray();
+							
+							System.out.println("option.getSubQuestions - - - "+option.getSubQuestions());
+							
 							for(int sub=0;sub<option.getSubQuestions().length;sub++){	
 								//System.out.println("attrib_id"+option.getSubQuestions()[sub]+"</end>");
 								if(!"".equals(option.getSubQuestions()[sub])){

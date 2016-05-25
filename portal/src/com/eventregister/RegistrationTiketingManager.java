@@ -85,8 +85,7 @@ public	String  createNewTransaction(String eventid,HashMap contextMap){
 			final_nts_commission=0;
 		/* Nts commission ends*/
 		
-		JSONArray seat_index = new JSONArray((String)ticketHash.get("seat_index"));
-		//JSONArray seat_index=(JSONArray)ticketHash.get("seat_index");
+		JSONArray seat_index=(JSONArray)ticketHash.get("seat_index");
 		System.out.println("seat_index - "+seat_index);
 
 		if(finalPrice==null||"".equals(finalPrice)){

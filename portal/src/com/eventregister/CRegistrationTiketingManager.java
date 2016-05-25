@@ -27,7 +27,10 @@ final String GET_TRANSACTION_ID_QUERY = "select nextval('seq_transactionid') as 
 final String GET_PAYMENT_TYPES_QUERY="select distinct paytype,attrib_1 from payment_types where refid=? and status=? and purpose=?";
 final String GET_TICKETS_QUERY="select groupname,ticket_groupid,price_id,ticket_name from tickets_info where eventid=?";
 final String BUYER_BASE_INFO="select fname,lname,email,phone from buyer_base_info where transactionid=?";
-final String BUYER_CUSTOM_QUESTIONS="select attribid from buyer_custom_questions where eventid=CAST(? AS BIGINT)";
+final String BUYER_CUSTOM_QUESTIONS="select attribid from buyer_custom_questions where eventid=CAST(? AS BIGINT) and  issubquestion='N'";
+final String BUYER_CUSTOM_QUESTIONS1 = "select attribid  from custom_attribs a, buyer_custom_questions "+
+ "b where a.attrib_id=b.attribid and b.eventid=CAST(? AS BIGINT) and" +
+ " a.attrib_setid=(select attrib_setid from custom_attrib_master where groupid=CAST(? AS BIGINT)) and issubquestion='N' order by a.position";
 final String GET_SELECTED_TICKETS="select * from event_reg_ticket_details_temp where tid=? order by transaction_at";
 
 private String  transactionid=null;
@@ -331,7 +334,9 @@ public	String  createNewTransaction(String eventid,HashMap contextMap){
 		ArrayList attribidList=new ArrayList();
 		try{
 			DBManager dbmanager=new DBManager();
-			StatusObj sb=dbmanager.executeSelectQuery(BUYER_CUSTOM_QUESTIONS,new String[]{eventid});
+			//StatusObj sb=dbmanager.executeSelectQuery(BUYER_CUSTOM_QUESTIONS,new String[]{eventid});
+			//for order 
+			StatusObj sb=dbmanager.executeSelectQuery(BUYER_CUSTOM_QUESTIONS1,new String[]{eventid,eventid});
 			if(sb.getStatus()){
 				for(int p=0;p<sb.getCount();p++){
 					attribidList.add(dbmanager.getValue(p,"attribid",""));

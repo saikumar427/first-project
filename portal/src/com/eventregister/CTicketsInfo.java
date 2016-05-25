@@ -27,7 +27,7 @@ public class CTicketsInfo {
 		this.eventDate=params.get("evtdate");
 		eventid=evtid;
 		configMap=ticketsDB.getConfigValuesFromDb(eventid);
-		RegistrationTiketingManager regtktmgr=new RegistrationTiketingManager();
+		CRegistrationTiketingManager regtktmgr=new CRegistrationTiketingManager();
 		if(!"YES".equals(GenUtil.getHMvalue(configMap,"event.loading.quick","NO")))
 			regtktmgr.autoLocksAndBlockDelete(eventid, "", "jsonlevel",GenUtil.getHMvalue(configMap,"timeout","14"),GenUtil.getHMvalue(configMap,"event.seating.enabled","NO"));
 		

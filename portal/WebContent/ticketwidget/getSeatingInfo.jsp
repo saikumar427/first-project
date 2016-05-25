@@ -1,4 +1,4 @@
-<%@page import="com.eventregister.RegistrationTiketingManager"%>
+<%@page import="com.eventregister.CRegistrationTiketingManager"%>
 <%@page import="org.apache.velocity.runtime.log.SystemLogChute"%>
 <%@page import="com.eventbee.general.StatusObj"%>
 <%@page import="com.eventbee.general.DBManager"%>
@@ -41,7 +41,7 @@ System.out.println("end of 2nd delete:eid:"+eid+" uid::"+uid);
 DbUtil.executeUpdateQuery("delete from event_reg_block_seats_temp where transactionid in (select tid from event_reg_details_temp where eventid=? and transactiondate < (to_timestamp(?,'YYYY-MM-DD HH24:MI:SS.MS')- interval '20 minutes') and current_action is null );",new String[]{eventid,DateUtil.getCurrDBFormatDate()});
 System.out.println("end of 3rd delete:eid:"+eid+" uid::"+uid); */
 
-RegistrationTiketingManager regtktmgr=new RegistrationTiketingManager();
+CRegistrationTiketingManager regtktmgr=new CRegistrationTiketingManager();
 regtktmgr.autoLocksAndBlockDelete(eid, tid, "seatingsectionlevel");
 
 

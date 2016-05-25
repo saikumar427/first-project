@@ -4,7 +4,7 @@
 <%@page import="com.eventbee.conditionalticketing.validators.ConditionalTicketingValidator"%>
 <%@page import="com.eventbee.general.DbUtil"%>
 <%@page import="com.eventbee.general.StatusObj"%>
-<%@page import="com.eventregister.RegistrationTiketingManager"%>
+<%@page import="com.eventregister.CRegistrationTiketingManager"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.eventbee.general.EventbeeLogger"%>
@@ -115,7 +115,7 @@
 	System.out.println("selected_Tickets - - "+selected_Tickets);
 	/* for Conditional Ticketing end */
 	
-	RegistrationTiketingManager regtktmgr=new RegistrationTiketingManager();
+	CRegistrationTiketingManager regtktmgr=new CRegistrationTiketingManager();
 	ConditionalTicketingValidator condTickValidator = new ConditionalTicketingValidator();
 	CCheckTicketStatus checkStatus = new CCheckTicketStatus();
 	

@@ -1,7 +1,6 @@
 <%@page import="com.eventregister.CProfilePageDisplay"%>
 <%@page import="com.eventbee.general.DbUtil"%>
 <%@page import="com.eventregister.CRegistrationTiketingManager"%>
-<%@page import="com.eventregister.BProfilePageDisplay"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
@@ -13,7 +12,7 @@
 	//Version: 0.1
 	//File: getProfileJSON.jsp 
 	//Created: 23/05/2014 
-	//Modified: 26/05/2014 by venkat reddy*/
+	//Modified: 24/05/2016 by omshankar*/
 %>
 <%@page trimDirectiveWhitespaces="true"%>
 	
