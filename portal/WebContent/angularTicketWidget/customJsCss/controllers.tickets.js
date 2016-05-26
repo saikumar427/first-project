@@ -55,7 +55,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             $scope.widthCh = function() {
 
             };
-
+            $rootScope.menuTitles = false;
             /* meta data start */
             if ($rootScope.eid)
                 $http.get('http://localhost/ticketwidget/getEventMetaData.jsp?api_key=123&event_id=' + $rootScope.eid)
@@ -86,7 +86,6 @@ angular.module('ticketsapp.controllers.tickets', [])
                         return;
                     } else
                         $scope.getTicketSection();
-
                 })
                 .error(function(data, status, headers, config) {
                     alert('Unknown error occured. Please try reloading the page.');
@@ -737,7 +736,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                             } else {
                                 seat.seatSelected = false;
                                 //$scope.seats.completeseats[seatIndex].seatSelected = false;
-                                alert('What you are selected ticket is group seat selection ticket.');
+                                alert('Limit reached to select group seat ticket.');
                             }
                         } else {
                         	//alert(JSON.stringify(singleGrp));

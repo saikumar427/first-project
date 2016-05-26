@@ -94,10 +94,14 @@ angular.module('ticketsapp.controllers.profile', [])
                     $rootScope.showTimeoutBar = true;
                     $rootScope.backLinkWording = data.backbutton;
                     $scope.requiredError = data.Required;
-                    if (data.enablepromotion == 'false')
-                        $scope.promotions = false;
-                    else
+                    if (data.enablepromotion == 'false'){
+                    	$scope.promotionsDiv = false;
+                    	$scope.promotions = false;
+                    }else{
                     	$scope.promotions = true;
+                    	$scope.promotionsDiv = true;
+                    }
+                    	
 
                     $rootScope.timeWatcher = $rootScope.$watch('timeRemaining', function(newVal, oldVal) {
                         if (newVal < 0) {
@@ -145,7 +149,7 @@ angular.module('ticketsapp.controllers.profile', [])
             };
             //$scope.fblogin();
             
-            /* for collecting temp data buyer and attendee start */
+            /* for collecting Temp data buyer and attendee start */
             $scope.buyerAnswers = $rootScope.buyerAnswers;
             $scope.attendeeAnswers = $rootScope.attendeeAnswers;
             //console.log('scope.buyerAnswers - '+ $scope.buyerAnswers);
@@ -186,6 +190,7 @@ angular.module('ticketsapp.controllers.profile', [])
                 		return "";
                   }
                 };
+                /* for collecting Temp data buyer and attendee start */
            /* $scope.getSubQuestions = function(mainQuestion){
             	angular.forEach(mainQuestion.options,function(eachOption,index){
             		if(eachOption.sub_questions){
@@ -330,6 +335,12 @@ angular.module('ticketsapp.controllers.profile', [])
                 //console.log('attndeee_info - '+JSON.stringify(attendee_info))
 
             };
+            
+            
+            $scope.promotionsChange = function(data){
+            	$scope.promotions = data;
+            };
+            
             $scope.sub = function() {
                 $scope.loadingSubmit = true;
                 $rootScope.getDetails();
@@ -367,6 +378,8 @@ angular.module('ticketsapp.controllers.profile', [])
                 return result;
             };
 
+            
+            //for copy buyer or attendee info TO attendee fields  : select box : code start (select box html code in tktwidget.war-profile.html)
             $scope.allProfiles = function() {
                 var allProfiles = [];
 
@@ -377,7 +390,7 @@ angular.module('ticketsapp.controllers.profile', [])
                 });
 
                 angular.forEach($scope.profileQuestions.attendee_questions, function(item, index) {
-                    for (i = 0; i < item.profiles.length; i++)
+                    for (var i = 0; i < item.profiles.length; i++)
                         allProfiles.push({
                             ticketname: item.ticket_name,
                             ticketid: item.ticket_id,
@@ -387,7 +400,6 @@ angular.module('ticketsapp.controllers.profile', [])
                 });
                 return allProfiles;
             };
-
             $scope.copyResponse = function(from, to, toquestions) {
 
                 if (from.copyFrom == 'buyerinfo') {
@@ -417,6 +429,7 @@ angular.module('ticketsapp.controllers.profile', [])
                             to.response[item.id] = undefined;
                     });
             };
-
-        }
+          //for copy buyer info code select box code end
+        
+    	}
     ]);

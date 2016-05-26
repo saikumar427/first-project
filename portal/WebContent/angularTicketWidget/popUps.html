@@ -1,6 +1,10 @@
+<!-- when pop-up open background transparent color code 'class="modal-backdrop fade in"' added every modal pop-up if not you want 
+create like: this modal tag have ID 
+$('#ID').modal('show'); -->
+
 <!-- Multiple tickets case pop-up start -->
 <div ng-if="eventMetadata.has_seating">
-	<div class="modal" ng-show="seatingMultTicket">
+	<div class="modal" ng-show="seatingMultTicket"  >
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -17,6 +21,7 @@
 			</div>
 		</div>
 	</div>
+	<div ng-show="seatingMultTicket" class="modal-backdrop fade in"></div>
 </div>
 <!-- Multiple tickets case pop-up end -->
 
@@ -37,6 +42,7 @@
 			</div>
 		</div>
 	</div>
+	<div ng-show="timeCheckShow" class="modal-backdrop fade in"></div>
 </div>
 <!-- PriorityTimeCheck end -->
 
@@ -56,6 +62,7 @@
 		</div>
 	</div>
 </div>
+<div ng-show="conditional_ticketing" class="modal-backdrop fade in"></div>
 <!-- Conditional Ticketing Pop-Up End -->
 
 <!-- Wait List Pop-Up Start -->
@@ -107,4 +114,5 @@
       </div>
    </div>
 </div>
+<div ng-show="showWaitPop" class="modal-backdrop fade in"></div>
 <!-- Wait List Pop-Up End -->

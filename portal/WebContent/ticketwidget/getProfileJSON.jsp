@@ -88,8 +88,17 @@ try{
 
 responseJSON.put("timediffrence",totalDiff+"");
 responseJSON.put("secdiffrence",totalSecDiff+"");
-String promotionVal = DbUtil.getVal("select 'y' from promotion_mail_list where eid=cast(? as bigint) and attrib1=?", new String[]{eid,tid});
-promotionVal=promotionVal==null?"false":"true";
+//String promotionVal = DbUtil.getVal("select 'y' from promotion_mail_list where eid=cast(? as bigint) and attrib1=?", new String[]{eid,tid});
+String promotionVal = DbUtil.getVal("select value from config where config_id = (select config_id from eventinfo where eventid=CAST(? AS BIGINT)) and name=?", new String[]{eid,"show.ebee.promotions"});
+try{
+	if("".equals(promotionVal)||promotionVal==null||"No".equalsIgnoreCase(promotionVal))
+		promotionVal="false";
+	else
+		promotionVal="true";
+}catch(Exception e){
+	promotionVal="false";
+	System.out.println("Exception at getProfileJSON"+e.getMessage());
+}
 responseJSON.put("enablepromotion",promotionVal);
 
 out.println(responseJSON.toString(2));
