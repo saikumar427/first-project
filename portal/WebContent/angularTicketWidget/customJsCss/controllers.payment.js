@@ -33,11 +33,24 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
                 $rootScope.timeRemaining = $rootScope.millis - (+new Date);
             }, 500);
 
-            $http.get($rootScope.base_Url + 'getPaymentsJSON.jsp', {
+            /*if(fbavailable){
+			FB.getLoginStatus(function(response){
+				if(response.authResponse){
+					fbuid=response.authResponse.userID;
+				}
+			});
+			}*/
+            $scope.fbuid='';
+            
+            $http.get($rootScope.baseURL + 'getPaymentsJSON.jsp', {
                 params: {
-                    api_Key: '123',
-                    event_id: $rootScope.eid,
-                    transaction_id: $rootScope.transactionId
+                    api_Key : '123',
+                    event_id : $rootScope.eid,
+                    transaction_id : $rootScope.transactionId,
+                    regtype : $rootScope.eventDetailsList.registrationsource,
+                    ntsenable : $rootScope.eventDetailsList.nts_enable,
+                    referral_ntscode : $rootScope.eventDetailsList.referral_ntscode,
+                    fbuid : $scope.fbuid
                 }
             }).success(function(data, status, headers, config) {
                 if (data.status == 'success') {

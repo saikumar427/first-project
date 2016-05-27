@@ -19,6 +19,7 @@ String ntsenable=request.getParameter("ntsenable");
 System.out.println("ntsenable: "+ntsenable+", refcode: "+referral_ntscode);
 String fbuid=request.getParameter("fbuid");
 String paymentmode=request.getParameter("paymentmode");
+
 HashMap configMap=ticketInfo.getConfigValuesFromDb(eid);
 HashMap transactionAmounts=regTktMgr.getRegTotalAmounts(tid);
 regTktMgr.setEventRegTempAction(eid,tid,"payment section");
