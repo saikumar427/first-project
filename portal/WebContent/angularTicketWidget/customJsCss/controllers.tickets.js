@@ -58,7 +58,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             $rootScope.menuTitles = false;
             /* meta data start */
             if ($rootScope.eid)
-                $http.get('http://localhost/ticketwidget/getEventMetaData.jsp?api_key=123&event_id=' + $rootScope.eid)
+                $http.get($rootScope.baseURL + 'getEventMetaData.jsp?api_key=123&event_id=' + $rootScope.eid)
                 .success(function(data, status, headers, config) {
                     $rootScope.showTimeoutBar = false;
                     $scope.eventMetadata = data;
@@ -106,7 +106,7 @@ angular.module('ticketsapp.controllers.tickets', [])
 
             /*Priority registration start*/
             $scope.getPriorityReg = function() {
-                $http.get('http://localhost/ticketwidget/PriorityRegBlock.jsp?eid=' + $rootScope.eid)
+                $http.get($rootScope.baseURL + 'PriorityRegBlock.jsp?eid=' + $rootScope.eid)
                     .success(function(data, status, headers, config) {
                         $scope.priorityData = data;
                         if ($scope.priorityData.list_data.length == 1) {
@@ -136,7 +136,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                 }
             });
             $scope.submitPriority = function() {
-                $http.get('http://localhost/ticketwidget/PriorityRegFormAction.jsp', {
+                $http.get($rootScope.baseURL + 'PriorityRegFormAction.jsp', {
                         params: {
                             eid: $rootScope.eid,
                             listId: $rootScope.listid,
@@ -184,7 +184,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             $scope.priorityTimeCheck = function() {
 
                 if ($scope.resultPriorityReg.prireg_token != '' && $scope.resultPriorityReg.pri_list_id != '' && $scope.resultPriorityReg.limit_type != 'UNLIMIT') {
-                    $http.get('http://localhost/ticketwidget/PriorityTimeCheck.jsp?timestamp=' + (new Date()).getTime(), {
+                    $http.get($rootScope.baseURL + 'PriorityTimeCheck.jsp?timestamp=' + (new Date()).getTime(), {
                             params: {
                                 eid: $rootScope.eid,
                                 listId: $scope.resultPriorityReg.pri_list_id,
@@ -247,7 +247,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             /* Ticket data start */
             $scope.getTicketSection = function() {
                 $scope.loadingTickets = true;
-                $http.get('http://localhost/ticketwidget/getEventTickets.jsp', {
+                $http.get($rootScope.baseURL + 'getEventTickets.jsp', {
                         params: {
                             api_key: 123,
                             seating_enable: $rootScope.isSeatingEvent,
@@ -310,7 +310,7 @@ angular.module('ticketsapp.controllers.tickets', [])
 
                         if ($rootScope.isSeatingEvent) {
                             $scope.loadSeating = true;
-                            $http.get('http://localhost/ticketwidget/getSeatingInfo.jsp?&timestamp=' + new Date().getTime(), {
+                            $http.get($rootScope.baseURL + 'getSeatingInfo.jsp?&timestamp=' + new Date().getTime(), {
                                     params: {
                                         eid: $rootScope.eid,
                                         tid: $rootScope.transactionId,
@@ -397,7 +397,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                         ticket_name: $scope.waitListData.tktName,
                         qty: $scope.wait_select
                     }];
-                    $http.get('http://localhost/ticketwidget/createwaitlist.jsp', {
+                    $http.get($rootScope.baseURL + 'createwaitlist.jsp', {
                         params: {
                             event_id: $rootScope.eid,
                             user_details: data,
@@ -544,7 +544,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                 var trasactionid = '';
                 if ($location.search().tid)
                     trasactionid = $location.search().tid;
-                $http.get('http://localhost/ticketwidget/applyDiscount.jsp', {
+                $http.get($rootScope.baseURL + 'applyDiscount.jsp', {
                         params: {
                             api_key: '123',
                             event_id: $rootScope.eid,
@@ -1103,10 +1103,11 @@ angular.module('ticketsapp.controllers.tickets', [])
 
                 //console.log($rootScope.eventDetailsList);
                 //alert( $rootScope.context);
+                $rootScope.eventDetailsList.isSeating = $rootScope.isSeatingEvent;
+                $rootScope.eventDetailsList.seatSectionId = $scope.sectionId;
                 if (alertMsgCount == 0) {
                     $scope.loadingTransaction = true;
-                    /*$http.get($rootScope.baseUrl + 'setTicketQuantities.jsp', {*/
-                    $http.get('http://localhost/ticketwidget/setTicketQuantities.jsp', {
+                    $http.get($rootScope.baseURL + 'setTicketQuantities.jsp', {
                         params: {
                             api_Key: finalTickets.api_Key,
                             disc_code: finalTickets.discountCode,
@@ -1121,6 +1122,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                         //console.log("the final data is::"+JSON.stringify(data));
                         $scope.loadingTransaction = false;
                         //console.log(JSON.stringify(data));
+                        
                         if (data.status == 'success') {
                             $rootScope.ticketsCost = data.details.tickets_cost;
                             $('#tickets .widget h2').hide();
@@ -1140,8 +1142,13 @@ angular.module('ticketsapp.controllers.tickets', [])
                             else
                                 $rootScope.selectDate = '';
 
+                            // this data for access in profile controller
+                            $rootScope.eventDetailsList.selected_tickets = JSON.stringify(finalTickets.selected_tickets);
+                            $rootScope.eventDetailsList.discountCode = finalTickets.discountCode;
+                            // this data for access in profile controller
                             $location.path('/profile');
-                        } else if (data.status = 'fail' && data.reason == 'conditional_ticketing') {
+                        } else if (data.status == 'fail' && data.reason == 'conditional_ticketing') {
+                        	$scope.loadingTransaction = false;
                             var dataList = '<ul>';
                             for (var j = 0; data.errors.length > j; j++) {
                                 dataList = dataList + '<li>' + data.errors[j] + '</li>';
@@ -1159,8 +1166,10 @@ angular.module('ticketsapp.controllers.tickets', [])
                             if (agree) {
                                 $scope.buy();
                             }
-
-                        } else {
+                        } else if(data.status == 'fail' && data.reason == 'noSeat'){
+                        	$scope.loadingTransaction = false;
+                        	alert('Selected seat not available. Please try again.');
+                        }else {
                             $scope.loadingTransaction = false;
                             alert('Unknown error occured. Please try again');
                         }

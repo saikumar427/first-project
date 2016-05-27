@@ -29,7 +29,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
       
             $scope.renderInnerHtml = function(){
             	if(document.getElementById('shareblock')){
-            	$http.get($rootScope.baseUrl+'widgetsocialshare.jsp?timestamp='+(new Date()).getTime(), {
+            	$http.get($rootScope.base_Url+'widgetsocialshare.jsp?timestamp='+(new Date()).getTime(), {
             		params :{
             			eid:$rootScope.eid,
                     	tid:$rootScope.transactionId,

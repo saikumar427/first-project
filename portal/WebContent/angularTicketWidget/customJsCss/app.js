@@ -74,8 +74,10 @@ angular.module('ticketsapp', [
                 $location.path('/tickets');
         };
 
-       
-        $rootScope.baseUrl = 'http://localhost/tktwidget/registration/';
+        // this is using..
+        $rootScope.baseURL = 'http://localhost/ticketwidget/';
+        
+        $rootScope.base_Url = 'http://localhost/tktwidget/registration/';
         $rootScope.serverAddress = 'http://localhost/';
         //$rootScope.eid = $location.search().eid;
         $rootScope.eid = eventid;
@@ -117,10 +119,11 @@ angular.module('ticketsapp', [
         },1000);*/
 
         $rootScope.tryAgain = function() {
-            $http.get($rootScope.serverAddress + 'embedded_reg/seating/delete_temp_locked_tickets.jsp', {
+            $http.get($rootScope.baseURL + 'delete_temp_locked_tickets.jsp', {
                 params: {
                     eid: $rootScope.eid,
-                    tid: $rootScope.transactionId
+                    tid: $rootScope.transactionId,
+                    seating:$rootScope.isSeatingEvent == true ? 'y' : 'n'
                 }
             }).success(function(data, status, headers, config) {
                 $window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
@@ -136,7 +139,7 @@ angular.module('ticketsapp', [
 
 
         /*if($rootScope.context!='FBApp'){
-        $http.get($rootScope.baseUrl + 'getThemesJSON.jsp', {
+        $http.get($rootScope.base_Url + 'getThemesJSON.jsp', {
             params: {
                 eid: $rootScope.eid,
             }

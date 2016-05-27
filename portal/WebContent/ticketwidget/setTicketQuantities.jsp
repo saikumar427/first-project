@@ -57,6 +57,8 @@
 	String registrationsource = eventDataList.getString("registrationsource");
 	String context = eventDataList.getString("context");
 	String nts_enable = eventDataList.getString("nts_enable");
+	String isSeating = eventDataList.getString("isSeating");
+	String seatSectionId = eventDataList.getString("seatSectionId");
 	
 	if(priorityToken==null || "".equals(priorityToken))priorityToken="";
 	if(prilistId==null || "".equals(prilistId))prilistId="";
@@ -70,6 +72,8 @@
 	if(context==null||"".equals(context)) context="EB";
 	if(discountCode==null || "".equals(discountCode))discountCode="";
 	if(actionname==null||"".equals(actionname))actionname = "Order Now";
+	if(isSeating==null||"".equals(isSeating))isSeating="";
+	if(seatSectionId==null||"".equals(seatSectionId))seatSectionId="";
 	
 	if("FBApp".equals(context))
 		regSource = "widget";
@@ -172,74 +176,85 @@
 		responseJSON.put("status", "success");
 		EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "(Box Office) setTicketQuantities.jsp", "Registration Strated for the  event---->"+eid, "", null);
 		
-		//note :  	below getTicketDetails data getting from CacheLoader
-		//HashMap ticketDetailsMap=checkStatus.getTicketDetails(eid); 
+		/* This code for check seatstatus start code from checkseatstatus.jsp(portal) */
+		boolean checkSeatStatus = true;
+		if(isSeating=="true")
+			checkSeatStatus  = checkStatus.getSeatChecking(seatSectionId,eid,edate,tid,selTickQty,"");
+		/* This code for check seatstatus end */
 		
-		/*
-		HashMap ntsdata=new HashMap();
-		HashMap ntsdetails=new HashMap();
-		
-		 if(!"0".equals(fbuserid)){
-			ntsdata.put("fbuserid",fbuserid);
-			ntsdata.put("eventid",eid);
-			ntsdata.put("ntsenable",nts_enable);
-			ntsdata.put("fname",fname);
-			ntsdata.put("lname",lname);
-			ntsdata.put("email",email);
-			ntsdata.put("network","facebook");
-			try{
-				System.out.println("calling get nts code method: "+fbuserid);
-				ntsdetails=regTktMgr.getPartnerNTSCode(ntsdata);
-				ntscode=(String)ntsdetails.get("nts_code");
-				System.out.println("obtained nts code: "+ntscode);
-				display_ntscode=(String)ntsdetails.get("display_ntscode");
-			}
-			catch(Exception e){
-				System.out.println("exception in nts code: "+e.getMessage());
-			}
-		} */
-		HashMap contextdata=new HashMap();
-		String customerIp=request.getHeader("x-forwarded-for");
-		if(customerIp==null || "".equals(customerIp)) 
-			customerIp=request.getRemoteAddr();
-		if(tid==null||"".equals(tid)){
-			contextdata.put("useragent",request.getHeader("User-Agent")+"["+customerIp+"]");
-			contextdata.put("trackurl",track);
-			contextdata.put("ticketurlcode",ticketurlcode);
-			contextdata.put("eventdate",edate);
-			contextdata.put("registrationsource",registrationsource);
-			contextdata.put("wid",waitListID);
-			contextdata.put("prilistid",prilistId);
-			contextdata.put("pritoken",priorityToken);
-			contextdata.put("discountcode",discountCode);
-			contextdata.put("clubuserid","");
-			tid=regtktmgr.createNewTransaction(eid,contextdata);
-		}
-		JSONObject obj=new JSONObject();
-		try{
-			obj=(JSONObject)new JSONTokener(selected_Tickets).nextValue();
-		}catch(Exception e){
-				System.out.println("Error while processing buyticket hold checking:eid:"+eid+"tid::"+tid+""+e.getMessage());
-		}
-		contextdata.put("selected_tickets",selectedTickets);
-		contextdata.put("eid",eid);
-		contextdata.put("allTicketIds",ticketids);
-		contextdata.put("tid",tid);
-		contextdata.put("nts_enable",nts_enable);
-		contextdata.put("nts_commission","0");
-		contextdata.put("referral_ntscode",referral_ntscode);
-		if(!"{}".equals(obj+"")){
-			String trackquery="insert into querystring_temp (tid,useragent,created_at,querystring,jsp ) values(?,?,now(),?,?)";
-			DbUtil.executeUpdateQuery(trackquery,new String[]{tid,request.getHeader("User-Agent"),contextdata+"","setTicketQuantities.jsp 2st step"});
-		}
-		HashMap<String,String> resDetailsMap=checkStatus.doRegformAction(contextdata,regtktmgr,discountManager,eventTickets);
-		if("fail".equalsIgnoreCase(resDetailsMap.get("status"))){
-			responseJSON.put("status", "fail");
-			responseJSON.put("reason", resDetailsMap.get("reason"));
+		if(checkSeatStatus){
+			//note :  	below getTicketDetails data getting from CacheLoader
+			//HashMap ticketDetailsMap=checkStatus.getTicketDetails(eid); 
+			/*
+			HashMap ntsdata=new HashMap();
+			HashMap ntsdetails=new HashMap();
 			
+			 if(!"0".equals(fbuserid)){
+				ntsdata.put("fbuserid",fbuserid);
+				ntsdata.put("eventid",eid);
+				ntsdata.put("ntsenable",nts_enable);
+				ntsdata.put("fname",fname);
+				ntsdata.put("lname",lname);
+				ntsdata.put("email",email);
+				ntsdata.put("network","facebook");
+				try{
+					System.out.println("calling get nts code method: "+fbuserid);
+					ntsdetails=regTktMgr.getPartnerNTSCode(ntsdata);
+					ntscode=(String)ntsdetails.get("nts_code");
+					System.out.println("obtained nts code: "+ntscode);
+					display_ntscode=(String)ntsdetails.get("display_ntscode");
+				}
+				catch(Exception e){
+					System.out.println("exception in nts code: "+e.getMessage());
+				}
+			} */
+			HashMap contextdata=new HashMap();
+			String customerIp=request.getHeader("x-forwarded-for");
+			if(customerIp==null || "".equals(customerIp)) 
+				customerIp=request.getRemoteAddr();
+			if(tid==null||"".equals(tid)){
+				contextdata.put("useragent",request.getHeader("User-Agent")+"["+customerIp+"]");
+				contextdata.put("trackurl",track);
+				contextdata.put("ticketurlcode",ticketurlcode);
+				contextdata.put("eventdate",edate);
+				contextdata.put("registrationsource",registrationsource);
+				contextdata.put("wid",waitListID);
+				contextdata.put("prilistid",prilistId);
+				contextdata.put("pritoken",priorityToken);
+				contextdata.put("discountcode",discountCode);
+				contextdata.put("clubuserid","");
+				tid=regtktmgr.createNewTransaction(eid,contextdata);
+			}
+			JSONObject obj=new JSONObject();
+			try{
+				obj=(JSONObject)new JSONTokener(selected_Tickets).nextValue();
+			}catch(Exception e){
+					System.out.println("Error while processing buyticket hold checking:eid:"+eid+"tid::"+tid+""+e.getMessage());
+			}
+			contextdata.put("selected_tickets",selectedTickets);
+			contextdata.put("eid",eid);
+			contextdata.put("allTicketIds",ticketids);
+			contextdata.put("tid",tid);
+			contextdata.put("nts_enable",nts_enable);
+			contextdata.put("nts_commission","0");
+			contextdata.put("referral_ntscode",referral_ntscode);
+			if(!"{}".equals(obj+"")){
+				String trackquery="insert into querystring_temp (tid,useragent,created_at,querystring,jsp ) values(?,?,now(),?,?)";
+				DbUtil.executeUpdateQuery(trackquery,new String[]{tid,request.getHeader("User-Agent"),contextdata+"","setTicketQuantities.jsp 2st step"});
+			}
+			HashMap<String,String> resDetailsMap=checkStatus.doRegformAction(contextdata,regtktmgr,discountManager,eventTickets);
+			if("fail".equalsIgnoreCase(resDetailsMap.get("status"))){
+				responseJSON.put("status", "fail");
+				responseJSON.put("reason", resDetailsMap.get("reason"));
+				
+			}else{
+				responseJSON.put("details", resDetailsMap);
+			}
 		}else{
-			responseJSON.put("details", resDetailsMap);
+			responseJSON.put("status", "fail");
+			responseJSON.put("reason", "noSeat");
 		}
+		
 	}else{
 		responseJSON.put("status", "fail");
 		if(CCheckTicketStatus.EVENT_LEVEL_QTY_CRITERIA_MSG.equalsIgnoreCase(notAvailableTickets.get("criteria").get("criteria"))){

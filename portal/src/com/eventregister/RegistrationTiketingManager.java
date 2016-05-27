@@ -84,10 +84,7 @@ public	String  createNewTransaction(String eventid,HashMap contextMap){
 		if("donationType".equals(ticketType))
 			final_nts_commission=0;
 		/* Nts commission ends*/
-		
 		JSONArray seat_index=(JSONArray)ticketHash.get("seat_index");
-		System.out.println("seat_index - "+seat_index);
-
 		if(finalPrice==null||"".equals(finalPrice)){
 			finalPrice=price;
 		}

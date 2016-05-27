@@ -76,9 +76,11 @@ public class CTicketsJson {
 				lockedQuantity=getQuantity(tid, eid);	
 			//BTicketsInfo ticketInfo = new BTicketsInfo();
 			HashMap<String,String> mgrConfigMessages=new HashMap<String, String>();
-			if("widget".equalsIgnoreCase(params.get("source")))		
+			HashMap<String,String> selectedSeats = new HashMap<String,String>();
+			if("widget".equalsIgnoreCase(params.get("source")))	{	
 				mgrConfigMessages=ticketInfo.getTicketMessage(eid,params.get("evtdate"));
-			
+				selectedSeats=ticketInfo.getSelectedSeats(eid,params.get("evtdate"),tid);
+			}
 			Double totalFee=0.0;
 			
 			for(int i=0;i<ticketsArray.size();i++){
@@ -132,6 +134,10 @@ public class CTicketsJson {
 								eachTicketJSON.put("ticket_selected",Integer.parseInt(lockedQuantity.get(eventTicketsArray[k].getTicketId())));
 							else
 								eachTicketJSON.put("ticket_selected",0);
+							
+							if("widget".equals(params.get("source"))){
+								eachTicketJSON.put("seatIndexes",selectedSeats.containsKey(eventTicketsArray[k].getTicketId())?selectedSeats.get(eventTicketsArray[k].getTicketId()):new ArrayList());
+							}
 						}
 						String shortmsg="";
 						eachTicketJSON.put("availability_msg","");

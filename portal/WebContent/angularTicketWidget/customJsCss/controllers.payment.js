@@ -33,7 +33,7 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
                 $rootScope.timeRemaining = $rootScope.millis - (+new Date);
             }, 500);
 
-            $http.get($rootScope.baseUrl + 'getPaymentsJSON.jsp', {
+            $http.get($rootScope.base_Url + 'getPaymentsJSON.jsp', {
                 params: {
                     api_Key: '123',
                     event_id: $rootScope.eid,

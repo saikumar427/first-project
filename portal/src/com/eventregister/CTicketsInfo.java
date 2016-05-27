@@ -512,4 +512,41 @@ public class CTicketsInfo {
 	public void makeWaitListExpired(String eid,String waitlistId){
 		DbUtil.executeUpdateQuery("update wait_list_transactions set status='Expired' where eventid=?::BIGINT and wait_list_id=?",new String[]{eid,waitlistId});
 	}
+	
+	public HashMap getSelectedSeats(String eid,String edate,String tid){
+		System.out.println("the eid:"+eid+":edate:"+edate+":tid:"+tid);
+		HashMap<String,ArrayList<String>> blockedSeats=new HashMap<String,ArrayList<String>>();
+		if(!"".equals(tid)){
+			String query="";
+			DBManager dbm=new DBManager();
+			StatusObj sbj=null;
+			query="select distinct seatindex,ticketid from event_reg_block_seats_temp where eventid=? and transactionid=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=to_number(?,'99999999999') and seatindex is not null)";
+			if(!"".equals(edate)){
+				query="select distinct seatindex,ticketid from event_reg_block_seats_temp where eventid=? and transactionid=? and eventdate=? and seatindex NOT IN (select seatindex from seat_booking_status where eventid=to_number(?,'999999999') and eventdate=? and seatindex is not null)";
+				sbj=dbm.executeSelectQuery(query,new String[]{eid,tid,edate,eid,edate});
+				if(sbj.getStatus() && sbj.getCount()>0){
+					for(int i=0;i<sbj.getCount();i++){
+						ArrayList<String> arrlist=new ArrayList<String>();
+						if(blockedSeats.containsKey(dbm.getValue(i,"ticketid","")))
+							arrlist=blockedSeats.get(dbm.getValue(i,"ticketid",""));
+						arrlist.add(dbm.getValue(i,"seatindex",""));
+						blockedSeats.put(dbm.getValue(i,"ticketid",""),arrlist);
+					}	
+				}
+			}
+			else{
+				sbj=dbm.executeSelectQuery(query,new String[]{eid,tid,eid});
+				if(sbj.getStatus() && sbj.getCount()>0){
+					for(int i=0;i<sbj.getCount();i++){
+						ArrayList<String> arrlist=new ArrayList<String>();
+						if(blockedSeats.containsKey(dbm.getValue(i,"ticketid","")))
+							arrlist=blockedSeats.get(dbm.getValue(i,"ticketid",""));
+						arrlist.add(dbm.getValue(i,"seatindex",""));
+						blockedSeats.put(dbm.getValue(i,"ticketid",""),arrlist);
+					}
+				}	
+			} 
+		}
+	return blockedSeats;
+	}
 }

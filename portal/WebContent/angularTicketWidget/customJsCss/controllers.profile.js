@@ -76,7 +76,7 @@ angular.module('ticketsapp.controllers.profile', [])
             	$location.url('/event?eid=' + $rootScope.eid);
             }*/
 
-            $http.get('http://localhost/ticketwidget/getProfileJSON.jsp', {
+            $http.get($rootScope.baseURL + 'getProfileJSON.jsp', {
                     params: {
                         api_key: '123',
                         event_id: $rootScope.eid,
@@ -341,11 +341,44 @@ angular.module('ticketsapp.controllers.profile', [])
             	$scope.promotions = data;
             };
             
-            $scope.sub = function() {
-                $scope.loadingSubmit = true;
+            $scope.sub = function(){
+            	$scope.loadingSubmit = true;
+            	$http.get($rootScope.baseURL + 'profileTicketStatus.jsp',{
+            		params:{
+            			api_Key: '123',
+            			eventid : $rootScope.eid,
+            			event_date : $rootScope.selectDate,
+            			transaction_id: $rootScope.transactionId,
+            			ticket_ids : $rootScope.ticketsIds,
+            			selected_tickets:$rootScope.eventDetailsList.selected_tickets,
+            			discountCode:$rootScope.eventDetailsList.discountCode,
+            			seating_enabled: $rootScope.isSeatingEvent == true ? 'y' : 'n',
+            			wid:$rootScope.eventDetailsList.waitlistId,
+            			seatSectionId:$rootScope.eventDetailsList.seatSectionId
+            		}
+            	})
+            	.success(function(data, status, headers, config){
+            		if(data.status == 'success')
+            			$scope.submitProfile();
+            		else if(data.status == 'fail' && data.reason == 'noSeat'){
+            			$scope.loadingSubmit = false;
+            			alert('Selected seat not available. Please try again.');
+            		}else{
+            			$scope.loadingSubmit = false;
+            			alert('Unknown error occured. Please try again.');
+            		}
+            	})
+            	.error(function(data, status, headers, config) {
+            		$scope.loadingSubmit = false;
+                    alert('Unknown error occured. Please try again.');
+                });
+            };
+            
+            //final submit
+            $scope.submitProfile = function() {
+               // $scope.loadingSubmit = true;
                 $rootScope.getDetails();
-                //alert("promotion value is::"+$scope.promotions);
-                $http.get($rootScope.baseUrl + 'submitProfileInfo.jsp', {
+                $http.get($rootScope.base_Url + 'submitProfileInfo.jsp', {
                         params: {
                             api_Key: '123',
                             event_id: $rootScope.eid,
@@ -360,7 +393,6 @@ angular.module('ticketsapp.controllers.profile', [])
                     .success(function(data, status, headers, config) {
                         $scope.loadingSubmit = false;
                         if (data.status == 'success')
-                        //$location.url('/event/payment?eid=' + $rootScope.eid + '&tid=' + $rootScope.transactionId);
                             $location.path('/payment');
                         else
                             alert('Unknown error occured. Please try again.');
@@ -378,7 +410,7 @@ angular.module('ticketsapp.controllers.profile', [])
                 return result;
             };
 
-            
+            // below code we r not using now 26-05-2016 
             //for copy buyer or attendee info TO attendee fields  : select box : code start (select box html code in tktwidget.war-profile.html)
             $scope.allProfiles = function() {
                 var allProfiles = [];

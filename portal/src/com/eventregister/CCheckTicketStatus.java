@@ -10,6 +10,7 @@ import com.eventbee.general.DBManager;
 import com.eventbee.general.DbUtil;
 import com.eventbee.general.EventbeeLogger;
 import com.eventbee.general.StatusObj;
+import com.sun.media.sound.JavaSoundAudioClip;
 
 public class CCheckTicketStatus {
 	
@@ -494,5 +495,126 @@ public class CCheckTicketStatus {
 		}		
 		return returnMap;
 		
+	}
+	
+	public boolean getSeatChecking(String seatingId, String eid, String edate, String tid, JSONArray selectedDetails,String check){
+		System.out.println("check seats available.");
+		boolean result = true;
+		String seating_temp = "";
+		String booked_seats = "";
+		String forQueryString = "";
+		StatusObj booked_status=null;
+		StatusObj temp_status=null;
+		DBManager db=new DBManager();
+		DBManager dbt=new DBManager();
+		JSONArray allIds = new JSONArray();
+		try{
+			//selectedDetails = [{"ticket_id":"71350","seat_ids":["1740_13_6","1740_13_7"],"qty":2},{"ticket_id":"71351","seat_ids":["1740_17_17","1740_17_18"],"qty":2}]
+			for (int i =0; i<selectedDetails.length(); i++){
+				JSONObject eachTicket=selectedDetails.getJSONObject(i);
+				String eachSeat = eachTicket.getString("seat_ids");
+				JSONArray eachSeatArray = new JSONArray(eachSeat);
+				for(int k=0; k<eachSeatArray.length();k++){
+					allIds.put(eachSeatArray.get(k));
+				}
+			}
+			//allIds = ["1740_13_6","1740_13_7","1740_17_17","1740_17_18"]
+			forQueryString  = allIds.toString();
+			forQueryString = forQueryString.replace("[", "").replace("]", "");
+			forQueryString = forQueryString.replace('"','\'');
+			
+		}catch(Exception e){
+			System.out.println("Exception at CCheckTicketStatus.java "+e.getMessage());
+		}
+		
+		String dd = "select * from event_reg_block_seats_temp where eventid=? and transactionid!=? and seatindex in ("+forQueryString+")";
+		if(!"".equals(selectedDetails) || selectedDetails!=null){
+			if(!"".equals(tid)){
+				seating_temp="select * from event_reg_block_seats_temp where eventid=? and transactionid!=? and seatindex in ("+forQueryString+")";
+				booked_seats="select * from seat_booking_status where eventid=cast(? as numeric)  and tid!=? and seatindex in ("+forQueryString+")";
+			}else{
+				seating_temp="select * from event_reg_block_seats_temp where eventid=? and seatindex in ("+forQueryString+")";
+				booked_seats="select * from seat_booking_status where eventid=cast(? as numeric)  and seatindex in ("+forQueryString+")";
+			}
+			
+			if(!"".equals(edate)||!" ".equals(edate)){
+				if(!"".equals(tid)){
+					seating_temp="select * from event_reg_block_seats_temp where eventid=? and transactionid!=? and eventdate=? and seatindex in ("+forQueryString+")";
+					booked_seats="select * from seat_booking_status where eventid=cast(? as numeric)  and tid!=? and eventdate=? and seatindex in ("+forQueryString+")";
+					booked_status=db.executeSelectQuery(booked_seats,new String[]{eid,tid,edate});
+					temp_status=dbt.executeSelectQuery(seating_temp,new String[]{eid,tid,edate});
+				}else{
+					seating_temp="select * from event_reg_block_seats_temp where eventid=? and eventdate=? and seatindex in ("+forQueryString+")";
+					booked_seats="select * from seat_booking_status where eventid=cast(? as numeric) and eventdate=? and seatindex in ("+forQueryString+")";
+					booked_status=db.executeSelectQuery(booked_seats,new String[]{eid,edate});
+					temp_status=dbt.executeSelectQuery(seating_temp,new String[]{eid,edate});
+			
+				}
+			}else{
+				if(!"".equals(tid)){
+					booked_status=db.executeSelectQuery(booked_seats,new String[]{eid,tid});
+					temp_status=dbt.executeSelectQuery(seating_temp,new String[]{eid,tid});
+				}else{
+					booked_status=db.executeSelectQuery(booked_seats,new String[]{eid});
+					temp_status=dbt.executeSelectQuery(seating_temp,new String[]{eid});
+				}
+			}
+			if(temp_status.getStatus() || booked_status.getStatus()){
+				result = false;
+			}else{
+				result = true;
+			}
+		}else
+			result = true;
+		
+		// level2 : this case from profile submit (profile submit 'check' is level2, ticket submit 'check' is empty)
+		if("level2".equals(check)){
+			System.out.println("in profile page submit");
+			boolean break_flag=true;
+			HashMap timeseat= new HashMap();
+			try{
+				DBManager dbm=new DBManager();
+				StatusObj booked_statusinner=null;
+				String timequery="";
+				if(!"".equals(edate)||!" ".equals(edate)){
+					timequery="select seatindex from event_reg_block_seats_temp where transactionid not in(?) and blocked_at<(select  blocked_at from  event_reg_block_seats_temp where transactionid=? order by blocked_at desc limit 1) and eventid=? and eventdate=?";
+				    booked_statusinner=dbm.executeSelectQuery(timequery,new String[]{tid.trim(),tid.trim(),eid,edate});
+				}else{
+					timequery="select seatindex from event_reg_block_seats_temp where transactionid not in(?) and blocked_at<(select  blocked_at from  event_reg_block_seats_temp where transactionid =? order by blocked_at desc limit 1) and eventid=?";
+					booked_statusinner=dbm.executeSelectQuery(timequery,new String[]{tid.trim(),tid.trim(),eid});
+				}
+				System.out.println("satatus: "+booked_statusinner.getStatus()+" checseatinnercount "+booked_statusinner.getCount());
+				if(booked_statusinner.getStatus()){
+					for(int i=0;i<booked_statusinner.getCount();i++){
+						timeseat.put(dbm.getValue(i,"seatindex",""),"yes");
+					}
+				}
+				if(booked_status.getCount()==0){
+					for(int j=0;j<allIds.length() && break_flag;j++){
+						String seatindex=allIds.getString(j);
+						if(timeseat.containsKey(seatindex)){
+							result = false;
+							String	res=DbUtil.getVal("select array_agg( 'eventid='||eventid ||' ticketid='||ticketid||' tid='||transactionid||' seatindex='||seatindex||' eventdate='||eventdate||' time='||blocked_at ) ::text"+
+									  " as response  from event_reg_block_seats_temp  where eventid=? and transactionid=?", new String[]{eid,tid});
+							System.out.println("seat on hold profile level"+res);
+							DbUtil.executeUpdateQuery("delete from event_reg_block_seats_temp where transactionid=? ",new String[]{tid});
+							DbUtil.executeUpdateQuery("delete from event_reg_locked_tickets where tid=?",new String[]{tid});
+							break_flag=false;
+						}
+					}
+					if(!break_flag)
+						result = false;
+					else
+						result = true;
+					
+				}else
+					result = false;
+				
+			}catch(Exception e){
+				result = true;
+				System.out.println("Exception CCheckTicketStatus.java when profile submit "+e.getMessage());
+			}
+		}
+		return result;
 	}
 }
