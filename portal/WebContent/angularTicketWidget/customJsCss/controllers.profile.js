@@ -378,7 +378,7 @@ angular.module('ticketsapp.controllers.profile', [])
             $scope.submitProfile = function() {
                // $scope.loadingSubmit = true;
                 $rootScope.getDetails();
-                $http.get($rootScope.base_Url + 'submitProfileInfo.jsp', {
+                $http.get($rootScope.baseURL + 'submitProfileInfo.jsp', {
                         params: {
                             api_Key: '123',
                             event_id: $rootScope.eid,

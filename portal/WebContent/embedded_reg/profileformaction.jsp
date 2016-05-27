@@ -110,8 +110,7 @@ CustomAttribute[]  attributeSet=customattribs.getAttributes();
 ticketspecificAttributeIds=ticketcustomattribs.getTicketLevelAttributes(eid);
 profiledbaction.clearDBEntries(tid);
 try{
-	String buyerfname=request.getParameter("q_buyer_fname_1");
-		
+		String buyerfname=request.getParameter("q_buyer_fname_1");
 		String buyerlname=request.getParameter("q_buyer_lname_1");
 		String buyeremail=request.getParameter("q_buyer_email_1");
 		String buyerphone=request.getParameter("q_buyer_phone_1");
