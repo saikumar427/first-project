@@ -1160,7 +1160,7 @@ sup {
 			padding: 45px  48px !important;
 		}
 		.block-text-signup{
-			padding: 24px  48px !important;
+			padding: 10px  48px !important;
 		}
 		.block-text-pricing{
 			padding: 45px  48px !important;
@@ -1183,7 +1183,7 @@ sup {
 			font-size: 18px;
 			line-height: 34px;
 			position: relative;
-			top: -27px;
+			top: 10px;
 		}
 		.margin-class{
 			margin-right:12px;

@@ -478,7 +478,7 @@ li{
                         <div class="container">
                             <div class="intro-text platform-intro">
                                 <div class="row">
-                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                         <div class="block-text-platform padding-text">
                                             <div class="intro-lead-in intro-lead-in-platform" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Award winning</div>
 											<div class="intro-lead-in intro-lead-in-platform" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">online registration platform.</div>
@@ -504,7 +504,7 @@ li{
                         <div class="container">
                             <div class="intro-text  pricing-intro" id="platform">
                                 <div class="row">
-                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                         <div class="block-text-pricing padding-text">
                                             <div class="intro-lead-in intro-lead-in-signup " style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Save big with</div>
                                             <div class="intro-lead-in intro-lead-in-signup " style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">our flat fee pricing.</div>
@@ -559,7 +559,7 @@ li{
                         <div class="container">
                             <div class="intro-text signup-intro">
                                 <div class="row">
-                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                         <div class="block-text-signup padding-text">
                                             <div class="intro-lead-in intro-lead-in-signup" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Trusted by 50,000</div>
                                             <div class="intro-lead-in intro-lead-in-signup" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">event managers across the world.</div>

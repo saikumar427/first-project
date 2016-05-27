@@ -489,7 +489,7 @@ li{
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand " style="padding-top:0px;padding-bottom:0px;" href="/"><img src="/main/homepage/img/logo.png" /></a>
+                        <a class="navbar-brand " style="padding-top:0px;padding-bottom:0px;" href="/es-mx"><img src="/main/homepage/img/logo.png" /></a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav nav-list " style="float:none !important;">
@@ -509,7 +509,7 @@ li{
                         <div class="container">
                             <div class="intro-text platform-intro">
                                 <div class="row">
-                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                         <div class="block-text-platform padding-text">
                                             <div class="intro-lead-in intro-lead-in-platform" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Plataforma galardonada</div>
 											<div class="intro-lead-in intro-lead-in-platform" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">en venta de tiquetes</div>
@@ -535,7 +535,7 @@ li{
                         <div class="container">
                             <div class="intro-text  pricing-intro" id="platform">
                                 <div class="row">
-                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                         <div class="block-text-pricing padding-text">
                                             <div class="intro-lead-in intro-lead-in-signup " style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Ahorra en grande con</div>
                                             <div class="intro-lead-in intro-lead-in-signup " style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">nuestras tarifas fijas</div>
@@ -585,7 +585,7 @@ li{
                         <div class="container">
                             <div class="intro-text signup-intro">
                                 <div class="row">
-                                    <div class="col-lg-8 col-md-7 col-sm-12 col-xs-12">
+                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                         <div class="block-text-signup padding-text">
                                             <div class="intro-lead-in intro-lead-in-signup" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">Respaldada por más de 50.000 administradores</div>
                                             <div class="intro-lead-in intro-lead-in-signup" style="color: #e4e4e4;font-family:Muli-ExtraLight !important;">de eventos en todo el mundo</div>
