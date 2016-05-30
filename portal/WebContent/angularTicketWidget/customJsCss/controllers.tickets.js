@@ -257,7 +257,8 @@ angular.module('ticketsapp.controllers.tickets', [])
                             Priregtoken: $rootScope.pritoken,
                             Priregtype: $rootScope.priorityType,
                             Prilistid: $rootScope.listid,
-                            ticketurl: null,
+                            ticketurlcode: $rootScope.eventDetailsList.ticketurlcode, /*Private URL*/
+                            trackcode: $rootScope.eventDetailsList.trackcode, /*Track URL*/
                             wid: $rootScope.waitListId
 
                         }

@@ -15,22 +15,24 @@
 	pageEncoding="utf-8"%>
 <%
 long startTime = System.currentTimeMillis();
-String eid=request.getParameter("event_id");
-String edate=request.getParameter("event_date");
+String eid=request.getParameter("event_id");					/* Event ID */
+String edate=request.getParameter("event_date");				/* Event Date */
 String apiKey=request.getParameter("api_key");
-String ticketurlcode=request.getParameter("ticketurl");
-String tid=request.getParameter("transaction_id");
+String ticketurlcode=request.getParameter("ticketurlcode");		/* Private URL's */
+String trackcode = request.getParameter("trackcode"); 			/* Tracking URL's */
+String tid=request.getParameter("transaction_id");				/* Transaction ID */
 String seating_enable=request.getParameter("seating_enable");
-String discountCode=request.getParameter("disc_code");
+String discountCode=request.getParameter("disc_code");			/* Discount code */
 String priregtoken = request.getParameter("Priregtoken");
 String priregtype = request.getParameter("Priregtype");
 String prilistid = request.getParameter("Prilistid");
-String wid = request.getParameter("wid");
+String wid = request.getParameter("wid");						/* Wait list ID */
 HashMap<String, String> params = new HashMap<String, String>();
 
 params.put("evtdate", edate);
 params.put("tid", tid);
 params.put("tkt_url_code", ticketurlcode);
+params.put("trackcode", trackcode);
 params.put("disc_code", discountCode);
 params.put("source", "widget");
 params.put("pri_reg_token", priregtoken);

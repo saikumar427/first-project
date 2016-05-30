@@ -97,26 +97,25 @@ serveraddress="https://"+EbeeConstantsF.get("serveraddress","www.eventbee.com");
 
 if("other".equals(paytype) || "nopayment".equals(paytype)){}
 else{
-if("CC".equals(paytype)){
-%>
-<script>
-function cancelRedirect(){
-var url="<%=serveraddress%>/embedded_reg/cancelredirect.jsp";
-	window.location.href=url;
-}
-</script>
-<%
-}
-else
-{%>
-<script>
-function cancelRedirect(){
-var url="<%=serveraddress%>/embedded_reg/otherclose.jsp";
-	window.location.href=url;
-}
-</script>
-<%
-}
+	if("CC".equals(paytype)){
+		%>
+		<script>
+		function cancelRedirect(){
+		var url="<%=serveraddress%>/embedded_reg/cancelredirect.jsp";
+			window.location.href=url;
+		}
+		</script>
+		<%
+	}else{
+		%>
+		<script>
+		function cancelRedirect(){
+		var url="<%=serveraddress%>/embedded_reg/otherclose.jsp";
+			window.location.href=url;
+		}
+		</script>
+		<%
+	}
 }
 DBManager db=new DBManager();
 System.out.println("check availabilty");
@@ -130,14 +129,14 @@ DbUtil.executeUpdateQuery("delete from event_reg_locked_tickets where tid in (se
 DbUtil.executeUpdateQuery("delete from event_reg_locked_tickets where tid in (select tid from event_reg_details_temp where eventid=? and current_action is null ) and locked_time < (select now()- interval '20 minutes') ;",new String[]{eid});
  */
 RegistrationTiketingManager regtktmgr=new RegistrationTiketingManager();
- regtktmgr.autoLocksAndBlockDelete(eid, tid, "checkavailabiltylevel");
+regtktmgr.autoLocksAndBlockDelete(eid, tid, "checkavailabiltylevel");
  
-		if("CC".equals(paytype))
-      regtktmgr.setEventRegTempAction(eid,tid,"eventbee");
-	  else if("paypal".equals(paytype)||"paypalx".equals(paytype))
-      regtktmgr.setEventRegTempAction(eid,tid,"paypal");
-       else 
-      regtktmgr.setEventRegTempAction(eid,tid,paytype);
+if("CC".equals(paytype))
+	regtktmgr.setEventRegTempAction(eid,tid,"eventbee");
+else if("paypal".equals(paytype)||"paypalx".equals(paytype))
+	regtktmgr.setEventRegTempAction(eid,tid,"paypal");
+else
+	regtktmgr.setEventRegTempAction(eid,tid,paytype);
 
 
 

@@ -75,8 +75,6 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
                             // $window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
                         }
                     });
-
-
                 } else {
                     //alert('Unknown error occured. Please try refreshing the page');
                     $location.url('/event');
