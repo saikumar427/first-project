@@ -26,7 +26,10 @@ function populatefblogindata(data){
 	}
 	var msg="<p>"+props.fb_nts_login_track+"</p>";
 	var htmldata="<img src='/home/images/images/close.png' id='fbloginpopup' class='imgclose'>";
-	htmldata+=msg+"<center><span id='loginas'>"+props.fb_nts_login_as+"</span><br><a href='"+data.link+"' style='text-decoration:none;' target='_blank'><img src='https://graph.facebook.com/"+data.id+"/picture' border='0'><br><span>"+data.name+"</span></a>&nbsp;&nbsp;<span style='float:left;color:blue;' id='notyou'>"+props.fb_nts_login_not_u+"</span></center><br>";
+	htmldata+=msg+"<center><span id='loginas'>"+props.fb_nts_login_as+"</span>"+
+		"<br><a href='"+data.link+"' style='text-decoration:none;' target='_blank'>"+
+		"<img src='https://graph.facebook.com/"+data.id+"/picture' border='0'><br><span>"+data.name+"</span></a>"+
+		"&nbsp;&nbsp;<span style='float:left;color:blue;' id='notyou'>"+props.fb_nts_login_not_u+"</span></center><br>";
 	
 	htmldata+="<center><img src='/main/images/fb-connect.png' class='fbcommentbutton' border='0'><br><span ><a id='skipstep'>"+props.fb_nts_login_skip+"</a></span></center>";
 	document.getElementById("attendeeloginpopup").innerHTML=htmldata;

@@ -103,3 +103,21 @@
         </form>
 	</div>
 </div>
+
+<!-- facebook login start -->
+<div class="modal" ng-show="facebookPopup"  >
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+	            <button type="button" class="close" ng-click="facebookClose();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+         	</div>
+         	<div class="modal-body">
+         		<!-- <div ng-bind-html="facebookHtml"></div> -->
+         		<div id="facebookHtml"></div>
+         		<center><a ng-click="facebookClose();" style="cursor: pointer;">Skip this step</a></center>
+         	</div>
+		</div>
+	</div>
+</div>
+<div ng-show="facebookPopup" class="modal-backdrop fade in"></div>
+<!-- facebook login end -->

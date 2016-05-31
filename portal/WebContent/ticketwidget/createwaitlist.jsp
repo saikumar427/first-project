@@ -58,18 +58,15 @@ public void sendEmail(String eid,String email,String name){
 		StatusObj statobj = null;
 		String query = "insert into wait_list_transactions(notes,phone, status, wait_list_id,eventid,eventdate, updated_at, email, name, created_at)"
 				+ "values (?, ?, 'Waiting', ?, cast(? as bigint), ?, now(), ?,  ?, now())";
-		DbUtil.executeUpdateQuery(
-				query,
-				new String[] {notes,
-						userData.getString("phone") == null ? ""
-								: userData.getString("phone"),
-						waitListKey,
-						eventID,
-						eventDate,
-						userData.getString("email") == null ? ""
-								: userData.getString("email"),
-						userData.getString("name") == null ? ""
-								: userData.getString("name") });
+		DbUtil.executeUpdateQuery(query, new String[] {
+				notes,
+				userData.getString("phone") == null ? "": userData.getString("phone"),
+				waitListKey,
+				eventID,
+				eventDate,
+				userData.getString("email") == null ? "" : userData.getString("email"),
+				userData.getString("name") == null ? "" : userData.getString("name") 
+			});
 		String ticetsQtyString = request.getParameter("tickets_info");
 		JSONArray tickets = new JSONArray(ticetsQtyString);
 		for (int i = 0; i < tickets.length(); i++) {

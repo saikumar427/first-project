@@ -223,6 +223,7 @@
 				contextdata.put("registrationsource",registrationsource);
 				contextdata.put("wid",waitListID);
 				contextdata.put("prilistid",prilistId);
+				contextdata.put("context",context);
 				contextdata.put("pritoken",priorityToken);
 				contextdata.put("discountcode",discountCode);
 				contextdata.put("clubuserid","");

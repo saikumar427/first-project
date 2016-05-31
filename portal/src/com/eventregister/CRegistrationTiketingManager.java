@@ -601,8 +601,11 @@ public	String  createNewTransaction(String eventid,HashMap contextMap){
     }
 
     public void updateDetailsTempNTSDetails(HashMap ntsdata){
-    	String fbuserid="",ntscode="",partnerstatus="Skip Partner",referral_ntscode="";
+    	String fbuserid="",ntscode="",partnerstatus="Skip Partner",referral_ntscode="",fname="",lname="",email="";
     	try{
+    		fname = (String)ntsdata.get("fname");
+    		lname = (String)ntsdata.get("lname");
+    		email = (String)ntsdata.get("email");
     		fbuserid=(String)ntsdata.get("fbuserid");
     		if(!"0".equals(fbuserid)){
     			ntscode=(String)ntsdata.get("ntscode");
@@ -620,8 +623,8 @@ public	String  createNewTransaction(String eventid,HashMap contextMap){
     		}
     	}catch(Exception e){
     	}
-    	String tempdetailsntsupdatequery="update event_reg_details_temp set buyer_ntscode=?,nts_selected_action=?,referral_ntscode=? where eventid=? and tid=?";
-    	DbUtil.executeUpdateQuery(tempdetailsntsupdatequery, new String[]{ntscode,partnerstatus,referral_ntscode,(String)ntsdata.get("eventid"),(String)ntsdata.get("tid")});
+    	String tempdetailsntsupdatequery="update event_reg_details_temp set buyer_ntscode=?,nts_selected_action=?,referral_ntscode=?,fname=?,lname=?,email=? where eventid=? and tid=?";
+    	DbUtil.executeUpdateQuery(tempdetailsntsupdatequery, new String[]{ntscode,partnerstatus,referral_ntscode,fname,lname,email,(String)ntsdata.get("eventid"),(String)ntsdata.get("tid")});
     }
     
     
