@@ -608,7 +608,8 @@ var eventDetailsList = {
 		referral_ntscode : referral_ntscode,
 		priregtoken : priregtoken,
 		prilistid : prilistid,
-		actiontype : actiontype
+		actiontype : actiontype,
+		discountcode : discountcode
 	};
 </script>
 

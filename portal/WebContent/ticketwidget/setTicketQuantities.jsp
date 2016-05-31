@@ -9,7 +9,7 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="com.eventbee.general.EventbeeLogger"%>
 <%@page trimDirectiveWhitespaces="true"%>
-<%@ page language="java" contentType="application/json; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="application/json; charset=ISO-8859-1"	pageEncoding="ISO-8859-1"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="org.json.JSONTokener"%>
@@ -37,8 +37,12 @@
 	}catch(Exception eq){
 		System.out.println("error in setTicketQuantities.jsp(tid: "+tid+") inserting  query string"+eq.getMessage());
 	}
- 
+	
  	String eid = request.getParameter("event_id");
+ 	
+ 	CRegistrationTiketingManager regtktmgr=new CRegistrationTiketingManager();
+	regtktmgr.autoLocksAndBlockDelete(eid, tid, "ticketspagelevel");
+ 	
 	String selectedTickets = request.getParameter("selected_tickets");
 	String ticketids = request.getParameter("ticket_ids");
 	String event_details = request.getParameter("event_details");
@@ -119,11 +123,10 @@
 	System.out.println("selected_Tickets - - "+selected_Tickets);
 	/* for Conditional Ticketing end */
 	
-	CRegistrationTiketingManager regtktmgr=new CRegistrationTiketingManager();
 	ConditionalTicketingValidator condTickValidator = new ConditionalTicketingValidator();
 	CCheckTicketStatus checkStatus = new CCheckTicketStatus();
 	
-	regtktmgr.autoLocksAndBlockDelete(eid, tid, "ticketspagelevel");
+	
 	try{
 		//{"condition":"Block","src":"T1","trg":[{"id":"T2"},{"id":"T3"}]}
 		// this condition for convert {"ticketid":qty,} TO {"ticketid":qty}  
@@ -176,7 +179,7 @@
 		responseJSON.put("status", "success");
 		EventbeeLogger.log(EventbeeLogger.LOGGER_MAIN,EventbeeLogger.INFO, "(Box Office) setTicketQuantities.jsp", "Registration Strated for the  event---->"+eid, "", null);
 		
-		/* This code for check seatstatus start code from checkseatstatus.jsp(portal) */
+		/* This code for check seatstatus, this code from checkseatstatus.jsp(portal) */
 		boolean checkSeatStatus = true;
 		if(isSeating=="true")
 			checkSeatStatus  = checkStatus.getSeatChecking(seatSectionId,eid,edate,tid,selTickQty,"");

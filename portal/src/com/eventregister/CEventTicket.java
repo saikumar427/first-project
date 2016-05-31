@@ -22,6 +22,15 @@ private String TicketStatus=null;
 private String m_tickettype=null;
 private String waitListType ="N";
 private int waitListLimit =0;
+private int ticketIncrement =1;
+
+public int getTicketIncrement() {
+	return ticketIncrement;
+}
+
+public void setTicketIncrement(int ticketIncrement) {
+	this.ticketIncrement = ticketIncrement;
+}
 
 public void setTicketStatus(String p_ticketStatus){
 TicketStatus=p_ticketStatus;

@@ -143,6 +143,7 @@ public class CTicketsJson {
 						eachTicketJSON.put("availability_msg","");
 						eachTicketJSON.put("min",eventTicketsArray[k].getTicketMinQty()+"");
 						eachTicketJSON.put("max",eventTicketsArray[k].getTicketMaxQty()+"");
+						eachTicketJSON.put("tkt_inc",eventTicketsArray[k].getTicketIncrement());
 						eachTicketJSON.put("desc",eventTicketsArray[k].getTicketDescription());
 						if(eventTicketsArray[k].isMemberTicket())
 							eachTicketJSON.put("is_member_ticket","y");

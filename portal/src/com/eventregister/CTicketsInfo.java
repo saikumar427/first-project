@@ -57,6 +57,16 @@ public class CTicketsInfo {
 		if(eventDate!=null && !"".equals(eventDate)){
 			detailsMap=ticketsDB.getrecurringEventdetails(eventid,eventDate,params.get("tkt_url_code"));
 		}
+		
+		JSONObject ticketIncJsonVal=new JSONObject();
+		try{
+			if(configMap.containsKey("tickets.increment.value")){
+				String ticketIncJsonStr=(String)configMap.get("tickets.increment.value");//comming as json string
+				ticketIncJsonVal=new JSONObject(ticketIncJsonStr);
+			}
+		}catch(Exception e){
+			System.out.println("Exception occured while getting tickets increment value:"+e.getMessage());
+		}
 
 		DBManager db=new DBManager();
 		ArrayList<CTicketGroup> requiredGroupTickets=new ArrayList<CTicketGroup>();
@@ -186,6 +196,12 @@ public class CTicketsInfo {
 						eventTicketObj.setTicketStatus("NOT_STARTED");
 					else
 						eventTicketObj.setMemberTicketFlag(false);
+					
+					try{
+						eventTicketObj.setTicketIncrement(ticketIncJsonVal.has(db.getValue(i,"price_id","")) ? ticketIncJsonVal.getInt(db.getValue(i,"price_id","")) : 1);
+					}catch(Exception e){
+						System.out.println("Exception occured while getting tickets increment value:"+e.getMessage()+" _ "+db.getValue(i,"price_id",""));
+					}
 					
 					
 					if("NO".equalsIgnoreCase(db.getValue(i,"wait_list_type","NO")))

@@ -43,7 +43,7 @@ public class CDiscountManager {
 	public HashMap<String,HashMap<String, String>> getTickets(String discountcode, String eventid,String discount,String discounttype){
 		double afterDiscount=0;
 		double discountamount=0;
-		String query="select price_id,ticket_type,ticket_name,process_fee,ticket_price,isdonation from price where evt_id=cast(? as numeric) ";
+		String query="select price_id,ticket_type,ticket_name,process_fee,ticket_price,isdonation from price where evt_id=cast(? as bigint) ";
 		ArrayList<String> Discountpriceids=getDiscountPriceIds(eventid,discountcode);
 		HashMap<String,HashMap<String, String>> ticketList=new HashMap<String,HashMap<String, String>>();
 		DBManager db=new DBManager();

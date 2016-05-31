@@ -94,7 +94,7 @@
 		
 		responseJSON.put("date_default_option","-- Select a date --");
 			
-		String query = "select info.eventid as eventid,to_char(dates.zone_startdate+cast(cast(to_timestamp(COALESCE(dates.zone_start_time,'00'),'HH24:MI:SS') as text) as time ),'Dy, Mon DD, YYYY HH12:MI AM') as  edate from eventinfo info, event_dates dates where info.eventid=dates.eventid and info.eventid=to_number(?,'9999999999999999999')";
+		String query = "select info.eventid as eventid,to_char(dates.zone_startdate+cast(cast(to_timestamp(COALESCE(dates.zone_start_time,'00'),'HH24:MI:SS') as text) as time ),'Dy, Mon DD, YYYY HH12:MI AM') as  edate from eventinfo info, event_dates dates where info.eventid=dates.eventid and info.eventid=CAST(? AS BIGINT)";
 		StatusObj statusObj = db.executeSelectQuery(query,
 				new String[] {eid });
 		JSONArray dates = new JSONArray();

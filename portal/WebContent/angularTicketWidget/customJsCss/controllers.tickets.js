@@ -72,6 +72,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                             $scope.highVolume($scope.eventMetadata.remaintime);
                         return;
                     }
+                    
                     if ($scope.eventMetadata.is_priority && !$scope.eventMetadata.is_recurring) {
                         $scope.eventMetadata.is_priority = true;
                         $scope.getPriorityReg();
@@ -463,8 +464,8 @@ angular.module('ticketsapp.controllers.tickets', [])
                 }, 700);
             };
 
-
-            $scope.getQtyOptions = function(min, max, tktSelected) {
+            // this increment for, when 'tickets.increment.value' in in config table like: {"ticketId":"increment value"}. (default value 1)
+            $scope.getQtyOptions = function(min, max, tktSelected,increment) {
                 var options = [0];
                 try {
                     var tempMin = parseInt(min);
@@ -474,9 +475,20 @@ angular.module('ticketsapp.controllers.tickets', [])
                             options.push(parseInt(j));
                         return options;
                     }
-                    for (var i = tempMin; i <= tempMax && tempMax != 0; i++)
-                        options.push(parseInt(i));
-
+                    
+                    //original code start
+                    /*for (var i = tempMin; i <= tempMax&&tempMax!=0; i++)
+                    	options.push(parseInt(i));*/
+                    ///original code end
+                    
+                    var dpLimit = tempMax/increment;
+                    var minimum = tempMin;
+                    options.push(parseInt(minimum));
+                    	for(var k=1; k<dpLimit && tempMax != 0;k++){
+                    		minimum = minimum+increment;
+                    		if(minimum <= tempMax)
+                    			options.push(parseInt(minimum));
+                    	}
                 } catch (err) {}
                 return options;
             };
