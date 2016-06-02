@@ -38,13 +38,13 @@ String CountryCodes[]=new String[]{"US","AL","DZ","AD","AO","AI","AG","AM","AW",
 String CountryNames[]=new String[]{"USA","Canada"};
 
 String CountryCodes[]=new String[]{"US","CA"};
-String  BrainCountryNames[]=new String[]{"USA","Albania","Algeria","Andorra","Angola","Anguilla","Antigua and Barbuda","Armenia","Aruba",
-			"Argentina","Australia","Austria","Azerbaijan Republic","Bahamas","Bahrain","Barbados","Belgium",
-			"Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","British Virgin Islands",
-			"Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Canada","Cape Verde","Cayman Islands","Chad",
-			"China","Chile","Colombia","Comoros","Costa Rica","Cook Islands","Croatia","Cyprus","Czech Republic",
-			"Denmark","Democratic Republic of the Congo","Djibouti","Dominica","Dominican Republic","Ecuador",
-			"El Salvador","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Federated States of Micronesia",
+String  BrainCountryNames[]=new String[]{
+		"USA","Albania","Algeria","Andorra","Angola","Anguilla","Antigua and Barbuda","Armenia","Aruba","Argentina",
+		"Australia","Austria","Azerbaijan Republic","Bahamas","Bahrain","Barbados","Belgium","Belize","Benin","Bermuda",
+		"Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi",
+		"Cambodia","Canada","Cape Verde","Cayman Islands","Chad","China","Chile","Colombia","Comoros","Costa Rica",
+		"Cook Islands","Croatia","Curaçao","Cyprus","Czech Republic","Denmark","Democratic Republic of the Congo","Djibouti","Dominica","Dominican Republic",
+		"Ecuador","El Salvador","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Federated States of Micronesia",
 			"Fiji","Finland","France","French Guiana","French Polynesia","Gabon Republic","Gambia","Germany",
 			"Gibraltar","Greenland","Greece","Grenada","Guadeloupe","Guatemala","Guinea","Guinea Bissau","Guyana",
 			"Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Ireland","Israel","Italy","Japan",
@@ -63,17 +63,26 @@ String  BrainCountryNames[]=new String[]{"USA","Albania","Algeria","Andorra","An
 			"United Kingdom","Uruguay","Vanuatu","Vatican City State","Venezuela","Vietnam","Wallis and Futuna Islands",
 			"Yemen","Zambia"};
 
-			String BrainCountryCodes[]=new String[]{"US","AL","DZ","AD","AO","AI","AG","AM","AW","AR","AU","AT","AZ","BS","BH",
-			"BB","BE","BZ","BJ","BM","BT","BO","BA","BW","BR","VG","BN","BG","BF","BI","KH",
-			"CA","CV","KY","TD","C2","CL","CO","KM","CR","CK","HR","CY","CZ","DK",
-			"CD","DJ","DM","DO","EC","SV","ER","EE","ET","FK","FO","FM","FJ","FI","FR","GF","PF",
-			"GA","GM","DE","GI","GL","GR","GD","GP","GT","GN","GW","GY","HN","HK","HU","IS","IN","ID",
-			"IE","IL","IT","JP","JM","JO","KZ","KE","KI","KW","KG","LA","LV","LS","LI","LT",
-			"LU","MG","MY","MW","MV","ML","MT","MH","MQ","MR","MU","YT","MX","MN","MS","MA","MZ","NA","NR",
-			"NP","NL","AN","NZ","NC","NI","NE","NU","NF","NO","OM","PW","PA","PG","PE","PH","PN","PL","PT","QA",
-			"CG","RE","RO","RU","RW","VC","SM","WS","ST","SA","SN","SC","SL","SG","SK","SI","SB","SO","ZA","KR",
-			"ES","LK","SH","KN","LC","PM","SR","SJ","SZ","SE","CH","TW","TJ","TZ","TH","TG","TO","TT","TN",
-			"TR","TM","TC","TV","UG","UA","AE","GB","UY","VU","VA","VE","VN","WF","YE","ZM"};
+			String BrainCountryCodes[]=new String[]{
+					"US","AL","DZ","AD","AO","AI","AG","AM","AW","AR",
+					"AU","AT","AZ","BS","BH","BB","BE","BZ","BJ","BM",
+					"BT","BO","BA","BW","BR","VG","BN","BG","BF","BI",
+					"KH","CA","CV","KY","TD","C2","CL","CO","KM","CR",
+					"CK","HR","CW","CY","CZ","DK","CD","DJ","DM","DO","EC",
+					"SV","ER","EE","ET","FK","FO","FM","FJ","FI","FR",
+					"GF","PF","GA","GM","DE","GI","GL","GR","GD","GP",
+					"GT","GN","GW","GY","HN","HK","HU","IS","IN","ID",
+					"IE","IL","IT","JP","JM","JO","KZ","KE","KI","KW",
+					"KG","LA","LV","LS","LI","LT","LU","MG","MY","MW",
+					"MV","ML","MT","MH","MQ","MR","MU","YT","MX","MN",
+					"MS","MA","MZ","NA","NR","NP","NL","AN","NZ","NC",
+					"NI","NE","NU","NF","NO","OM","PW","PA","PG","PE",
+					"PH","PN","PL","PT","QA","CG","RE","RO","RU","RW",
+					"VC","SM","WS","ST","SA","SN","SC","SL","SG","SK",
+					"SI","SB","SO","ZA","KR","ES","LK","SH","KN","LC",
+					"PM","SR","SJ","SZ","SE","CH","TW","TJ","TZ","TH",
+					"TG","TO","TT","TN","TR","TM","TC","TV","UG","UA",
+					"AE","GB","UY","VU","VA","VE","VN","WF","YE","ZM"};
 
 
 
