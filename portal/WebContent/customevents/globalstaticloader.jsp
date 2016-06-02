@@ -31,9 +31,9 @@ public void prepareEventPageScript(){
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/textboxWidget.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/textareaWidget.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/popuphandler.js' defer></script>");
-	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/effects.js' defer></script>");
+	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/effects.js' defer></script>"); */
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/eventlinks.js' defer></script>");
-	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/Tokenizer.js' defer></script>");
+	/* general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/Tokenizer.js' defer></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/advajax.js'>function dummy() { }</script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/popup.js' defer></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/ebeepopup.js' ></script><link rel='stylesheet' type='text/css' href='/home/css/popupcss.css' />");

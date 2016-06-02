@@ -7,13 +7,7 @@
 <%@page import="com.eventregister.BDiscountManager"%>
 <%@page import="org.json.JSONArray"%>
 <%@page import="org.json.JSONObject"%>
-<%
-	//Author: Venkat Reddy
-	//Version: 0.1
-	//File: getProfileJSON.jsp 
-	//Created: 23/05/2014 
-	//Modified: 24/05/2016 by omshankar*/
-%>
+
 <%@page trimDirectiveWhitespaces="true"%>
 	
 	<%@ page language="java" contentType="application/json; charset=utf-8"
