@@ -167,8 +167,11 @@ public class CProfilePageDisplay {
 			buyerDetails.put(getAttendeeObject(GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.email.label","Email"),"email","Y"));
 			HashMap<Object,Object> attribMap=getAttribsForTickets("0",eid);
 			String isRequired=(String)attribMap.get("phone");
-			System.out.println("phone"+isRequired);
-			buyerDetails.put(getAttendeeObject(GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.phone.label","Phone"),"phone",isRequired));
+			System.out.println("attribMap.isEmpty() - "+attribMap.isEmpty());
+			if(attribMap.isEmpty()==false){
+				buyerDetails.put(getAttendeeObject(GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.phone.label","Phone"),"phone",isRequired));
+			}
+			
 			buyerAttribs=regTktMgr.getBuyerSpecificAttribs(eid);
 			
 			JSONObject buyerCustomResponses=regTktMgr.getbuyerCustomResponses(eid,tid);
@@ -283,7 +286,7 @@ public class CProfilePageDisplay {
 	
 	public HashMap<Object,Object> getAttribsForTickets(String ticketid,String eid){
 		HashMap<Object,Object> hm=new HashMap<Object,Object>();
-		String query="select attribid,isrequired from base_profile_questions where contextid=to_number(?,'9999999999') and groupid=to_number(?,'9999999999')";
+		String query="select attribid,isrequired from base_profile_questions where contextid=CAST(? AS INTEGER) and groupid=CAST(? AS BIGINT)";
 		DBManager db=new DBManager();
 		StatusObj sb=db.executeSelectQuery(query, new String[]{ticketid,eid});
 		if(sb.getStatus()){

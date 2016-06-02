@@ -15,8 +15,6 @@ angular.module('ticketsapp.controllers.profile', [])
             $rootScope.css3 = "";
             $rootScope.css4 = "";
 
-            $scope.facebookPopup = false;
-            $scope.facebookHtml = '';
             $rootScope.$on('eventName', function(event, args) {
                 $scope.message = args.message;
                 console.log($scope.message);
@@ -49,23 +47,7 @@ angular.module('ticketsapp.controllers.profile', [])
                     out.push(i);
                 }
                 return out;
-            }
-
-            /*var eleData='';
-            $scope.profileData=[];
-            $scope.pushTempData= function(ele){
-            	if(undefined!=ele){
-            		if ($scope.profileData.indexOf(ele) == -1) {
-                		$scope.profileData.push(ele);
-                		for(var i=0; i<$scope.profileData.length; i++){
-                			eleData += "<option value="+'"'+$scope.profileData[i]+'"'+">";
-                		}
-                		document.getElementById('suggestions').innerHTML=eleData;
-                		eleData='';
-                	}
-            	}
             };
-              */
 
 
             if ($rootScope.eid) $rootScope.eid = $rootScope.eid;
@@ -73,10 +55,6 @@ angular.module('ticketsapp.controllers.profile', [])
                 $location.url('/tickets');
             }
 
-            /*if ($location.search().tid) $rootScope.transactionId = $location.search().tid;
-            else{
-            	$location.url('/event?eid=' + $rootScope.eid);
-            }*/
 
             $http.get($rootScope.baseURL + 'getProfileJSON.jsp', {
                     params: {
@@ -104,7 +82,6 @@ angular.module('ticketsapp.controllers.profile', [])
                     	$scope.promotionsDiv = true;
                     }
                     	
-                    $scope.fbLoginPopup();
                     $rootScope.timeWatcher = $rootScope.$watch('timeRemaining', function(newVal, oldVal) {
                         if (newVal < 0) {
                             $interval.cancel($rootScope.globalTimer);
@@ -113,7 +90,7 @@ angular.module('ticketsapp.controllers.profile', [])
                             // $window.location.href=$rootScope.serverAddress+'tktwidget/public/#/event?eid='+$rootScope.eid;
                         }
                     });
-
+                    $scope.applyBuyerDetails();
                 })
                 .error(function(data, status, headers, config) {
                     alert('Unknown error occured. Please try reloading the page.');
@@ -123,149 +100,36 @@ angular.module('ticketsapp.controllers.profile', [])
                 if (!Obj[qid])
                     Obj[qid] = new Object();
             };
-
-            // Facebook login start, code from ticket_registration.js
-            $scope.fbLoginPopup = function(){
-            	if(!fbavailable){
-                	$rootScope.eventDetailsList.nts_enable = 'N';
-                	$rootScope.eventDetailsList.login_popup = 'N';
-                	$rootScope.eventDetailsList.fbsharepopup = 'N';
-                }
-                if('widget'== $rootScope.eventDetailsList.registrationsource){
-                	$('#leftList').append("<div id='forntspopup'><iframe style='border: 0; margin: 0; padding: 0; height: 350px; width: 0;' id='ntsframe' name='ntsframe'></iframe></div>");
-                }
-                
-                if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable){
-                	FB.getLoginStatus(function(response) {
-                		//console.log(response);  {authResponse: null, status: "not_authorized"}
-                		if (response.authResponse && response.status=='connected') {
-                			FB.api('/me', function(response) {
-                			if(response.email==undefined)
-                				response.email='';
-                				$scope.populatefblogindata(response);
-                			});	
-                		}else if(response.session){
-                			$scope.openFb();
-                		}else{
-                			$scope.fillfblogindefaultcontent();
-                		}
-                	}, {scope:'publish_stream,email'});
-                };
-                
-                $scope.populatefblogindata = function(data){
-                	if(data.id==undefined){
-                		$scope.fillfblogindefaultcontent();
-                		return;
-                	}
-                	$scope.facebookPopup = true;
-                	$scope.facebookHtml = '<p>'+props.fb_nts_login_track+'</p>';
-                	$scope.facebookHtml = $scope.facebookHtml + '<center>'+props.fb_nts_login_as+'<br>';
-                	$scope.facebookHtml = $scope.facebookHtml + '<a href="'+data.link+'" style="text-decoration:none;" target="_blank"><img src="https://graph.facebook.com/'+data.id+'/picture" border="0"><br><span>'+data.name+'</span></a>';
-                	$scope.facebookHtml = $scope.facebookHtml + '&nbsp;&nbsp;<span style="color:blue; cursor:pointer" id="notyou">'+props.fb_nts_login_not_u+'</span></center>';
-                	$scope.facebookHtml = $scope.facebookHtml + '<center><button type="button" style="margin-top: 5px;" class="btn btn-primary btn-sm" id="fbcommentbutton"><i class="fa fa-facebook"></i> | Connect</button></center><br>';
-                	
-                	$('#facebookHtml').html($scope.facebookHtml);
-                	$('#notyou').click(function(){
-                		FB.logout(function(response){
-                			$scope.fillfblogindefaultcontent();
-                		});
-                	});
-                	$('#fbcommentbutton').click(function(){
-                		$scope.fbloginData(data);
-                		$scope.facebookPopup = false;
-                    	$scope.facebookHtml = '';
-                	});
-                };
-                
-            };
-            $scope.fillfblogindefaultcontent = function(){
-            	$scope.facebookPopup = true;
-            	$scope.facebookHtml = '<p>'+props.fb_nts_login_track+'</p>';
-            	$scope.facebookHtml = $scope.facebookHtml +'<center><button type="button" class="btn btn-primary btn-sm" id="getFBpopup"><i class="fa fa-facebook"></i> | Login with facebook</button></center>';
-            	$('#facebookHtml').html($scope.facebookHtml);
-            	
-            	 $('#getFBpopup').click(function(){
-                 	$scope.openFb();
-                 });
-            };
-            $scope.openFb = function(){
-            	FB.login(function(response){
-            		FB.api('/me', function(response) {
-            			if(response.error){
-            				$scope.facebookPopup = false;
-                        	$scope.facebookHtml = '';
-            			}
-            			else{
-            				if(response.email==undefined)
-            					response.email='';
-            				$scope.fbloginData(response);
-            				$scope.facebookPopup = false;
-                        	$scope.facebookHtml = '';
-            			}       
-            		});
-            		}, {scope:'publish_stream,email'});
-            };
-            $scope.fbloginData = function(response){
-    			$scope.$apply(function() {
-                    $scope.profileQuestions.buyer_questions[0].response = response.first_name;
-                    $scope.profileQuestions.buyer_questions[1].response = response.last_name;
-                    $scope.profileQuestions.buyer_questions[2].response = response.email;
-                });
-    			$http.get($rootScope.baseURL + 'ntsDetails.jsp', {
-                    params: {
-                        api_key: '123',
-                        event_id: $rootScope.eid,
-                        transaction_id: $rootScope.transactionId,
-                        ntsDetails:response,
-                        nts_enable : $rootScope.eventDetailsList.nts_enable,
-                        referral_ntscode : $rootScope.eventDetailsList.referral_ntscode,
-                    }
-                })
-                .success(function(data, status, headers, config) {
-                	
-                })
-                .error(function(data, status, headers, config){
-                	
-                });
-            };
-            $scope.facebookClose = function(){
-            	$scope.facebookPopup = false;
-            	$scope.facebookHtml = '';
-            };
-            // facebook login start, code from ticket_registration.js
             
-            
-            /*$scope.fblogin = function() {
-                var getUserInfo = function(response) {
-                    if (response.authResponse) { // in case if we are logged in
-                        FB.api('/me', function(response) {
-                            $rootScope.fbUserData = response;
-                            $scope.$apply(function() {
-                                $scope.profileQuestions.buyer_questions[0].response = response.first_name;
-                                $scope.profileQuestions.buyer_questions[1].response = response.last_name;
-                                $scope.profileQuestions.buyer_questions[2].response = response.email;
-                            });
-                        });
-                    } else {
-                        FB.login(function(response) {
-                            if (response.authResponse) {
-                                //window.location.reload();
-                            } else {}
-                        }, {
-                            scope: 'email'
-                        });
-                    }
-                };
-                FB.getLoginStatus(getUserInfo);
-                FB.Event.subscribe('auth.statusChange', getUserInfo);
+            $scope.applyBuyerDetails = function(){
+            	$timeout(function() {
+            		$scope.$apply(function() {
+                        $scope.profileQuestions.buyer_questions[0].response = $rootScope.facebookNTSdetails.first_name;
+                        $scope.profileQuestions.buyer_questions[1].response = $rootScope.facebookNTSdetails.last_name;
+                        $scope.profileQuestions.buyer_questions[2].response = $rootScope.facebookNTSdetails.email;
+                    });
+            		
+            		// set custom error message
+        			var elements = document.getElementsByTagName("INPUT");
+        			for (var i = 0; i < elements.length; i++) {
+        			    elements[i].oninvalid = function(e) {
+        			        e.target.setCustomValidity("");
+        			        if (!e.target.validity.valid) {
+        			            e.target.setCustomValidity("custom error required");
+        			        }
+        			    };
+        			    elements[i].oninput = function(e) {
+        			        e.target.setCustomValidity("");
+        			    };
+        			}
+        			// set custom error message
+            		
+                },1000);
             };
-            $scope.fblogin();*/
             
             /* for collecting Temp data buyer and attendee start */
             $scope.buyerAnswers = $rootScope.buyerAnswers;
             $scope.attendeeAnswers = $rootScope.attendeeAnswers;
-            //console.log('scope.buyerAnswers - '+ $scope.buyerAnswers);
-            //console.log('scope.attendeeAnswers - '+ $scope.attendeeAnswers);
             $scope.isAnsStored=function(){
             	if($scope.buyerAnswers)
             		return true;

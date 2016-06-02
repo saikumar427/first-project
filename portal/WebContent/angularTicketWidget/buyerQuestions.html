@@ -15,7 +15,7 @@ width:90%;
          
          <input type="text" name="name" ng-model="question.response" class="form-control suggestion-list" ng-required="question.required=='y'" 
             placeholder="{{question.label}}" ng-keyup="complete()" ng-style="myStyle" ng-click="myStyle={'width':'100%'}" ng-blur="pushTempData(question.response);myStyle={'width':'90%'}" 
-            ng-init="question.response = getBuyerAnswers(question.id,question.type);" title="{{question.label}}"/>
+            ng-init="question.response = getBuyerAnswers(question.id,question.type);" title="{{question.label}}" />
          
          <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>

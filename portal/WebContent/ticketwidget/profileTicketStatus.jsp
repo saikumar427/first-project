@@ -79,5 +79,7 @@
 		}
 		// This code for check seatstatus end
 	}
+	
+	System.out.println("final result "+responseJSON);
 	out.println(responseJSON.toString(2));
 %>

@@ -46,6 +46,13 @@ angular.module('ticketsapp.controllers.tickets', [])
             $scope.allSeats = '';
             $scope.groupDetails = '';
             $scope.groupTicketSelection = '';
+            $scope.showBuyButton=true;
+            $scope.selectedticketAllDetails='';
+            //$scope.facebookPopup = false;
+            $scope.facebookHtml = '';
+            $rootScope.facebookNTSdetails.first_name='';
+            $rootScope.facebookNTSdetails.last_name='';
+            $rootScope.facebookNTSdetails.email='';
 
             try {
                 $interval.cancel($rootScope.globalTimer);
@@ -1062,6 +1069,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     selected_tickets: [],
                     api_Key: '123'
                 };
+                var allTicketDetails = {
+                	allTickets:[]	
+                };
                 angular.forEach($scope.ticketsData.items, function(item, index) {
                     if (item.type == 'ticket') {
                         if (item.is_donation == 'n') {
@@ -1075,12 +1085,20 @@ angular.module('ticketsapp.controllers.tickets', [])
                                     qty: item.ticket_selected,
                                     seat_ids: item.seatIndexes = item.seatIndexes == undefined ? [] : item.seatIndexes
                                 });
+                            allTicketDetails.allTickets.push({
+                            	ticketid : item.id,
+                            	isdonation :'No'
+                            });
                         } else if (item.is_donation == 'y') {
                             if (item.donation_amount)
                                 finalTickets.selected_tickets.push({
                                     ticket_id: item.id,
-                                    amount: item.donation_amount
+                                    amount: item.donation_amount,
                                 });
+                            allTicketDetails.allTickets.push({
+                            	ticketid : item.id,
+                            	isdonation :'Yes'
+                            });
                         }
                     } else if (item.type == 'group') {
                         angular.forEach(item.tickets, function(item, index) {
@@ -1095,17 +1113,25 @@ angular.module('ticketsapp.controllers.tickets', [])
                                         qty: item.ticket_selected,
                                         seat_ids: item.seatIndexes = item.seatIndexes == undefined ? [] : item.seatIndexes
                                     });
+                                allTicketDetails.allTickets.push({
+                                	ticketid : item.id,
+                                	isdonation :'No'
+                                });
                             } else if (item.is_donation == 'y') {
                                 if (item.donation_amount)
                                     finalTickets.selected_tickets.push({
                                         ticket_id: item.id,
-                                        amount: item.donation_amount
+                                        amount: item.donation_amount,
                                     });
+                                allTicketDetails.allTickets.push({
+                                	ticketid : item.id,
+                                	isdonation :'Yes'
+                                });
                             }
                         });
                     }
                 });
-
+                
                 finalTickets.discountCode = $scope.discountsData.disc_code;
                 finalTickets.event_id = $rootScope.eid;
                 if ($scope.eventMetadata.is_recurring) {
@@ -1113,54 +1139,40 @@ angular.module('ticketsapp.controllers.tickets', [])
                     //finalTickets.event_date = $scope.selectedDate.value;
                 } else
                     $rootScope.eventDetailsList.event_date = '';
-
+                
+                $scope.selectedticketAllDetails = finalTickets;
                 //console.log($rootScope.eventDetailsList);
                 //alert( $rootScope.context);
                 $rootScope.eventDetailsList.isSeating = $rootScope.isSeatingEvent;
                 $rootScope.eventDetailsList.seatSectionId = $scope.sectionId;
                 if (alertMsgCount == 0) {
                     $scope.loadingTransaction = true;
-                    $http.get($rootScope.baseURL + 'setTicketQuantities.jsp', {
+                    $http.get($rootScope.baseURL + 'checkTicketQty.jsp', {
                         params: {
-                            api_Key: finalTickets.api_Key,
-                            disc_code: finalTickets.discountCode,
                             event_id: finalTickets.event_id,
                             selected_tickets: JSON.stringify(finalTickets.selected_tickets),
-                            ticket_ids: $rootScope.ticketsIds,
                             transaction_id: ($rootScope.transactionId) ? $rootScope.transactionId : '',
-                            event_details: $rootScope.eventDetailsList
+                            edate : $rootScope.eventDetailsList.event_date,
+                            waitListID : $rootScope.eventDetailsList.waitlistId,
+                            ticket_ids: $rootScope.ticketsIds,
+                            allticketDeatils:JSON.stringify(allTicketDetails.allTickets),
+                            isSeating:$rootScope.isSeatingEvent,
+                            seatSectionId : $rootScope.eventDetailsList.seatSectionId
 
                         }
                     }).success(function(data, status, headers, config) {
-                        //console.log("the final data is::"+JSON.stringify(data));
-                        $scope.loadingTransaction = false;
-                        //console.log(JSON.stringify(data));
-                        
-                        if (data.status == 'success') {
-                            $rootScope.ticketsCost = data.details.tickets_cost;
-                            $('#tickets .widget h2').hide();
-                            $rootScope.menuTitles = true;
-                            $scope.loadingTransaction = true;
-                            $rootScope.transactionDetails = data.details;
-                            //$location.search('eid', $rootScope.eid);
-                            $rootScope.transactionId = $rootScope.transactionDetails.tid;
-                            //$location.search('tid', $rootScope.transactionDetails.tid);
-                            if ($scope.discountApplied)
-                                $location.search('discountCode', $scope.discountCode);
-                            else
-                                $location.search('discountCode', null);
-
-                            if ($scope.eventMetadata.is_recurring)
-                                $rootScope.selectDate = $rootScope.selectDate;
-                            else
-                                $rootScope.selectDate = '';
-
-                            // this data for access in profile controller
+                    	$scope.loadingTransaction = false;
+                    	if (data.status == 'success') {
+                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    			$scope.checkFbLogin();
+                    		else
+                    			$scope.ticketsFinalSubmit();  
+                    		$scope.showBuyButton=false;	
+                			// this data for access in profile controller
                             $rootScope.eventDetailsList.selected_tickets = JSON.stringify(finalTickets.selected_tickets);
                             $rootScope.eventDetailsList.discountCode = finalTickets.discountCode;
                             // this data for access in profile controller
-                            $location.path('/profile');
-                        } else if (data.status == 'fail' && data.reason == 'conditional_ticketing') {
+                    	}else if (data.status == 'fail' && data.reason == 'conditional_ticketing') {
                         	$scope.loadingTransaction = false;
                             var dataList = '<ul>';
                             for (var j = 0; data.errors.length > j; j++) {
@@ -1168,30 +1180,201 @@ angular.module('ticketsapp.controllers.tickets', [])
                             }
                             dataList = dataList + '</ul>';
                             $scope.conditional_ticketing = dataList;
+                            $scope.showBuyButton=true;
                         } else if (data.status == 'fail' && data.reason == 'event-level-qty-criteria') {
                             $scope.loadingTransaction = false;
                             var avalbleQty = data.details.remaining_qty <= 0 ? 0 : data.details.remaining_qty;
                             alert('For "' + data.details.eventname + '" selected quantity is ' + data.details.selected_qty + ' and currently available quantity is ' + avalbleQty);
-                        } else if (data.status == 'fail' && data.reason == 'Applied code is Unavailable') {
-                            var agree = confirm(data.reason);
-                            $scope.discountApplied = false;
-                            $scope.discountsData = {};
-                            if (agree) {
-                                $scope.buy();
-                            }
+                            $scope.showBuyButton=true;
                         } else if(data.status == 'fail' && data.reason == 'noSeat'){
                         	$scope.loadingTransaction = false;
                         	alert('Selected seat not available. Please try again.');
-                        }else {
+                        	$scope.showBuyButton=true;
+                        } else {
                             $scope.loadingTransaction = false;
                             alert('Unknown error occured. Please try again');
+                            $scope.showBuyButton=true;
                         }
 
                     }).error(function(data, status, headers, config) {
                         $scope.loadingTransaction = false;
                         alert('Unknown error occured. Please try refreshing the page');
+                        $scope.showBuyButton=true;
                     });
                 }
             };
+            
+            /*facebook code start*/
+            var timer;
+            $scope.checkFbLogin = function(){
+            	//window.fbAsyncInit();
+            	if(!fbavailable){
+                	$rootScope.eventDetailsList.nts_enable = 'N';
+                	$rootScope.eventDetailsList.login_popup = 'N';
+                	$rootScope.eventDetailsList.fbsharepopup = 'N';
+                }
+            	if('widget'== $rootScope.eventDetailsList.registrationsource){
+                	$('#leftList').append("<div id='forntspopup'><iframe style='border: 0; margin: 0; padding: 0; height: 350px; width: 0;' id='ntsframe' name='ntsframe'></iframe></div>");
+                }
+            	
+            	if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable){
+                	FB.getLoginStatus(function(response) {
+                		if (response.authResponse && response.status=='connected') {
+                			FB.api('/me', function(response) {
+                			if(response.email==undefined)
+                				response.email='';
+                				$scope.populatefblogindata(response);
+                			});	
+                		}else if(response.session){
+                			$scope.openFb();
+                		}else{
+                			$scope.fillfblogindefaultcontent();
+                		}
+                	}, {scope:'publish_stream,email'});
+                }else
+                	$scope.ticketsFinalSubmit();
+            };
+            $scope.populatefblogindata = function(data){
+            	if(data.id==undefined){
+            		$scope.fillfblogindefaultcontent();
+            		return;
+            	}
+            	//$scope.facebookPopup = true;
+            	$('#facebookPopup').modal('show');
+            	$scope.idealClose();
+            	$scope.facebookHtml = '<p>'+props.fb_nts_login_track+'</p>';
+            	$scope.facebookHtml = $scope.facebookHtml + '<center>'+props.fb_nts_login_as+'<br>';
+            	$scope.facebookHtml = $scope.facebookHtml + '<a href="'+data.link+'" style="text-decoration:none;" target="_blank"><img src="https://graph.facebook.com/'+data.id+'/picture" border="0"><br><span>'+data.name+'</span></a>';
+            	$scope.facebookHtml = $scope.facebookHtml + '&nbsp;&nbsp;<span style="color:blue; cursor:pointer" id="notyou">'+props.fb_nts_login_not_u+'</span></center>';
+            	$scope.facebookHtml = $scope.facebookHtml + '<center><button type="button" style="margin-top: 5px;" class="btn btn-primary btn-sm" id="fbcommentbutton"><i class="fa fa-facebook"></i> | Connect</button></center><br>';
+            	
+            	$('#facebookHtml').html($scope.facebookHtml);
+            	$('#notyou').click(function(){
+            		FB.logout(function(response){
+            			$scope.fillfblogindefaultcontent();
+            		});
+            	});
+            	$('#fbcommentbutton').click(function(){
+            		$rootScope.facebookNTSdetails = data;
+            		//$scope.facebookPopup = false;
+            		$('#facebookPopup').modal('hide');
+            		$timeout.cancel(timer);
+                	$scope.facebookHtml = '';
+                	$scope.ticketsFinalSubmit();
+            	});
+            };
+
+            $scope.fillfblogindefaultcontent = function(){
+            	//$scope.facebookPopup = true;
+            	$('#facebookPopup').modal('show');
+            	$scope.idealClose();
+            	$scope.facebookHtml = '<p>'+props.fb_nts_login_track+'</p>';
+            	$scope.facebookHtml = $scope.facebookHtml +'<center><button type="button" class="btn btn-primary btn-sm" id="getFBpopup"><i class="fa fa-facebook"></i> | Login with facebook</button></center><br>';
+            	$('#facebookHtml').html($scope.facebookHtml);
+            	
+            	//console.log($scope.facebookPopup);
+            	//console.log($scope.facebookHtml);
+            	
+            	 $('#getFBpopup').click(function(){
+                 	$scope.openFb();
+                 });
+            };
+            $scope.openFb = function(){
+            	FB.login(function(response){
+            		FB.api('/me', function(response) {
+            			if(response.error){
+            				//$scope.facebookPopup = false;
+            				$('#facebookPopup').modal('hide');
+                        	$scope.facebookHtml = '';
+                        	$timeout.cancel(timer);
+                        	$scope.ticketsFinalSubmit();
+            			}
+            			else{
+            				if(response.email==undefined)
+            					response.email='';
+            				$rootScope.facebookNTSdetails = response;
+            				//$scope.facebookPopup = false;
+            				$('#facebookPopup').modal('hide');
+                        	$scope.facebookHtml = '';
+                        	$timeout.cancel(timer);
+                        	$scope.ticketsFinalSubmit();
+            			}       
+            		});
+            		}, {scope:'publish_stream,email'});
+            };
+            $scope.facebookClose = function(){
+            	//$scope.facebookPopup = false;
+            	$('#facebookPopup').modal('hide');
+            	$timeout.cancel(timer);
+            	$scope.facebookHtml = '';
+            	$scope.ticketsFinalSubmit();
+            };
+            $scope.idealClose= function(){
+            	var closeFb =30000;
+            	timer =	$timeout(function() {
+            		$scope.facebookClose();
+                },closeFb);
+            };
+            
+            
+           /* facebook code end */
+            
+            /* final submit start */
+            $scope.ticketsFinalSubmit = function(){
+            	$scope.loadingTransaction = true;
+            	$http.get($rootScope.baseURL +'setTicketQuantities.jsp', {
+            		params: {
+                        api_Key: '123',
+                        disc_code: $scope.discountsData.disc_code,
+                        event_id: $rootScope.eid,
+                        selected_tickets: JSON.stringify($scope.selectedticketAllDetails.selected_tickets),
+                        ticket_ids: $rootScope.ticketsIds,
+                        transaction_id: ($rootScope.transactionId) ? $rootScope.transactionId : '',
+                        event_details: $rootScope.eventDetailsList,
+                        fbuserid:$rootScope.facebookNTSdetails.id,
+                        fname:$rootScope.facebookNTSdetails.first_name,
+                        lname:$rootScope.facebookNTSdetails.last_name,
+                        email:$rootScope.facebookNTSdetails.email
+
+                    }
+            })
+            .success(function(data, status, headers, config) {
+            	if (data.status == 'success') {
+            		$rootScope.ticketsCost = data.details.tickets_cost;
+                    $('#tickets .widget h2').hide();
+                    $rootScope.menuTitles = true;
+                    $scope.loadingTransaction = true;
+                    $rootScope.transactionDetails = data.details;
+                    $rootScope.transactionId = $rootScope.transactionDetails.tid;
+                    if ($scope.discountApplied)
+                        $location.search('discountCode', $scope.discountCode);
+                    else
+                        $location.search('discountCode', null);
+                    if ($scope.eventMetadata.is_recurring)
+                        $rootScope.selectDate = $rootScope.selectDate;
+                    else
+                        $rootScope.selectDate = '';
+                    $location.path('/profile');
+            	} else if (data.status == 'fail' && data.reason == 'Applied code is Unavailable') {
+            		var agree = confirm(data.reason);
+                    $scope.discountApplied = false;
+                    $scope.discountsData = {};
+                    if (agree) {
+                        $scope.buy();
+                    }
+                    $scope.showBuyButton=true;
+            	}else{
+            		$scope.loadingTransaction = false;
+                    alert('Unknown error occured. Please try refreshing the page');
+                    $scope.showBuyButton=true;
+            	}
+            }).error(function(data, status, headers, config) {
+                $scope.loadingTransaction = false;
+                alert('Unknown error occured. Please try refreshing the page');
+                $scope.showBuyButton=true;
+            });
+            };
+            /* final submit end */
+            
         }
     ]);

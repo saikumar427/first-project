@@ -7,8 +7,6 @@ String tid = request.getParameter("transaction_id");
 String nts_enable = request.getParameter("nts_enable");
 String requestNTSData = request.getParameter("ntsDetails");
 String referral_ntscode = request.getParameter("referral_ntscode");
-
-
 	/* {"id":"1642729096052582",
 	"email":"omshankar@eventbee.com",
 	"first_name":"Om",

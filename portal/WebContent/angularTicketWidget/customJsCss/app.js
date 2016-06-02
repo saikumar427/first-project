@@ -111,6 +111,7 @@ angular.module('ticketsapp', [
 		$rootScope.listid= '';
 		$rootScope.ifPri = false;
 		$rootScope.eventDetailsList = eventDetailsList;
+		$rootScope.facebookNTSdetails='';
 		//console.log($rootScope.eventDetailsList);
         /*var sectime=$interval(function() {
             $rootScope.secondsRemaining = $rootScope.secondsRemaining - 1;
@@ -138,41 +139,8 @@ angular.module('ticketsapp', [
         };
 
 
-        /*if($rootScope.context!='FBApp'){
-        $http.get($rootScope.base_Url + 'getThemesJSON.jsp', {
-            params: {
-                eid: $rootScope.eid,
-            }
-        }).success(function(data, status, headers, config) {
-           var css = document.createElement('style');
-           css.type = 'text/css';
-           var styles='';
-           if(data.csstype=='htmlcss'){
-        	   styles=data.css;
-           }else{
-           var bgtype='image';
-           if(data.bg_type=='color')
-        	   bgtype='color';
-           		
-           		if(bgtype=='color')
-               styles = '.leftboxcontent{margin:'+data.boxmargin+';padding: '+data.boxpadding+';background-color: '+data.color+';}';
-           		else
-           	   styles = '.leftboxcontent{margin:'+data.boxmargin+';padding: '+data.boxpadding+';background: url("'+data.bgimageurl+'") repeat scroll 0 0 rgba(0, 0, 0, 0);}';
-           	   styles += '.bodytextstyle{font: '+data.bodytextfontsize+' '+data.bodytextfonttype+';color: '+data.bodytextcolor+';}';
-           	   styles += '.bodyheaders{color: '+data.bodytextcolor+';}';
-           	   styles += '.small{color:'+data.smalltextcolor+';font-family:'+data.smalltextfonttype+';font-size:'+data.smalltextfontsize+';font-weight: lighter;}';
-           }
-           
-           if (css.styleSheet) css.styleSheet.cssText = styles;
-           else css.appendChild(document.createTextNode(styles));
-
-           document.getElementsByTagName("head")[0].appendChild(css);
-        }).error(function(data, status, headers, config) {
-           
-        });
-        }*/
         // Facebook login
-        window.fbAsyncInit = function() {
+        /*  window.fbAsyncInit = function() {
             FB.init({
                 appId: '504743746255078',
                 channelUrl: 'app/channel.html',
@@ -182,7 +150,7 @@ angular.module('ticketsapp', [
             });
         };
 
-       /* (function(d) {
+       (function(d) {
             var js,
                 id = 'facebook-jssdk',
                 ref = d.getElementsByTagName('script')[0];
@@ -193,7 +161,7 @@ angular.module('ticketsapp', [
             js.async = true;
             js.src = "//connect.facebook.net/en_US/all.js";
             ref.parentNode.insertBefore(js, ref);
-        }(document));*/
+        }(document)); */
 
     }
 ]);
