@@ -40,7 +40,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             		$scope.emailData.url = data.eventurl;
             		$scope.emailData.toemails='';
             		$scope.emailData.fromemail=data.email;
-            		$scope.emailData.fromname=data.name
+            		$scope.emailData.fromname=data.name;
             		$scope.emailData.subject='';
             		$scope.emailData.personalmessage=data.msg;
             		$scope.emailData.captcha='';
@@ -72,8 +72,8 @@ angular.module('ticketsapp.controllers.confirmation', [])
             $scope.emailContent = function(){
             	$scope.emailData.toemails = '';
             	$scope.emailData.captcha = '';
-            var	htmldata="<img src='/home/images/images/close.png' id='ebeecreditsclose' class='imgclose' ng-click='hide()'>";
-            	htmldata +="<div style='background-color:#f5f5f5'><br/><form name='emailForm'  ng-submit='checkEmailForm()' id='emailForm' style='padding-left:23px'>"
+           // var	htmldata="<img src='/home/images/images/close.png' id='ebeecreditsclose' class='imgclose' ng-click='hide()'>";
+            	/*htmldata +="<div style='background-color:#f5f5f5'><br/><form name='emailForm'  ng-submit='checkEmailForm()' id='emailForm' style='padding-left:23px'>"
             		     +"<input type='hidden' name='url'  ng-model='emailData.url'/>To* :<br>"
             		     +"<textarea id='toheader' name='toemails' ng-model='emailData.toemails' placeholder='Enter emails with comma separated' style='width: 350px; height: 40px;'></textarea><br>"
             		     +" Your Email* :<br> <input type='text' name='fromemail' ng-model='emailData.fromemail'   style='width: 200px;'><br>"
@@ -86,28 +86,49 @@ angular.module('ticketsapp.controllers.confirmation', [])
             		     +"<input type='hidden' name='formname'  ng-model='emailData.formname'/>"
             		     +"<div style='background-color:#f5f5f5'><div class='submitbtn-style' style='width:70px;float:left'><input type='submit' name='sendmsg' value='Send' class='fbsharebtn'> </div>"
             		     +"<div class='submitbtn-style' style='width:70px;float:left'><input type='button' ng-click='hide()'  class='fbsharebtn' value='Cancel'></div> </p></form></div></div>";
+            	*/
             	
-            	document.getElementById('attendeeloginpopup').HTML='';
-            	var $el = $(htmldata).appendTo('#attendeeloginpopup');
-        		$compile($el)($scope);
+            var	htmldata = "<form  name='emailForm' id='emailForm' ng-submit='checkEmailForm()'>"
+            		   +"<input type='hidden' name='url'  ng-model='emailData.url'/>"
+            		   +"<div class='form-group'><label for='inputName' class='control-label'>To* :</label><textarea class='form-control' id='toheader' name='toemails' ng-model='emailData.toemails' placeholder='Enter emails with comma separated' required></textarea></div>"
+            		   +"<div class='form-group'><label for='inputName' class='control-label'>Your Email* :</label><input type='email' class='form-control' name='fromemail' ng-model='emailData.fromemail' placeholder='Your Email' required /></div>"
+            		   +"<div class='form-group'><label for='inputName' class='control-label'>Your Name* :</label><input type='text' class='form-control' name='fromname' ng-model='emailData.fromname' placeholder='Your Name' required /></div>"
+            		   +"<div class='form-group'><label for='inputName' class='control-label'>Subject :</label><input type='text' class='form-control' id='mailsubject' name='subject' ng-model='emailData.subject' placeholder='Subject' required /></div>"
+            		   +"<div class='form-group'><label for='inputName' class='control-label'>Message :</label><textarea class='form-control' id='permsg' name='personalmessage' ng-model='emailData.personalmessage' required></textarea></div>"
+            		   +"<div class='form-group'><label for='inputName' class='control-label'>Enter the code as shown below:</label><div id='emailcaptchamsg' style='display: none; color:red' >Enter Correct Code</div><div style='clear:both;'></div>"
+            		      +"<div class='col-md-6 col-sm-6'><input type='text' class='form-control' name='captcha' ng-model='emailData.captcha' placeholder='Captcha' required /></div>"
+            		      +"<div class='col-md-6 col-sm-6'><img src='/home/images/ajax-loader.gif' alt='Captcha' id='emailcaptchaid'></div>"
+            		   +"</div>"
+            		   +"<input type='hidden' name='formname'  ng-model='emailData.formname'/><br><br>"
+            		   +"<div class='col-md-12 text-center'><input type='submit' class='btn btn-primary btn-sm ' name='sendmsg' value='Send' >"
+            		   +"<input type='button' ng-click='hide()'  class='btn btn-warning btn-sm ' value='Cancel'></div>"
+            		+"</form>";
+            	
+            	
+            	$('#shareEventEmailHtml').html(htmldata);
+            	$('#shareEventEmail').modal('show');
+            	
+            	//document.getElementById('attendeeloginpopup').HTML='';
+            	//var $el = $(htmldata).appendTo('#attendeeloginpopup');
+        		//$compile($el)($scope);
             	
             	
             	//document.getElementById('attendeeloginpopup').innerHTML=htmldata;
-            	if(document.getElementById("backgroundPopup"))
-            		document.getElementById("backgroundPopup").style.display="block";
+            	//if(document.getElementById("backgroundPopup"))
+            		//document.getElementById("backgroundPopup").style.display="block";
             	$window.scrollTo(0,0);
-            	document.getElementById('ebeecreditsclose').style.marginTop='-15px';
-            	document.getElementById('ebeecreditsclose').style.marginRight='-16px';
-            	document.getElementById('ebeecreditsclose').style.cursor='pointer';
-            	document.getElementById('attendeeloginpopup').style.width='auto';
-            	document.getElementById('attendeeloginpopup').style.minWidth='435px';
-            	document.getElementById('attendeeloginpopup').style.height='auto';
-            	document.getElementById('attendeeloginpopup').style.top='18%';
-            	document.getElementById('attendeeloginpopup').style.left='28%';	
-            	document.getElementById('attendeeloginpopup').style.padding=0;
+            	//document.getElementById('ebeecreditsclose').style.marginTop='-15px';
+            	//document.getElementById('ebeecreditsclose').style.marginRight='-16px';
+            	//document.getElementById('ebeecreditsclose').style.cursor='pointer';
+            	//document.getElementById('attendeeloginpopup').style.width='auto';
+            	//document.getElementById('attendeeloginpopup').style.minWidth='435px';
+            	//document.getElementById('attendeeloginpopup').style.height='auto';
+            	//document.getElementById('attendeeloginpopup').style.top='18%';
+            	//document.getElementById('attendeeloginpopup').style.left='28%';	
+            	//document.getElementById('attendeeloginpopup').style.padding=0;
             //	document.getElementById('ebeecreditsclose').onclick=ccscreenclose;
-            	document.getElementById('attendeeloginpopup').style.backgroundColor='#FFFFFF';
-            	document.getElementById('attendeeloginpopup').style.display="block";
+            	//document.getElementById('attendeeloginpopup').style.backgroundColor='#FFFFFF';
+            	//document.getElementById('attendeeloginpopup').style.display="block";
             	document.getElementById("emailcaptchaid").src="/captcha?fid=emailForm&pt="+new Date().getTime();
             };
             
@@ -180,6 +201,10 @@ angular.module('ticketsapp.controllers.confirmation', [])
             };
             
             $scope.hide = function(){
+            	
+            	$('#shareEventEmailHtml').html('');
+            	$('#shareEventEmail').modal('hide');
+            	
             	document.getElementById('attendeeloginpopup').removeAttribute("style");
             	document.getElementById('attendeeloginpopup').innerHTML='';
             	document.getElementById('attendeeloginpopup').style.display="none";

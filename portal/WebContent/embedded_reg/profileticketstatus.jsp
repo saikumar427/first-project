@@ -107,18 +107,18 @@ public HashMap getregularticketsAvailibility(HashMap hm,JSONObject jobj){
 		int currentlock=0;
 		int lock=0;
 					try{
-							if(remainingcounthm.get("p_"+tktid)!=null)
-								max_ticket=Integer.parseInt((String)remainingcounthm.get("p_"+tktid));
-							}catch(Exception e){max_ticket=0;}
+						if(remainingcounthm.get("p_"+tktid)!=null)
+							max_ticket=Integer.parseInt((String)remainingcounthm.get("p_"+tktid));
+						}catch(Exception e){max_ticket=0;}
 					try{
-							if(remainingcounthm.get("s_"+tktid)!=null)
-								sold=Integer.parseInt((String)remainingcounthm.get("s_"+tktid));
-							}catch(Exception e){sold=0;}
+						if(remainingcounthm.get("s_"+tktid)!=null)
+							sold=Integer.parseInt((String)remainingcounthm.get("s_"+tktid));
+						}catch(Exception e){sold=0;}
 							
-							try{
-							if(remainingcounthm.get("cl_"+tktid)!=null)
-								currentlock=Integer.parseInt((String)remainingcounthm.get("cl_"+tktid));
-							}catch(Exception e){currentlock=0;}
+					try{
+					if(remainingcounthm.get("cl_"+tktid)!=null)
+						currentlock=Integer.parseInt((String)remainingcounthm.get("cl_"+tktid));
+					}catch(Exception e){currentlock=0;}
 			
 				    try{	
 					   if(remainingcounthm.get("cl_"+tktid)!=null)

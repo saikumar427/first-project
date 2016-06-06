@@ -1,3 +1,7 @@
+<%@page import="com.eventbee.general.GenUtil"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@ include file='/globalprops.jsp' %>
 <%
 String eventid = groupid;
@@ -154,18 +158,20 @@ JSONObject singleBottomWidget=EventPageRenderer.getWidgetsHTML(single_bottom_wid
 if(singleWidgets.has("whosAttending") || wideWidgets.has("whosAttending") || narrowWidgets.has("whosAttending") || singleBottomWidget.has("whosAttending"))
 	scriptTag.append((String) getGlobalStaticMap().get("whos_attendee"));
  %>
-<%=scriptTag.toString().replace("##resourceaddress##", resourceaddress).replace("##timestamp##", String.valueOf(d.getTime())) %>
 <%=eventlevelHiddenAttribs %>
  <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><%=getEventName(groupid)%></title>
+<%=scriptTag.toString().replace("##resourceaddress##", resourceaddress).replace("##timestamp##", String.valueOf(d.getTime())) %>
 <link href="/main/bootstrap/css/bootstrap.css" rel="stylesheet" />
-<script type="text/javascript" src="/angularTicketWidget/js/jquery-1.12.3.min.js"></script>
-<script src="/home/layout/eventPage.js"></script>
 <!-- angular ticket widget start -->
-
+<%
+if(newTktWidgetList.contains(groupid)){
+%>
+<script type='text/javascript' language='JavaScript' src='/home/js/eventlinks.js' defer></script>
+<script type="text/javascript" src="/angularTicketWidget/js/jquery-1.12.3.min.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/iframehelper.js"></script>
 <!-- <link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/bootstrap.min.css" /> -->
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -182,7 +188,7 @@ if(singleWidgets.has("whosAttending") || wideWidgets.has("whosAttending") || nar
 
 <script type="text/javascript" src="/angularTicketWidget/js/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/jquery-ui.css" />
-
+<%} %>
 <!-- angular ticket widget end -->
 
 <style>
@@ -406,6 +412,13 @@ hr {
 }
 </style>
 
+<%
+if(newTktWidgetList.contains(groupid)){
+%>
+<script src="/home/layout/eventPage.js"></script>
+<%} else{%>
+<script src="http://www.eventbee.com/home/layout/eventPage.js"></script>
+<%} %>
 </head>
 <body > 
 <div id="rootDiv">
@@ -499,6 +512,13 @@ var isSeating = document.getElementById('isseatingevent').value;
 		</div>
 	</div>
 	
+<%
+	String i18nActualLang=GenUtil.getHMvalue(getEventConfigMap(groupid),"event.i18n.actual.lang","en-us");
+	String domain="http://www.eventbee.com";
+	if("es-co".equals(i18nActualLang)) domain="http://www.eventbee.co";
+	else if("es-mx".equals(i18nActualLang))domain="http://www.eventbee.mx";
+	else if("es-es".equals(i18nActualLang))domain="http://www.eventbee.es";
+%>
 	<!-- Footer start -->
 	<div style="clear:both;"></div>
 	<div>
@@ -506,11 +526,11 @@ var isSeating = document.getElementById('isseatingevent').value;
 		    <tbody>
 		        <tr>
 		            <td align="left" valign="middle">
-		                <a style="margin-right:15px" href="http://www.eventbee.com/"><img src="http://www.eventbee.com/home/images/poweredby.jpg" border="0">
+		                <a style="margin-right:15px" href="<%=domain%>"><img src="/home/images/<%=i18nActualLang%>/poweredby.jpg" border="0">
 		                </a>
 		            </td>
 		            <td>&nbsp;&nbsp;</td>
-		            <td align="left" valign="middle"><span class="small_s"><%=getPropValue("evh.footer.lnk",eventid)%><a href="http://www.eventbee.com">http://www.eventbee.com</a></span>
+		            <td align="left" valign="middle"><span class="small_s"><%=getPropValue("evh.footer.lnk",eventid)%>&nbsp;<a href="<%=domain%>"><%=domain%></a></span>
 		            </td>
 		        </tr>
 		    </tbody>
@@ -560,7 +580,11 @@ var singleBottomWidget = <%=singleBottomWidget%>;
 	getAllWidgets('wide_widgets', wideWidgets, wide_widgets,eventid);
 	getAllWidgets('narrow_widgets', narrowWidgets, narrow_widgets,eventid);
 	getAllWidgets('single_bottom_widgets', singleBottomWidget, single_bottom_widgets,eventid);
-	
+</script>
+<%
+	if(newTktWidgetList.contains(groupid)){
+%>
+<script>
 var waitlistId = '',trackCode = '',discountcode = '',registrationsource = '',venueid = '',isseatingevent = '',fbsharepopup = '',nts_enable = '';
 var login_popup = '',fbappid = '',ticketurlcode = '',context = '',nts_commission = '',referral_ntscode = '',priregtoken = '';var prilistid='';
 var fname='',lname='',email='',actiontype='Order Now';
@@ -623,6 +647,9 @@ var eventDetailsList = {
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.confirmation.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/app.js"></script>
 <!-- angular ticket widget end -->
+<%
+	}
+%>
 </div>
 </body>
 </html>

@@ -275,8 +275,7 @@ public class CSubmitProfileJSON {
 				}
 			} //selected Tickets loop close 
 
-			String profilekey = "AK"
-					+ EncodeNum.encodeNum(buyer_profileid).toUpperCase();
+			String profilekey = "AK" + EncodeNum.encodeNum(buyer_profileid).toUpperCase();
 			HashMap<String,String> buyerBasInfo = new HashMap<String,String>();
 			buyerBasInfo.put("fname", buyerFname);
 			buyerBasInfo.put("lname", buyerLname);
@@ -381,12 +380,12 @@ public class CSubmitProfileJSON {
 					for(int p=0;p<options.size();p++){
 						CAttribOption option=(CAttribOption)options.get(p);
 						JSONObject optionObj=new JSONObject();
-						if(option.getSubQuestions().length>0){
+						if(option.getSubQuestions().length>0){ //for subquestions
 							JSONArray subQuestions=new JSONArray();
 							for(int sub=0;sub<option.getSubQuestions().length;sub++){	
 								if(!"".equals(option.getSubQuestions()[sub])){
 									CCustomAttribute eachAttrib=customAttributes.get(option.getSubQuestions()[sub]);
-									fillAnswerMap(eachAttrib,level,profileActionDB,responseId,customAttributes);
+									fillAnswerMap(eachAttrib,level,profileActionDB,responseId,customAttributes); //recursive call for subquestions
 								}
 							}
 							if(subQuestions.length()>0)

@@ -325,11 +325,8 @@ angular.module('ticketsapp.controllers.profile', [])
             			eventid : $rootScope.eid,
             			event_date : $rootScope.selectDate,
             			transaction_id: $rootScope.transactionId,
-            			ticket_ids : $rootScope.ticketsIds,
             			selected_tickets:$rootScope.eventDetailsList.selected_tickets,
-            			discountCode:$rootScope.eventDetailsList.discountCode,
             			seating_enabled: $rootScope.isSeatingEvent == true ? 'y' : 'n',
-            			wid:$rootScope.eventDetailsList.waitlistId,
             			seatSectionId:$rootScope.eventDetailsList.seatSectionId
             		}
             	})

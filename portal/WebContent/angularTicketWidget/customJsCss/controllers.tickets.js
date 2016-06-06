@@ -1360,7 +1360,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                     $scope.discountApplied = false;
                     $scope.discountsData = {};
                     if (agree) {
-                        $scope.buy();
+                        $scope.ticketsFinalSubmit();
                     }
                     $scope.showBuyButton=true;
             	}else{

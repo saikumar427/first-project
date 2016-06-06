@@ -275,6 +275,8 @@ if(!isvalidEvent(groupid)){
 	 HashMap<String,String> configmp=getEventConfigMap(groupid);
 	 StringBuffer scriptTag=new StringBuffer();
 	 String i18nLang="en_US";
+	 List<String> newTktWidgetList = new ArrayList<String>(Arrays.asList(GenUtil.getHMvalue(configmp,"new.ticket.widget","").split(",")));
+	 System.out.println("newTktWidgetList.contains("+groupid+"): "+newTktWidgetList.contains(groupid));
 	 try{
 		 i18nLang=DBHelper.getLanguageFromDB(groupid);
 	 }catch(Exception e){
@@ -286,18 +288,23 @@ if(!isvalidEvent(groupid)){
 	 try{ 
 	//general script order should be like this
 	scriptTag.append(getNTSGenScript(groupid));
-	scriptTag.append(getEventGenralScript());
+	if(!newTktWidgetList.contains(groupid))
+		scriptTag.append(getEventGenralScript());
 	//rsvp
-	if(("Yes".equalsIgnoreCase(GenUtil.getHMvalue(configmp,"event.rsvp.enabled","no"))))
-		scriptTag.append(getRSVPScript());
+	if(("Yes".equalsIgnoreCase(GenUtil.getHMvalue(configmp,"event.rsvp.enabled","no")))){
+		if(!newTktWidgetList.contains(groupid))
+			scriptTag.append(getRSVPScript());
 	//regularsc
-	else{	
-		scriptTag.append(getRegularScript());	
-	    if("YES".equals(GenUtil.getHMvalue(configmp,"event.seating.enabled","NO")))
-	    {//seating related
-	    	scriptTag.append(getSeatingScript(groupid,GenUtil.getHMvalue(configmp,"venuid","")));   			
-	    	scriptTag.append((String) getGlobalStaticMap().get("seatingreg_script"));
-	    }
+	}else{	
+		if(!newTktWidgetList.contains(groupid)){
+			scriptTag.append(getRegularScript());
+		
+		    if("YES".equals(GenUtil.getHMvalue(configmp,"event.seating.enabled","NO")))
+		    {//seating related
+		    	scriptTag.append(getSeatingScript(groupid,GenUtil.getHMvalue(configmp,"venuid","")));   	
+		    	scriptTag.append((String) getGlobalStaticMap().get("seatingreg_script"));
+		    }
+		}
 	  }		
 	
 	   

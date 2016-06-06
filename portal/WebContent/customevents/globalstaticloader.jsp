@@ -12,18 +12,18 @@ public void prepareEventPageScript(){
 	StringBuffer rsvpreg_script=new StringBuffer();	
 	StringBuffer seatingreg_script=new StringBuffer();	
 
-	/* general_script.append("<link rel='stylesheet' type='text/css' href='/main/build/container/assets/container.css' />");
+	general_script.append("<link rel='stylesheet' type='text/css' href='/main/build/container/assets/container.css' />");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/build/yahoo-dom-event/yahoo-dom-event.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/build/container/container-min.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/seating/jquery-ui-1.8.10.custom.min.js'></script>");
-	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/tktWedget.js?timestamp=##timestamp##'></script>"); */
+	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/tktWedget.js?timestamp=##timestamp##'></script>");
 	//general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/prototype.js'></script>");
-	/* general_script.append("<script src='//ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js'></script>"); */
-/* 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/ajax.js'>function ajaxdummy(){ }</script>");
+	general_script.append("<script src='//ajax.googleapis.com/ajax/libs/prototype/1.7.2.0/prototype.js'></script>");
+	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/ajax.js'>function ajaxdummy(){ }</script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration.js?timestamp=##timestamp##'></script>");
-	general_script.append("<link rel='stylesheet' type='text/css' href='/home/css/seating.css' />"); */
+	general_script.append("<link rel='stylesheet' type='text/css' href='/home/css/seating.css' />");
 
-	/* general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/buildcontrol.js'></script>");
+	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/buildcontrol.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/ctrlData.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/checkboxWidget.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/selectWidget.js'></script>");
@@ -31,9 +31,9 @@ public void prepareEventPageScript(){
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/textboxWidget.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/controls/textareaWidget.js'></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/popuphandler.js' defer></script>");
-	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/effects.js' defer></script>"); */
+	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/effects.js' defer></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/eventlinks.js' defer></script>");
-	/* general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/Tokenizer.js' defer></script>");
+	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/Tokenizer.js' defer></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/advajax.js'>function dummy() { }</script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/popup.js' defer></script>");
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/ebeepopup.js' ></script><link rel='stylesheet' type='text/css' href='/home/css/popupcss.css' />");
@@ -43,20 +43,20 @@ public void prepareEventPageScript(){
 	general_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/fbevent/shareonfacebook.js?timestamp=##timestamp##' defer></script>");
 	general_script.append("<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})");
     general_script.append("(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create', 'UA-60215903-1', 'auto');ga('send', 'pageview');</script>");
-    general_script.append("<script src='##resourceaddress##/main/js/registration/registration/priority_reg.js?timestamp=##timestamp##''></script>"); */
+    general_script.append("<script src='##resourceaddress##/main/js/registration/registration/priority_reg.js?timestamp=##timestamp##''></script>");
 
-	/* reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/tickets_registration.js?timestamp=##timestamp##'></script>"); */
+	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/tickets_registration.js?timestamp=##timestamp##'></script>");
 	//reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/common/tickets_common.js?timestamp=##timestamp##'></script>");
-	/* reg_script.append("<script>var scriptNotLoad=false;setTimeout(function(){if (typeof getTicketsJson == 'undefined' || typeof getTicketsJson === 'undefined') { scriptNotLoad=true; if(document.getElementById('registration'))  document.getElementById('registration').innerHTML='<center><h3>Network error! Please refresh the page to get tickets.</center></h3>';var eid=location.search.split('eid=')[1] ? location.search.split('eid=')[1] : '';var script = document.createElement('script');script.type  = 'text/javascript';script.src= '##resourceaddress##/main/ticketloadfails.jsp?eid='+eid;document.body.appendChild(script);}}, 30 * 1000);setInterval(function(){if(document.getElementById('registration') && (typeof getTicketsJson == 'undefined' || typeof getTicketsJson === 'undefined') && !scriptNotLoad)document.getElementById('registration').innerHTML='<center>Loading...</center>';},5*1000)</script>");
+	reg_script.append("<script>var scriptNotLoad=false;setTimeout(function(){if (typeof getTicketsJson == 'undefined' || typeof getTicketsJson === 'undefined') { scriptNotLoad=true; if(document.getElementById('registration'))  document.getElementById('registration').innerHTML='<center><h3>Network error! Please refresh the page to get tickets.</center></h3>';var eid=location.search.split('eid=')[1] ? location.search.split('eid=')[1] : '';var script = document.createElement('script');script.type  = 'text/javascript';script.src= '##resourceaddress##/main/ticketloadfails.jsp?eid='+eid;document.body.appendChild(script);}}, 30 * 1000);setInterval(function(){if(document.getElementById('registration') && (typeof getTicketsJson == 'undefined' || typeof getTicketsJson === 'undefined') && !scriptNotLoad)document.getElementById('registration').innerHTML='<center>Loading...</center>';},5*1000)</script>");
 	
 	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/common/profile_common.js?timestamp=##timestamp##' defer></script>");
 	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/profile_registration.js?timestamp=##timestamp##' defer></script>");
 	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/common/payments_common.js?timestamp=##timestamp##' defer></script>");
 	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/payments_registration.js?timestamp=##timestamp##' defer></script>");
 	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/common/confirmation_common.js?timestamp=##timestamp##' defer></script>");
-	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/confirmation_registration.js?timestamp=##timestamp##' defer></script>"); */
+	reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/confirmation_registration.js?timestamp=##timestamp##' defer></script>");
 	//reg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/regcontrollerprofile.js?timestamp=##timestamp##'></script>");
-	/* reg_script.append("<script> var ebeepopup=new ebeepopupwindow('ebeecustpopup','ebeepopup');ebeepopup.init();window.onload=initfbcheck;</script>");
+	reg_script.append("<script> var ebeepopup=new ebeepopupwindow('ebeecustpopup','ebeepopup');ebeepopup.init();window.onload=initfbcheck;</script>");
 
 	seatingreg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/seating/getseatingsection_registration.js?timestamp=##timestamp##'></script>");
 	seatingreg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/common/seating/generateseating_common.js?timestamp=##timestamp##'></script>");
@@ -65,7 +65,7 @@ public void prepareEventPageScript(){
 	seatingreg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/main/js/registration/registration/seating/seatingtimer_registration.js?timestamp=##timestamp##'></script>");
 
 
-	rsvpreg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/rsvpreg.js?timestamp=##timestamp##'></script>"); */
+	rsvpreg_script.append("<script type='text/javascript' language='JavaScript' src='##resourceaddress##/home/js/rsvpreg.js?timestamp=##timestamp##'></script>");
 	
 		
 	StringBuffer footer=new StringBuffer();

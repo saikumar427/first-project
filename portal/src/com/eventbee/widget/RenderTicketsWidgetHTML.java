@@ -1,11 +1,15 @@
 package com.eventbee.widget;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 import com.eventbee.cachemanage.CacheManager;
+import com.eventbee.general.DbUtil;
 import com.eventbee.general.GenUtil;
 import com.eventbee.layout.EventGlobalTemplates;
 
@@ -46,10 +50,15 @@ public class RenderTicketsWidgetHTML implements RenderWidgetHTML {
 		 		  if(isPriority) vcontext.put("isPriority","Yes");
 		 	   }
 			   
-			   VelocityEngine ve= new VelocityEngine(); 
+			   VelocityEngine ve= new VelocityEngine();
 			   String tktwdgttemplate=configHash.get("global_template_ticketingwidget");
-			   if(tktwdgttemplate==null || "".equals(tktwdgttemplate.trim()))
-			   tktwdgttemplate=EventGlobalTemplates.getTemplateOfLanguage(refHash.get("i18nlang"),"global_template_ticketingwidget");
+			   List<String> newTktWidgetList = new ArrayList<String>(Arrays.asList(GenUtil.getHMvalue(configMap,"new.ticket.widget","").split(",")));
+			   if(newTktWidgetList.contains(groupid)){
+				   tktwdgttemplate=DbUtil.getVal("select template_value from layout_templates where template_key='new_ticketingwidget_template' and lang='en_US'", null);
+			   }else{
+				   if(tktwdgttemplate==null || "".equals(tktwdgttemplate.trim()))
+				   tktwdgttemplate=EventGlobalTemplates.getTemplateOfLanguage(refHash.get("i18nlang"),"global_template_ticketingwidget");
+			   }
 		 	  try{
 		 	  ve.init();
 		 	  boolean abletopares=ve.evaluate(vcontext,out,"ebeetemplate",tktwdgttemplate);
