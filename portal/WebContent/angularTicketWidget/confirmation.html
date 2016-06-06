@@ -1,19 +1,75 @@
-
 <div ng-bind-html="templateHtml" ng-init="renderHtml()"></div>
-
-<div class="modal"  id="shareEventEmail" style="display:none;">
-		<div class="modal-dialog ">
-			<div class="modal-content">
-				<div class="modal-header">
-		            <button type="button" id='ebeecreditsclose' class="close" ng-click='hide()' style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
-	         	</div>
-	         	<div class="modal-body">
-	         		<div id="shareEventEmailHtml"></div>
-	         	</div>
-	         	<!-- <div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
-	         	<input type='submit' class='btn btn-default btn-sm fbsharebtn' name='sendmsg' value='Send' >
-	         	<input type='button' ng-click='hide()' class='btn btn-warning btn-sm fbsharebtn' value='Cancel'>
-	         	</div> -->
-			</div>
+<div class="modal" ng-show="shareonfacebookpop"  >
+	<div class="modal-dialog modal-sm" > 
+		<div class="modal-content">
+			<div class="modal-header">
+	            <button type="button" class="close" ng-click="close_share();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+	       	</div>
+	       	<div class="modal-body">
+	       		<div id="shareonfacebookpopHtml"></div>
+	       	</div>
 		</div>
 	</div>
+</div>
+<div ng-show="shareonfacebookpop" class="modal-backdrop fade in"></div>
+<style>
+#emailForm label{
+	font-weight: bold;
+}
+</style>
+<div class="modal"  id="shareEventEmail" style="display:none; top: -55px;">
+   <div class="modal-dialog ">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" id='ebeecreditsclose' class="close" ng-click='hide()' style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+         </div>
+         
+         <div ng-hide="showEmail">
+	         <div class="modal-body" id="shareEventEmailHtml">
+	         </div>
+	         <div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
+	         	 <input type='button' ng-click='hide()' class='btn btn-warning btn-sm ' value='Cancel'>
+	         </div>
+         </div>
+         
+         <form ng-show="showEmail"  name='emailForm' id='emailForm' ng-submit='checkEmailForm()'>
+         <div class="modal-body" >
+               <input type='hidden' name='url'  ng-model='emailData.url'/>
+               <div class='form-group'>
+                  <label for='inputName' class='control-label'>{{emailData.To}}* :</label>
+                  <textarea class='form-control' id='toheader' name='toemails' ng-model='emailData.toemails' placeholder='{{emailData.EnterWithComms}}' required></textarea>
+               </div>
+               <div class='form-group'>
+                  <label for='inputName' class='control-label'>{{emailData.YourEmail}}* :</label>
+                  <input type='email' class='form-control' name='fromemail' ng-model='emailData.fromemail' placeholder='{{emailData.YourEmail}}' required />
+               </div>
+               <div class='form-group'>
+                  <label for='inputName' class='control-label'>{{emailData.YourName}}* :</label>
+                  <input type='text' class='form-control' name='fromname' ng-model='emailData.fromname' placeholder='{{emailData.YourName}}' required />
+               </div>
+               <div class='form-group'>
+                  <label for='inputName' class='control-label'>{{emailData.Subject}}* :</label>
+                  <input type='text' class='form-control' id='mailsubject' name='subject' ng-model='emailData.subject' placeholder='{{emailData.Subject}}' required />
+               </div>
+               <div class='form-group'>
+                  <label for='inputName' class='control-label'>{{emailData.Message}}* :</label>
+                  <textarea class='form-control' id='permsg' name='personalmessage' ng-model='emailData.personalmessage' placeholder="{{emailData.Message}}" required></textarea>
+               </div>
+               <div class='form-group'>
+                  <label for='inputName' class='control-label'>{{emailData.EnterShownBelow}} :</label>
+                  <div id='emailcaptchamsg' style='display: none; color:red' >{{emailData.EnterCorrectCode}}</div>
+                  <div style='clear:both;'></div>
+                  <div class='col-md-6 col-sm-6'><input type='text' class='form-control' name='captcha' ng-model='emailData.captcha' placeholder='{{emailData.Captcha}}' required /></div>
+                  <div class='col-md-6 col-sm-6'>
+                  <img src='/home/images/ajax-loader.gif' alt='Captcha' id='emailcaptchaid'></div>
+               </div>
+               <input type='hidden' name='formname'  ng-model='emailData.formname'/>
+         </div>
+         <div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
+            <input type='submit' class='btn btn-default btn-sm'  name='sendmsg' value='{{emailData.send}}' >
+            <input type='button' ng-click='hide()' class='btn btn-warning btn-sm ' value='{{emailData.cancel}}'>
+          </div>
+           </form>
+      </div>
+   </div>
+</div>

@@ -16,11 +16,27 @@ angular.module('ticketsapp.controllers.confirmation', [])
             $scope.display_ntscode ='';
             $scope.shareData = {};       
             $scope.emailData = {};
+            $scope.showEmail=true;
+            $scope.shareonfacebookpop = false;
             
-            	try{
-                $rootScope.timeWatcher();
-                }catch(err){
-                }
+            /* i18n start */
+            $scope.emailData.To= 'To';
+        	$scope.emailData.YourEmail ='Your Email';
+        	$scope.emailData.YourName ='Your Name';
+        	$scope.emailData.Subject ='Subject';
+        	$scope.emailData.Message ='Message';
+        	$scope.emailData.EnterShownBelow ='Enter the code as shown below';
+        	$scope.emailData.EnterCorrectCode ='Enter Correct Code';
+        	$scope.emailData.EnterWithComms='Enter emails with comma separated';
+        	$scope.emailData.Captcha='Captcha';
+        	$scope.emailData.send='Send';
+        	$scope.emailData.cancel='Cancel';
+            /* i18n end */
+            
+        	try{
+            $rootScope.timeWatcher();
+            }catch(err){
+            }
             
             $scope.confirmationDetails = {
                 confirmation_page_header: "Confirmation",
@@ -29,7 +45,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
       
             $scope.renderInnerHtml = function(){
             	if(document.getElementById('shareblock')){
-            	$http.get($rootScope.base_Url+'widgetsocialshare.jsp?timestamp='+(new Date()).getTime(), {
+            	$http.get($rootScope.baseURL+'widgetsocialshare.jsp?timestamp='+(new Date()).getTime(), {
             		params :{
             			eid:$rootScope.eid,
                     	tid:$rootScope.transactionId,
@@ -51,13 +67,11 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	
             }
             	jQuery('#toplink a#reflink').on('click',function(event){
-        			//$location.url($rootScope.serverAddress+'tktwidget/public/index.html/event?eid=' + $rootScope.eid);
         			window.location.href=$rootScope.serverAddress+'event?eid='+$rootScope.eid;
         			event.preventDefault();
         		});
             	
             	jQuery('#btmlink a').on('click',function(event){
-        			//$location.url($rootScope.serverAddress+'tktwidget/public/index.html/event?eid=' + $rootScope.eid);
         			window.location.href=$rootScope.serverAddress+'event?eid='+$rootScope.eid;
         			event.preventDefault();
         		});
@@ -70,74 +84,28 @@ angular.module('ticketsapp.controllers.confirmation', [])
             
             
             $scope.emailContent = function(){
+            	$scope.showEmail=true;
             	$scope.emailData.toemails = '';
             	$scope.emailData.captcha = '';
-           // var	htmldata="<img src='/home/images/images/close.png' id='ebeecreditsclose' class='imgclose' ng-click='hide()'>";
-            	/*htmldata +="<div style='background-color:#f5f5f5'><br/><form name='emailForm'  ng-submit='checkEmailForm()' id='emailForm' style='padding-left:23px'>"
-            		     +"<input type='hidden' name='url'  ng-model='emailData.url'/>To* :<br>"
-            		     +"<textarea id='toheader' name='toemails' ng-model='emailData.toemails' placeholder='Enter emails with comma separated' style='width: 350px; height: 40px;'></textarea><br>"
-            		     +" Your Email* :<br> <input type='text' name='fromemail' ng-model='emailData.fromemail'   style='width: 200px;'><br>"
-            		     +"Your Name* : <br><input type='text' name='fromname' ng-model='emailData.fromname'   style='width: 200px;'><br>"
-            		     +" Subject :<br><input type='text' id='mailsubject' name='subject' ng-model='emailData.subject' value='' style='width: 200px;'><br>"
-            		     +"Message :<br> <textarea id='permsg' name='personalmessage' ng-model='emailData.personalmessage' style='width: 350px; height: 50px;'></textarea><br> <p align='center'>"
-            		     +"<div id='emailcaptchamsg' style='display: none; color:red' >Enter Correct Code</div> Enter the code as shown below:<div width='100%' valign='top' style='padding:5px;'>"
-            		     +"<table><tbody><tr><td valign='middle'><input type='text' valign='top' value='' size='8' name='captcha' ng-model='emailData.captcha'></td><td>"
-            		     +"<img src='/home/images/ajax-loader.gif' alt='Captcha' id='emailcaptchaid'></td></tr></tbody></table></div><br>"
-            		     +"<input type='hidden' name='formname'  ng-model='emailData.formname'/>"
-            		     +"<div style='background-color:#f5f5f5'><div class='submitbtn-style' style='width:70px;float:left'><input type='submit' name='sendmsg' value='Send' class='fbsharebtn'> </div>"
-            		     +"<div class='submitbtn-style' style='width:70px;float:left'><input type='button' ng-click='hide()'  class='fbsharebtn' value='Cancel'></div> </p></form></div></div>";
-            	*/
-            	
-            var	htmldata = "<form  name='emailForm' id='emailForm' ng-submit='checkEmailForm()'>"
-            		   +"<input type='hidden' name='url'  ng-model='emailData.url'/>"
-            		   +"<div class='form-group'><label for='inputName' class='control-label'>To* :</label><textarea class='form-control' id='toheader' name='toemails' ng-model='emailData.toemails' placeholder='Enter emails with comma separated' required></textarea></div>"
-            		   +"<div class='form-group'><label for='inputName' class='control-label'>Your Email* :</label><input type='email' class='form-control' name='fromemail' ng-model='emailData.fromemail' placeholder='Your Email' required /></div>"
-            		   +"<div class='form-group'><label for='inputName' class='control-label'>Your Name* :</label><input type='text' class='form-control' name='fromname' ng-model='emailData.fromname' placeholder='Your Name' required /></div>"
-            		   +"<div class='form-group'><label for='inputName' class='control-label'>Subject :</label><input type='text' class='form-control' id='mailsubject' name='subject' ng-model='emailData.subject' placeholder='Subject' required /></div>"
-            		   +"<div class='form-group'><label for='inputName' class='control-label'>Message :</label><textarea class='form-control' id='permsg' name='personalmessage' ng-model='emailData.personalmessage' required></textarea></div>"
-            		   +"<div class='form-group'><label for='inputName' class='control-label'>Enter the code as shown below:</label><div id='emailcaptchamsg' style='display: none; color:red' >Enter Correct Code</div><div style='clear:both;'></div>"
-            		      +"<div class='col-md-6 col-sm-6'><input type='text' class='form-control' name='captcha' ng-model='emailData.captcha' placeholder='Captcha' required /></div>"
-            		      +"<div class='col-md-6 col-sm-6'><img src='/home/images/ajax-loader.gif' alt='Captcha' id='emailcaptchaid'></div>"
-            		   +"</div>"
-            		   +"<input type='hidden' name='formname'  ng-model='emailData.formname'/><br><br>"
-            		   +"<div class='col-md-12 text-center'><input type='submit' class='btn btn-primary btn-sm ' name='sendmsg' value='Send' >"
-            		   +"<input type='button' ng-click='hide()'  class='btn btn-warning btn-sm ' value='Cancel'></div>"
-            		+"</form>";
-            	
-            	
-            	$('#shareEventEmailHtml').html(htmldata);
             	$('#shareEventEmail').modal('show');
-            	
-            	//document.getElementById('attendeeloginpopup').HTML='';
-            	//var $el = $(htmldata).appendTo('#attendeeloginpopup');
-        		//$compile($el)($scope);
-            	
-            	
-            	//document.getElementById('attendeeloginpopup').innerHTML=htmldata;
-            	//if(document.getElementById("backgroundPopup"))
-            		//document.getElementById("backgroundPopup").style.display="block";
-            	$window.scrollTo(0,0);
-            	//document.getElementById('ebeecreditsclose').style.marginTop='-15px';
-            	//document.getElementById('ebeecreditsclose').style.marginRight='-16px';
-            	//document.getElementById('ebeecreditsclose').style.cursor='pointer';
-            	//document.getElementById('attendeeloginpopup').style.width='auto';
-            	//document.getElementById('attendeeloginpopup').style.minWidth='435px';
-            	//document.getElementById('attendeeloginpopup').style.height='auto';
-            	//document.getElementById('attendeeloginpopup').style.top='18%';
-            	//document.getElementById('attendeeloginpopup').style.left='28%';	
-            	//document.getElementById('attendeeloginpopup').style.padding=0;
-            //	document.getElementById('ebeecreditsclose').onclick=ccscreenclose;
-            	//document.getElementById('attendeeloginpopup').style.backgroundColor='#FFFFFF';
-            	//document.getElementById('attendeeloginpopup').style.display="block";
             	document.getElementById("emailcaptchaid").src="/captcha?fid=emailForm&pt="+new Date().getTime();
+            	
+            	var elements = document.getElementsByClassName("form-control");
+    			for (var i = 0; i < elements.length; i++) {
+    			    elements[i].oninvalid = function(e) {
+    			        e.target.setCustomValidity("");
+    			        if (!e.target.validity.valid) {
+    			            e.target.setCustomValidity("Required field");
+    			        }
+    			    };
+    			    elements[i].oninput = function(e) {
+    			        e.target.setCustomValidity("");
+    			    };
+    			}
             };
             
             
             $scope.checkEmailForm = function(){
-            	
-            	//action='/portal/emailprocess/emailsend.jsp?UNITID=13579&id="+$rootScope.eid+"&purpose=INVITE_FRIEND_TO_EVENT'  method='post'
-            	
-            	
             	if (!document.emailForm.fromname.value) {
         			alert('Please enter your name.');
         			return false;
@@ -164,10 +132,8 @@ angular.module('ticketsapp.controllers.confirmation', [])
         		}
         		  var toemail=document.emailForm.toemails.value;
         			var tokens = toemail.split(',');
-        			//alert("jsonObjec::"+tokens);
         		for(var i=0; i<tokens.length; i++){
         			if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(tokens[i])){
-        				//alert(tokens[i] + ' is not a valid email address.');
         				return false;
         			}
         		}
@@ -175,34 +141,26 @@ angular.module('ticketsapp.controllers.confirmation', [])
         		$http.get($rootScope.serverAddress+'emailprocess/emailsend.jsp?UNITID=13579&id='+$rootScope.eid+'&purpose=INVITE_FRIEND_TO_EVENT',{
             		params: $scope.emailData
             	}).success(function(data, status, headers, config) {
-                	//$scope.getNTScoderesponse(data);
             		var restxt=data;
-         		   if(restxt.indexOf("Error")>-1){
-         		  		     document.getElementById('emailcaptchamsg').style.display='block';
-         					 document.getElementById("emailcaptchaid").src="/home/images/ajax-loader.gif";
-         					 document.getElementById("emailcaptchaid").src="/captcha?fid=emailForm&pt="+new Date().getTime();
-         		  		     document.emailForm.sendmsg.value="Send";
-         		     }
-         		     else{
-         		    	document.getElementById('attendeeloginpopup').innerHTML='';
-         		    	var htmlcontent="<img src='/home/images/images/close.png' id='ebeecreditsclose' class='imgclose' ng-click='hide()'><center>"+restxt+"<br><input type='button' value='OK' ng-click='hide()'>";
-         		    	var $el = $(htmlcontent).appendTo('#attendeeloginpopup');
-                		$compile($el)($scope);
-                		document.getElementById('ebeecreditsclose').style.marginTop='-15px';
-                    	document.getElementById('ebeecreditsclose').style.marginRight='-16px';
-         		    	
-         				/*ebeepopup.setContent("<center>"+restxt+"<br><input type='button' value='OK' onclick='ebeepopup.hide()'>");
-         				ebeepopup.show();*/
+         		   	if(restxt.indexOf("Error")>-1){
+     		  		     document.getElementById('emailcaptchamsg').style.display='block';
+     					 document.getElementById("emailcaptchaid").src="/home/images/ajax-loader.gif";
+     					 document.getElementById("emailcaptchaid").src="/captcha?fid=emailForm&pt="+new Date().getTime();
+     		  		     document.emailForm.sendmsg.value="Send";
+         		     }else{
+         		    	 document.getElementById('attendeeloginpopup').innerHTML='';
+         		    	 var htmlcontent = '<div class="text-center alert alert-success">'+restxt+'</div>';
+         		    	 $('#shareEventEmailHtml').html(htmlcontent);
+         		    	$scope.showEmail=false;
          		   }
             		
                });
-        		
-        		
             };
+            
             
             $scope.hide = function(){
             	
-            	$('#shareEventEmailHtml').html('');
+            	//$('#shareEventEmailHtml').html('');
             	$('#shareEventEmail').modal('hide');
             	
             	document.getElementById('attendeeloginpopup').removeAttribute("style");
@@ -211,12 +169,6 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	document.getElementById("backgroundPopup").style.display="none";
             };
             
-            
-            $scope.fbconfshare = function(){
-            	//alert("fbconfshare");
-            	$scope.fbtype='conffbshare';
-            	$scope.fbcommon();
-            };
             
             $scope.conftweet = function(){
             	var url="//images.eventbee.com/tweet/?event_id="+$rootScope.eid;
@@ -231,11 +183,34 @@ angular.module('ticketsapp.controllers.confirmation', [])
             $scope.renderHtml = function(){
             	$scope.templateHtml = $sce.trustAsHtml($rootScope.templateMsg);
             	$timeout($scope.renderInnerHtml,10);
+            	if('Y'==$rootScope.eventDetailsList.fbsharepopup || 'Y' == $rootScope.eventDetailsList.nts_enable){
+            		$scope.openSharePop();
+            	}
+            };
+            $scope.openSharePop = function(){
+            	var shareHtml = '<div class="col-md-12 col-sm-12 text-center">Publish to Facebook. Let your friends know that you are attending this event!</div><br><br><br>';
+            	shareHtml = shareHtml + '<div class="text-center"><button type="button" class="btn btn-primary btn-sm" id="shareOnFacebook"><i class="fa fa-facebook"></i> | Share on Facebook</button></div>';
+            	$('#shareonfacebookpopHtml').html(shareHtml);
+            	$scope.shareonfacebookpop= true;
+            	//$('#shareonfacebookpop').modal('show');
+            	
+            	$('#shareOnFacebook').click(function(){
+                	$scope.fbconfshare();
+                	//$('#shareonfacebookpop').modal('hide');
+                	$scope.shareonfacebookpop= false;
+                });
+            };
+            
+            $scope.close_share = function(){
+            	$scope.shareonfacebookpop= false;
+            	//$('#shareonfacebookpop').modal('hide');
+            };
+            $scope.fbconfshare = function(){
+            	$scope.fbtype='conffbshare';
+            	$scope.fbcommon();
             };
             
             /* facebook share begins here */
-            
-            
             $scope.fbcommon = function(){
             	FB.login(function(response1){
             		 FB.api('/me', function(response) {
@@ -256,12 +231,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
                 $http.get(url).success(function(data, status, headers, config) {
             	  	window.location.href=$rootScope.serverAddress+"attendee/mypurchases/home?aid="+data; 
             	});
-                        
-                        };
-            
-            
-            
-            
+            };
             
             $scope.getNTScode = function(response,eventid){
             	var fbid=response.id;

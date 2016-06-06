@@ -529,5 +529,49 @@ cursor:pointer;
 }
 
 
+/* confirmation page share email fb tweet start */
+.social-facebook, .social-tweet, .social-email{
+	padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;   
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.social-facebook{
+    color: #FFFFFF;
+    background-color: #4060A5;
+}
+	
+.social-facebook:hover{
+	color: #4060A5;
+    background-color: #FFFFFF;
+	transition: all 0.5s;
+	border: 1px solid #4060A5;
+}
+
+.social-tweet{
+    color: #FFFFFF;
+    background-color: #3CF;
+}
+	
+.social-tweet:hover{
+	color: #3CF;
+    background-color: #FFFFFF;
+	transition: all 0.5s;
+	border: 1px solid #3CF;
+}
+.social-email{
+    color: #FFFFFF;
+    background-color: #DC4A38;
+}
+	
+.social-email:hover{
+	color: #DC4A38;
+    background-color: #FFFFFF;
+	transition: all 0.5s;
+	border: 1px solid #DC4A38;
+}
+/* confirmation page share email fb tweet end */
 
 

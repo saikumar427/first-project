@@ -77,7 +77,7 @@ angular.module('ticketsapp', [
         // this is using..
         $rootScope.baseURL = 'http://localhost/ticketwidget/';
         
-        $rootScope.base_Url = 'http://localhost/tktwidget/registration/';
+       // $rootScope.base_Url = 'http://localhost/tktwidget/registration/';
         $rootScope.serverAddress = 'http://localhost/';
         //$rootScope.eid = $location.search().eid;
         $rootScope.eid = eventid;

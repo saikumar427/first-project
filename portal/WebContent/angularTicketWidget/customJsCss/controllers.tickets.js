@@ -1163,9 +1163,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     }).success(function(data, status, headers, config) {
                     	$scope.loadingTransaction = false;
                     	if (data.status == 'success') {
-                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
-                    		else
+                    		else*/
                     			$scope.ticketsFinalSubmit();  
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller
