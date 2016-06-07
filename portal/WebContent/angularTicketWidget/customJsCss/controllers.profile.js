@@ -103,12 +103,14 @@ angular.module('ticketsapp.controllers.profile', [])
             
             $scope.applyBuyerDetails = function(){
             	$timeout(function() {
-            		$scope.$apply(function() {
-                        $scope.profileQuestions.buyer_questions[0].response = $rootScope.facebookNTSdetails.first_name;
-                        $scope.profileQuestions.buyer_questions[1].response = $rootScope.facebookNTSdetails.last_name;
-                        $scope.profileQuestions.buyer_questions[2].response = $rootScope.facebookNTSdetails.email;
-                    });
-            		
+            		if($rootScope.buyerNTSData){
+            			$scope.$apply(function() {
+                            $scope.profileQuestions.buyer_questions[0].response = $rootScope.facebookNTSdetails.first_name;
+                            $scope.profileQuestions.buyer_questions[1].response = $rootScope.facebookNTSdetails.last_name;
+                            $scope.profileQuestions.buyer_questions[2].response = $rootScope.facebookNTSdetails.email;
+                        });
+            			$rootScope.buyerNTSData = false;
+            		}
             		// set custom error message
         			var elements = document.getElementsByTagName("INPUT");
         			for (var i = 0; i < elements.length; i++) {

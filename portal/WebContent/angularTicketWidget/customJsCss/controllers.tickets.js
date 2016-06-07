@@ -53,7 +53,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             $rootScope.facebookNTSdetails.first_name='';
             $rootScope.facebookNTSdetails.last_name='';
             $rootScope.facebookNTSdetails.email='';
-
+            
             try {
                 $interval.cancel($rootScope.globalTimer);
                 $rootScope.timeWatcher();
@@ -62,6 +62,15 @@ angular.module('ticketsapp.controllers.tickets', [])
             $scope.widthCh = function() {
 
             };
+            
+            
+            /*i18n code start*/
+        	$scope.internationalization={};
+        	$scope.internationalization.skipFb = 'Skip this step';
+        	$scope.internationalization.loading = 'Loading...';
+            	
+             /*i18n code end*/
+            
             $rootScope.menuTitles = false;
             /* meta data start */
             if ($rootScope.eid)
@@ -388,6 +397,10 @@ angular.module('ticketsapp.controllers.tickets', [])
 
                 } catch (error) {}
                 return list;
+            };
+            
+            $scope.getScoreData = function(val){
+            	$scope.wait_select=val;
             };
             $scope.submitWaitList = function() {
 

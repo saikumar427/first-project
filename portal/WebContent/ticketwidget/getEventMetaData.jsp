@@ -71,7 +71,7 @@
 		String status=(String)eventinfoMap.get("status");
 		if("pending".equalsIgnoreCase(status)||"cancel".equalsIgnoreCase(status)){
 			responseJSON.put("do_continue", false);
-			responseJSON.put("message","Tickets currently not available" );			
+			responseJSON.put("message","Tickets are currently unavailable" );			
 		}else if(status==null){
 			JSONObject temp=new JSONObject();
 			temp.put("do_continue", false);

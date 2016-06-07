@@ -112,6 +112,7 @@ angular.module('ticketsapp', [
 		$rootScope.ifPri = false;
 		$rootScope.eventDetailsList = eventDetailsList;
 		$rootScope.facebookNTSdetails='';
+		$rootScope.buyerNTSData = true;
 		//console.log($rootScope.eventDetailsList);
         /*var sectime=$interval(function() {
             $rootScope.secondsRemaining = $rootScope.secondsRemaining - 1;

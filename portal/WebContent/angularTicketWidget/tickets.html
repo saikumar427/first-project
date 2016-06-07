@@ -9,7 +9,7 @@
          	<div class="modal-body">
          		<!-- <div ng-bind-html="facebookHtml"></div> -->
          		<div id="facebookHtml"></div>
-         		<center><a ng-click="facebookClose();" style="cursor: pointer;">Skip this step</a></center>
+         		<center><a ng-click="facebookClose();" style="cursor: pointer;">{{internationalization.skipFb}}</a></center>
          	</div>
 		</div>
 	</div>
@@ -19,12 +19,12 @@
 
 <div class="text-center center-block" ng-show="loadingMetadata" style="padding:30px 0">
     <img src="/angularTicketWidget/images/loading.gif"/>
-    Loading...
+    {{internationalization.loading}}
 </div>
 
 <div ng-hide="eventMetadata.do_continue">
 	<div class="text-center">
-		<div ng-bind-html="eventMetadata.message"></div>
+		<b>{{eventMetadata.message}}</b>
 	</div>
 </div>
 <div ng-show="eventMetadata.do_continue ">
@@ -229,9 +229,9 @@
             
             <div ng-show="ticketsUnavailable">
                 <div class="text-center">
-                    <h5>
+                    <b>
                         Tickets are currently unavailable
-                    </h5>
+                    </b>
                 </div>
             </div>
         

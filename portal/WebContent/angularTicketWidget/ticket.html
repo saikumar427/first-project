@@ -78,9 +78,12 @@
 		<span ng-bind-html="ticket.ticket_selected"></span>
 	</div>
     
-	<div class="col-md-2 col-sm-2 col-xs-6 " ng-if="ticket.wait_li_type=='Y'">
+    <span  ng-if="ticket.wait_li_type=='Y'">
     	<button class="btn btn-sm btn-primary" ng-click="waitlistPop(ticket.name,ticket.id,ticket.wait_li_limit)">put me in waitlist</button>
-    </div>
+    </span>
+	<!-- <div class="col-md-2 col-sm-2 col-xs-6 " ng-if="ticket.wait_li_type=='Y'">
+    	<button class="btn btn-sm btn-primary" ng-click="waitlistPop(ticket.name,ticket.id,ticket.wait_li_limit)">put me in waitlist</button>
+    </div> -->
     
 </div>
 
