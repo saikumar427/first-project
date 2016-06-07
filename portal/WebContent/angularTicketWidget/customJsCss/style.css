@@ -547,7 +547,6 @@ cursor:pointer;
 	color: #4060A5;
     background-color: #FFFFFF;
 	transition: all 0.5s;
-	border: 1px solid #4060A5;
 }
 
 .social-tweet{
@@ -559,7 +558,6 @@ cursor:pointer;
 	color: #3CF;
     background-color: #FFFFFF;
 	transition: all 0.5s;
-	border: 1px solid #3CF;
 }
 .social-email{
     color: #FFFFFF;
@@ -570,7 +568,6 @@ cursor:pointer;
 	color: #DC4A38;
     background-color: #FFFFFF;
 	transition: all 0.5s;
-	border: 1px solid #DC4A38;
 }
 /* confirmation page share email fb tweet end */
 

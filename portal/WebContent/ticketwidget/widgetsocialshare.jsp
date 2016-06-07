@@ -64,12 +64,12 @@ StringBuffer sbf= new StringBuffer();
 //sbf.append(" <tr><td colspan=\"3\" style=\"height:10px\"></td></tr></table>");
 
 sbf.append("<div class=\"col-md-12 \"><b>Share your purchase :</b></div><br>");
-sbf.append("<div class=\"col-md-12 \" style=\"margin-top: 20px;\">");
+sbf.append("<div class=\"col-md-12 text-center \" style=\"margin-top: 20px;\">");
 sbf.append("<span class=\"social-facebook\" id=\"fbconfshare\" ng-click=\"fbconfshare()\" ><i class=\"fa fa-facebook\" ></i> Share </span>");
 sbf.append("<span class=\"social-tweet\" style=\"margin:0px 15px;\" id=\"conftweet\" ng-click=\"conftweet()\"><i class=\"fa fa-twitter\"></i> Tweet </span>");
 sbf.append("<span class=\"social-email\" ng-click=\"emailContent()\" id=\"submitBtn\"><i class=\"fa fa-envelope\"></i> Email </span>");
 sbf.append("</div><br><br><br><br>");
-sbf.append("<div class=\"col-md-12\">Your referral link <input type=\"text\" id=\"evereflink\" readonly=\"readonly\" value=\""+eventurl+"\" size=\"50\" ></div>");
+sbf.append("<div class=\"col-md-12\">Your referral link <input type=\"text\" id=\"evereflink\" readonly=\"readonly\" value=\""+eventurl+"\" size=\"50\"  onclick=\"this.setSelectionRange(0, this.value.length)\"></div>");
 
 
 

@@ -159,21 +159,27 @@
                         </div>
                     </div>
                     <div class="row">
-                            <div class="col-md-12 col-xs-12" ng-show="showBuyButton">
-                                <div ng-show="ticketsData.items.length &gt; 0" style="float:right">
-                                    <h4 class="bodytextstyle">
-                                        {{ ticketsData.reg_flow_wordings.total_amount_label }} : {{ total() | currency:ticketsData.currency }}
-                                    </h4>
-                                </div>
-                                <div style="clear:both">
-                                </div>
-                                <button class="btn btn-warning" ng-click="buy();" ng-disabled="!(total() &gt; 0 || atleastOneTicketSelected())" ng-show="ticketsData.items.length &gt; 0 && !loadingTransaction" style="float:right">
-                                    
-                                        {{ ticketsData.reg_flow_wordings.order_button_label }}
-                                   
-                                </button>
-                                <img ng-show="loadingTransaction" src="/angularTicketWidget/images/loading.gif" style="float:right"/>
-                            </div>
+                    	<div class="col-md-12 col-xs-12" >
+						   <div class="col-md-6 col-sm-6 col-xs-12 text-left" style="margin-top:35px;">
+						      <a href="http://www.eventbee.com"><img style="margin-bottom: 7px;" alt="Powered by Eventbee Online Registration &amp; Ticketing" border="0" src="http://www.eventbee.com/main/images/home/poweredbyeventbee.jpg" title="Powered by Eventbee"></a>
+						      <span id="siteseal" >
+						         <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3mlfoHSPjcEHprez8Nf5vp"></script>
+						      </span>
+						   </div>
+						   <div class="col-md-6 col-sm-6 col-xs-12 text-right" ng-show="showBuyButton">
+						      <div ng-show="ticketsData.items.length &gt; 0" style="float:right">
+						         <h4 class="bodytextstyle">
+						            {{ ticketsData.reg_flow_wordings.total_amount_label }} : {{ total() | currency:ticketsData.currency }}
+						         </h4>
+						      </div>
+						      <div style="clear:both">
+						      </div>
+						      <button class="btn btn-warning" ng-click="buy();" ng-disabled="!(total() &gt; 0 || atleastOneTicketSelected())" ng-show="ticketsData.items.length &gt; 0 && !loadingTransaction" style="float:right">
+						      {{ ticketsData.reg_flow_wordings.order_button_label }}
+						      </button>
+						      <img ng-show="loadingTransaction" src="/angularTicketWidget/images/loading.gif" style="float:right"/>
+						   </div>
+						</div>
                     </div>
                     <div class="text-center center-block" ng-show="ticketsData.items.length &gt; 0 && loadSeating" style="padding:30px 0">
                         <img src="/angularTicketWidget/images/loading.gif"/>
