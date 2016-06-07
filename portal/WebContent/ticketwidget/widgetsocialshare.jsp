@@ -63,13 +63,14 @@ StringBuffer sbf= new StringBuffer();
 //sbf.append("<tr><td colspan=\"3\">Your referral link <input type=\"text\" id=\"evereflink\" name=\"evereflink\" readonly=\"readonly\" value=\""+eventurl+"\" size=\"50\"></td></tr>");
 //sbf.append(" <tr><td colspan=\"3\" style=\"height:10px\"></td></tr></table>");
 
-sbf.append("<div class=\"col-md-12 \"><b>Share your purchase :</b></div><br>");
-sbf.append("<div class=\"col-md-12 text-center \" style=\"margin-top: 20px;\">");
-sbf.append("<span class=\"social-facebook\" id=\"fbconfshare\" ng-click=\"fbconfshare()\" ><i class=\"fa fa-facebook\" ></i> Share </span>");
-sbf.append("<span class=\"social-tweet\" style=\"margin:0px 15px;\" id=\"conftweet\" ng-click=\"conftweet()\"><i class=\"fa fa-twitter\"></i> Tweet </span>");
-sbf.append("<span class=\"social-email\" ng-click=\"emailContent()\" id=\"submitBtn\"><i class=\"fa fa-envelope\"></i> Email </span>");
-sbf.append("</div><br><br><br><br>");
-sbf.append("<div class=\"col-md-12\">Your referral link <input type=\"text\" id=\"evereflink\" readonly=\"readonly\" value=\""+eventurl+"\" size=\"50\"  onclick=\"this.setSelectionRange(0, this.value.length)\"></div>");
+sbf.append("<div style=\"height: 110px;\"><div class=\"col-md-12 text-center row \"><b>Tell your friends!</b></div><br>");
+sbf.append("<div class=\"col-md-12 text-center \" style=\"margin: 10px 0px;\">");
+sbf.append("<span class=\"social-facebook\" id=\"fbconfshare\" ng-click=\"fbconfshare()\" ><i class=\"fa fa-facebook\" ></i> </span>");
+sbf.append("<span class=\"social-tweet\" id=\"conftweet\" ng-click=\"conftweet()\"><i class=\"fa fa-twitter\"></i> </span>");
+sbf.append("<span class=\"social-email\" ng-click=\"emailContent()\" id=\"submitBtn\"><i class=\"fa fa-envelope\"></i> </span>");
+sbf.append("<span class=\"social-referral\" ng-click=\"referral()\" id=\"referralBtn\"><i class=\"fa fa-link\"></i> </span>");
+sbf.append("</div><br>");
+sbf.append("<div class=\"text-center\" style=\"display:none;\" id=\"show_ref_link\"><input type=\"text\" id=\"evereflink\" readonly=\"readonly\" value=\""+eventurl+"\" size=\"50\"  onclick=\"this.setSelectionRange(0, this.value.length)\"></div><br></div>");
 
 
 

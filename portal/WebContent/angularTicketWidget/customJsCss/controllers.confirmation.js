@@ -81,7 +81,11 @@ angular.module('ticketsapp.controllers.confirmation', [])
                 	$scope.fbcommon();
         		});
             };
-            
+            $scope.referral = function(){
+            	$('#show_ref_link').toggle('slow', function() {
+            	    // Animation complete.
+            	  });
+            };
             
             $scope.emailContent = function(){
             	$scope.showEmail=true;
