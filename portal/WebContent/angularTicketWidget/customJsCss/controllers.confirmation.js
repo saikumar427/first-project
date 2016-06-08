@@ -92,7 +92,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	$('#fbconfshare').tooltipster({
               		 content:$('<span>Facebook</span>'),
               	    fixedWidth:'100px',
-              	    position: 'left'
+              	    position: 'top'
               	    });
             	$('#conftweet').tooltipster({
              		 content:$('<span>Twitter</span>'),
@@ -107,7 +107,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	$('#referralBtn').tooltipster({
              		 content:$('<span>Referrl link</span>'),
              	    fixedWidth:'100px',
-             	    position: 'right'
+             	    position: 'top'
              	    });
             	
             	
