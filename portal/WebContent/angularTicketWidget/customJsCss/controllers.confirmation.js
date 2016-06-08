@@ -32,7 +32,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
         	$scope.emailData.send='Send';
         	$scope.emailData.cancel='Cancel';
             /* i18n end */
-            
+        	
         	try{
             $rootScope.timeWatcher();
             }catch(err){
@@ -63,6 +63,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             		$scope.emailData.formname='emailForm';
             		var $el = $($scope.shareData.sharehtml).appendTo('#shareblock');
             		$compile($el)($scope);
+            		$scope.tooltip();
             	});
             	
             }
@@ -86,6 +87,34 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	    // Animation complete.
             	  });
             };
+            
+            $scope.tooltip = function(){
+            	$('#fbconfshare').tooltipster({
+              		 content:$('<span>Facebook</span>'),
+              	    fixedWidth:'100px',
+              	    position: 'left'
+              	    });
+            	$('#conftweet').tooltipster({
+             		 content:$('<span>Twitter</span>'),
+             	    fixedWidth:'100px',
+             	    position: 'top'
+             	    });
+            	$('#submitBtn').tooltipster({
+             		 content:$('<span>Email</span>'),
+             	    fixedWidth:'100px',
+             	    position: 'top'
+             	    });
+            	$('#referralBtn').tooltipster({
+             		 content:$('<span>Referrl link</span>'),
+             	    fixedWidth:'100px',
+             	    position: 'right'
+             	    });
+            	
+            	
+            	
+            	
+            };
+            
             
             $scope.emailContent = function(){
             	$scope.showEmail=true;

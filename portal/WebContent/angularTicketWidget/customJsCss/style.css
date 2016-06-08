@@ -579,10 +579,7 @@ cursor:pointer;
     background-color: #FFFFFF;
 	transition: all 0.5s;
 }
-#shareblock{
-	    background-color: #F5F5F5;
-	    padding: 10px 0px 0px 0px;
-}
+
 #shareblock .fa{
 	position: relative;
     top: 14px;
