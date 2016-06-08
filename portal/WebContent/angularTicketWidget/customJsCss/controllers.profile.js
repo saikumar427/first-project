@@ -352,6 +352,7 @@ angular.module('ticketsapp.controllers.profile', [])
             //final submit
             $scope.submitProfile = function() {
                // $scope.loadingSubmit = true;
+            	
                 $rootScope.getDetails();
                 $http.get($rootScope.baseURL + 'submitProfileInfo.jsp', {
                         params: {

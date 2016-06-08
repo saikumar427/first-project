@@ -1179,7 +1179,8 @@ angular.module('ticketsapp.controllers.tickets', [])
                     		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
                     		else*/
-                    			$scope.ticketsFinalSubmit();  
+                    			$scope.ticketsFinalSubmit(); 
+                    			
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller
                             $rootScope.eventDetailsList.selected_tickets = JSON.stringify(finalTickets.selected_tickets);
