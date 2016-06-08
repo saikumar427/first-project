@@ -367,8 +367,10 @@ angular.module('ticketsapp.controllers.profile', [])
                     })
                     .success(function(data, status, headers, config) {
                         $scope.loadingSubmit = false;
-                        if (data.status == 'success')
-                            $location.path('/payment');
+                        if (data.status == 'success'){
+                        	$location.path('/payment');
+                        	$('html, body').animate({scrollTop: $('#tickets').offset().top}, 'slow');
+                        }
                         else
                             alert('Unknown error occured. Please try again.');
                     })

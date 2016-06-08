@@ -1368,6 +1368,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                     else
                         $rootScope.selectDate = '';
                     $location.path('/profile');
+                    $('html, body').animate({scrollTop: $('#tickets').offset().top}, 'slow');
             	} else if (data.status == 'fail' && data.reason == 'Applied code is Unavailable') {
             		var agree = confirm(data.reason);
                     $scope.discountApplied = false;
