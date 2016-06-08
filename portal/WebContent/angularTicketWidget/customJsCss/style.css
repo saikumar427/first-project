@@ -586,4 +586,13 @@ cursor:pointer;
 }
 /* confirmation page share email fb tweet end */
 
-
+/* print button start */
+.printBtn{
+	background-color: whitesmoke;
+    border: 1px solid #DDDDDD;
+    padding: 5px 10px;
+}
+.printBtn:hover{
+	background-color: #DDDDDD;
+}
+/* print button start */

@@ -31,6 +31,9 @@ angular.module('ticketsapp.controllers.confirmation', [])
         	$scope.emailData.Captcha='Captcha';
         	$scope.emailData.send='Send';
         	$scope.emailData.cancel='Cancel';
+        	$scope.confirmData = {
+        			backtoevent : 'Back To Event Page'
+        	};
             /* i18n end */
         	
         	try{
@@ -67,7 +70,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	});
             	
             }
-            	jQuery('#toplink a#reflink').on('click',function(event){
+            	/*jQuery('#toplink a#reflink').on('click',function(event){
         			window.location.href=$rootScope.serverAddress+'event?eid='+$rootScope.eid;
         			event.preventDefault();
         		});
@@ -75,7 +78,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	jQuery('#btmlink a').on('click',function(event){
         			window.location.href=$rootScope.serverAddress+'event?eid='+$rootScope.eid;
         			event.preventDefault();
-        		});
+        		});*/
             	
             	jQuery('#submitBtn').on('click',function(event){
                 	$scope.fbtype='fbattendee';
@@ -87,7 +90,9 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	    // Animation complete.
             	  });
             };
-            
+            $scope.backToTickets = function(){
+            	location.reload();
+            };
             $scope.tooltip = function(){
             	$('#fbconfshare').tooltipster({
               		 content:$('<span>Facebook</span>'),
@@ -328,10 +333,9 @@ angular.module('ticketsapp.controllers.confirmation', [])
             };
             
             
-            var refreshPage = function(){
+           /* var refreshPage = function(){
             	window.location.href=$rootScope.serverAddress+'/event?eid='+$rootScope.eid;
-            	//$location.url('/event?eid=' + $rootScope.eid);
-            };
+            };*/
             
             
             $scope.insertPromotion = function(eid,network){

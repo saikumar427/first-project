@@ -418,9 +418,9 @@ hr {
 <%
 if(newTktWidgetList.contains(groupid)){
 %>
-<script src="/home/layout/eventPage.js"></script>
+<script src="/angularTicketWidget/customJsCss/angularEventPage.js"></script>
 <%} else{%>
-<script src="http://www.eventbee.com/home/layout/eventPage.js"></script>
+<script src="/home/layout/eventPage.js"></script>
 <%} %>
 </head>
 <body > 
