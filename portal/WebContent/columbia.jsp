@@ -683,7 +683,17 @@ li{
    .select2-chosen{
    	 background-image: url("<%=resourceaddress%>/main/images/flags/flag_colombia.png");
    	 background-repeat:no-repeat;
-   	 background-size:25px 27px;
+   	 #background-size:25px 27px;
+   	 background-position:center left;
+   }
+    </style>
+   <%} %>
+   <%if(lang.equals("es-es")){%>
+      <style>
+   .select2-chosen{
+   	 background-image: url("<%=resourceaddress%>/main/images/flags/spainFlag.png");
+   	 background-repeat:no-repeat;
+   	 #background-size:25px 27px;
    	 background-position:center left;
    }
     </style>
@@ -693,7 +703,7 @@ li{
    .select2-chosen{
    	 background-image: url("<%=resourceaddress%>/main/images/flags/flag_mexico.png");
    	 background-repeat:no-repeat;
-   	 background-size:25px 27px;
+   	 #background-size:25px 27px;
    	 background-position:center left;
    }
     </style>
@@ -704,7 +714,7 @@ li{
    .select2-chosen{
    	 background-image: url("<%=resourceaddress%>/main/images/flags/flag_united_states.png");
    	 background-repeat:no-repeat;
-   	 background-size:25px 27px;
+   	 #background-size:25px 27px;
    	 background-position:center left;
    }
     </style>
@@ -737,7 +747,8 @@ li{
 		<a>
 		 <select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
 		   	<option value="es-co" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
-		   	<option value="es-mx" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option>     
+			<option value="es-mx" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option> 
+		   	<option value="es-es" <%if(lang.equals("es-es")){%>selected='selected' class="select-active"<%} %>>Spain - Spanish</option>			
 		    <option value="en-us" <%if(lang.equals("en-us")){%>selected='selected' class="select-active"<%} %>>United States - English</option>             
 		</select>      
 			</a> 

@@ -1,3 +1,5 @@
+<%@page import="java.util.Map.Entry"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="com.eventbee.cachemanage.CacheManager"%>
 <%@page import="com.eventbee.cachemanage.InstanceWatcher"%>
 <%@page import="com.eventbee.util.CoreConnector"%>
@@ -119,15 +121,18 @@ StringBuffer br=new StringBuffer();
 Map<String,InstanceWatcher> globalMap = CacheManager.getGlobalMap();
 br.append("<form id='globaldata'  name='globaldata' method='post' action='eventglobaldata.jsp' ><center>Total GlobalMap Size Is: "+globalMap.size()+" &nbsp;&nbsp;<a href='#' onclick='removeAll();'>RemoveAll</a></center> <br/>");
 
-Set<String> globalkeys= globalMap.keySet();
+//Set<String> globalkeys= globalMap.keySet();
+Iterator<Entry<String,InstanceWatcher>> it = globalMap.entrySet().iterator();
 br.append("<input type='hidden' id='rmkey' name='rmkey' value=''><input type='hidden' id='mode' name='mode' value=''>");
 br.append("<div style='float:center'><table cellpadding='0' cellspacing='0' border='0' class='display' id='globalmaptable'><thead><tr><th>Keys</th><th>LastAccessTime</th><th>CurrrentTime</th><th>Action</th></tr></thead><tbody>");
-for(String key:globalkeys){
+while (it.hasNext()){
 	String[] temp;
+	Entry<String,InstanceWatcher> item=it.next();
+	String key=item.getKey();
 	temp = key.split("_");
 	InstanceWatcher iw=globalMap.get(key);	
  		br.append("<tr><td>"+key+"</td><td>"+new java.util.Date(iw.getLastAccessTime())+"</td><td>"+new java.util.Date()+"</td><td><a href='#' id='"+key+"' onclick='removein(this);'>remove</a>&nbsp;|&nbsp;<a href='#' id='"+temp[0]+"' onclick='removeEvent(this);'>removeEvent</a></td></tr>");
-		}
+	}
 	br.append("</table></div></form><br/>");
 	br.append("<form id='toggleevenpage' name='toggleevenpage' method='post' action='eventglobaldata.jsp'><b>Toggle EventPage Name</b></br>");
 	br.append("<div style='float:center'><table cellpadding='0' cellspacing='0' border='0'><tr><td><table><tr><td>Select Map:</td><td><select id='jbossserver' name='jbossserver'><option value='jboss7'>Jboss 7</option><option value='jboss4'>Jboss 4</option></select>");

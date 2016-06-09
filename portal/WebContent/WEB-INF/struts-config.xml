@@ -55,6 +55,9 @@
 	<action path="/es-mx" type="com.actions.SimpleAction" >
         <forward name="success" path="/mexico.jsp?lang=es-mx" />
 	</action>
+	<action path="/es-es" type="com.actions.SimpleAction" >
+        <forward name="success" path="/spain.jsp?lang=es-es" />
+	</action>
 	<action path="/en-mx" type="com.actions.SimpleAction" >
          <forward name="success" path="/mexico.jsp?lang=en-mx" />
 	</action>

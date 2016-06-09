@@ -1,6 +1,6 @@
 <%@include file="getresourcespath.jsp" %>
 <%@include file="common.jsp" %>
-<%@include file="/mexico/props.jsp" %>
+<%@include file="/spain/props.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -25,7 +25,7 @@
 <script src="<%=resourceaddress%>/main/js/jquery-1.11.2.min.js"></script>
 <script src="<%=resourceaddress%>/main/js/jquery.inview.min.js"></script>
 <script src="<%=resourceaddress%>/main/user/login?lang=<%=lang%>"></script>
-<link href="/mexico/css/homepage.css?id=1" rel="stylesheet"/>
+<link href="/spain/css/homepage.css?id=1" rel="stylesheet"/>
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="/main/homepage/js/background.cycle.js"></script>
   <script src="<%=resourceaddress%>/main/user/login?lang=<%=lang%>"></script>
@@ -489,7 +489,7 @@ li{
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand " style="padding-top:0px;padding-bottom:0px;" href="/es-mx"><img src="/main/homepage/img/logo.png" /></a>
+                        <a class="navbar-brand " style="padding-top:0px;padding-bottom:0px;" href="/es-es"><img src="/main/homepage/img/logo.png" /></a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav nav-list " style="float:none !important;">
@@ -497,7 +497,7 @@ li{
                             <li><a class="font-class" onclick="showPricing();">PRECIOS</a></li>
                             <li><a class="font-class" onclick="showSignup();">REGISTRARSE</a></li>
                             <li class="navbar-right"><a href="javascript:;" id="contact" class="font-class">CONTACTO</a></li>
-                            <li class="navbar-right"><a href="/main/user/login?lang=es-mx" id="sinbtn" class="font-class">INICIAR SESION</a></li>
+                            <li class="navbar-right"><a href="/main/user/login?lang=es-es" id="sinbtn" class="font-class">INICIAR SESION</a></li>
                         </ul>
                     </div>
                 </div>
@@ -519,7 +519,7 @@ li{
                                         <div class="block-box-platform block padding-box" id="platform_div">
                                             <div class="intro-lead-in-right intro-lead-in-right-platform" style="font-family:Muli-Light !important;">Te presentamos</div>
 											<div class="intro-lead-in-right intro-lead-in-right-platform" style="font-family:Muli-Light !important;">Eventbee Business</div><br/>
-                                            <a href="/main/eventbee-for-business/es-mx" class="page-scroll btn btn-xz" 
+                                            <a href="/main/eventbee-for-business/es-es" class="page-scroll btn btn-xz" 
                                             style="border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;">CONOCE MÀS</a>
                                         </div>
                                     </div>
@@ -549,9 +549,7 @@ li{
                                                         <div class="price-tag" style="font-family:Muli-Light !important;">Venta de tiquetes Básico</div>
                                                     </li>
                                                    <li style="display:inline-block;">
-                                                        <div class="colored-circle"><span style="font-size: 16px;
-    position: relative;
-    right: 1px;top:24px;">MX$18</span>
+                                                        <div class="colored-circle"><span style="font-size: 16px;position: relative; right: 1px;top:24px;">€1</span>
                                                             <br/><span style="font-size:12px;position:relative;top:22px;">por tiquete</span></div>
                                                     </li>
                                                 </ul>
@@ -559,17 +557,17 @@ li{
                                             <hr class="hr-line" />
                                             <ul style="list-style:none;display:inline;padding-left:0px;">
                                                 <li class="margin-class" style="display:inline-block;">
-                                                    <div class="no-colored-circle"><span style="font-size: 14px;left:0px;position: relative;top: 24px;">MX$28</span></div>Pro</li>
+                                                    <div class="no-colored-circle"><span style="font-size: 16px;left:0px;position: relative;top: 24px;">€1.50</span></div>Pro</li>
                                                 <li class="margin-class" style="display:inline-block;">
-                                                    <div class="no-colored-circle"><span style="font-size: 14px;left:0px;position: relative;top: 24px;">MX$36</span></div>Avanzado</li>
+                                                    <div class="no-colored-circle"><span style="font-size: 16px;left:0px;position: relative;top: 24px;">€2</span></div>Avanzado</li>
                                                 <li style="display:inline-block;">
-                                                    <div class="no-colored-circle"><span style="font-size: 14px;left:0px;position: relative;top: 24px;">MX$54</span></div>Business</li>
+                                                    <div class="no-colored-circle"><span style="font-size: 16px;left:-4px;position: relative;top: 24px;">€3</span></div>Business</li>
                                             </ul>
                                             <br/>
 
                                             <div style="clear:both;"></div>
                                             <br/>
-                                            <a href="/main/pricing/es-mx" class="page-scroll btn btn-xz" 
+                                            <a href="/main/pricing/es-es" class="page-scroll btn btn-xz" 
                                             style="border-radius:0px !important;font-family: Montserrat Light !important;font-size:12px;text-transform:uppercase;">CONOCE MÀS</a>
                                         </div>
                                     </div>
@@ -624,7 +622,7 @@ li{
                                                 </div>
 												<div class="form-group">
                                                     <div class="col-xs-12 col-xs-offset-0">
-													<label style="font-size:12px;font-weight:normal;text-align:left;">Al hacer click en el botón Registrarse, confirmo que acepto los <a href="http://www.eventbee.com/main/termsofservice/es-mx" style="color:#5388c4;" target="_blank">Términos de Servicio</a> de Eventbee
+													<label style="font-size:12px;font-weight:normal;text-align:left;">Al hacer click en el botón Registrarse, confirmo que acepto los <a href="http://www.eventbee.com/main/termsofservice/es-es" style="color:#5388c4;" target="_blank">Términos de Servicio</a> de Eventbee
                                         </label>
                                                 </div>
                                                 </div>
@@ -648,10 +646,10 @@ li{
             <div class="container">
                 <div class="row text-center">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <h4  style=";margin-bottom:12px;"><a class="service-heading" href="/main/how-it-works/es-mx">Cómo funciona</a></h4>
+                        <h4  style=";margin-bottom:12px;"><a class="service-heading" href="/main/how-it-works/es-es">Cómo funciona</a></h4>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <h4 style="margin-bottom:12px;"><a class="service-heading" href="/main/faq/es-mx">FAQ</a></h4>
+                        <h4 style="margin-bottom:12px;"><a class="service-heading" href="/main/faq/es-es">FAQ</a></h4>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                         <h4 style="margin-bottom:12px;"><a class="service-heading" href="javascript:;" id="getTickets">Obtener mis tiquetes</a></h4>
@@ -764,20 +762,20 @@ li{
 		<div class="row" style="margin: 0 auto; padding-top: 15px;">
 			<div class="row">
 				<center>
-					<span style="font-size: 12px; color: #ccc"><%=getPropValue("copyright_eventbee_all_right_reserved" ,lang) %> </span>
+					<span style="font-size: 12px; color: #ccc">Derechos de Autor 2003 hasta 2016. Eventbee Inc. Todos los derechos reservados.</span>
 				</center>
 				<span class="footerlinks" style="font-size: 0.7em" id="lowerlinks">
 					<center>
 						 <a href="/main/privacystatement<%=getSlashLinkPath(lang)%>">
-						<%=getPropValue("privacy_statement" ,lang) %></a> 
+						Declaración de Privacidad</a> 
 						<span style="color: #ccc"> |</span>   
 						<a
-							href="/main/termsofservice<%=getSlashLinkPath(lang)%>"><%=getPropValue("term_of_services" ,lang) %></a>
+							href="/main/termsofservice<%=getSlashLinkPath(lang)%>">Términos de servicio</a>
 				
 					</center>
 				</span>
 				<center>
-					<span style="font-size: 12px; color: #ccc"><%=getPropValue("with_backing_magr_world_records_sales_promotion" ,lang) %></span>
+					<span style="font-size: 12px; color: #ccc">Con el respaldo de más de 50.000 organizadores de eventos alrededor del mundo en registros en línea, venta de tiquetes y promoción de eventos.</span>
 				</center>
 			</div>
 			<br />
@@ -1056,11 +1054,11 @@ $('#myModal .modal-body').html('<iframe id="popup" src="" width="100%" style="he
 });
 function showButtons(response){
  if(response.indexOf('false')>-1){
-    $('#sinbtn').html('<a href="/main/user/login?lang=es-mx">INICIAR SESION</a>');
-	$('#supbtn').html('<a href="/main/user/signup?lang=es-mx"><button class="btn btn-primary">REGISTRARSE</button></a>');
+    $('#sinbtn').html('<a href="/main/user/login?lang=es-es">INICIAR SESION</a>');
+	$('#supbtn').html('<a href="/main/user/signup?lang=es-es"><button class="btn btn-primary">REGISTRARSE</button></a>');
    }else{
-    $('#sinbtn').html('<a href="/main/myevents/home?lang=es-mx">Mi cuenta</a>');
-	$('#supbtn').html('<a href="/main/user/logout?lang=es-mx"><button class="btn btn-primary">Cerrar sesión</button></a>');
+    $('#sinbtn').html('<a href="/main/myevents/home?lang=es-es">Mi cuenta</a>');
+	$('#supbtn').html('<a href="/main/user/logout?lang=es-es"><button class="btn btn-primary">Cerrar sesión</button></a>');
    }
 }
 $.ajax({

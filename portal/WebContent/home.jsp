@@ -764,27 +764,28 @@ li{
 <!-- full width container footer -->
 <div class="container" style="background-color:#474747;width: 100%;">
 <div class="container footer">
-<div class="row" style="margin: 0 auto; padding-bottom: 0px;">
-     <div class="col-md-2">&nbsp; </div>
+<%-- <div class="row" style="margin: 0 auto; padding-bottom: 0px;">
+      <div class="col-md-2">&nbsp; </div>
 		 <div class="col-md-4"> &nbsp;</div>
-			  <div class="col-md-3">&nbsp; </div>
-				   <div class="col-md-3">
+			  <div class="col-md-3">&nbsp; </div> 
+				 <div class="col-md-3">
 				   <span style="display:none;">
 					 <%if(lang.equals("en-us")){%>
 					   <a style="position:relative;top:470px;left: 8px;"><select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
 		   				<option value="es-co" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
-		   				<option value="es-mx" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option>     
+		   				<option value="es-mx" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option>
+						<option value="es-es" <%if(lang.equals("es-es")){%>selected='selected' class="select-active"<%} %>>Spain - Spanish</option>
 		    			<option value="en-us" <%if(lang.equals("en-us")){%>selected='selected' class="select-active"<%} %>>United States - English</option>             
 					 </select>      
 				 </a> 
            	<%} %>
            	</span>
        </div>
-</div>
+</div> --%>
 
 <div class="row" style="margin: 0 auto;padding-bottom:10px;">
 <div class="row"><br>
-<div class="col-md-2">
+<div class="col-md-3">
 <span class="footertabheader"><h4><strong>Eventbee</strong></h4></span>
 <span class="footertab"><a href="/main/aboutus">About Us</a></span> <br/>
 <span class="footertab"><a href="/main/contact">Contact Us</a> </span> <br/>
@@ -799,8 +800,23 @@ li{
 <a href="http://blog.eventbee.com/" target="_blank">
 <i style="padding-right:20px" class="fa fa-fw fa-2x fa-rss-square"></i> Blog<br></a>
 <a href="http://www.youtube.com/user/eventbee/videos" target="_blank">
-<i style="padding-right:20px" class="fa fa-fw fa-2x fa-youtube-square"></i> Videos<br></a></p></div>
-<div class="col-md-4">
+<i style="padding-right:20px" class="fa fa-fw fa-2x fa-youtube-square"></i> Videos<br></a></p>
+    
+    				   <span style="display:block;">
+					 <%if(lang.equals("en-us")){%>
+					   <a style="/* position:relative; */top:470px;left: 8px;"><select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
+		   				<option value="es-co" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
+		   				<option value="es-mx" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option>
+		   				<option value="es-es" <%if(lang.equals("es-es")){%>selected='selected' class="select-active"<%} %>>Spain - Spanish</option> 
+		    			<option value="en-us" <%if(lang.equals("en-us")){%>selected='selected' class="select-active"<%} %>>United States - English</option>             
+					 </select>      
+				 </a> 
+           	<%} %>
+           	</span>
+
+</div>
+
+<div class="col-md-3">
 <span class="footertabheader"><h4><strong>Online Registration & Event Ticketing</strong></h4></span>
 <span class="footertab"><a href="/main/how-it-works">Event Creation - Event Ticketing Types, Donations, Registration Form, Credit Card Processing, Venue Seating</a></span><br/>
 <span class="footertab"><a href="/main/how-it-works">Event Promotion - Event Page Links, Buttons, Widgets, Social Media Sharing, Facebook Ticketing App</a></span><br/>
@@ -870,7 +886,17 @@ li{
    .select2-chosen{
    	 background-image: url("<%=resourceaddress%>/main/images/flags/flag_colombia.png");
    	 background-repeat:no-repeat;
-   	 background-size:25px 27px;
+   	 #background-size:25px 27px;
+   	 background-position:center left;
+   }
+    </style>
+   <%} %>
+   <%if(lang.equals("es-es")){%>
+      <style>
+   .select2-chosen{
+   	 background-image: url("<%=resourceaddress%>/main/images/flags/spainFlag.png");
+   	 background-repeat:no-repeat;
+   	 #background-size:25px 27px;
    	 background-position:center left;
    }
     </style>
@@ -880,7 +906,7 @@ li{
    .select2-chosen{
    	 background-image: url("<%=resourceaddress%>/main/images/flags/flag_mexico.png");
    	 background-repeat:no-repeat;
-   	 background-size:25px 27px;
+   	 #background-size:25px 27px;
    	 background-position:center left;
    }
     </style>
@@ -891,7 +917,7 @@ li{
    .select2-chosen{
    	 background-image: url("<%=resourceaddress%>/main/images/flags/flag_united_states.png");
    	 background-repeat:no-repeat;
-   	 background-size:25px 27px;
+   	 #background-size:25px 27px;
    	 background-position:center left;
    }
     </style>

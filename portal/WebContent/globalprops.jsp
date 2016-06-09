@@ -131,6 +131,8 @@ props.put("byer.access.tkn.expired_en_US","Access Token is expired");
 props.put("byer.resend.btn_en_US","Resend");
 props.put("byer.continue.btn_en_US","Continue");
 props.put("byer.or.lbl_en_US","OR");
+		
+	//for columbia
 
 /*eventhandler.jsp*/
 props.put("evh.footer.lnk_es_CO", "Desarrollado por Eventbee - Tu plataforma online para el registro y venta de tiquetes de eventos. Para más información, visita");
@@ -395,4 +397,137 @@ props.put("byer.access.tkn.expired_es_MX","Token de acceso ha caducado");
 props.put("byer.resend.btn_es_MX","Reenviar");
 props.put("byer.continue.btn_es_MX","Continuar");
 props.put("byer.or.lbl_es_MX","O");
+		
+//for spain
+
+
+/*eventhandler.jsp*/
+props.put("evh.footer.lnk_es_ES", "Desarrollado por Eventbee - Tu plataforma online para el registro y venta de tiquetes de eventos. Para más información, visita");
+
+/*CreditCardScreen.jsp*/
+
+props.put("ccs.note_es_ES", "NOTA: El proceso de tarjeta de crédito se realizó a través de Eventbee. Eventbee aparecerá en el extracto bancario de su tarjeta de crédito");
+props.put("ccs.card.type_es_ES", "Tipo de Tarjeta");
+props.put("ccs.card.nmbr_es_ES", "Número de Tarjeta");
+props.put("ccs.cvv_es_ES", "Código de Seguridad");
+props.put("ccs.exp_es_ES", "Fecha de Expiración Mes/Año");
+props.put("ccs.cc.address_es_ES", "Dirección Tarjeta de Crédito");
+props.put("ccs.card.holder_es_ES", "Titular");
+props.put("ccs.fname_es_ES", "Nombre");
+props.put("ccs.lname_es_ES", "Apellido");
+props.put("ccs.country_es_ES", "País");
+props.put("ccs.street_es_ES", "Calle");
+props.put("ccs.apt_es_ES", "Apt/Suite");
+props.put("ccs.city_es_ES", "Ciudad");
+props.put("ccs.state_es_ES", "Departamento");
+props.put("ccs.zip_es_ES", "Código Postal");
+
+
+/*continueoptions.jsp*/
+
+props.put("co.nopayment.first_es_ES", "Si has cerrado la ventana del proceso de pago sin completar el proceso, ");
+props.put("co.nopayment.second_es_ES", "haz clic aquí para continuar el proceso, ");
+props.put("co.payment.first_es_ES", "Si has completado el proceso de pago exitosamente,");
+props.put("co.payment.second_es_ES", "haz clic aquí para dirigirte a la página de confirmación");
+
+
+/*fbpopupshare.jsp*/
+
+props.put("fbpopshre.nts.enable_es_ES", "Publica en Facebook. ¡Gana Bee Credits si tus amigos compran tiquetes por medio del link de tu publicación!");
+props.put("fbpopshre.nts.disable_es_ES", "Publica en Facebook. Permite que tus amigos sepan a qué evento estas asistiendo");
+
+
+
+/*done.jsp*/
+
+props.put("done.print_es_ES", "Imprimir");
+props.put("done.payment.not.received.first_es_ES", "No hemos recibido la confirmación de pago de la compañía encargada del procesamiento de la tarjeta de crédito. Este proceso por lo general toma algunos minutos para efectuarse. <p>Un correo de confirmación con el Número de Transacción</p>");
+props.put("done.payment.not.received.second_es_ES", "</b> será enviado a su correo tan pronto como se realice la confirmación");
+props.put("done.payment.not.received.note_es_ES", "NOTA: Si no encuentra el correo de confirmación en su bandeja de entrada, por favor revise su carpeta de Correos No Deseados y actualice los ajustes de filtros de Spam para permitir los correo de Eventbee.");
+props.put("done.back_es_ES", "Volver a la Página de Tiquetes");
+
+
+/*checkavailability.jsp*/
+
+props.put("ca.tkt.not.avail_es_ES", "Los tiquetes que ha seleccionado recientemente no se encuentran disponibles");
+props.put("ca.timeout.first_es_ES", "Usted ha excedido el tiempo límite y su reserva ha sido liberada");
+props.put("ca.timeout.second_es_ES", "El propósito de este tiempo límite es permitir que el registro se encuentre disponible para la mayor cantidad de personas");
+props.put("ca.timeout.third_es_ES", "Pedimos disculpas por las molestias ocasionadas");
+props.put("ca.back_es_ES", "Haga clic aquí para ir a la Página de Tiquetes");
+props.put("ca.seats.not.available_es_ES", "Algunos de estos asientos están siendo reservados o ya fueron vendidos");
+
+
+
+/*socialshare.jsp*/
+
+props.put("ss.share_es_ES", "Compartir");
+props.put("ss.tweet_es_ES", "Compartir en Twitter");
+props.put("ss.email_es_ES", "Enviar por Correo");
+props.put("ss.to_es_ES", "To");
+props.put("ss.comma.seperate_es_ES", "Ingrese los correos separados por comas");
+props.put("ss.ur.email_es_ES", "Su Correo");
+props.put("ss.ur.name_es_ES", "Su Nombre");
+props.put("ss.sub_es_ES", "Asunto");
+props.put("ss.msg_es_ES", "Mensaje");
+props.put("ss.enter.crct_es_ES", "Ingrese el Código Correcto");
+props.put("ss.enter.below_es_ES", "Ingrese el código mostrado a continuación");
+props.put("ss.refer.lnk_es_ES", "Su enlace de referencia");
+props.put("ss.send_es_ES", "Enviar");
+props.put("ss.cancel_es_ES", "Cancelar");
+props.put("ss.share.purchase_es_ES", "Compartir tu compra");
+
+
+/*rsvp confirmation*/
+props.put("rsvp.other.info_es_ES", "Información Adicional");
+props.put("rsvp.back.evnt_es_ES", "Regresar a la Página del Evento");
+
+/*rsvpoptions.jsp*/
+props.put("rsvp.sel.date_es_ES", "--Seleccionar Fecha--");
+
+/*waitlist.jsp */
+props.put("wl.tkt.name_es_ES", "Nombre del Tiquete");
+props.put("wl.qty_es_ES", "Cantidad");
+props.put("wl.name_es_ES", "Nombre");
+props.put("wl.email_es_ES", "Correo");
+props.put("wl.phone_es_ES", "Teléfono");
+props.put("wl.msg.mgr_es_ES", "Escribir al Administrador");
+props.put("wl.submit_es_ES", "Enviar");
+props.put("wl.cancel_es_ES", "Cancelar");
+props.put("wl.require_es_ES", "Requerido");
+
+/*paymentsection.jsp */
+props.put("ps.proc.fee.msg_es_ES","Cuota de procesamiento no es aplicable a este método de pago");
+
+/*emailsend.jsp*/
+props.put("email.sent.to.msg_es_ES","Correo electrónico enviado a");
+props.put("email.sent.to.msg2_es_ES","recepient(s)");
+props.put("email.invi.limit.msg_es_ES","Por favor, limite de 10 invitaciones por correo electrónico");
+props.put("no.email.sent.to.msg_es_ES","Sin correo electrónico enviado a recepient(s)");
+
+props.put("buy.btn.lbl_es_ES","Comprar Tiquetes");
+props.put("reg.btn.lbl_es_ES","Registro");
+
+//priority registration
+props.put("pri.reg.invalid.errmsg_es_ES","Código no válido o código de acceso");
+props.put("pri.reg.limit.reg.single.errmsg_es_ES","Este código se utiliza ya");
+props.put("pri.reg.limit.reg.mul.errmsg_es_ES","Este código alcanzó el máximo uso");
+props.put("pri.reg.limit.reg.errmsg_es_ES","Inscripciones limitadas son más de");
+		
+/*BuyerPage login */		
+props.put("byer.u.hv.regd.wth.fb.acc_es_ES","Te has registrado para este evento con tu cuenta de Facebook");
+props.put("byer.access.tkn_es_ES","Señal de acceso");
+props.put("byer.access.tkn.snt.mail_es_ES","Señal de Acceso enviada a esta dirección de correo electrónico");
+props.put("byer.lgn.wth.fb_es_ES","Iniciar sesión con mi cuenta de Facebook");
+props.put("byer.eml.byr.access.tkn_es_ES","Mandarme por correo electrónico la Señal de Acceso de la página del comprador");
+props.put("byer.to.vst.byr.page_es_ES","Para visitar la página del comprador");
+props.put("byer.invld.access.tken_es_ES","Señal de Acceso Inválida");
+props.put("byer.fb.lgn.nt.mtch.wth.reg_es_ES","Lo sentimos! Tu información de inicio de sesión de Facebook no coincide con la información de Facebook proporcionada para el registro de este evento.");
+props.put("byer.aces.tkn.sent.success_es_ES","Señal de Acceso enviada exitosamente");
+props.put("byer.there.problm.try.latr_es_ES","Hay un problema. Por favor inténtalo de nuevo más tarde");
+props.put("byer.lgt.fb.lgin.reged.fb.acct_es_ES","Lo sentimos! Tu información de inicio de sesión de Facebook no coincide con la información de Facebook proporcionada para el registro de este evento.");
+props.put("byer.ur.pg.crntly.unavble_es_ES","Tu página no está disponible en estos momentos");
+props.put("byer.access.tkn.expired_es_ES","Token de acceso ha caducado");
+props.put("byer.resend.btn_es_ES","Reenviar");
+props.put("byer.continue.btn_es_ES","Continuar");
+props.put("byer.or.lbl_es_ES","O");
 %>
