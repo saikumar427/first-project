@@ -1,28 +1,4 @@
-<style>
-.animate-show,
-.animate-hide {
-  -webkit-transition:all linear 1s;
-  -moz-transition:all linear 1s;
-  -ms-transition:all linear 1s;
-  -o-transition:all linear 1s;
-  transition:all linear 1s;
-}
 
-.animate-show.ng-hide-remove,
-.animate-hide.ng-hide-add.ng-hide-add-active {
-  opacity: 0;
-  display: block !important;
-}
-
-.animate-hide.ng-hide-add,
-.animate-show.ng-hide-remove.ng-hide-remove-active {
-  opacity: 1;
-  display: block !important;
-}
-.question-title{
-	font-weight: bold;
-}
-</style>
 <div class="text-center center-block" style="padding:30px 0" ng-show="loadingQuestions">
     <img src="/angularTicketWidget/images/loading.gif" />&nbsp;Loading...
 </div>
@@ -104,7 +80,7 @@
 	            </div>
 	            <div class="col-md-6 col-sm-6 text-right" style="margin-top: 6px;">
 	            	<img src="/angularTicketWidget/images/loading.gif" style="float:right" ng-show="loadingSubmit" />
-	            	<button class="btn btn-warning pull-right" type="submit" ng-hide="loadingSubmit">{{profileQuestions.profilecountinue}}</button>
+	            	<button class="btn btn-warning global-btn pull-right" type="submit" ng-hide="loadingSubmit">{{profileQuestions.profilecountinue}}</button>
 	            </div>
             </div>
             

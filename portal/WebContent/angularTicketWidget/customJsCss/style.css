@@ -19,21 +19,20 @@ a {
         float: right;
     }
 }
-small {
-    color: #666;
-}
+
 
 i.fa-plus-square,
 i.fa-minus-square {
     cursor: pointer;
-    color: #5388c4;
+    color: #666;
+    /* need to update */
 }
 .headings h5,
 .groupTickets>h4 {
     color: #5388c4;
 }
 .groupTickets {
-    border-left: 3px solid #5388c4;
+    border-left: 3px solid #DDDDDD;
     padding-left: 5px;
     margin-left: -8px;
 }
@@ -41,8 +40,8 @@ hr {
     margin: 10px 0 !important;
 }
 .discountCode {
-    padding: 5px;
-    border: 1px dotted orange;
+    #padding: 5px;
+    #border: 1px dotted orange;
 }
 .cut {
     text-decoration: line-through;
@@ -596,3 +595,52 @@ cursor:pointer;
 	background-color: #DDDDDD;
 }
 /* print button start */
+
+/* popup close top button start */
+#close-top{
+	margin: 0px;
+}
+.modal-no-bottom{
+	border: 0px;
+}
+/* popup close top button end */
+
+/* text box and text-box title start */
+.animate-show,
+.animate-hide {
+  -webkit-transition:all linear 1s;
+  -moz-transition:all linear 1s;
+  -ms-transition:all linear 1s;
+  -o-transition:all linear 1s;
+  transition:all linear 1s;
+}
+
+.animate-show.ng-hide-remove,
+.animate-hide.ng-hide-add.ng-hide-add-active {
+  opacity: 0;
+  display: block !important;
+}
+
+.animate-hide.ng-hide-add,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+  display: block !important;
+}
+.question-title{
+	font-weight: bold;
+}
+/* text box and text-box title end */
+.btn-font{
+	font-size: 12px;
+	padding: 5px 5px;
+}
+.total-font{
+	font-size: 14px;
+	font-family: Verdana;
+}
+.global-btn{
+	font-size: 16px;
+    font-weight: 600;
+    border-radius: 0px;
+    font-family: League Gothic,Helvetica,Arial,sans-serif;
+}

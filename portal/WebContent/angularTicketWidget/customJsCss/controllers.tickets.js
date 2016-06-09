@@ -53,7 +53,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             $rootScope.facebookNTSdetails.first_name='';
             $rootScope.facebookNTSdetails.last_name='';
             $rootScope.facebookNTSdetails.email='';
-            
+            $('#tickets .widget h2').show();
             try {
                 $interval.cancel($rootScope.globalTimer);
                 $rootScope.timeWatcher();
@@ -1176,9 +1176,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     }).success(function(data, status, headers, config) {
                     	$scope.loadingTransaction = false;
                     	if (data.status == 'success') {
-                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
-                    		else
+                    		else*/
                     			$scope.ticketsFinalSubmit();  
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller
@@ -1281,8 +1281,8 @@ angular.module('ticketsapp.controllers.tickets', [])
             	//$scope.facebookPopup = true;
             	$('#facebookPopup').modal('show');
             	$scope.idealClose();
-            	$scope.facebookHtml = '<p>'+props.fb_nts_login_track+'</p>';
-            	$scope.facebookHtml = $scope.facebookHtml +'<center><button type="button" class="btn btn-primary btn-sm" id="getFBpopup"><i class="fa fa-facebook"></i> | Login with facebook</button></center><br>';
+            	$scope.facebookHtml = '<p class="text-center">'+props.fb_nts_login_track+'</p>';
+            	$scope.facebookHtml = $scope.facebookHtml +'<center><button type="button" class="btn btn-primary" id="getFBpopup"><i class="fa fa-facebook"></i> | Login with facebook</button></center><br>';
             	$('#facebookHtml').html($scope.facebookHtml);
             	
             	//console.log($scope.facebookPopup);

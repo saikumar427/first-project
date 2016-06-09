@@ -7,8 +7,8 @@ $('#ID').modal('show'); -->
 	<div class="modal" ng-show="seatingMultTicket"  >
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<div class="modal-header">
-		            <button type="button" class="close" ng-click="multiSeatSelectClose();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+				<div class="modal-header modal-no-bottom">
+		            <button type="button" class="close" ng-click="multiSeatSelectClose();" id="close-top"><img src='/home/images/images/close.png'></button>
 	         	</div>
 	         	<div class="modal-body">
 	         	<div>This seat is assigned to multiple Ticket Types, &nbsp;select one</div>
@@ -30,8 +30,8 @@ $('#ID').modal('show'); -->
 	<div class="modal" ng-show="timeCheckShow">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<div class="modal-header">
-		            <button type="button" class="close" ng-click="close_priTimeCheck();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+				<div class="modal-header modal-no-bottom">
+		            <button type="button" class="close" ng-click="close_priTimeCheck();" id="close-top"><img src='/home/images/images/close.png'></button>
 	         	</div>
 	         	<div class="modal-body">
 	         		<div > Sorry, timed out!</div>
@@ -50,8 +50,8 @@ $('#ID').modal('show'); -->
 <div class="modal" ng-show="conditional_ticketing">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content">
-			<div class="modal-header">
-	            <button type="button" class="close" ng-click="close_condition();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+			<div class="modal-header modal-no-bottom">
+	            <button type="button" class="close" ng-click="close_condition();" id="close-top"><img src='/home/images/images/close.png'></button>
          	</div>
          	<div class="modal-body">
          		<div ng-bind-html="conditional_ticketing"></div>
@@ -69,8 +69,8 @@ $('#ID').modal('show'); -->
 <div class="modal "  ng-show="showWaitPop" >
    <div class="modal-dialog">
       <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" class="close" ng-click="closeWaitList();" >
+         <div class="modal-header modal-no-bottom">
+            <button type="button" class="close " id="close-top" ng-click="closeWaitList();" >
             	<img src='/home/images/images/close.png'>
             </button>
          </div>
@@ -78,11 +78,11 @@ $('#ID').modal('show'); -->
             <form name="myForm">
                <div ng-show="waitListResponse.status=='success'" class="alert alert-success">{{waitListResponse.msg}}</div>
                <div ng-show="waitListResponse.status=='fail'" class="alert alert-danger">{{waitListResponse.status}}</div>
-               <div class="col-sm-9">
+               <div class="col-sm-10">
                   <b>Ticket Name</b><br>
                   <label>{{waitListData.tktName}}</label>
                </div>
-               <div class="col-sm-3 text-right">
+               <div class="col-sm-2 text-right">
                   <b>Quantity</b><br>
                   <span >
                   <select class="form-control" ng-change="getScoreData(wait_select)"  ng-model="wait_select" ng-options="o for o in waitListData.waitlistQty"></select>
@@ -92,24 +92,30 @@ $('#ID').modal('show'); -->
                   <hr>
                </div>
                <div ng-show="waitListData.error" style="color:red;">{{waitListData.error}}</div>
-               <div class="form-group">
+               <div class="form-group col-md-12 col-sm-12 ">
                   <input type="text" name="wname" class="form-control" ng-model="userWaitListDetails.name" placeholder="Name" required/>
                   <span class="error" ng-show="myForm.wname.$error.required">Required!</span>
                </div>
-               <div class="form-group">
+               <div class="form-group col-md-12 col-sm-12">
                   <input type="email" name="wemail" class="form-control" ng-model="userWaitListDetails.email" placeholder="Email" required ng-pattern="waitListData.pattern"/>
                   <span class="error" ng-show="myForm.wemail.$error.required">Required!</span>
                   <span class="error" ng-show="myForm.wemail.$error.email">Not valid email!</span>
                </div>
-               <div class="form-group">
+               <div class="form-group col-md-12 col-sm-12">
                   <input type="text" class="form-control" ng-model="userWaitListDetails.mnumber" placeholder="Mobile Number"/>
                </div>
-               <textarea class="form-control" ng-model="userWaitListDetails.message"  placeholder="Message to manager"></textarea>
+               <div style="clear:both;"></div>
+               <div class="form-group col-md-12 col-sm-12" style="    margin-bottom: 0px;">
+                 <textarea class="form-control" ng-model="userWaitListDetails.message"  placeholder="Message to manager"></textarea>
+               </div>
+               <div style="clear:both;"></div>
             </form>
          </div>
          <div class="modal-footer">
-            <button type="button" ng-show="waitListData.showBtn" class="btn btn-warning btn-sm" ng-disabled="wbtn = wait_select == 0 ? true : false" ng-click="submitWaitList();">Submit</button>
-            <button type="button" class="btn btn-default btn-sm" ng-click="closeWaitList();">Cancel</button>
+            <div class="text-center">
+            	<button type="button" ng-show="waitListData.showBtn" class="btn btn-sm btn-primary" ng-disabled="wbtn = wait_select == 0 ? true : false" ng-click="submitWaitList();">Submit</button>
+            <button type="button" class="btn btn-sm btn-primary" ng-click="closeWaitList();">Cancel</button>
+            </div>
          </div>
       </div>
    </div>

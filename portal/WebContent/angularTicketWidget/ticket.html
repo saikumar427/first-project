@@ -2,41 +2,60 @@
     
     <!-- Ticket name, description, config message, seating seat image start-->
     <div class="col-md-7 col-sm-7 col-xs-12">
-        <h5>
             <span class="bodytextstyle" ng-class="{'cutname':ticket.strike=='Y'||ticket.strike=='y'}">{{ ticket.name }}</span>
             <span ng-hide="ticket.desc==''">
                 <i class="fa fa-plus-square" ng-hide="showDesc" ng-click="showDesc=!showDesc"></i>
                 <i class="fa fa-minus-square" ng-show="showDesc" ng-click="showDesc=!showDesc"></i>
             </span>
-        </h5>
-        <p ng-if="ticket.mgr_config_msg!=''" class="small"><small >{{ ticket.mgr_config_msg }}</small></p>
-        <p><small class="small">{{ ticket.small_desc }}</small></p>
-        <p class="bodytextstyle" ng-show="showDesc" ng-bind-html="ticket.desc"></p>
+        <div ng-if="ticket.mgr_config_msg!=''" class="small"><small >{{ ticket.mgr_config_msg }}</small></div>
+        <div class="small">{{ ticket.small_desc }}</div>
+        <div class="bodytextstyle" ng-show="showDesc" ng-bind-html="ticket.desc"></div>
         <img ng-repeat="src in seatingdata.ticketseatcolor[ticket.id]" ng-src="{{'/main/images/seatingimages/'+src+'.png'}}" style="margin-right:5px" /> 
     </div>
     <!-- Ticket name, description, config message, seating seat image end-->
 
     <div ng-if="ticket.available=='y' || ticket.wait_li_type=='Y' || ticket.wid_status">
-    <!-- ticket amount and fee discount apply fee start -->
-        <div class="col-md-3 col-sm-3 col-xs-6">
-			<h5>
+    	<!-- ticket amount and fee discount apply fee start -->
+        <div ng-if="ticket.wait_li_type!='Y'" class="col-md-3 col-sm-3 col-xs-6">
 				<span class="bodytextstyle" ng-class="{'cut':parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)}">{{ ticket.actual_price | currency:ticketsData.currency }}</span>
 	            <span class="bodytextstyle" ng-show="parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)">{{ ticket.charging_price | currency:ticketsData.currency }}</span>
-           		<span ng-if="ticketsData.feecolrequeired=='Y'">
-            		<br>
-             		<small class="bodytextstyle" ng-hide="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">
-                	{{ ticketsData.reg_flow_wordings.process_fee_label }}:
-                		<span ng-class="{'cut':parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)}">{{ ticket.actual_fee | currency:ticketsData.currency }}</span>
-            		</small>
-            		<br>
+           		<span class="small" ng-if="ticketsData.feecolrequeired=='Y'" style="padding: 1px;">
+	           		<br>
+	            		<small class="bodytextstyle" ng-hide="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">
+	               		{{ticketsData.reg_flow_wordings.process_fee_label}}:
+	               		<span ng-class="{'cut':parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)}">{{ ticket.actual_fee | currency:ticketsData.currency }}</span>
+	           		</small>
+	           		<br>
 		            <small class="bodytextstyle" ng-hide="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">
 		                <span style="visibility:hidden;">
-		                    {{ ticketsData.reg_flow_wordings.process_fee_label }}:
+		                   {{ticketsData.reg_flow_wordings.process_fee_label}}:
 		                </span>
 		                <span ng-show="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">{{ ticket.charging_fee | currency:ticketsData.currency }}</span>
 		            </small> 
             	</span>
-            </h5>
+        </div>
+        <div ng-if="ticket.wait_li_type=='Y'" class="col-md-5 col-sm-5 col-xs-12">
+				<div class="col-md-4 col-sm-5 col-xs-6 row">
+					<span class="bodytextstyle" ng-class="{'cut':parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)}">{{ ticket.actual_price | currency:ticketsData.currency }}</span>
+		            <span class="bodytextstyle" ng-show="parseFloat(ticket.actual_price)>parseFloat(ticket.charging_price)">{{ ticket.charging_price | currency:ticketsData.currency }}</span>
+	           		<span class="small" ng-if="ticketsData.feecolrequeired=='Y'" style="padding: 1px;">
+		           		<br>
+		            		<small class="bodytextstyle" ng-hide="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">
+		               		{{ticketsData.reg_flow_wordings.process_fee_label}}:
+		               		<span ng-class="{'cut':parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)}">{{ ticket.actual_fee | currency:ticketsData.currency }}</span>
+		           		</small>
+		           		<br>
+			            <small class="bodytextstyle" ng-hide="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">
+			                <span style="visibility:hidden;">
+			                   {{ticketsData.reg_flow_wordings.process_fee_label}}:
+			                </span>
+			                <span ng-show="parseFloat(ticket.actual_fee)>parseFloat(ticket.charging_fee)">{{ ticket.charging_fee | currency:ticketsData.currency }}</span>
+			            </small> 
+	            	</span>
+				</div>
+				<div class="col-md-8 col-sm-7 col-xs-6">
+            		<button class="btn btn-sm btn-primary btn-font" ng-click="waitlistPop(ticket.name,ticket.id,ticket.wait_li_limit)">Put me in waitlist</button>
+            	</div>
         </div>
         <!-- ticket amount and fee discount apply fee end -->
         
@@ -68,8 +87,8 @@
 
 	<div ng-if="ticket.wid_status!='In Process'">
 	    <div class="col-md-5 col-sm-5 col-xs-12" ng-if="ticket.available=='n' && !ticket.wait_li_type">
-	        <div class="text-center bodytextstyle" >
-	            <h4>{{ ticket.availability_msg }}</h4>
+	        <div class="text-center" >
+	            {{ ticket.availability_msg }}
 	        </div>
 	    </div>
 	</div>
@@ -78,9 +97,9 @@
 		<span ng-bind-html="ticket.ticket_selected"></span>
 	</div>
     
-    <span  ng-if="ticket.wait_li_type=='Y'">
-    	<button class="btn btn-sm btn-primary" ng-click="waitlistPop(ticket.name,ticket.id,ticket.wait_li_limit)">put me in waitlist</button>
-    </span>
+    <!-- <span  ng-if="ticket.wait_li_type=='Y'">
+    	<button class="btn btn-sm btn-primary" ng-click="waitlistPop(ticket.name,ticket.id,ticket.wait_li_limit)">Put me in waitlist</button>
+    </span> -->
 	<!-- <div class="col-md-2 col-sm-2 col-xs-6 " ng-if="ticket.wait_li_type=='Y'">
     	<button class="btn btn-sm btn-primary" ng-click="waitlistPop(ticket.name,ticket.id,ticket.wait_li_limit)">put me in waitlist</button>
     </div> -->
@@ -121,7 +140,7 @@
 	</div>
     
 	<div class="col-md-1 col-sm-1 col-xs-6" ng-if="ticket.available=='y' && ticket.availability_msg=='NA'">
-		<div class="text-center bodytextstyle" ><h4>{{ ticket.availability_msg }}</h4> </div>
+		<div class="text-center " >{{ ticket.availability_msg }} </div>
 	</div>
     
 	<div class="col-md-5 col-sm-5 col-xs-12" ng-if="ticket.available=='n'">

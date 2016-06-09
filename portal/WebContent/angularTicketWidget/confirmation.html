@@ -7,8 +7,8 @@
 <div class="modal" ng-show="shareonfacebookpop"  >
 	<div class="modal-dialog modal-sm" > 
 		<div class="modal-content">
-			<div class="modal-header">
-	            <button type="button" class="close" ng-click="close_share();" style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+			<div class="modal-header modal-no-bottom">
+	            <button type="button" class="close" ng-click="close_share();" id="close-top" ><img src='/home/images/images/close.png'></button>
 	       	</div>
 	       	<div class="modal-body">
 	       		<div id="shareonfacebookpopHtml"></div>
@@ -25,8 +25,8 @@
 <div class="modal"  id="shareEventEmail" style="display:none; top: -55px;">
    <div class="modal-dialog ">
       <div class="modal-content">
-         <div class="modal-header">
-            <button type="button" id='ebeecreditsclose' class="close" ng-click='hide()' style="margin-top: -5px; margin-right: 0px;"><img src='/home/images/images/close.png'></button>
+         <div class="modal-header modal-no-bottom">
+            <button type="button" id='ebeecreditsclose' class="close" ng-click='hide()' style="margin: 0px;"><img src='/home/images/images/close.png'></button>
          </div>
          
          <div ng-hide="showEmail">
