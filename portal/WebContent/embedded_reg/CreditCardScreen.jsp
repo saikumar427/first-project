@@ -11,16 +11,21 @@
 String eventid=request.getParameter("GROUPID");
 %>
 <%!
-	String YEARS[]=new String[]{"2015","2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027"};
+	String YEARS[]=new String[]{"2016","2017","2018","2019","2020","2021","2022","2023","2024","2025","2026","2027","2028","2029","2030"};
 %>
 <%
 	String vendorqry="select attrib_5 from payment_types where refid=? and  paytype='eventbee' limit 1";			
 	String vendor=DbUtil.getVal(vendorqry,new String[]{eventid});
 	
 	if(vendor==null || "".equals(vendor)) vendor="paypal_pro";
-String currencyformat1=DbUtil.getVal("select currency_symbol from currency_symbols where currency_code in (select currency_code from event_currency where eventid=?)",new String[]{eventid});
-if(currencyformat1==null)
-currencyformat1="$";
+	
+	if("paypal_pro".equals(vendor)){
+		String eventbeevendor = DbUtil.getVal("select value from config where config_id='0' and name='regflow.eventbee.cc.vendor'", null);
+		if(eventbeevendor!=null && !"".equals(eventbeevendor)) vendor=eventbeevendor.trim();
+	}
+	
+	String currencyformat1=DbUtil.getVal("select currency_symbol from currency_symbols where currency_code in (select currency_code from event_currency where eventid=?)",new String[]{eventid});
+	if(currencyformat1==null) currencyformat1="$";
 	
 	if(request.getAttribute("ccm")!=null){
 	CreditCardModel ccm=(CreditCardModel)request.getAttribute("ccm");
@@ -31,7 +36,7 @@ currencyformat1="$";
 			try{
 			if("paypal_pro".equals(vendor) && Double.parseDouble(ccm.getGrandtotal())>9000){vendor="braintree_eventbee";}
 			}catch(Exception e){}
-			System.out.println("vendorvendor:vendor::"+vendor);
+			System.out.println("CreditCardScreen ccvendor:vendor::"+vendor);
 %>
 <script>
 var selectbox='',textbox='';
@@ -63,7 +68,7 @@ var vend='<%=vendor%>';
 
 <input type='hidden' name='vendor_pay' id='vendor_pay' value='<%=vendor%>'>
   <table width='100%' cellpading='0' cellspacing='0' ><tr><td>Amount: <%=grandtotal%>
-  <%if(!"authorize.net".equals(vendor)&& !"braintree_manager".equals(vendor) && !"stripe".equals(vendor)){%>
+  <%if(!"authorize.net".equals(vendor)&& !"braintree_manager".equals(vendor) && !"stripe".equals(vendor) && !"payulatam".equals(vendor)){%>
 	<br/><span class='small'><%=getPropValue("ccs.note",eventid) %></span><%}%></td></tr>
  </table>
   <table width='100%' valign='top' cellpadding="0" cellspacing="0">
@@ -73,7 +78,7 @@ var vend='<%=vendor%>';
 		    <%
 		    String[] cardtypes=null;
 		    String[] carddisplaytypes=null;
-		    if("braintree_manager".equals(vendor) && "AU$".equals(currencyformat1)){
+		    if(("braintree_manager".equals(vendor) || "braintree_eventbee".equals(vendor)) && "AU$".equals(currencyformat1)){
 		    	cardtypes=new String[]{"","Visa","Mastercard","Discover"};
 		    	carddisplaytypes=new String[]{"-- Select Card Type --","Visa","Mastercard","Discover"};
 
@@ -151,7 +156,7 @@ src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3ml
 				<%}%>
 
 
-				<%if(vendor!=null &&  ("authorize.net".equals(vendor) || vendor.contains("braintree") || "stripe".equals(vendor) || "payulatam".equals(vendor))){%>				
+				<%if(vendor!=null &&  ("authorize.net".equals(vendor) || vendor.contains("braintree") || vendor.contains("stripe") || "payulatam".equals(vendor))){%>				
 				<tr><%if(!"authorize.net".equals(vendor)){ %>
 				  <input type='hidden' name='state' id='state' value='default'>
 				  <input type='hidden' name='non_us_state' id='non_us_state' value='default'>
@@ -181,7 +186,7 @@ src="https://seal.godaddy.com/getSeal?sealID=NVWu6PFkDsxAjkyLnVuI60pWgpqh4SRo3ml
 					<td height='30' class="bigfont"><%=getPropValue("ccs.city",eventid)%> *</td> 
 					<td height='30'><%=getXfTextBox("city",GenUtil.getEncodedXML(ccm.getProfiledata().getCity() ),"25")%></td>
 				</tr>
-			  <%if(vendor !=null &&   (vendor.contains("braintree") || "stripe".equals(vendor) || "payulatam".equals(vendor))){}else{%>	
+			  <%if(vendor !=null &&   (vendor.contains("braintree") || vendor.contains("stripe") || "payulatam".equals(vendor))){}else{%>	
 				<tr id='st_prv'>
 					<td height='30' class="bigfont"><%=getPropValue("ccs.state",eventid)%> *</td> 
 					<td height='30'><%=getXfSelectListBox("state",EventbeeStrings.getUSStateCodes(),EventbeeStrings.getUSStateNames(),  GenUtil.getEncodedXML(ccm.getProfiledata().getState()))%>

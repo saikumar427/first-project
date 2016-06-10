@@ -16,8 +16,10 @@ public HashMap<String,String> processStripePayment(CreditCardModel ccm,HttpServl
 	 Map<String, Object> cardParams = new HashMap<String, Object>();
 	 String eid=request.getParameter("eid");
 	 String tid=request.getParameter("tid");
+	 String vendor=request.getParameter("vendor_pay");
 	 String apirrkey="";
-	 System.out.println("Stripe process:::"+eid+" tid::"+tid);
+	 String senv=EbeeConstantsF.get("BRAINTREE_ENVIRONMENT","SANDBOX");
+	 System.out.println("Stripe process:::eid: "+eid+" tid::"+tid+" vendor: "+vendor+" environment: "+senv);
 	 try{
 	 if(!"".equals(ccm.getCardnumber()))cardnumber=ccm.getCardnumber()+"";
 	 if(!"".equals(ccm.getExpmonth()))expmonth=ccm.getExpmonth()+"";
@@ -33,7 +35,11 @@ public HashMap<String,String> processStripePayment(CreditCardModel ccm,HttpServl
 	 if(!"".equals(ccm.getProfiledata().getZip()))zipcode=ccm.getProfiledata().getZip()+"";
 	 if(!"".equals(ccm.getProfiledata().getState()))state=ccm.getProfiledata().getState()+"";
 	 if(!"".equals(ccm.getProfiledata().getCountry()))country=ccm.getProfiledata().getCountry()+"";
-	 apirrkey=getManagerAPIKey(eid);
+	 if("stripe".equals(vendor)){//manager stripe account
+		 apirrkey=getManagerAPIKey(eid);
+	 }else{//eventbee stripe account
+	 	apirrkey=EbeeConstantsF.get("STRIPE_"+senv+"_MERCHANT_APIKEY","");
+	 }
 	 Stripe.apiKey=apirrkey.trim();	
      String amt=CurrencyFormat.getCurrencyFormat("",Double.parseDouble(ccm.getGrandtotal())*100+"",false);	 
      amt=amt.substring(0,amt.indexOf("."));
@@ -133,7 +139,7 @@ public HashMap<String,String> processStripePayment(CreditCardModel ccm,HttpServl
     	resultMap.put("failuremessage", e.getMessage());  
      }
 	 String accountstatus="false";
-	 String senv=EbeeConstantsF.get("BRAINTREE_ENVIRONMENT","sandbox");
+	 //String senv=EbeeConstantsF.get("BRAINTREE_ENVIRONMENT","sandbox");
 	 System.out.println("stripe environment:"+senv+" "+tid+"::"+eid);
 	 if(!"sandbox".equalsIgnoreCase(senv))accountstatus="true";
 	 

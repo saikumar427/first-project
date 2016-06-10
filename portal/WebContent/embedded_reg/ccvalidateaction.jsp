@@ -121,7 +121,8 @@ String error="";
 if(sobj.getStatus()){
 v=(Vector)(sobj.getData());
 }
-String vendor=request.getParameter("vendor_pay"); 
+String vendor=request.getParameter("vendor_pay");
+System.out.println("ccvalidateaction.jsp tid: "+tid+" eventid: "+eid+" vendor: "+vendor);
 if(vendor==null) vendor="paypal_pro";
 if(v==null || v.size()==0){
 if(!"authorize.net".equals(vendor) && ! vendor.contains("braintree")&& ! vendor.contains("stripe") && ! vendor.contains("payulatam")){

@@ -270,7 +270,10 @@ else if("NOT_STARTED".equals((String)timeHm.get("startstatus")))
 eventTicketObj.setTicketStatus("NOT_STARTED");
 eventTicketObj.setMemberTicketFlag(false);
 eventTicketObj.setIsAtDoor(db.getValue(i,"is_at_door","Y"));
-eventTicketObj.setWaitListType(db.getValue(i,"wait_list_type","NO"));
+if(maxmin.get("seat_"+tkktid)==null)
+	eventTicketObj.setWaitListType(db.getValue(i,"wait_list_type","NO"));
+else 
+	eventTicketObj.setWaitListType("NO");
 eventTicketObj.setWaitListLimit(Integer.parseInt(db.getValue(i,"wait_list_max_qty","0")));
 groupTicketsArray.add(eventTicketObj);
 if(groupTicketsArray!=null){
@@ -398,8 +401,17 @@ public HashMap checkTicket(String eventid,String eventdate){
 				hm.put("hold_"+db.getValue(i, "ticketid", ""),db.getValue(i, "holdqty", ""));
 			}
 		}
-
-		if("YES".equals(GenUtil.getHMvalue(configMap,"event.seating.enabled",""))){
+		
+		String seatingEnabled="";
+		try{
+			Map ticketSettingsMap=CacheManager.getData(eventid, "ticketsettings");	
+			HashMap configMap=(HashMap)ticketSettingsMap.get("configmap");
+			seatingEnabled=GenUtil.getHMvalue(configMap,"event.seating.enabled","");
+		}catch(Exception  e){
+			System.out.println("Exception Ticketinginfo.java checkTicket eventid: "+eventid+" ERROR:: "+e.getMessage());
+		}
+		
+		if("YES".equals(seatingEnabled)){
 			String isseatingevent="SELECT ticketid from seat_tickets where eventid=CAST(? AS BIGINT)";
 			sb= dbm.executeSelectQuery(isseatingevent, new String[]{eventid});
 			if(sb.getStatus()){
