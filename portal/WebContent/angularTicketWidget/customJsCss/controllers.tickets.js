@@ -53,7 +53,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             $rootScope.facebookNTSdetails.first_name='';
             $rootScope.facebookNTSdetails.last_name='';
             $rootScope.facebookNTSdetails.email='';
-            $('#tickets .widget h2').show();
+            //$('#tickets .widget h2').show();
             try {
                 $interval.cancel($rootScope.globalTimer);
                 $rootScope.timeWatcher();
@@ -71,7 +71,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             	
              /*i18n code end*/
             
-            $rootScope.menuTitles = false;
+            //$rootScope.menuTitles = false;
             /* meta data start */
             if ($rootScope.eid)
                 $http.get($rootScope.baseURL + 'getEventMetaData.jsp?api_key=123&event_id=' + $rootScope.eid)
@@ -1176,9 +1176,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     }).success(function(data, status, headers, config) {
                     	$scope.loadingTransaction = false;
                     	if (data.status == 'success') {
-                    		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
-                    		else*/
+                    		else
                     			$scope.ticketsFinalSubmit();  
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller
@@ -1355,6 +1355,8 @@ angular.module('ticketsapp.controllers.tickets', [])
             	if (data.status == 'success') {
             		$rootScope.ticketsCost = data.details.tickets_cost;
                     $('#tickets .widget h2').hide();
+                    $('#tickets .widget').css({"border-top-left-radius":"0px","border-top-right-radius":"0px"});
+                    
                     $rootScope.menuTitles = true;
                     $scope.loadingTransaction = true;
                     $rootScope.transactionDetails = data.details;

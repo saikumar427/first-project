@@ -193,7 +193,6 @@ if(newTktWidgetList.contains(groupid)){
 <link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/jquery-ui.css" />
 <%} %>
 <!-- angular ticket widget end -->
-
 <style>
 table {
     border-collapse: separate !important;
@@ -274,147 +273,8 @@ position: relative;
 text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.3);
 word-wrap: break-word;
 }
-body {
-	margin: 0 0 0 0;
-	font-family: Tahoma, Geneva, sans-serif;
-	background-position: top;
-	background-color: <%=bodyBackgroundColor%>;
-	<%if(!"".equals(bodyBackgroundImage)){%>
-	background-image: url('<%=bodyBackgroundImage%>');
-	<%}%>
-	<%
-	if("cover".equals(bodyBackgroundPosition)) {
-		out.println("background-size:100% auto;");
-		out.print("\tbackground-repeat:no-repeat;");
-	} else
-		out.print("background-repeat:"+bodyBackgroundPosition+";");%>
-}
-
-#whosAttending .widget-content #attendeeinfo ul hr{
-    margin: 10px 0px;
-}
-
-.container {
-	box-shadow:-60px 0px 100px -90px #000000, 60px 0px 100px -90px #000000;
-	background-color: <%=backgroundRgba%> !important;
-}
-.header {
-	  margin-bottom: 15px;
-} 
-h2{
-	text-transform: capitalize;
-}
-.widget {
-	margin:5px 2px  20px;
-	position:relative;
-	border:1px solid <%=border%>;
-	width: 100%;
-	-webkit-border-top-left-radius: <%=topLeft%>;
-	-webkit-border-top-right-radius: <%=topRight%>;
-	-webkit-border-bottom-right-radius: <%=bottomRight%>;
-	-webkit-border-bottom-left-radius: <%=bottomLeft%>;
-	-moz-border-radius-topleft: <%=topLeft%>;
-	-moz-border-radius-topright: <%=topRight%>;
-	-moz-border-radius-bottomright: <%=bottomRight%>;
-	-moz-border-radius-bottomleft: <%=bottomLeft%>;
-	border-top-left-radius: <%=topLeft%>;
-	border-top-right-radius: <%=topRight%>;
-	border-bottom-right-radius: <%=bottomRight%>;
-	border-bottom-left-radius: <%=bottomLeft%>;
-}
-.widget h2{
-    font-family:<%=headerTextFont%>;
-	margin:0;
-	font-size:<%=headerTextSize%>px;
-	background-color:<%=header%>;
-	color:<%=headerText%>;
-	border-bottom:1px solid <%=border%>;
-	padding:10px;
-	-webkit-border-top-left-radius: <%=topLeft%>;
-	-webkit-border-top-right-radius: <%=topRight%>;
-	-moz-border-radius-topleft: <%=topLeft%>;
-	-moz-border-radius-topright: <%=topRight%>;
-	border-top-left-radius: <%=topLeft%>;
-	border-top-right-radius: <%=topRight%>;
-}
-.widget-content{
-	background-color:<%=content%>;
-	color:<%=contentText%>;
-	font-family:<%=contentTextFont%>;
-	font-size:<%=contentTextSize%>px;
-	line-height:20px;
-	padding:15px;
-	-webkit-border-bottom-right-radius: <%=bottomRight%>;
-	-webkit-border-bottom-left-radius: <%=bottomLeft%>;
-	-moz-border-radius-bottomright: <%=bottomRight%>;
-	-moz-border-radius-bottomleft: <%=bottomLeft%>;
-	border-bottom-right-radius: <%=bottomRight%>;
-	border-bottom-left-radius: <%=bottomLeft%>;
-	position: static;
-	#overflow: hidden;
-}
-.widget-content-ntitle{
-	-webkit-border-top-left-radius: <%=topLeft%>;
-	-webkit-border-top-right-radius: <%=topRight%>;
-	-moz-border-radius-topleft: <%=topLeft%>;
-	-moz-border-radius-topright: <%=topRight%>;
-	border-top-left-radius: <%=topLeft%>;
-	border-top-right-radius: <%=topRight%>;
-}
-
-table{
-	color:<%=contentText%>;
-	font-family:<%=contentTextFont%>;
-	font-size:<%=contentTextSize%>px;
-}
-.small {
-font-family: Verdana, Arial, Helvetica, sans-serif;
-font-size: 10px;
-font-weight: lighter;
-color:<%=contentTextFont%>;
-overflow: hidden;
-}
-.small_s{
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 10px;
-    font-weight: lighter;
-    color: #666666;
-}
-
-hr {
-	border: 0;
-    height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), <%=border%>, rgba(0,0,0,0)); 
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), <%=border%>, rgba(0,0,0,0)); 
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), <%=border%>, rgba(0,0,0,0)); 
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), <%=border%>, rgba(0,0,0,0)); 
-}
-#whosPromoting .widget .widget-content{
-	overflow: auto;
-}
-#subForm{
-	background-color:#fff;
-}
-
-.textWidgetImg img{
-	max-width:100%;
-}
-#whosAttending img{
-	max-width:100%;
-}
-#organizer img{
-	max-width: 100%;
-}
-
-#captchaidmgr{
-	width: 70px !important;
-}
-
-#when img, #where img{
-    max-width: 100%;
-}
 </style>
-
+<%@ include file='eventPageStyles.jsp' %>
 <%
 if(newTktWidgetList.contains(groupid)){
 %>
