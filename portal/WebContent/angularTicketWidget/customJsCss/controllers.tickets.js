@@ -2,11 +2,7 @@ angular.module('ticketsapp.controllers.tickets', [])
     .controller('tickets', ['$scope', '$http', '$location', '$timeout', '$rootScope', '$window', '$sce', '$filter', '$interval',
         function($scope, $http, $location, $timeout, $rootScope, $window, $sce, $filter, $interval) {
             $rootScope.showTimeoutBar = false;
-            $rootScope.css = 'active';
-            $rootScope.css2 = "";
-            $rootScope.css3 = "";
-            $rootScope.css4 = "";
-            $rootScope.css1 = "";
+            $rootScope.css = 'active';$rootScope.css2 = "";$rootScope.css3 = "";$rootScope.css4 = "";$rootScope.css1 = "";
             $scope.seats = {};
             $scope.priorityData;
             $scope.loadSeating = false;

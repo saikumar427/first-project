@@ -7,7 +7,10 @@ angular.module('ticketsapp.controllers.confirmation', [])
             $rootScope.pageLocation = 'Confirmation';
             if ($rootScope.transactionId) $rootScope.transactionId = $rootScope.transactionId;
             else $location.url('/event');
-            $rootScope.css3 = 'active';$rootScope.css4 ="";
+            
+            //$rootScope.css3 = 'active';$rootScope.css4 ="";
+            $rootScope.css = "";$rootScope.css2 = "";$rootScope.css3 = "";$rootScope.css4 = "";$rootScope.css1 = "";
+            
             $rootScope.showTimeoutBar = false;
             $scope.config = '';
             $scope.templateHtml='';
@@ -35,6 +38,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
         			backtoevent : 'Back To Event Page'
         	};
             /* i18n end */
+        	
         	
         	try{
             $rootScope.timeWatcher();
@@ -67,6 +71,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             		var $el = $($scope.shareData.sharehtml).appendTo('#shareblock');
             		$compile($el)($scope);
             		$scope.tooltip();
+            		//$scope.eventTitle = data.linkname;
             	});
             	
             }
@@ -110,7 +115,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
              	    position: 'top'
              	    });
             	$('#referralBtn').tooltipster({
-             		 content:$('<span>Referrl link</span>'),
+             		 content:$('<span>Referral link</span>'),
              	    fixedWidth:'100px',
              	    position: 'top'
              	    });

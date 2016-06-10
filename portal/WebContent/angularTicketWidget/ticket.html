@@ -79,7 +79,7 @@
             </div>
             
             <div ng-if="ticket.availability_msg=='NA'" class="float-right bodytextstyle">
-             	<h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ticket.availability_msg}}</h4>
+             	<span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ticket.availability_msg}}</span>
             </div>
         </div>
 		<!-- tickets drop down end -->
@@ -130,7 +130,7 @@
 			<input type="number" step="any" min="0" name="name" class="form-control" placeholder="{{ ticketsData.currency }}" style="width:100px" ng-model="ticket.donation_amount" />
 		</div>
 		<div class="bodytextstyle" ng-if="ticket.availability_msg=='NA'" >
-			<h4>{{ ticket.availability_msg }}</h4>
+			<span>{{ ticket.availability_msg }}</span>
 		</div>
 	</div>
 		    

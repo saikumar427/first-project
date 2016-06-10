@@ -187,14 +187,22 @@ i.fa-minus-square {
 /* ------------------------------print button start------------------------------ */
 .printBtn{
 	background-color:<%=header%>;
-	border: 1px solid <%=border%>;
+	border: 2px solid <%=border%>;
     padding: 5px 10px;
     font-family: <%=headerTextFont%>;
+    transition: all 0.5s;
 }
 .printBtn:hover{
-	background-color: <%=border%>;
+	background-color: <%=content%>;
+	transition: all 0.5s;
 }
-/* ------------------------------print button start------------------------------ */
+ @media print {
+        div.for-print-footer {
+            position: fixed;
+            bottom: 0;
+        }
+    }
+/* ------------------------------print button end------------------------------ */
 
 /* ------------------------------popup close top button start------------------------------ */
 #close-top{
@@ -362,10 +370,10 @@ i.fa-minus-square {
 	border-right:transparent;
 }
 .test-arrow> ul li a:hover {
-    background: <%=border%>;
+    #background: <%=border%>;
 }
 .test-arrow> ul li a:hover:after {
-    border-color: transparent transparent transparent <%=border%>; 
+   # border-color: transparent transparent transparent <%=border%>; 
 }
 .test-arrow > ul li a:last-child :after{
 	border-color:transparent;
@@ -429,12 +437,12 @@ i.fa-minus-square {
  #tickets .widget-content{
  	padding: 0px 15px 15px 15px;
  }   
- .ticket-title{
+/*  .ticket-title{
  	background-color: #F5F5F5;
     padding: 9px;
     font-size: 14px;
     border-bottom: 1px solid #ddd;
- }
+ } */
 .test-arrow a {
 	font-size:<%=headerTextSize%>px;
 	font-family:<%=headerTextFont%>;
@@ -442,7 +450,7 @@ i.fa-minus-square {
 }
 /* ------------------------------For top menu end-------------------------------------------------- */
 
-/* ------------------------------confirmation page ticket start-------------------------------------------------- */
+/* -------------------------confirmation page ticket start----------------------------------------- */
 .no-padding-th th{
 	padding: 0px !important
 }
@@ -450,8 +458,26 @@ i.fa-minus-square {
 .no-padding-td td{
 	padding: 10px 0px !important
 }
-/* ------------------------------confirmation page ticket end-------------------------------------------------- */
+/* ------------------------------confirmation page ticket end-------------------------------------- */
 
+/* ------------------------------group ticket title start------------------------------------------ */
+.group-ticket-fieldset{
+	border: 1px solid <%=border%>;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
 
+.group-ticket-legend{
+	font-family:<%=contentTextFont%>;
+	font-size:<%=contentTextSize%>px;
+	width: auto;
+	border-bottom: 0px;
+	margin-bottom: 5px;
+}
+/* -----------------------------group ticket title start------------------------------------------- */
+
+.form-control{
+	height: 30px;
+}
 
 </style>
