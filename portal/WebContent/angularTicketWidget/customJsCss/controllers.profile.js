@@ -9,12 +9,17 @@ angular.module('ticketsapp.controllers.profile', [])
                 $rootScope.timeWatcher();
             } catch (err) {}
             
-            $rootScope.css = 'active';
-            $rootScope.css1 = 'active';
-            $rootScope.css2 = "";
-            $rootScope.css3 = "";
-            $rootScope.css4 = "";
+            $rootScope.css = 'active';$rootScope.css1 = 'active';$rootScope.css2 = "";$rootScope.css3 = "";$rootScope.css4 = "";
 
+            $scope.profilePageInfo = {
+            		order_summary : 'Order Summary',
+            		ticket_name : 'Ticket Name',
+            		quantity : 'Quantity',
+            		price : 'Price',
+            		attendee_information :'Attendee information',
+            		profile:'Profile'
+            };
+            
             $rootScope.$on('eventName', function(event, args) {
                 $scope.message = args.message;
                 console.log($scope.message);
@@ -128,6 +133,21 @@ angular.module('ticketsapp.controllers.profile', [])
             		
                 },1000);
             };
+            
+            /* Summary start */
+            $scope.summarydetails=false;
+            $scope.abc=false;
+            $scope.xyz=true;
+            $scope.showSummary = function(){
+            	$scope.abc=!$scope.abc;
+            	$scope.xyz=!$scope.xyz;
+            	$scope.summarydetails=!$scope.summarydetails;
+            	if($scope.summarydetails)
+            		$('#summarydetails').slideDown();
+            	else
+            		$('#summarydetails').slideUp();
+            };
+            /* Summary end */
             
             /* for collecting Temp data buyer and attendee start */
             $scope.buyerAnswers = $rootScope.buyerAnswers;

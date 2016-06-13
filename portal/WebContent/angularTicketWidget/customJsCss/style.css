@@ -7,7 +7,25 @@
     }
 }
 
-
+.down {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-transition: all 900ms ease;
+    -moz-transition: all 900ms ease;
+    -ms-transition: all 900ms ease;
+    -o-transition: all 900ms ease;
+    transition: all 900ms ease;
+}
+.original {
+    -webkit-transition: all 900ms ease;
+    -moz-transition: all 900ms ease;
+    -ms-transition: all 900ms ease;
+    -o-transition: all 900ms ease;
+    transition: all 900ms ease;
+}
 
 
 hr {
@@ -181,11 +199,7 @@ height:5px;
 }
 
 
-.sub-module{
-	border-left: 4px solid #ddd;
-    padding: 0px 40px 0px 40px;
-    border-right: 4px solid #ddd;
-}
+
 .arrow_box {
 	position: relative;
 	background: #fff;

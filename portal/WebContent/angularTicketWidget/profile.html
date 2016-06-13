@@ -3,67 +3,63 @@
     <img src="/angularTicketWidget/images/loading.gif" />&nbsp;Loading...
 </div>
 <div ng-hide="loadingQuestions">
-	<div class="col-md-10 col-sm-10 xol-xs-10 row" ><h4 >Order Summary</h4></div>
-	<div class="col-md-2 col-sm-2 col-xs-2 row"><b>{{currencyLbl}} {{ticketsCost}}</b></div>
-	<div style="clear: both;"></div>
-	
-	<div style="cursor:pointer" ng-click="animate = !animate;" ><b ng-hide="animate" class="animate-show animate-hide ">Show more</b></div>
-	<div ng-show="animate" class="animate-show animate-hide row"  style=" margin: 0px; border-radius: 5px; padding: 5px; border: 1px solid #000;">
-		<div class="col-md-4 col-sm-4 col-xs-4"><b>Ticket Name</b></div>
-		<div class="col-md-4 col-sm-4 col-xs-4"><b>Quantity</b></div>
-		<div class="col-md-4 col-sm-4 col-xs-4"><b>Price</b></div>
-		<span ng-repeat="question in profileQuestions.attendee_questions">
-		<div class="col-md-4 col-sm-4 col-xs-4">{{question.ticket_name}}</div>
-		<div class="col-md-4 col-sm-4 col-xs-4">{{question.qty}}</div>
-		<div class="col-md-4 col-sm-4 col-xs-4">Price</div>
+	<div class="col-md-10 col-sm-10 xol-xs-10 row " >
+		<span ng-click="showSummary();" class="show_summary" style="cursor: pointer;">
+			<span class="order-summary">{{profilePageInfo.order_summary}}</span>&nbsp;<i ng-class='{"down":abc,"original":xyz}' class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i>
 		</span>
 	</div>
-	<div style="cursor:pointer" ng-click="animate = !animate;" ><b ng-show="animate" class="animate-show animate-hide ">Show less</b></div>
-	<!-- <div style="cursor:pointer" ng-click="showSummary = showSummary ? false : true" ><b>Show <span ng-hide="showSummary">more</span> <span ng-show="showSummary">less</span></b></div>
-	<div ng-show="showSummary" class="row" style=" margin: 0px; border-radius: 5px; padding: 5px; border: 1px solid #000;">
-		<div class="col-md-4 col-sm-4 col-xs-4"><b>Ticket Name</b></div>
-		<div class="col-md-4 col-sm-4 col-xs-4"><b>Quantity</b></div>
-		<div class="col-md-4 col-sm-4 col-xs-4"><b>Price</b></div>
+	<div class="col-md-2 col-sm-2 col-xs-2 row order-summary"><b>{{currencyLbl}} {{ticketsCost}}</b></div>
+	<div style="clear: both;"></div>
+	
+	<div id="summarydetails" style="display: none;">
+		<div class="col-md-5 col-sm-5 col-xs-5"><b>{{profilePageInfo.ticket_name}}</b></div>
+		<div class="col-md-4 col-sm-4 col-xs-4"><b>{{profilePageInfo.quantity}}</b></div>
+		<div class="col-md-3 col-sm-3 col-xs-3"><b>{{profilePageInfo.Price}}</b></div>
 		<span ng-repeat="question in profileQuestions.attendee_questions">
-		<div class="col-md-4 col-sm-4 col-xs-4">{{question.ticket_name}}</div>
-		<div class="col-md-4 col-sm-4 col-xs-4">{{question.qty}}</div>
-		<div class="col-md-4 col-sm-4 col-xs-4">Price</div>
+			<div class="col-md-5 col-sm-5 col-xs-5"> {{question.ticket_name}} </div>
+			<div class="col-md-4 col-sm-4 col-xs-4"> {{question.qty}} </div>
+			<div class="col-md-3 col-sm-3 col-xs-3"> {{currencyLbl}} {{question.finalprice}} </div>
 		</span>
-	</div> -->
+		<!-- <div class="col-md-12 col-sm-12 col-xs-12"><br></div> -->
+	</div>
+	
  	<div style="clear: both;"></div>
 	<div class="col-md-12" style="padding:0px;">
 	
 		<form class="form-horizontal" name="questionForm" ng-submit="sub()">
 			<!-- profileQuestions start -->
-			<h4 class="">{{profileQuestions.buyerheader}}</h4>
+			<b>{{profileQuestions.buyerheader}}</b>
 			<hr>
 			
 			<div ng-repeat="question in profileQuestions.buyer_questions">
                 <div ng-include="'/angularTicketWidget/buyerQuestions.html'"></div>
             </div>
-            <br>
+            <!-- <br> -->
             <!-- profileQuestions end -->
             
             <!-- attendee_questions start -->
             <span ng-if="profileQuestions.attendee_questions.length>0"> 
-            	<h4 class="bodyheaders">Attendee information:</h4><hr>
+            	<b>{{profilePageInfo.attendee_information}}</b>
+            	<hr>
             </span>
             <div ng-repeat="ticket in profileQuestions.attendee_questions" ng-init="ticketIndex = $index">
-                <h5 class="bodyheaders">Ticket: {{ ticket.ticket_name }}</h5>
+               <!--  <h5 class="bodyheaders">Ticket: {{ ticket.ticket_name }}</h5> -->
+                <b>{{ ticket.ticket_name }}</b>
                 <div ng-repeat="profile in ticket.profiles" ng-init="profileIndex = $index">
-                    <h5 class="bodyheaders">Profile #{{ $index+1 }}</h5>
+                    <h5 class="bodyheaders">{{profilePageInfo.profile}} #{{ $index+1 }}</h5>
 					<div ng-repeat="question in ticket.questions">
                         <div ng-include="'/angularTicketWidget/attendeeQuestions.html'"></div>
                     </div>
                 </div>
-                <hr ng-hide="$last">
+                <!-- <hr ng-hide="$last"> -->
             </div>
             <!-- attendee_questions end -->
             
             <!-- promotion section start -->
             <div ng-if="promotionsDiv">
-            	<hr>
-              	<h4 class="bodyheaders">{{profileQuestions.promotionsectionheader}}</h4>
+            	
+              	<b>{{profileQuestions.promotionsectionheader}}</b>
+              	<hr>
               	<label class="checkbox-inline bodyheaders">
                   	<input type="checkbox" ng-model="promotions" ng-click="promotionsChange(promotions);"/>{{profileQuestions.promotionsectionmessage}}
               	</label>

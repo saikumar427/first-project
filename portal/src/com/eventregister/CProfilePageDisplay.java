@@ -83,6 +83,7 @@ public class CProfilePageDisplay {
 				HashMap<String, String> profileMap=(HashMap<String, String>)selectedTickets.get(i);
 				String selecedticket=(String)profileMap.get("selectedTicket");
 				String ticketName=(String)profileMap.get("ticketName");
+				String finalprice = (String)profileMap.get("finalprice");
 				HashMap<String, String> hmap=null;//getAttribsForTickets(selecedticket,eid);
 				
 				if(allTicketAtts.get(selecedticket)!=null)
@@ -133,7 +134,7 @@ public class CProfilePageDisplay {
 				ticketOject.put("questions", questionArray);
 				ticketOject.put("ticket_id",selecedticket );
 				ticketOject.put("ticket_name",ticketName);
-
+				ticketOject.put("finalprice", finalprice);
 				if(questionArray.length()!=0){
 					JSONArray profiles= new JSONArray();
 					for(int q=0;q<qty;q++){

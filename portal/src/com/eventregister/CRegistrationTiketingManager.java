@@ -31,7 +31,8 @@ final String BUYER_CUSTOM_QUESTIONS="select attribid from buyer_custom_questions
 final String BUYER_CUSTOM_QUESTIONS1 = "select attribid  from custom_attribs a, buyer_custom_questions "+
  "b where a.attrib_id=b.attribid and b.eventid=CAST(? AS BIGINT) and" +
  " a.attrib_setid=(select attrib_setid from custom_attrib_master where groupid=CAST(? AS BIGINT)) and issubquestion='N' order by a.position";
-final String GET_SELECTED_TICKETS="select * from event_reg_ticket_details_temp where tid=? order by transaction_at";
+//final String GET_SELECTED_TICKETS="select * from event_reg_ticket_details_temp where tid=? order by transaction_at";
+final String GET_SELECTED_TICKETS="select *,(finalprice+finalfee)*qty as total from event_reg_ticket_details_temp where tid=? order by transaction_at";
 
 private String  transactionid=null;
 private int selectedTicketsQty=0;
@@ -302,6 +303,7 @@ public	String  createNewTransaction(String eventid,HashMap contextMap){
 					ticketMap.put("selectedTicket",dbmanager.getValue(index,"ticketid",""));
 					ticketMap.put("qty",dbmanager.getValue(index,"qty",""));
 					ticketMap.put("type",dbmanager.getValue(index,"tickettype",""));
+					ticketMap.put("finalprice",dbmanager.getValue(index,"total",""));
 					ticketsList.add(ticketMap);
 				}
 			}

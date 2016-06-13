@@ -55,9 +55,10 @@
          </span>
       </div>
    </div>
-   <div class="col-md-12 col-sm-12" ng-show="tempoptions" ><br></div>
+   <!-- <div class="col-md-12 col-sm-12" ng-show="tempoptions" ><br></div> -->
    <div ng-repeat="subqns in tempoptions" class="col-md-12 col-sm-12 sub-module">
       <div ng-if="profile.response[question.id]==subqns.value" >
+      <div class="col-md-12 col-sm-12"><br></div>
          <span ng-repeat="subQuestion in subqns.sub_questions">
             <div ng-include="'/angularTicketWidget/subAttendeeQuestions.html'"></div>
          </span>
@@ -80,9 +81,10 @@
          </div>
       </div>
    </div>
-   <div class="col-md-12 col-sm-12" ng-show="checkboxoptions" ><br></div>
+   <!-- <div class="col-md-12 col-sm-12" ng-show="checkboxoptions" ><br></div> -->
    <div ng-repeat="subqns in checkboxoptions" class="col-md-12 col-sm-12 sub-module">
       <div ng-if="(profile.response[question.id])[subqns.value]==true" ng-animate="'animate'" class="animate-enter animate-enter-active">
+      <div class="col-md-12 col-sm-12"><br></div>
          <span ng-repeat="subQuestion in subqns.sub_questions">
             <div ng-include="'/angularTicketWidget/subAttendeeQuestions.html'" ng-init="getSubQuestions(subQuestion)"></div>
          </span>
@@ -105,10 +107,10 @@
          <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">Select an option</p>
       </div>
    </div>
-   <div class="col-md-12 col-sm-12" ng-show="selectoptions" ><br></div>
-   <span ng-show=""><br></span>
+   <!-- <div class="col-md-12 col-sm-12" ng-show="selectoptions" ><br></div> -->
    <div ng-repeat="subqns in selectoptions" class="col-md-12 col-sm-12 sub-module">
       <div ng-if="profile.response[question.id]==subqns.value" ng-animate="'animate'" class="animate-enter animate-enter-active">
+      <div class="col-md-12 col-sm-12"><br></div>
          <span ng-repeat="subQuestion in subqns.sub_questions">
             <div ng-include="'/angularTicketWidget/subAttendeeQuestions.html'" ></div>
          </span>

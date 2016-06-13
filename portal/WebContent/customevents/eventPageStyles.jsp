@@ -235,7 +235,7 @@ i.fa-minus-square {
   display: block !important;
 }
 .question-title{
-	font-weight: bold;
+	#font-weight: bold;
 }
 /* ------------------------------text-box title end-------------------------------------------------- */
 
@@ -479,5 +479,13 @@ i.fa-minus-square {
 .form-control{
 	height: 30px;
 }
-
+.order-summary{
+	font-size:<%=headerTextSize%>px;
+	color:<%=headerText%>;
+}
+.sub-module{
+	#border-left: 4px solid #ddd;
+    padding: 0px 40px 0px 40px;
+    #border-right: 4px solid #ddd;
+}
 </style>
