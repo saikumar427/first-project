@@ -14,7 +14,7 @@
 	<div id="summarydetails" style="display: none;">
 		<div class="col-md-5 col-sm-5 col-xs-5"><b>{{profilePageInfo.ticket_name}}</b></div>
 		<div class="col-md-4 col-sm-4 col-xs-4"><b>{{profilePageInfo.quantity}}</b></div>
-		<div class="col-md-3 col-sm-3 col-xs-3"><b>{{profilePageInfo.Price}}</b></div>
+		<div class="col-md-3 col-sm-3 col-xs-3"><b>{{profilePageInfo.price}}</b></div>
 		<span ng-repeat="question in profileQuestions.attendee_questions">
 			<div class="col-md-5 col-sm-5 col-xs-5"> {{question.ticket_name}} </div>
 			<div class="col-md-4 col-sm-4 col-xs-4"> {{question.qty}} </div>
@@ -24,7 +24,7 @@
 	</div>
 	
  	<div style="clear: both;"></div>
-	<div class="col-md-12" style="padding:0px;">
+	<div class="col-md-12" style="padding:0px;    margin-top: 5px;">
 	
 		<form class="form-horizontal" name="questionForm" ng-submit="sub()">
 			<!-- profileQuestions start -->
