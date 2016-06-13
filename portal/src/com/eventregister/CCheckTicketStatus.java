@@ -166,9 +166,10 @@ public class CCheckTicketStatus {
 
 
 			for(int i=0;i<ticketsQtyArray.length();i++){
-				JSONObject eachTicketQtyJSON=ticketsQtyArray.getJSONObject(i);
 				
+				JSONObject eachTicketQtyJSON=ticketsQtyArray.getJSONObject(i);
 				String ticketId=eachTicketQtyJSON.getString("ticket_id");
+				String ticket_name=eachTicketQtyJSON.getString("ticket_name");
 				int qty=0;
 				if(eachTicketQtyJSON.has("qty"))
 					qty=Integer.parseInt(eachTicketQtyJSON.getString("qty"));
@@ -179,6 +180,7 @@ public class CCheckTicketStatus {
 					temp.put("ticket_id",ticketId+"");
 					temp.put("selected_qty",qty+"");
 					temp.put("remaining_qty",remainingQty+"");
+					temp.put("ticket_name",ticket_name);
 					qtyDetails.put(ticketId, temp);	
 				}
 
@@ -265,6 +267,7 @@ public class CCheckTicketStatus {
 			for(int i=0;i<ticketsQtyArray.length();i++){
 				JSONObject eachTicketQtyJSON=ticketsQtyArray.getJSONObject(i);
 				String ticketId=eachTicketQtyJSON.getString("ticket_id");
+				String ticket_name=eachTicketQtyJSON.getString("ticket_name");
 				int qty=0;
 				if(eachTicketQtyJSON.has("qty"))
 					qty=Integer.parseInt(eachTicketQtyJSON.getString("qty"));
@@ -301,6 +304,7 @@ public class CCheckTicketStatus {
 					temp.put("ticket_id",ticketId+"");
 					temp.put("selected_qty",qty+"");
 					temp.put("remaining_qty",remainingQty+"");
+					temp.put("ticket_name", ticket_name);
 					qtyDetails.put(ticketId, temp);	
 				}
 

@@ -101,7 +101,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                         $scope.getTicketSection();
                 })
                 .error(function(data, status, headers, config) {
-                    alert('Unknown error occured. Please try reloading the page.');
+                   // alert('Unknown error occured. Please try reloading the page.');
+                    $('#error_messages').modal('show');
+                    $('#error_messages_html').html('Unknown error occured. Please try reloading the page.');
                 });
             else {
                 $scope.loadingMetadata = false;
@@ -130,7 +132,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                         }
                     })
                     .error(function() {
-                        alert('Unknown error occured. Please try reloading the page.');
+                       // alert('Unknown error occured. Please try reloading the page.');
+                        $('#error_messages').modal('show');
+                        $('#error_messages_html').html('Unknown error occured. Please try reloading the page.');
                     });
             };
             $scope.$watch('prioritylist', function(nVal, oVal) {
@@ -364,7 +368,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                         $rootScope.ticketsIds = allTicketIds;
                     })
                     .error(function(data, status, headers, config) {
-                        alert('Unknown error occured. Please try reloading the page.');
+                       // alert('Unknown error occured. Please try reloading the page.');
+                        $('#error_messages').modal('show');
+                        $('#error_messages_html').html('Unknown error occured. Please try reloading the page.');
                     });
             };
             /* Ticket data end */
@@ -435,7 +441,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                             $scope.getTicketSection();
                         }
                     }).error(function(data, status, headers, config) {
-                        alert('error');
+                        //alert('error');
+                        $('#error_messages').modal('show');
+                        $('#error_messages_html').html('error');
                     });
                 }
             };
@@ -765,7 +773,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                             } else {
                                 seat.seatSelected = false;
                                 //$scope.seats.completeseats[seatIndex].seatSelected = false;
-                                alert('Limit reached to select group seat ticket.');
+                                //alert('Limit reached to select group seat ticket.');
+                                $('#error_messages').modal('show');
+                                $('#error_messages_html').html('Limit reached to select group seat ticket.');
                             }
                         } else {
                         	//alert(JSON.stringify(singleGrp));
@@ -896,11 +906,17 @@ angular.module('ticketsapp.controllers.tickets', [])
                                     
                                     $rootScope.seatTempIndexs = eachItem.seatIndexes;
                                     
-                                    if (eachItem.min > eachItem.ticket_selected)
-                                        alert("for \"" + eachItem.name + "\", you need to select minimum of " + eachItem.min + " seats");
+                                    if (eachItem.min > eachItem.ticket_selected){
+                                    	//alert("for \"" + eachItem.name + "\", you need to select minimum of " + eachItem.min + " seats");
+                                    	$('#error_messages').modal('show');
+                                        $('#error_messages_html').html("for \"" + eachItem.name + "\", you need to select minimum of " + eachItem.min + " seats");
+                                    }
+                                        
 
                                 } else {
-                                    alert("maximum quantity reached for \"" + eachItem.name + "\" ticket type ");
+                                    //alert("maximum quantity reached for \"" + eachItem.name + "\" ticket type ");
+                                    $('#error_messages').modal('show');
+                                    $('#error_messages_html').html("maximum quantity reached for \"" + eachItem.name + "\" ticket type ");
                                     seat.seatSelected = false;
                                     seat.selectedTkt = '';
                                 }
@@ -916,8 +932,12 @@ angular.module('ticketsapp.controllers.tickets', [])
                                 
                                 $scope.seatIndexs = eachItem.seatIndexes;
                                 
-                                if (eachItem.min > 1 && eachItem.min > eachItem.ticket_selected)
-                                    alert("you need to select mininmum of " + eachItem.min + " for \"" + eachItem.name + "\" ticket type");
+                                if (eachItem.min > 1 && eachItem.min > eachItem.ticket_selected){
+                                	//alert("you need to select mininmum of " + eachItem.min + " for \"" + eachItem.name + "\" ticket type");
+                                	$('#error_messages').modal('show');
+                                    $('#error_messages_html').html("you need to select mininmum of " + eachItem.min + " for \"" + eachItem.name + "\" ticket type");
+                                }
+                                    
                             }
                         }
                     } else {
@@ -933,10 +953,16 @@ angular.module('ticketsapp.controllers.tickets', [])
                                             eachTktInGroup.seatIndexes = [];
                                             eachTktInGroup.seatIndexes.push(seatIndex);
                                         }
-                                        if (eachTktInGroup.min > eachTktInGroup.ticket_selected)
-                                            alert("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats");
+                                        if (eachTktInGroup.min > eachTktInGroup.ticket_selected){
+                                        	 //alert("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats");
+                                        	$('#error_messages').modal('show');
+                                            $('#error_messages_html').html("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats");
+                                        }
+                                           
                                     } else {
-                                        alert("maximum quantity reached for \"" + eachTktInGroup.name + "\" ticket type ");
+                                        //alert("maximum quantity reached for \"" + eachTktInGroup.name + "\" ticket type ");
+                                        $('#error_messages').modal('show');
+                                        $('#error_messages_html').html("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats");
                                         seat.seatSelected = false;
                                         seat.selectedTkt = '';
                                     }
@@ -945,8 +971,12 @@ angular.module('ticketsapp.controllers.tickets', [])
                                     eachTktInGroup.ticket_selected = eachTktInGroup.ticket_selected <= 0 ? 0 : eachTktInGroup.ticket_selected;
                                     seat.selectedTkt = '';
                                     eachTktInGroup.seatIndexes.splice(eachTktInGroup.seatIndexes.indexOf(seatIndex), 1);
-                                    if (eachTktInGroup.min > 1 && eachTktInGroup.min > eachTktInGroup.ticket_selected)
-                                        alert("you need to select mininmum of " + eachTktInGroup.min + " for \"" + eachTktInGroup.name + "\" ticket type");
+                                    if (eachTktInGroup.min > 1 && eachTktInGroup.min > eachTktInGroup.ticket_selected){
+                                    	//alert("you need to select mininmum of " + eachTktInGroup.min + " for \"" + eachTktInGroup.name + "\" ticket type");
+                                    	$('#error_messages').modal('show');
+                                        $('#error_messages_html').html("you need to select mininmum of " + eachTktInGroup.min + " for \"" + eachTktInGroup.name + "\" ticket type");
+                                    }
+                                        
                                 }
 
                             }
@@ -1085,18 +1115,21 @@ angular.module('ticketsapp.controllers.tickets', [])
                     if (item.type == 'ticket') {
                         if (item.is_donation == 'n') {
                             if (item.ticket_selected > 0 && (item.min > item.ticket_selected)) {
-                                alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
+                                //alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
+                                $('#error_messages').modal('show');
+                                $('#error_messages_html').html("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
                                 alertMsgCount++;
                             }
                             if (item.ticket_selected > 0)
                                 finalTickets.selected_tickets.push({
                                     ticket_id: item.id,
                                     qty: item.ticket_selected,
-                                    seat_ids: item.seatIndexes = item.seatIndexes == undefined ? [] : item.seatIndexes
+                                    seat_ids: item.seatIndexes = item.seatIndexes == undefined ? [] : item.seatIndexes,
+                                    ticket_name : item.name
                                 });
                             allTicketDetails.allTickets.push({
                             	ticketid : item.id,
-                            	isdonation :'No'
+                            	isdonation : 'No'
                             });
                         } else if (item.is_donation == 'y') {
                             if (item.donation_amount)
@@ -1106,25 +1139,28 @@ angular.module('ticketsapp.controllers.tickets', [])
                                 });
                             allTicketDetails.allTickets.push({
                             	ticketid : item.id,
-                            	isdonation :'Yes'
+                            	isdonation : 'Yes'
                             });
                         }
                     } else if (item.type == 'group') {
                         angular.forEach(item.tickets, function(item, index) {
                             if (item.is_donation == 'n') {
                                 if (item.ticket_selected > 0 && (item.min > item.ticket_selected)) {
-                                    alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
+                                    //alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
+                                	$('#error_messages').modal('show');
+                                    $('#error_messages_html').html("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
                                     alertMsgCount++;
                                 }
                                 if (item.ticket_selected > 0)
                                     finalTickets.selected_tickets.push({
                                         ticket_id: item.id,
                                         qty: item.ticket_selected,
-                                        seat_ids: item.seatIndexes = item.seatIndexes == undefined ? [] : item.seatIndexes
+                                        seat_ids: item.seatIndexes = item.seatIndexes == undefined ? [] : item.seatIndexes,
+                                        ticket_name : item.name
                                     });
                                 allTicketDetails.allTickets.push({
                                 	ticketid : item.id,
-                                	isdonation :'No'
+                                	isdonation : 'No'
                                 });
                             } else if (item.is_donation == 'y') {
                                 if (item.donation_amount)
@@ -1134,7 +1170,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                                     });
                                 allTicketDetails.allTickets.push({
                                 	ticketid : item.id,
-                                	isdonation :'Yes'
+                                	isdonation : 'Yes'
                                 });
                             }
                         });
@@ -1172,9 +1208,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     }).success(function(data, status, headers, config) {
                     	$scope.loadingTransaction = false;
                     	if (data.status == 'success') {
-                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
-                    		else
+                    		else*/
                     			$scope.ticketsFinalSubmit();  
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller
@@ -1183,7 +1219,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                             // this data for access in profile controller
                     	}else if (data.status == 'fail' && data.reason == 'conditional_ticketing') {
                         	$scope.loadingTransaction = false;
-                            var dataList = '<ul>';
+                            var dataList = '<ul style="padding-left: 20px;list-style: inherit;">';
                             for (var j = 0; data.errors.length > j; j++) {
                                 dataList = dataList + '<li>' + data.errors[j] + '</li>';
                             }
@@ -1193,25 +1229,44 @@ angular.module('ticketsapp.controllers.tickets', [])
                         } else if (data.status == 'fail' && data.reason == 'event-level-qty-criteria') {
                             $scope.loadingTransaction = false;
                             var avalbleQty = data.details.remaining_qty <= 0 ? 0 : data.details.remaining_qty;
-                            alert('For "' + data.details.eventname + '" selected quantity is ' + data.details.selected_qty + ' and currently available quantity is ' + avalbleQty);
+                            var error = 'For "' + data.details.eventname + '" selected quantity is ' + data.details.selected_qty + ' and currently available quantity is ' + avalbleQty;
+                            $('#error_messages').modal('show');
+                            $('#error_messages_html').html(error);
+                            
                             $scope.showBuyButton=true;
+                        } else if (data.status == 'fail' && data.reason == 'ticket-level-qty-criteria') {
+                            $scope.loadingTransaction = false;
+
+                            var available = '<ul style="padding-left: 20px;list-style: inherit;">';
+                            for(var i=0; i<data.details.length;i++){
+                            	available = available + '<li> For "'+data.details[i].ticket_name+'" selected quantity is ' + data.details[i].selected_qty + ' and currently available quantity is ' +data.details[i].remaining_qty + '</li>';
+                            }
+                            available = available + '</ul>';
+                            //console.log(available);
+                            $('#error_messages').modal('show');
+                            $('#error_messages_html').html(available);
+                            $scope.tickets_submit=true;
                         } else if(data.status == 'fail' && data.reason == 'noSeat'){
                         	$scope.loadingTransaction = false;
-                        	alert('Selected seat not available. Please try again.');
+                        	$('#error_messages').modal('show');
+                            $('#error_messages_html').html('Selected seat not available. Please try again.');
                         	$scope.showBuyButton=true;
                         } else {
                             $scope.loadingTransaction = false;
-                            alert('Unknown error occured. Please try again');
+                            $('#error_messages').modal('show');
+                            $('#error_messages_html').html('Unknown error occured. Please try again.');
                             $scope.showBuyButton=true;
                         }
 
                     }).error(function(data, status, headers, config) {
                         $scope.loadingTransaction = false;
-                        alert('Unknown error occured. Please try refreshing the page');
+                        $('#error_messages').modal('show');
+                        $('#error_messages_html').html('Unknown error occured. Please try refreshing the page.');
                         $scope.showBuyButton=true;
                     });
                 }
             };
+            
             
             /*facebook code start*/
             var timer;
@@ -1278,7 +1333,7 @@ angular.module('ticketsapp.controllers.tickets', [])
             	$('#facebookPopup').modal('show');
             	$scope.idealClose();
             	$scope.facebookHtml = '<p class="text-center">'+props.fb_nts_login_track+'</p>';
-            	$scope.facebookHtml = $scope.facebookHtml +'<center><button type="button" class="btn btn-primary" id="getFBpopup"><i class="fa fa-facebook"></i> | Login with facebook</button></center><br>';
+            	$scope.facebookHtml = $scope.facebookHtml +'<center><button type="button" class="btn btn-primary" id="getFBpopup"><i class="fa fa-facebook"></i> | Login with facebook</button></center>';
             	$('#facebookHtml').html($scope.facebookHtml);
             	
             	//console.log($scope.facebookPopup);
@@ -1377,16 +1432,26 @@ angular.module('ticketsapp.controllers.tickets', [])
                     $scope.showBuyButton=true;
             	}else{
             		$scope.loadingTransaction = false;
-                    alert('Unknown error occured. Please try refreshing the page');
+                    //alert('Unknown error occured. Please try refreshing the page');
+                    $('#error_messages').modal('show');
+                    $('#error_messages_html').html('Unknown error occured. Please try refreshing the page.');
                     $scope.showBuyButton=true;
             	}
             }).error(function(data, status, headers, config) {
                 $scope.loadingTransaction = false;
-                alert('Unknown error occured. Please try refreshing the page');
+                //alert('Unknown error occured. Please try refreshing the page');
+                $('#error_messages').modal('show');
+                $('#error_messages_html').html('Unknown error occured. Please try refreshing the page.');
                 $scope.showBuyButton=true;
             });
             };
             /* final submit end */
             
+            $scope.closeError = function(){
+            	$('#error_messages').modal('hide');
+                $('#error_messages_html').html('');
+            };
+            
         }
+    
     ]);
