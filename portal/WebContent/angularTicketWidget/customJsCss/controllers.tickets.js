@@ -1212,9 +1212,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     }).success(function(data, status, headers, config) {
                     	$scope.loadingTransaction = false;
                     	if (data.status == 'success') {
-                    		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
-                    		else*/
+                    		else
                     			$scope.ticketsFinalSubmit();  
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller
@@ -1276,11 +1276,13 @@ angular.module('ticketsapp.controllers.tickets', [])
             var timer;
             $scope.checkFbLogin = function(){
             	//window.fbAsyncInit();
-            	if(!fbavailable){
-                	$rootScope.eventDetailsList.nts_enable = 'N';
-                	$rootScope.eventDetailsList.login_popup = 'N';
-                	$rootScope.eventDetailsList.fbsharepopup = 'N';
-                }
+            	if('EB' == $rootScope.eventDetailsList.context){
+            		if(!fbavailable){
+                    	$rootScope.eventDetailsList.nts_enable = 'N';
+                    	$rootScope.eventDetailsList.login_popup = 'N';
+                    	$rootScope.eventDetailsList.fbsharepopup = 'N';
+                    }
+            	}
             	if('widget'== $rootScope.eventDetailsList.registrationsource){
                 	$('#leftList').append("<div id='forntspopup'><iframe style='border: 0; margin: 0; padding: 0; height: 350px; width: 0;' id='ntsframe' name='ntsframe'></iframe></div>");
                 }

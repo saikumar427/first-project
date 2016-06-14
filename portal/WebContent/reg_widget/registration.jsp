@@ -231,6 +231,24 @@
 <input type='hidden' name='referral_ntscode' id='referral_ntscode' value='<%=referral_ntscode%>' />
 <%@ include file='styles.jsp' %>
 <script>
+
+var  fbavailable=false;
+window.fbAsyncInit = function() {
+		fbavailable=true;
+         FB.init({ 
+            appId:'<%=fbappid%>', cookie:true, 
+            status:true, xfbml:true 
+         });
+		 };
+         (function() {
+                var e = document.createElement('script');
+                e.type = 'text/javascript';
+                e.src = document.location.protocol +
+                    '//connect.facebook.net/en_US/all.js';
+                e.async = true;
+                document.getElementById('fb-root').appendChild(e);
+            }());
+
 var eventid=<%=eid%>
 var waitlistId = '',trackCode = '',discountcode = '',registrationsource = '',venueid = '',isseatingevent = '',fbsharepopup = '',nts_enable = '';
 var login_popup = '',fbappid = '',ticketurlcode = '',context = '',nts_commission = '',referral_ntscode = '',priregtoken = '';var prilistid='';
