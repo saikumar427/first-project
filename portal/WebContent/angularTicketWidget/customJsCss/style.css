@@ -326,3 +326,20 @@ height:5px;
 	margin-left: -33px;
 }
 }
+
+
+.text-field-expand{
+	width:100%;
+	-webkit-transition: width 2s;
+	-moz-transition: width 2s;
+	-o-transition: width 2s;
+	transition: width 2s;
+}
+.text-field-collapse{
+	width:90%;
+	-webkit-transition: width 2s;
+	-moz-transition: width 2s;
+	-o-transition: width 2s;
+	transition: width 2s;
+}
+

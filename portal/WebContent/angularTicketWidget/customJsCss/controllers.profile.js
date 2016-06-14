@@ -134,6 +134,11 @@ angular.module('ticketsapp.controllers.profile', [])
                 },1000);
             };
             
+            
+            $scope.changeWitdh = function(){
+            		$(this).animate({width:'100%'},1000);
+            };
+            
             /* Summary start */
             $scope.summarydetails=false;
             $scope.abc=false;
@@ -148,6 +153,7 @@ angular.module('ticketsapp.controllers.profile', [])
             		$('#summarydetails').slideUp();
             };
             /* Summary end */
+            
             
             /* for collecting Temp data buyer and attendee start */
             $scope.buyerAnswers = $rootScope.buyerAnswers;

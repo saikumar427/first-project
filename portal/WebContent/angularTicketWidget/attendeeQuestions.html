@@ -7,17 +7,19 @@
       <div ng-if="question.id!='email'" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
          
          <input type="text" name="name" ng-model="profile.response[question.id]" class="form-control suggestion-list" ng-required="question.required=='y'" 
-            placeholder="{{question.label}}" ng-keyup="complete()"  ng-blur="pushTempData(profile.response[question.id]);myStyle={'width':'90%'}" autocomplete="off" 
-            ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
-            ng-style="myStyle" ng-click="myStyle={'width':'100%'}" title="{{question.label}}" />
+            placeholder="{{question.label}}" ng-keyup="complete()"  ng-blur="pushTempData(profile.response[question.id]);collapse=true;expand=false;" autocomplete="off" 
+            ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' ;collapse=true;expand=false;"
+            ng-focus="expand=true;collapse=false" title="{{question.label}}" 
+            ng-class='{"text-field-expand":expand,"text-field-collapse":collapse}' />
          
          <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
       <div ng-if="question.id=='email'" ng-class="{'has-error':subForm.name.$error.email && !subForm.name.$pristine}">
          
          <input type="email" name="name" ng-model="profile.response[question.id]" class="form-control" ng-required="question.required=='y'" placeholder="{{question.label}}" 
-         ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
-         ng-blur="myStyle={'width':'90%'}" ng-style="myStyle" ng-click="myStyle={'width':'100%'}" title="{{question.label}}"/>
+         ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' ;collapse=true;expand=false;"
+         ng-blur="collapse=true;expand=false;" ng-style="myStyle" ng-focus="expand=true;collapse=false" title="{{question.label}}"
+         ng-class='{"text-field-expand":expand,"text-field-collapse":collapse}'/>
          
          <p ng-show="subForm.name.$error.email && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>

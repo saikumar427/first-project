@@ -481,7 +481,7 @@ i.fa-minus-square {
 }
 .order-summary{
 	font-size:<%=headerTextSize%>px;
-	color:<%=headerText%>;
+	#color:<%=headerText%>;
 }
 .sub-module{
 	#border-left: 4px solid #ddd;

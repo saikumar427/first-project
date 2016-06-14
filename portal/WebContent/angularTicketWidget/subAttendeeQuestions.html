@@ -6,9 +6,10 @@
    <div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
       
       <input type="text" name="name" ng-model="profile.response[subQuestion.id]" class="form-control suggestion-list" ng-required="subQuestion.required=='y'" 
-         placeholder="{{subQuestion.label}}" ng-keyup="complete()" ng-blur="pushTempData(profile.response[subQuestion.id]);myStyle={'width':'90%'}" autocomplete="off" 
-         ng-init="profile.response[subQuestion.id] = isAttAnsStored() ? getAttendeeAnswers(subQuestion.id,subQuestion.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
-         ng-style="myStyle" ng-click="myStyle={'width':'100%'}" title="{{subQuestion.label}}"/>
+         placeholder="{{subQuestion.label}}" ng-keyup="complete()" ng-blur="pushTempData(profile.response[subQuestion.id]);collapse=true;expand=false;" autocomplete="off" 
+         ng-init="profile.response[subQuestion.id] = isAttAnsStored() ? getAttendeeAnswers(subQuestion.id,subQuestion.type,$parent.profileIndex+1,ticket.ticket_id) : '' ;collapse=true;expand=false;"
+         ng-style="myStyle" ng-focus="expand=true;collapse=false" title="{{subQuestion.label}}"
+         ng-class='{"text-field-expand":expand,"text-field-collapse":collapse}'/>
          
       <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
    </div>

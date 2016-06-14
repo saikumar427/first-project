@@ -6,8 +6,10 @@
    <div ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
      
       <input type="text" name="name" ng-model="subQuestion.response" class="form-control suggestion-list" ng-required="subQuestion.required=='y'" 
-         placeholder="{{subQuestion.label}}" ng-keyup="complete()" ng-blur="pushTempData(question.response);myStyle={'width':'90%'}" autocomplete="off" ng-init="subQuestion.response = getBuyerAnswers(subQuestion.id,subQuestion.type);"
-         ng-style="myStyle" ng-click="myStyle={'width':'100%'}" title="{{subQuestion.label}}"/>
+         placeholder="{{subQuestion.label}}" ng-keyup="complete()" ng-blur="pushTempData(question.response);collapse=true;expand=false;" autocomplete="off" 
+         ng-init="subQuestion.response = getBuyerAnswers(subQuestion.id,subQuestion.type);collapse=true;expand=false;"
+         ng-style="myStyle" ng-focus="expand=true;collapse=false" title="{{subQuestion.label}}"
+         ng-class='{"text-field-expand":expand,"text-field-collapse":collapse}'/>
      
       <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
    </div>
