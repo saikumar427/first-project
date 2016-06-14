@@ -7,6 +7,7 @@ angular.module('ticketsapp', [
     'ticketsapp.controllers.profile',
     'ticketsapp.controllers.payment',
     'ticketsapp.controllers.confirmation',
+    'ticketsapp.controllers.rsvptickets',
     'ticketsapp.filters',
     'ticketsapp.services'
 ])
@@ -38,6 +39,11 @@ angular.module('ticketsapp', [
             .when('/profile', {
                 templateUrl: '/angularTicketWidget/profile.html',
                 controller: 'profile',
+                reloadOnSearch: false
+            })
+            .when('/rsvp', {
+                templateUrl: '/angularTicketWidget/rsvp/tickets.html',
+                controller: 'rsvptickets',
                 reloadOnSearch: false
             })
             .when('/payment', {
@@ -75,10 +81,10 @@ angular.module('ticketsapp', [
         };
 
         // this is using..
-        $rootScope.baseURL = 'http://localhost/ticketwidget/';
+        $rootScope.baseURL = 'http://www.citypartytix.com/ticketwidget/';
         
        // $rootScope.base_Url = 'http://localhost/tktwidget/registration/';
-        $rootScope.serverAddress = 'http://localhost/';
+        $rootScope.serverAddress = 'http://www.citypartytix.com/';
         //$rootScope.eid = $location.search().eid;
         $rootScope.eid = eventid;
         $rootScope.waitListId = waitlistId;
@@ -126,7 +132,11 @@ angular.module('ticketsapp', [
             if($rootScope.secondsRemaining<=0)
             	$rootScope.secondsRemaining=60;
         },1000);*/
-
+		
+		/*for rsvp*/
+		$rootScope.eventDate='';
+		/*for rsvp*/
+		
         $rootScope.tryAgain = function() {
             $http.get($rootScope.baseURL + 'delete_temp_locked_tickets.jsp', {
                 params: {

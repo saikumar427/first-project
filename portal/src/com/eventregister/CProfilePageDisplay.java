@@ -297,5 +297,18 @@ public class CProfilePageDisplay {
 		}
 		return hm;
 	}
+	
+	// for rsvp start
+	public JSONObject getRSVPAttendeeObject(String question,String id,String isRequired){
+		JSONObject obj=new JSONObject();
+		try{
+			obj.put("id",id);
+			obj.put("label",question);
+			obj.put("type","text");
+			obj.put("required",("Y".equals(isRequired)?"Y":"N"));
+		}
+		catch(Exception e){}
+		return obj;
+	}
 
 }

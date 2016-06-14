@@ -504,6 +504,7 @@ var eventDetailsList = {
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/filters.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/services.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.tickets.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.rsvp.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.profile.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.payment.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/customJsCss/controllers.confirmation.js"></script>

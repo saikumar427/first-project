@@ -1,0 +1,108 @@
+<style>
+.date-btn{
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    color: #333;
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 30px;
+    margin: 10px;
+    padding: 5px 0;
+    }
+</style>
+<div ng-show="do_continue ">
+   <div  ng-hide="confirmationPage">
+   <!-- recurring event block start -->
+   <div class="text-center" ng-show="isRecirring">
+      <div ng-show="selectError" style="color:red;">{{reason}}</div>
+      <br>
+      <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" style="float:none;margin: 0 auto;">
+         {{selectmsg}}
+         <select class="form-control" id="recurDate"  style="margin-bottom: 10px;" ng-model="selectedDate.value" ng-options="date.name as date.value for date in selectDate">
+            <option value="">
+               {{date_default_option }}
+            </option>
+         </select>
+      </div>
+      
+   </div>
+   <div ng-show="radioButtons">
+	   <div class="col-md-5 col-sm-5 col-xs-12" ng-hide="OneAttendee">
+	      <div class="col-md-5 col-sm-5 col-xs-12" >
+		      <input type="radio" ng-model="rsvpRecurring" value="attend" ng-click=getList(attendlimit,rsvpRecurring);>
+		      {{attending}} 
+		      </div>
+			 <div class="col-md-7 col-sm-7 col-xs-12" >
+			<select class="form-control" ng-disabled="dropDisble" ng-model="sureattend" ng-change="validate(sureattend,0,'yes');" ng-options="y for y in list"><option value="">{{defaultmsg }}</option></select>
+	      </div>
+	   </div>
+	   
+	   <div ng-show="isMaybeAttend" >
+	     	<div class="col-md-5 col-sm-5 col-xs-12" >
+	      		<div class="col-md-4 col-sm-4 col-xs-12" >
+		      <input type="radio" ng-model="rsvpRecurring" value="maybeAttend" ng-click=getList(notsurelimit,rsvpRecurring);>
+		      {{maybe}}
+		      </div>
+		       <div class="col-md-8 col-sm-8 col-xs-12" >
+			<select class="form-control" ng-disabled="dropDisbleMay" ng-model="notsureattend" ng-change="validate(0,notsureattend,'yes');" ng-options="y for y in list"><option value="">{{defaultmsg }}</option></select></span>
+	   </div>
+	   </div>
+	   </div>
+	   <div class="col-md-2 col-sm-2 col-xs-12" ng-show="isNotAttend">
+	      <label>
+		      <input type="radio" ng-model="rsvpRecurring" ng-click="validate(0,0,'no')" value="notAttend">
+		      {{notAttending}}
+	    </label>
+	   </div>
+	   <div style="clear: both;"></div>
+
+   <form class="form-horizontal" name="questionForm" ng-submit="sub()" ng-hide="formSH">
+   			 <!-- <div ng-repeat="ticket in profileQuestions" ng-init="ticketIndex = $index"> -->
+   			 <!-- <div ng-show="profileDiv">
+                 <div  ng-repeat="profile in dataq" ng-init="profileIndex = $index"> 
+                    <h3 class="bodyheaders">{{profileName}} <span ng-hide="pCount">#{{ $index+1 }}</span></h3>
+					<div ng-repeat="question in profileQuestions">
+                        <div ng-include="'/angularTicketWidget/rsvp/attendeeQuestions.html'"></div>
+                    </div>
+               </div>  -->
+               
+               
+             
+               <div ng-show="profileDiv">
+               <div ng-repeat="ticket in profileQuestions" ng-init="ticketIndex = $index">
+               
+                  <div ng-repeat="profile in ticket.profiles track by $index" ng-init="profileIndex = $index"> 
+                     <h5 class="bodyheaders"><span ng-hide="profileHide">Profile #{{ $index+1 }}<span></span></h5> 
+					 <div ng-repeat="question in ticket.questions">
+                         <div ng-include="'/angularTicketWidget/rsvp/attendeeQuestions.html'"></div> 
+                         
+                   </div>
+                </div>
+                
+                <hr ng-hide="$last">
+            </div>
+            
+               <div ng-show="otherProfileDiv"> 
+                    <h3 class="bodyheaders">OtherQuestions </h3>
+					<div ng-repeat="question in otherQuestions">
+                        <div ng-include="'/angularTicketWidget/rsvp/buyerQuestions.html'"></div>
+                    </div>
+               </div> 
+                <!-- <hr ng-hide="$last"> -->
+                <div ng-if="promotionsection!='No'">
+                	<h3 class="bodyheaders"> Promotions</h3>
+                	<input type="checkbox" ng-model="promotionCheckBox" ng-click="promotionCheck(promotionCheckBox)">{{promotionsection}}
+                </div>
+                <div class="">
+            	<img src="/angularTicketWidget/images/loading.gif" style="float:right" ng-show="loadingSubmit" />
+            	<button class="btn btn-warning pull-right" type="submit" ng-hide="loadingSubmit">continue</button>
+            </div>
+                </div>
+             </div>
+            <!-- </div> -->
+    </form>
+</div>
+    <div ng-show="confirmationPage">
+    <div ng-bind-html="confirmationPageData"></div>
+    </div>
+</div>
