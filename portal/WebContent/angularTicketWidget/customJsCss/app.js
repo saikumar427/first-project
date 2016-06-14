@@ -90,6 +90,13 @@ angular.module('ticketsapp', [
           $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000);*/
         $rootScope.showTimeoutBar = false;
         $rootScope.isSeatingEvent = false;
+        $rootScope.templatedata = {
+        	ticket_title : 'Tickets',
+        	registration_title : 'Registration',
+        	payment_title : 'Payment',
+        	confirmation_title : 'Confirmation',
+        	time_left : 'Time left:'
+        };
         $rootScope.selectDate = '';
         $rootScope.templateMsg = '';
         $rootScope.timeWatcher;
