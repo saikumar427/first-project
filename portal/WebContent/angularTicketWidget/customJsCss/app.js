@@ -81,10 +81,10 @@ angular.module('ticketsapp', [
         };
 
         // this is using..
-        $rootScope.baseURL = 'http://localhost/ticketwidget/';
+        $rootScope.baseURL = 'http://www.citypartytix.com/ticketwidget/';
         
        // $rootScope.base_Url = 'http://localhost/tktwidget/registration/';
-        $rootScope.serverAddress = 'http://localhost/';
+        $rootScope.serverAddress = 'http://www.citypartytix.com/';
         //$rootScope.eid = $location.search().eid;
         $rootScope.eid = eventid;
         $rootScope.waitListId = waitlistId;
@@ -145,14 +145,27 @@ angular.module('ticketsapp', [
                     seating:$rootScope.isSeatingEvent == true ? 'y' : 'n'
                 }
             }).success(function(data, status, headers, config) {
-                $window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
+            	try {
+            		if('EB' == $rootScope.eventDetailsList.context)
+                		$window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
+                	else if('web' == $rootScope.eventDetailsList.context)
+                		location.reload();
+            	}
+            	catch(err) { location.reload(); };
+               
                 $rootScope.timeOutBg = false;
             });
         };
 
 
         $rootScope.cancelTimeOut = function() {
-            $window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
+        	try {
+        		if('EB' == $rootScope.eventDetailsList.context)
+            		$window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
+            	else if('web' == $rootScope.eventDetailsList.context)
+            		location.reload();
+        	}
+        	catch(err) { location.reload(); };
             $rootScope.timeOutBg = false;
         };
 

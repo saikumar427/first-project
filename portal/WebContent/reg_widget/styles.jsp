@@ -158,7 +158,7 @@
 		border-right: 1px solid <%=border%>;
 	}
 	.margin-right-left{
-		    margin: 0px -13px 0px -6px;	
+		    margin: 0px -9px 0px -2px;
 	}
 	.test-arrow> ul {
 	   	padding:0px;

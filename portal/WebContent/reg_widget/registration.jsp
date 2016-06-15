@@ -311,7 +311,7 @@ var eventDetailsList = {
 	</div>
 	<ul   style="margin:0px; padding:0px;"> 
 		<div class="col-md-12 col-sm-12 ">
-			<div class="alert alert-warning row" role="alert" ng-show="showTimeoutBar" style="margin-bottom: 0px; padding: 5px;">
+			<div class="alert alert-warning row" role="alert" ng-show="showTimeoutBar" style="margin-bottom: 0px; padding: 5px; border-radius: 0px;">
 				<div class="col-xs-6">
 					<a href="javascript:;" ng-click="back()">
 						<i class="fa fa-angle-double-left"></i>&nbsp; {{backLinkWording}}

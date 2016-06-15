@@ -1283,9 +1283,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     	$rootScope.eventDetailsList.fbsharepopup = 'N';
                     }
             	}
-            	if('widget'== $rootScope.eventDetailsList.registrationsource){
+            	/*if('widget'== $rootScope.eventDetailsList.registrationsource){
                 	$('#leftList').append("<div id='forntspopup'><iframe style='border: 0; margin: 0; padding: 0; height: 350px; width: 0;' id='ntsframe' name='ntsframe'></iframe></div>");
-                }
+                }*/
             	
             	if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable){
                 	FB.getLoginStatus(function(response) {
