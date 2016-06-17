@@ -106,8 +106,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                 })
                 .error(function(data, status, headers, config) {
                    // alert('Unknown error occured. Please try reloading the page.');
-                    $('#error_messages').modal('show');
-                    $('#error_messages_html').html('Unknown error occured. Please try reloading the page.');
+                	bootbox.alert($rootScope.globalError, function() {
+                		  //Example.show("Hello world callback");
+                	});
                 });
             else {
                 $scope.loadingMetadata = false;
@@ -137,8 +138,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     })
                     .error(function() {
                        // alert('Unknown error occured. Please try reloading the page.');
-                        $('#error_messages').modal('show');
-                        $('#error_messages_html').html('Unknown error occured. Please try reloading the page.');
+                    	bootbox.alert($rootScope.globalError, function() {
+                  		  //Example.show("Hello world callback");
+                    	});
                     });
             };
             $scope.$watch('prioritylist', function(nVal, oVal) {
@@ -215,19 +217,30 @@ angular.module('ticketsapp.controllers.tickets', [])
                         .success(function(data, status, headers, config) {
                             $scope.priTimeCheckData = data;
                             if (!$scope.priTimeCheckData.expired) {
-                                $scope.timeCheckShow = props.try_again;
+                                
+                            	bootbox.dialog({
+                            		message : "<div class='text-center'>Sorry, timed out!</div>",
+                            		title: "",
+                            		size:"small",
+                            		buttons: {
+                            			success: { label: "Ok", callback: function() {
+                            					  window.location.reload();
+                            				  }
+                            			}
+                            		}
+                            	});
+                                
                                 return 'false';
                             }
                         })
                         .error(function(data, status, headers, config) {
-                            //alert('Unknown error occured. Please try refreshing the page');
+                        	bootbox.alert($rootScope.globalError, function() {
+                      		  //Example.show("Hello world callback");
+                        	});
                         });
                 }
             };
-            $scope.close_priTimeCheck = function() {
-                $scope.timeCheckShow = '';
-                window.location.reload();
-            };
+            
             /*Priority registration end*/
 
             /*rec date start*/
@@ -372,9 +385,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                         $rootScope.ticketsIds = allTicketIds;
                     })
                     .error(function(data, status, headers, config) {
-                       // alert('Unknown error occured. Please try reloading the page.');
-                        $('#error_messages').modal('show');
-                        $('#error_messages_html').html('Unknown error occured. Please try reloading the page.');
+                    	bootbox.alert($rootScope.globalError, function() {
+                  		  //Example.show("Hello world callback");
+                    	});
                     });
             };
             /* Ticket data end */
@@ -445,9 +458,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                             $scope.getTicketSection();
                         }
                     }).error(function(data, status, headers, config) {
-                        //alert('error');
-                        $('#error_messages').modal('show');
-                        $('#error_messages_html').html('error');
+                    	bootbox.alert($rootScope.globalError, function() {
+                    		  //Example.show("Hello world callback");
+                      	});
                     });
                 }
             };
@@ -777,9 +790,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                             } else {
                                 seat.seatSelected = false;
                                 //$scope.seats.completeseats[seatIndex].seatSelected = false;
-                                //alert('Limit reached to select group seat ticket.');
-                                $('#error_messages').modal('show');
-                                $('#error_messages_html').html('Limit reached to select group seat ticket.');
+                                bootbox.alert('Limit reached to select group seat ticket.', function() {
+                          		  //Example.show("Hello world callback");
+                                });
                             }
                         } else {
                         	//alert(JSON.stringify(singleGrp));
@@ -911,16 +924,16 @@ angular.module('ticketsapp.controllers.tickets', [])
                                     $rootScope.seatTempIndexs = eachItem.seatIndexes;
                                     
                                     if (eachItem.min > eachItem.ticket_selected){
-                                    	//alert("for \"" + eachItem.name + "\", you need to select minimum of " + eachItem.min + " seats");
-                                    	$('#error_messages').modal('show');
-                                        $('#error_messages_html').html("for \"" + eachItem.name + "\", you need to select minimum of " + eachItem.min + " seats");
+                                    	bootbox.alert("for \"" + eachItem.name + "\", you need to select minimum of " + eachItem.min + " seats", function() {
+                                    		  //Example.show("Hello world callback");
+                                        });
                                     }
                                         
 
                                 } else {
-                                    //alert("maximum quantity reached for \"" + eachItem.name + "\" ticket type ");
-                                    $('#error_messages').modal('show');
-                                    $('#error_messages_html').html("maximum quantity reached for \"" + eachItem.name + "\" ticket type ");
+                                	bootbox.alert("maximum quantity reached for \"" + eachItem.name + "\" ticket type.", function() {
+                              		  //Example.show("Hello world callback");
+                                	});
                                     seat.seatSelected = false;
                                     seat.selectedTkt = '';
                                 }
@@ -937,9 +950,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                                 $scope.seatIndexs = eachItem.seatIndexes;
                                 
                                 if (eachItem.min > 1 && eachItem.min > eachItem.ticket_selected){
-                                	//alert("you need to select mininmum of " + eachItem.min + " for \"" + eachItem.name + "\" ticket type");
-                                	$('#error_messages').modal('show');
-                                    $('#error_messages_html').html("you need to select mininmum of " + eachItem.min + " for \"" + eachItem.name + "\" ticket type");
+                                	bootbox.alert("you need to select mininmum of " + eachItem.min + " for \"" + eachItem.name + "\" ticket type.", function() {
+                                		  //Example.show("Hello world callback");
+                                  	});
                                 }
                                     
                             }
@@ -958,15 +971,15 @@ angular.module('ticketsapp.controllers.tickets', [])
                                             eachTktInGroup.seatIndexes.push(seatIndex);
                                         }
                                         if (eachTktInGroup.min > eachTktInGroup.ticket_selected){
-                                        	 //alert("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats");
-                                        	$('#error_messages').modal('show');
-                                            $('#error_messages_html').html("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats");
+                                        	bootbox.alert("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats", function() {
+                                      		  //Example.show("Hello world callback");
+                                        	});
                                         }
                                            
                                     } else {
-                                        //alert("maximum quantity reached for \"" + eachTktInGroup.name + "\" ticket type ");
-                                        $('#error_messages').modal('show');
-                                        $('#error_messages_html').html("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats");
+                                    	bootbox.alert("for \"" + eachTktInGroup.name + "\", you need to select minimum of " + eachTktInGroup.min + " seats", function() {
+                                    		  //Example.show("Hello world callback");
+                                      	});
                                         seat.seatSelected = false;
                                         seat.selectedTkt = '';
                                     }
@@ -976,9 +989,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                                     seat.selectedTkt = '';
                                     eachTktInGroup.seatIndexes.splice(eachTktInGroup.seatIndexes.indexOf(seatIndex), 1);
                                     if (eachTktInGroup.min > 1 && eachTktInGroup.min > eachTktInGroup.ticket_selected){
-                                    	//alert("you need to select mininmum of " + eachTktInGroup.min + " for \"" + eachTktInGroup.name + "\" ticket type");
-                                    	$('#error_messages').modal('show');
-                                        $('#error_messages_html').html("you need to select mininmum of " + eachTktInGroup.min + " for \"" + eachTktInGroup.name + "\" ticket type");
+                                    	bootbox.alert("you need to select mininmum of " + eachTktInGroup.min + " for \"" + eachTktInGroup.name + "\" ticket type", function() {
+                                  		  //Example.show("Hello world callback");
+                                    	});
                                     }
                                         
                                 }
@@ -1119,9 +1132,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     if (item.type == 'ticket') {
                         if (item.is_donation == 'n') {
                             if (item.ticket_selected > 0 && (item.min > item.ticket_selected)) {
-                                //alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
-                                $('#error_messages').modal('show');
-                                $('#error_messages_html').html("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
+                            	bootbox.alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats", function() {
+                            		  //Example.show("Hello world callback");
+                              	});
                                 alertMsgCount++;
                             }
                             if (item.ticket_selected > 0)
@@ -1150,9 +1163,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                         angular.forEach(item.tickets, function(item, index) {
                             if (item.is_donation == 'n') {
                                 if (item.ticket_selected > 0 && (item.min > item.ticket_selected)) {
-                                    //alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
-                                	$('#error_messages').modal('show');
-                                    $('#error_messages_html').html("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats");
+                                	bootbox.alert("for \"" + item.name + "\", the minimum seats quantity is " + item.min + ",you selected only " + item.ticket_selected + " seats", function() {
+                              		  //Example.show("Hello world callback");
+                                	});
                                     alertMsgCount++;
                                 }
                                 if (item.ticket_selected > 0)
@@ -1212,9 +1225,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     }).success(function(data, status, headers, config) {
                     	$scope.loadingTransaction = false;
                     	if (data.status == 'success') {
-                    		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
-                    		else*/
+                    		else
                     			$scope.ticketsFinalSubmit();  
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller
@@ -1228,15 +1241,17 @@ angular.module('ticketsapp.controllers.tickets', [])
                                 dataList = dataList + '<li>' + data.errors[j] + '</li>';
                             }
                             dataList = dataList + '</ul>';
-                            $scope.conditional_ticketing = dataList;
-                            $('#conditional_ticketing').html(dataList);
+                            bootbox.alert(dataList, function() {
+                      		  //Example.show("Hello world callback");
+                        	});
                             $scope.showBuyButton=true;
                         } else if (data.status == 'fail' && data.reason == 'event-level-qty-criteria') {
                             $scope.loadingTransaction = false;
                             var avalbleQty = data.details.remaining_qty <= 0 ? 0 : data.details.remaining_qty;
                             var error = 'For "' + data.details.eventname + '" selected quantity is ' + data.details.selected_qty + ' and currently available quantity is ' + avalbleQty;
-                            $('#error_messages').modal('show');
-                            $('#error_messages_html').html(error);
+                            bootbox.alert(error, function() {
+                        		  //Example.show("Hello world callback");
+                          	});
                             
                             $scope.showBuyButton=true;
                         } else if (data.status == 'fail' && data.reason == 'ticket-level-qty-criteria') {
@@ -1247,26 +1262,29 @@ angular.module('ticketsapp.controllers.tickets', [])
                             	available = available + '<li> For "'+data.details[i].ticket_name+'" selected quantity is ' + data.details[i].selected_qty + ' and currently available quantity is ' +data.details[i].remaining_qty + '</li>';
                             }
                             available = available + '</ul>';
-                            //console.log(available);
-                            $('#error_messages').modal('show');
-                            $('#error_messages_html').html(available);
+                            bootbox.alert(available, function() {
+                      		  //Example.show("Hello world callback");
+                        	});
                             $scope.tickets_submit=true;
                         } else if(data.status == 'fail' && data.reason == 'noSeat'){
                         	$scope.loadingTransaction = false;
-                        	$('#error_messages').modal('show');
-                            $('#error_messages_html').html('Selected seat not available. Please try again.');
+                        	bootbox.alert('Selected seat not available. Please try again.', function() {
+                        		  //Example.show("Hello world callback");
+                          	});
                         	$scope.showBuyButton=true;
                         } else {
                             $scope.loadingTransaction = false;
-                            $('#error_messages').modal('show');
-                            $('#error_messages_html').html('Unknown error occured. Please try again.');
+                            bootbox.alert('Unknown error occured. Please try again.', function() {
+                      		  //Example.show("Hello world callback");
+                        	});
                             $scope.showBuyButton=true;
                         }
 
                     }).error(function(data, status, headers, config) {
                         $scope.loadingTransaction = false;
-                        $('#error_messages').modal('show');
-                        $('#error_messages_html').html('Unknown error occured. Please try refreshing the page.');
+                        bootbox.alert($rootScope.globalError, function() {
+                    		  //Example.show("Hello world callback");
+                      	});
                         $scope.showBuyButton=true;
                     });
                 }
@@ -1440,25 +1458,21 @@ angular.module('ticketsapp.controllers.tickets', [])
             	}else{
             		$scope.loadingTransaction = false;
                     //alert('Unknown error occured. Please try refreshing the page');
-                    $('#error_messages').modal('show');
-                    $('#error_messages_html').html('Unknown error occured. Please try refreshing the page.');
+            		 bootbox.alert($rootScope.globalError, function() {
+               		  //Example.show("Hello world callback");
+                 	});
                     $scope.showBuyButton=true;
             	}
             }).error(function(data, status, headers, config) {
                 $scope.loadingTransaction = false;
                 //alert('Unknown error occured. Please try refreshing the page');
-                $('#error_messages').modal('show');
-                $('#error_messages_html').html('Unknown error occured. Please try refreshing the page.');
+                bootbox.alert($rootScope.globalError, function() {
+             		  //Example.show("Hello world callback");
+               	});
                 $scope.showBuyButton=true;
             });
             };
             /* final submit end */
-            
-            $scope.closeError = function(){
-            	$('#error_messages').modal('hide');
-                $('#error_messages_html').html('');
-            };
-            
         }
     
     ]);

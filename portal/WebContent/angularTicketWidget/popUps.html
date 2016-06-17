@@ -2,24 +2,6 @@
 create like: this modal tag have ID 
 $('#ID').modal('show'); -->
 
-<!-- alert messages start -->
-<div class="modal" id="error_messages" style="display:none;" >
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header modal-no-bottom">
-	            <button type="button" class="close" ng-click="closeError();" id="close-top"><img src='/home/images/images/close.png'></button>
-         	</div>
-         	<div class="modal-body">
-         		<div id="error_messages_html"></div>
-         	</div>
-         	<div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
-            	<button type="button" class="btn btn-default btn-sm" ng-click="closeError();">OK</button>
-         	</div>
-		</div>
-	</div>
-</div>
-<!-- alert messages start -->
-
 <!-- Multiple tickets case pop-up start -->
 <div ng-if="eventMetadata.has_seating">
 	<div class="modal" ng-show="seatingMultTicket"  >
@@ -43,46 +25,7 @@ $('#ID').modal('show'); -->
 </div>
 <!-- Multiple tickets case pop-up end -->
 
-<!-- PriorityTimeCheck start -->
-<div ng-if="eventMetadata.is_priority">
-	<div class="modal" ng-show="timeCheckShow">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">
-				<div class="modal-header modal-no-bottom">
-		            <button type="button" class="close" ng-click="close_priTimeCheck();" id="close-top"><img src='/home/images/images/close.png'></button>
-	         	</div>
-	         	<div class="modal-body">
-	         		<div > Sorry, timed out!</div>
-	         	</div>
-	         	<div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
-	            	<button type="button" class="btn btn-default btn-sm" ng-click="close_priTimeCheck();">{{timeCheckShow}}</button>
-	         	</div>
-			</div>
-		</div>
-	</div>
-	<div ng-show="timeCheckShow" class="modal-backdrop fade in"></div>
-</div>
-<!-- PriorityTimeCheck end -->
 
-<!-- Conditional Ticketing Pop-Up Start -->
-<div class="modal" ng-show="conditional_ticketing">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-header modal-no-bottom">
-	            <button type="button" class="close" ng-click="close_condition();" id="close-top"><img src='/home/images/images/close.png'></button>
-         	</div>
-         	<div class="modal-body">
-         		<!-- <div ng-bind-html="conditional_ticketing"></div> -->
-         		<div id="conditional_ticketing"></div>
-         	</div>
-         	<div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5; padding: 0px 0px 15px 0px;">
-            	<button type="button" class="btn btn-default btn-sm" ng-click="close_condition();">OK</button>
-         	</div>
-		</div>
-	</div>
-</div>
-<div ng-show="conditional_ticketing" class="modal-backdrop fade in"></div>
-<!-- Conditional Ticketing Pop-Up End -->
 
 <!-- Wait List Pop-Up Start -->
 <div class="modal "  ng-show="showWaitPop" >

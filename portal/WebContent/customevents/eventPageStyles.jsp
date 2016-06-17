@@ -500,5 +500,6 @@ i.fa-minus-square {
 .modal-footer{
 	border: 0px;
 	text-align: center;
+	padding-top: 0px;
 }
 </style>
