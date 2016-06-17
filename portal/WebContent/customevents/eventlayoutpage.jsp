@@ -189,6 +189,8 @@ if(newTktWidgetList.contains(groupid)){
 <script type="text/javascript" src="/angularTicketWidget/js/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="/angularTicketWidget/css/jquery-ui.css" />
 <script type="text/javascript" src="/angularTicketWidget/js/jquery.PrintArea.js"></script>
+<script type="text/javascript" src="/angularTicketWidget/js/bootbox.min.js"></script>
+
 <%} %>
 <!-- angular ticket widget end -->
 <style>

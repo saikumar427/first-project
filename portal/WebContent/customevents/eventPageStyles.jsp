@@ -488,4 +488,17 @@ i.fa-minus-square {
     padding: 0px 40px 0px 40px;
     #border-right: 4px solid #ddd;
 }
+
+
+.active .grand-total{
+	font-weight: bold;
+	background-color: <%=header%>;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color:<%=headerText%>;
+}
+.modal-footer{
+	border: 0px;
+	text-align: center;
+}
 </style>

@@ -343,3 +343,10 @@ height:5px;
 	transition: width 2s;
 }
 
+.cancel-order{
+	color: #ff3333;
+	cursor: pointer;
+}
+.cancel-order:HOVER{
+	color: #ff0000;
+}

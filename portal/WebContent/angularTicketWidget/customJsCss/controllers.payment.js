@@ -85,20 +85,88 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
                 $location.url('/event');
             });
 
-            $scope.other = function(evt) {
+            $scope.other = function(evt,data) {
                 evt.target.blur();
-                $dialogs.confirm('Please Confirm', 'Are you sure you want to continue?')
-                    .result
-                    .then(function(btn) {
-                        $timeout(function() {
-                            //$location.path('/event/confirmation');
-                            $scope.otherDisable = true;
-                            $scope.NoPaymentOrOther('other');
+                /*$dialogs.confirm('Please Confirm', 'Are you sure you want to continue?')
+                .result
+                .then(function(btn) {
+                    $timeout(function() {
+                        //$location.path('/event/confirmation');
+                        $scope.otherDisable = true;
+                        $scope.NoPaymentOrOther('other');
 
-                        }, 200);
-                    }, function(btn) {});
+                    }, 200);
+                }, function(btn) {});*/
+                bootbox.dialog({
+                	  message: data,
+                	  title: "Please Confirm",
+                	  buttons: {
+                	    success: {
+                	      label: "Continue",
+                	      className: "btn-primary btn-sm",
+                	      callback: function() {
+                	    	  $timeout(function() {
+                                  //$location.path('/event/confirmation');
+                                  $scope.otherDisable = true;
+                                  $scope.NoPaymentOrOther('other');
+
+                              }, 200);
+                	      }
+                	    },
+                	    danger: {
+                	      label: "Cancel",
+                	      className: "btn-primary btn-sm",
+                	      callback: function() {
+                	        //Example.show("uh oh, look out!");
+                	    	//alert('canceld');
+                	      }
+                	    }
+                	  }
+                	});
+                
             };
 
+            $scope.cancel_order = function(){
+            	bootbox.dialog({
+              	  message: "Are you sure you want to cancel your order?",
+              	  title: "",
+              	  //size:"small",
+              	  buttons: {
+              	    success: {
+              	      label: "Ok",
+              	      className: "btn-primary btn-sm",
+              	      callback: function() {
+              	    	$http.get($rootScope.baseURL + 'delete_temp_locked_tickets.jsp', {
+                            params: {
+                                eid: $rootScope.eid,
+                                tid: $rootScope.transactionId,
+                                seating:$rootScope.isSeatingEvent == true ? 'y' : 'n'
+                            }
+                        }).success(function(data, status, headers, config) {
+                        	try {
+                        		if('EB' == $rootScope.eventDetailsList.context)
+                            		$window.location.href = $rootScope.serverAddress + 'event?eid=' + $rootScope.eid;
+                            	else if('web' == $rootScope.eventDetailsList.context)
+                            		location.reload();
+                        	}
+                        	catch(err) { location.reload(); };
+                           
+                            $rootScope.timeOutBg = false;
+                        }); 
+              	      }
+              	    },
+              	    danger: {
+              	      label: "Cancel",
+              	      className: "btn-primary btn-sm",
+              	      callback: function() {
+              	        //Example.show("uh oh, look out!");
+              	    	//alert('canceld');
+              	      }
+              	    }
+              	  }
+              	});
+            };
+            
             $scope.NoPaymentOrOther = function(paymenttype) {
                 //alert("in no payment");
                 $http.get($rootScope.serverAddress + 'embedded_reg/checkavailability.jsp?timestamp=' + (new Date()).getTime(), {
