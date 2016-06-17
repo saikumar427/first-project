@@ -103,7 +103,7 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
                 	  buttons: {
                 	    success: {
                 	      label: "Continue",
-                	      className: "btn-primary",
+                	      className: "btn-primary btn-sm",
                 	      callback: function() {
                 	    	  $timeout(function() {
                                   //$location.path('/event/confirmation');
@@ -115,7 +115,7 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
                 	    },
                 	    danger: {
                 	      label: "Cancel",
-                	      className: "btn-primary",
+                	      className: "btn-primary btn-sm",
                 	      callback: function() {
                 	        //Example.show("uh oh, look out!");
                 	    	//alert('canceld');
@@ -134,7 +134,7 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
               	  buttons: {
               	    success: {
               	      label: "Ok",
-              	      className: "btn-primary",
+              	      className: "btn-primary btn-sm",
               	      callback: function() {
               	    	$http.get($rootScope.baseURL + 'delete_temp_locked_tickets.jsp', {
                             params: {
@@ -157,7 +157,7 @@ angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
               	    },
               	    danger: {
               	      label: "Cancel",
-              	      className: "btn-primary",
+              	      className: "btn-primary btn-sm",
               	      callback: function() {
               	        //Example.show("uh oh, look out!");
               	    	//alert('canceld');

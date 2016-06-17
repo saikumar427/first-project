@@ -497,9 +497,13 @@ i.fa-minus-square {
     padding-bottom: 10px;
     color:<%=headerText%>;
 }
-.modal-footer{
+#no-bottom .modal-footer{
 	border: 0px;
 	text-align: center;
 	padding-top: 0px;
+}
+#no-bottom .modal-header{
+	border-bottom: 0px;
+	padding-bottom: 0px;
 }
 </style>
