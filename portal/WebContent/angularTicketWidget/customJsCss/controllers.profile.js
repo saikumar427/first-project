@@ -122,7 +122,7 @@ angular.module('ticketsapp.controllers.profile', [])
         			    elements[i].oninvalid = function(e) {
         			        e.target.setCustomValidity("");
         			        if (!e.target.validity.valid) {
-        			            e.target.setCustomValidity("custom error required");
+        			            e.target.setCustomValidity("Required Field");
         			        }
         			    };
         			    elements[i].oninput = function(e) {
