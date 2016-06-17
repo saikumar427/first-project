@@ -1229,6 +1229,7 @@ angular.module('ticketsapp.controllers.tickets', [])
                             }
                             dataList = dataList + '</ul>';
                             $scope.conditional_ticketing = dataList;
+                            $('#conditional_ticketing').html(dataList);
                             $scope.showBuyButton=true;
                         } else if (data.status == 'fail' && data.reason == 'event-level-qty-criteria') {
                             $scope.loadingTransaction = false;

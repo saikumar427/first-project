@@ -34,9 +34,9 @@
       <label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
       </span>
       <div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
-         <textarea class="form-control" name="name" ng-model="profile.response[question.id]" ng-required="question.required=='y'" placeholder="{{question.label}}"
+         <textarea class="form-control text-field-collapse" name="name" ng-model="profile.response[question.id]" ng-required="question.required=='y'" placeholder="{{question.label}}"
          ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
-         title="{{question.label}}" style="width: 90%;"></textarea>
+         title="{{question.label}}"></textarea>
          <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
    </div>
@@ -102,7 +102,7 @@
       <label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='y'">*</span>
       </span>
       <div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
-         <select class="form-control" name="name" ng-model="profile.response[question.id]" ng-required="question.required=='y'" ng-options="option.value as option.display for option in question.options"
+         <select class="form-control text-field-collapse" name="name" ng-model="profile.response[question.id]" ng-required="question.required=='y'" ng-options="option.value as option.display for option in question.options"
          ng-init="profile.response[question.id] = isAttAnsStored() ? getAttendeeAnswers(question.id,question.type,$parent.profileIndex+1,ticket.ticket_id) : '' ">
             <option value="">-- Select an option --</option>
          </select>

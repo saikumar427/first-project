@@ -72,9 +72,10 @@ $('#ID').modal('show'); -->
 	            <button type="button" class="close" ng-click="close_condition();" id="close-top"><img src='/home/images/images/close.png'></button>
          	</div>
          	<div class="modal-body">
-         		<div ng-bind-html="conditional_ticketing"></div>
+         		<!-- <div ng-bind-html="conditional_ticketing"></div> -->
+         		<div id="conditional_ticketing"></div>
          	</div>
-         	<div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5;">
+         	<div class="modal-footer" style="text-align: center; border-top: 0px solid #e5e5e5; padding: 0px 0px 15px 0px;">
             	<button type="button" class="btn btn-default btn-sm" ng-click="close_condition();">OK</button>
          	</div>
 		</div>
