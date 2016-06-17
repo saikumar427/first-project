@@ -182,8 +182,8 @@ if(newTktWidgetList.contains(groupid)){
 <script type="text/javascript" src="/angularTicketWidget/js/angular-sanitize.min.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/js/bootstrap.min.js"></script>
 <!-- <script type="text/javascript" src="/angularTicketWidget/js/ui-bootstrap-tpls-1.3.2.min.js"></script> -->
-<script type="text/javascript" src="/angularTicketWidget/js/ui-bootstrap-tpls.js"></script>
-<script type="text/javascript" src="/angularTicketWidget/js/dialogs.js"></script>
+<!-- <script type="text/javascript" src="/angularTicketWidget/js/ui-bootstrap-tpls.js"></script> -->
+<!-- <script type="text/javascript" src="/angularTicketWidget/js/dialogs.js"></script> -->
 <link type="text/css" rel="stylesheet" href="/angularTicketWidget/css/tooltipster.css" />
 <script type="text/javascript" src="/angularTicketWidget/js/jquery.tooltipster.js"></script>
 <script type="text/javascript" src="/angularTicketWidget/js/jquery-ui.js"></script>

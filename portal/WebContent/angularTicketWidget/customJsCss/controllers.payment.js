@@ -1,6 +1,6 @@
-angular.module('ticketsapp.controllers.payment', ['ui.bootstrap', 'dialogs'])
-    .controller('payment', ['$scope', '$location', '$rootScope', '$http', '$timeout', '$interval', '$dialogs', '$window',
-        function($scope, $location, $rootScope, $http, $timeout, $interval, $dialogs, $window) {
+angular.module('ticketsapp.controllers.payment', [])
+    .controller('payment', ['$scope', '$location', '$rootScope', '$http', '$timeout', '$interval', '$window',
+        function($scope, $location, $rootScope, $http, $timeout, $interval,  $window) {
 
             if ($rootScope.eid) $rootScope.eid = $rootScope.eid;
             else $location.url('/event');

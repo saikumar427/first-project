@@ -493,6 +493,7 @@ i.fa-minus-square {
 .active .grand-total{
 	font-weight: bold;
 	background-color: <%=header%>;
+	<%-- border:1px solid <%=border%>; --%>
     padding-top: 10px;
     padding-bottom: 10px;
     color:<%=headerText%>;
