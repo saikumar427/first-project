@@ -81,10 +81,10 @@ angular.module('ticketsapp', [
         };
 
         // this is using..
-        $rootScope.baseURL = 'http://www.citypartytix.com/ticketwidget/';
+        $rootScope.baseURL = 'http://localhost/ticketwidget/';
         
        // $rootScope.base_Url = 'http://localhost/tktwidget/registration/';
-        $rootScope.serverAddress = 'http://www.citypartytix.com/';
+        $rootScope.serverAddress = 'http://localhost/';
         //$rootScope.eid = $location.search().eid;
         $rootScope.eid = eventid;
         $rootScope.waitListId = waitlistId;
