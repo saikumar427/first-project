@@ -1,5 +1,6 @@
 <!-- Text start -->
 <div class="form-group" ng-if="subQuestion.type=='text'" ng-form="subForm">
+<div class="col-md-12 col-sm-12"><br></div>
    <span ng-hide="!subQuestion.response" class="animate-show animate-hide">
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
    </span>
@@ -18,12 +19,14 @@
 
 <!-- text area start -->
 <div class="form-group" ng-if="subQuestion.type=='textarea'" ng-form="subForm">
+<div class="col-md-12 col-sm-12"><br></div>
    <span ng-hide="!subQuestion.response" class="animate-show animate-hide">
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
    </span>
    <div  ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
       <textarea class="form-control" name="name" ng-model="subQuestion.response" ng-required="subQuestion.required=='y'"
-      ng-init="subQuestion.response = getBuyerAnswers(subQuestion.id,subQuestion.type)" title="{{subQuestion.label}}"></textarea>
+      ng-init="subQuestion.response = getBuyerAnswers(subQuestion.id,subQuestion.type)" title="{{subQuestion.label}}"
+      style="width: 90%;"></textarea>
       <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
    </div>
 </div>
@@ -31,8 +34,9 @@
 
 <!-- radio start -->
 <div class="form-group" ng-if="subQuestion.type=='radio'" ng-form="subForm" ng-init="tempoptions=subQuestion.options">
+<div class="col-md-12 col-sm-12"><br></div>
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
-   <div  ng-class="{'has-error':subForm.name.$error.required}">
+   <div  ng-class="{'has-error':subForm.name.$error.required}" style="margin-top: -10px;">
       <span ng-repeat="option in subQuestion.options">
       <label class="radio-inline" >
       <input type="radio" name="{{subQuestion.id}}" ng-model="subQuestion.response" value="{{option.value}}" 
@@ -45,19 +49,23 @@
 
 <!-- check box start -->
 <div class="form-group" ng-if="subQuestion.type=='checkbox'" ng-form="subForm">
+<div class="col-md-12 col-sm-12"><br></div>
    <span ng-init="subQuestion.response={}; answers=getBuyerAnswers(subQuestion.id,subQuestion.type)"></span>
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
-   <div ng-repeat="option in subQuestion.options">
-      <label class="checkbox-inline">
-      <input type="checkbox" name="checkboxgroup[]" ng-model="subQuestion.response[option.value]" ng-init="subQuestion.response[option.value] = answers.indexOf(option.value) > - 1 ?   true :  false"
-      ng-required="(subQuestion.required == 'y' && !atleastOneTrue(subQuestion.response))" />{{ option.display }}
-      </label><br/>
+   <div style="margin-top: -10px;">
+	   <div ng-repeat="option in subQuestion.options">
+	      <label class="checkbox-inline">
+	      <input type="checkbox" name="checkboxgroup[]" ng-model="subQuestion.response[option.value]" ng-init="subQuestion.response[option.value] = answers.indexOf(option.value) > - 1 ?   true :  false"
+	      ng-required="(subQuestion.required == 'y' && !atleastOneTrue(subQuestion.response))" />{{ option.display }}
+	      </label><br/>
+	   </div>
    </div>
 </div>
 <!-- check box end -->
 
 <!-- select box start -->
 <div class="form-group" ng-if="subQuestion.type=='select'" ng-form="subForm">
+<div class="col-md-12 col-sm-12"><br></div>
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
    <div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
       <select class="form-control" name="name" ng-model="subQuestion.response" ng-required="subQuestion.required=='y'" 

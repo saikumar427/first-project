@@ -1,5 +1,6 @@
 <!-- Type is text box start -->
 <div class="form-group" ng-if="subQuestion.type=='text'" ng-form="subForm" id="{{ticket.ticket_id}}_{{profileIndex+1}}_{{subQuestion.id}}">
+<div class="col-md-12 col-sm-12"><br></div>
    <span ng-hide="!profile.response[subQuestion.id]" class="animate-show animate-hide">
    		<label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
    </span>
@@ -18,6 +19,7 @@
 
 <!-- Type is text area start -->
 <div class="form-group" ng-if="subQuestion.type=='textarea'" ng-form="subForm" id="{{ticket.ticket_id}}_{{profileIndex+1}}_{{subQuestion.id}}">
+<div class="col-md-12 col-sm-12"><br></div>
    <span ng-hide="!profile.response[subQuestion.id]" class="animate-show animate-hide">
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
    </span>
@@ -25,7 +27,7 @@
       
       <textarea class="form-control" name="name" ng-model="profile.response[subQuestion.id]" ng-required="subQuestion.required=='y'" placeholder="{{subQuestion.label}}"
       ng-init="profile.response[subQuestion.id] = isAttAnsStored() ? getAttendeeAnswers(subQuestion.id,subQuestion.type,$parent.profileIndex+1,ticket.ticket_id) : '' "
-      title="{{subQuestion.label}}"></textarea>
+      title="{{subQuestion.label}}" style="width: 90%;"></textarea>
       
       <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
    </div>
@@ -34,8 +36,9 @@
 
 <!-- Type is radio start -->
 <div class="form-group" ng-if="subQuestion.type=='radio'" ng-form="subForm" id="{{ticket.ticket_id}}_{{profileIndex+1}}_{{subQuestion.id}}">
+<div class="col-md-12 col-sm-12"><br></div>
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
-   <div class="" ng-class="{'has-error':subForm.name.$error.required}">
+   <div class="" ng-class="{'has-error':subForm.name.$error.required}" style="margin-top: -10px;">
       <span ng-repeat="option in subQuestion.options">
       <label class="radio-inline" >
       <input type="radio" name="{{ subQuestion.id }}" ng-model="profile.response[subQuestion.id]" value="{{option.value}}" ng-required="subQuestion.required=='y'" 
@@ -48,21 +51,25 @@
 
 <!-- Type is check box start -->
 <div class="form-group" ng-if="subQuestion.type=='checkbox'" ng-form="subForm" id="{{ticket.ticket_id}}_{{profileIndex+1}}_{{subQuestion.id}}">
+<div class="col-md-12 col-sm-12"><br></div>
 <span ng-init="attendeeAnswers = getAttendeeAnswers(subQuestion.id,subQuestion.type,$parent.profileIndex+1,ticket.ticket_id)"></span>
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
    <div class="" ng-init="assignEmpty(profile.response,subQuestion.id)" >
-      <span ng-repeat="option in subQuestion.options">
-      <label class="checkbox-inline">
-      <input type="checkbox" name="checkboxgroup[]" ng-model="(profile.response[subQuestion.id])[option.value]" ng-required="(subQuestion.required == 'y' && !atleastOneTrue(profile.response[subQuestion.id]))" 
-      ng-init="(profile.response[subQuestion.id])[option.value] = attendeeAnswers.indexOf(option.value) > - 1 ? true : false"/>{{ option.display }}
-      </label><br/>
-      </span>
+      <div style="margin-top: -10px;">
+	      <div ng-repeat="option in subQuestion.options">
+	      <label class="checkbox-inline">
+	      <input type="checkbox" name="checkboxgroup[]" ng-model="(profile.response[subQuestion.id])[option.value]" ng-required="(subQuestion.required == 'y' && !atleastOneTrue(profile.response[subQuestion.id]))" 
+	      ng-init="(profile.response[subQuestion.id])[option.value] = attendeeAnswers.indexOf(option.value) > - 1 ? true : false"/>{{ option.display }}
+	      </label><br/>
+	      </div>
+      </div>
    </div>
 </div>
 <!-- Type is check box end -->
 
 <!-- Type is select box start -->
 <div class="form-group" ng-if="subQuestion.type=='select'" ng-form="subForm" id="{{ticket.ticket_id}}_{{profileIndex+1}}_{{subQuestion.id}}">
+<div class="col-md-12 col-sm-12"><br></div>
    <label ng-bind-html="subQuestion.label" class="question-title"></label> <span ng-show="subQuestion.required=='y'">*</span>
    <div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
       <select class="form-control" name="name" ng-model="profile.response[subQuestion.id]" ng-required="subQuestion.required=='y'" ng-options="option.value as option.display for option in subQuestion.options"
