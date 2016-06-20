@@ -80,6 +80,7 @@ h2{
 	position: static;
 	#overflow: hidden;
 }
+
 .widget-content-ntitle{
 	-webkit-border-top-left-radius: <%=topLeft%>;
 	-webkit-border-top-right-radius: <%=topRight%>;
@@ -330,7 +331,7 @@ i.fa-minus-square {
 
 .form-control{
 	height: 30px;
-	border-radius: 0px;
+	#border-radius: 0px;
 }
 .order-summary{
 	font-size:<%=headerTextSize%>px;
@@ -372,8 +373,8 @@ i.fa-minus-square {
 .margin-right-left{
 	    #margin: 0 -24px 0 -17px;
 }
-.widget-content{
-	padding:0px !important;
+#tickets .widget-content{
+	padding: 0px !important;
 }
 .test-arrow> ul {
    	padding:0px;

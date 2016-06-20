@@ -49,6 +49,11 @@ angular.module('ticketsapp.controllers.tickets', [])
             $rootScope.facebookNTSdetails.first_name='';
             $rootScope.facebookNTSdetails.last_name='';
             $rootScope.facebookNTSdetails.email='';
+           
+            $scope.seatingdata = {
+                    allsections: []
+                };
+            
             //$('#tickets .widget h2').show();
             try {
                 $interval.cancel($rootScope.globalTimer);
@@ -239,9 +244,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                             items: []
                         };
                     }
-                    $scope.seatingdata = {
+                   /* $scope.seatingdata = {
                         allsections: []
-                    };
+                    };*/
                     $scope.seats = {};
                     $scope.noofcols = '';
                     $scope.noofrows = '';
@@ -355,7 +360,8 @@ angular.module('ticketsapp.controllers.tickets', [])
                                     $scope.groupTicketSelection = seatingdata.seatticketgroupdetails;
                                     $scope.groupDetails = seatingdata.seatticketgroupdetails.seatgrouptable;
                                     $scope.backgroundCSS = {
-                                            'background-image': 'url(' + $scope.seats.background_image + ')'
+                                            'background-image': 'url(' + $scope.seats.background_image + ')',
+                                            'background-repeat': 'no-repeat'
                                         },
                                         $scope.noofcols = seatingdata.allsections[0].noofcols;
                                     $scope.noofrows = seatingdata.allsections[0].noofrows;
@@ -997,9 +1003,10 @@ angular.module('ticketsapp.controllers.tickets', [])
                 if (seat) {
                     $scope.popupStyle = {
                         position: 'absolute',
-                        left: (mouseevent.pageX - 125) + 'px',
+                        left: (mouseevent.pageX - 110) + 'px',
                         top: (mouseevent.pageY - 160) + 'px'
                     };
+                    //$scope.popupStyle = {position:'absolute',left:(mouseevent.pageX+5)+'px',top:(mouseevent.pageY+5)+'px'};
                     //console.log(mouseevent.pageX+' - '+mouseevent.pageY);
                     //console.log(JSON.stringify($scope.popupStyle));
                     if (seat.type && isTicketExists(seat) && isTicketAvailable(seat)) {
@@ -1212,9 +1219,9 @@ angular.module('ticketsapp.controllers.tickets', [])
                     }).success(function(data, status, headers, config) {
                     	$scope.loadingTransaction = false;
                     	if (data.status == 'success') {
-                    		/*if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
+                    		if('Y' == $rootScope.eventDetailsList.login_popup || 'Y' == $rootScope.eventDetailsList.nts_enable)
                     			$scope.checkFbLogin();
-                    		else*/
+                    		else
                     			$scope.ticketsFinalSubmit();  
                     		$scope.showBuyButton=false;	
                 			// this data for access in profile controller

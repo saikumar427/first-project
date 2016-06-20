@@ -3,15 +3,16 @@
     <img src="/angularTicketWidget/images/loading.gif" />&nbsp;Loading...
 </div>
 <div ng-hide="loadingQuestions">
-	<div class="col-md-10 col-sm-10 col-xs-9 row " >
+	<div class="col-md-6 col-sm-6 col-xs-6  " style="padding-left: 0px;">
 		<span ng-click="showSummary();" class="show_summary" style="cursor: pointer;">
 			<span class="order-summary">{{profilePageInfo.order_summary}}</span>&nbsp;<i style="margin-left: 7px;" ng-class='{"down":abc,"original":xyz}' class="glyphicon glyphicon-menu-right" aria-hidden="true"></i>
 		</span>
 	</div>
-	<div class="col-md-2 col-sm-2 col-xs-3 row order-summary"><b>{{currencyLbl}} {{ticketsCost}}</b></div>
+	<div class="col-md-6 col-sm-6 col-xs-6  order-summary text-right"><b>{{currencyLbl}} {{ticketsCost}}</b></div>
 	<div style="clear: both;"></div>
 	
 	<div id="summarydetails" style="display: none;">
+		<hr>
 			<div class="col-md-5 col-sm-5 col-xs-5" style="margin-bottom: 5px;"><b>{{profilePageInfo.ticket_name}}</b></div>
 			<div class="col-md-4 col-sm-4 col-xs-4" style="margin-bottom: 5px;"><b>{{profilePageInfo.quantity}}</b></div>
 			<div class="col-md-3 col-sm-3 col-xs-3" style="margin-bottom: 5px;"><b>{{profilePageInfo.price}}</b></div>

@@ -81,10 +81,10 @@ angular.module('ticketsapp', [
         };
 
         // this is using..
-        $rootScope.baseURL = 'http://localhost/ticketwidget/';
+        $rootScope.baseURL = 'http://www.citypartytix.com/ticketwidget/';
         
-       // $rootScope.base_Url = 'http://localhost/tktwidget/registration/';
-        $rootScope.serverAddress = 'http://localhost/';
+       // $rootScope.base_Url = 'http://www.citypartytix.com/tktwidget/registration/';
+        $rootScope.serverAddress = 'http://www.citypartytix.com/';
         //$rootScope.eid = $location.search().eid;
         $rootScope.eid = eventid;
         $rootScope.waitListId = waitlistId;
@@ -127,6 +127,14 @@ angular.module('ticketsapp', [
 		$rootScope.facebookNTSdetails='';
 		$rootScope.buyerNTSData = true;
 		$rootScope.globalError = 'Unknown error occured. Please try reloading the page.';
+		$rootScope.profilePageInfo = {
+        		order_summary : 'Order Summary',
+        		ticket_name : 'Ticket Name',
+        		quantity : 'Quantity',
+        		price : 'Price',
+        		attendee_information :'Attendee information',
+        		profile:'Profile'
+        };
 		//console.log($rootScope.eventDetailsList);
         /*var sectime=$interval(function() {
             $rootScope.secondsRemaining = $rootScope.secondsRemaining - 1;

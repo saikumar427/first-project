@@ -23,7 +23,8 @@ angular.module('ticketsapp.controllers.payment', [])
             $rootScope.fromPage = 'payments';
             /* $rootScope.millis = (+new Date) + ($rootScope.totalMinutes * 60 * 1000);
              $rootScope.timeRemaining = $rootScope.totalMinutes * 60000;*/
-
+            
+            
             try {
                 $rootScope.timeWatcher();
             } catch (err) {}
@@ -31,7 +32,22 @@ angular.module('ticketsapp.controllers.payment', [])
             $rootScope.globalTimer = $interval(function() {
                 $rootScope.timeRemaining = $rootScope.millis - (+new Date);
             }, 500);
-
+            
+            /* Summary start */
+            $scope.summarydetails=false;
+            $scope.abc=false;
+            $scope.xyz=true;
+            $scope.showSummary = function(){
+            	$scope.abc=!$scope.abc;
+            	$scope.xyz=!$scope.xyz;
+            	$scope.summarydetails=!$scope.summarydetails;
+            	if($scope.summarydetails)
+            		$('#summarydetails').slideDown();
+            	else
+            		$('#summarydetails').slideUp();
+            };
+            /* Summary end */
+            
             /*if(fbavailable){
 			FB.getLoginStatus(function(response){
 				if(response.authResponse){

@@ -10,15 +10,6 @@ angular.module('ticketsapp.controllers.profile', [])
             } catch (err) {}
             
             $rootScope.css = 'active';$rootScope.css1 = 'active';$rootScope.css2 = "";$rootScope.css3 = "";$rootScope.css4 = "";
-
-            $scope.profilePageInfo = {
-            		order_summary : 'Order Summary',
-            		ticket_name : 'Ticket Name',
-            		quantity : 'Quantity',
-            		price : 'Price',
-            		attendee_information :'Attendee information',
-            		profile:'Profile'
-            };
             
             $rootScope.$on('eventName', function(event, args) {
                 $scope.message = args.message;
@@ -71,6 +62,7 @@ angular.module('ticketsapp.controllers.profile', [])
                 .success(function(data, status, headers, config) {
                     $scope.profileQuestions = data;
                     $scope.loadingQuestions = false;
+                    $rootScope.ticket_info = data.attendee_questions;
                     $rootScope.menuTitles = true;
                     $rootScope.totalMinutes = Number(data.timediffrence);
                     $rootScope.secondsRemaining = Number(data.secdiffrence);

@@ -190,11 +190,12 @@
                             <span ng-bind-html="tooltipHtml">
                             </span>
                         </div>
-                        <div class="row">
-                            <div class="col-md-1" ng-show="getSectionsLength() &gt; 1" style="width:10%;padding-top:7px;">
+                        
+                       <div class="row" ng-if="allSectionObjLength > 1">
+                            <div class="col-md-1" ng-show="getSectionsLength() > 1" style="width:10%;padding-top:7px;">
                                 Select Section :
                             </div>
-                            <div class="col-md-2" ng-show="getSectionsLength() &gt; 1">
+                            <div class="col-md-2" ng-show="getSectionsLength() > 1">
                                 <select class="form-control" ng-change="setSection(sectionId)" ng-init="initSectionId();setSection(sectionId)" ng-model="sectionId" ng-options="key as value for (key , value) in allSectionObj">
                                 </select>
                                 
@@ -208,8 +209,8 @@
                             </div>
                         </div>
                     </div>
-               <!--  <br ng-hide="ticketsData.items.length == 0 && !eventMetadata.is_recurring"> -->
-                <div style="width=100%;overflow: auto;">
+              	<br ng-hide="ticketsData.items.length == 0 && !eventMetadata.is_recurring">
+                <div style="width:100%;overflow: auto;">
                 <table ng-style="backgroundCSS">
                     <tr ng-repeat="row in getRowSize()">
                         <td ng-class="{'NA':!seats.completeseats['s_'+row+'_'+col]}" ng-repeat="col in getColSize()">
@@ -219,11 +220,11 @@
                             ng-mouseout="hideSeatDetails()" 
                             ng-mouseover="showSeatDetails(seats.completeseats['s_'+row+'_'+col],$event)" 
                             ng-src="{{getSeatImage(seats.completeseats['s_'+row+'_'+col])}}" 
-                            style="height: 17px; width: 17px;" />
+                            style="height: 14px; width: 14px;" />
                         </td>
                     </tr>
                 </table>
-                </div>
+               	</div> 
             </form>
             </hr>
             
