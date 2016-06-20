@@ -58,9 +58,9 @@
     
     
     
-    <div class=" col-md-6 col-sm-6 col-xs-12 arrow_box " ng-class='{"arrow-side":arrow_side,"arrow-side1":arrow_side1}'>
+    <div class=" col-md-6 col-sm-6 col-xs-12 arrow_box " ng-class='{"arrow-side":arrow_side,"arrow-side1":arrow_side1,"arrow-side2":arrow_side2,"arrow-side3":arrow_side3,"arrow-side4":arrow_side4,"arrow-side5":arrow_side5}'>
     <div ><b>Payment Method</b></div>
-    	<div class="row" ng-repeat="payment_type in paymentsData.payment_types" ng-hide="isTotalZero()" style="margin-bottom: 10px;" ng-init='arrow_side=$index==0?true:false'>
+    	<div class="row" ng-repeat="payment_type in paymentsData.payment_types" ng-hide="isTotalZero()" style="margin-bottom: 10px;">
     		
     		<div ng-if="payment_type.type == 'paypal'">
 	    		<div class="col-md-12 col-sm-12 col-xs-12">

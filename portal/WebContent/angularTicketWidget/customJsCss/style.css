@@ -243,19 +243,18 @@ hr {
 	border: 2px solid #ddd;
 	padding: 10px;	
 }
-
 .arrow-side {
 	position: relative;
 	background: #fff;
 	border: 2px solid #ddd;
 	padding: 10px;	
 }
-.arrow-side1 {
-	position: relative;
-	background: #fff;
-	border: 2px solid #ddd;
-	padding: 10px;	
+
+.arrow-side:after, .arrow-side:before{
+	top: 45%;
 }
+
+
 .arrow_box:after, .arrow_box:before {
 	right: 100%;
 	border: solid transparent;
@@ -265,8 +264,13 @@ hr {
 	position: absolute;
 	pointer-events: none;
 }
-.arrow-side:after, .arrow-side:before{
-	top: 22%;
+
+
+.arrow-side1 {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 10px;	
 }
 
 .arrow-side1:after, .arrow-side1:before {
@@ -279,9 +283,94 @@ hr {
 	pointer-events: none;
 }
 .arrow-side1:after, .arrow-side1:before{
-	top: 36%;
+	top: 32%;
 }
 
+/* second */
+
+.arrow-side2 {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 10px;	
+}
+
+.arrow-side2:after, .arrow-side2:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.arrow-side2:after, .arrow-side2:before{
+	top: 22%;
+}
+
+
+ /* third */
+
+.arrow-side3 {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 25px;	
+}
+
+.arrow-side3:after, .arrow-side3:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.arrow-side3:after, .arrow-side3:before{
+	top: 65%;
+}
+
+/*fouth*/
+.arrow-side4 {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 10px;	
+}
+
+.arrow-side4:after, .arrow-side4:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.arrow-side4:after, .arrow-side4:before{
+	top: 54%;
+}
+/*fiveth*/
+.arrow-side5 {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 10px;	
+}
+
+.arrow-side5:after, .arrow-side5:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.arrow-side5:after, .arrow-side5:before{
+	top: 38%;
+}
 
 
 .arrow_box:after {

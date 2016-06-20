@@ -1,6 +1,7 @@
 angular.module('ticketsapp.controllers.payment', [])
     .controller('payment', ['$scope', '$location', '$rootScope', '$http', '$timeout', '$interval', '$window',
         function($scope, $location, $rootScope, $http, $timeout, $interval,  $window) {
+    	
             if ($rootScope.eid) $rootScope.eid = $rootScope.eid;
             else $location.url('/event');
             $rootScope.css2 = 'active';
@@ -70,8 +71,15 @@ angular.module('ticketsapp.controllers.payment', [])
             }).success(function(data, status, headers, config) {
                 if (data.status == 'success') {
                     $scope.paymentsData = data;
-                    if($scope.paymentsData.payment_details.length==3)$scope.arrow_side=true;
-                    if($scope.paymentsData.payment_details.length==5)$scope.arrow_side1=true;
+                    if($scope.paymentsData.payment_details.length==3 && $scope.paymentsData.payment_types.length==1)$scope.arrow_side=true;
+                    else if($scope.paymentsData.payment_details.length==3 && $scope.paymentsData.payment_types.length==2)$scope.arrow_side1=true;
+                    else if($scope.paymentsData.payment_details.length==3 && $scope.paymentsData.payment_types.length==3)$scope.arrow_side2=true;
+                    else if($scope.paymentsData.payment_details.length==5 && $scope.paymentsData.payment_types.length==1)$scope.arrow_side3=true;
+                    else if($scope.paymentsData.payment_details.length==5 && $scope.paymentsData.payment_types.length==2)$scope.arrow_side4=true;
+                    else if($scope.paymentsData.payment_details.length==5 && $scope.paymentsData.payment_types.length==3)$scope.arrow_side5=true;
+                    else $scope.arrow_side=true;
+                    
+                    
                     $scope.scheme = data.scheme;
                     $rootScope.totalMinutes = Number(data.timediffrence);
                     $rootScope.secondsRemaining = Number(data.secdiffrence);
@@ -131,7 +139,7 @@ angular.module('ticketsapp.controllers.payment', [])
                 	      }
                 	    },
                 	    danger: {
-                	      label: "Cancel",
+                	      label: "<b>X</b>",
                 	      className: "btn-primary btn-sm",
                 	      callback: function() {
                 	        //Example.show("uh oh, look out!");
@@ -173,7 +181,7 @@ angular.module('ticketsapp.controllers.payment', [])
               	      }
               	    },
               	    danger: {
-              	      label: "Cancel",
+              	      label: "<b>X</b>",
               	      className: "btn-primary btn-sm",
               	      callback: function() {
               	        //Example.show("uh oh, look out!");
