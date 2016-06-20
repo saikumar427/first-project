@@ -8,6 +8,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             if ($rootScope.transactionId) $rootScope.transactionId = $rootScope.transactionId;
             else $location.url('/event');
             
+            $scope.confirmTID = $rootScope.transactionId;
             //$rootScope.css3 = 'active';$rootScope.css4 ="";
             $rootScope.css = "";$rootScope.css2 = "";$rootScope.css3 = "";$rootScope.css4 = "";$rootScope.css1 = "";
             
@@ -55,7 +56,7 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	$http.get($rootScope.baseURL+'widgetsocialshare.jsp?timestamp='+(new Date()).getTime(), {
             		params :{
             			eid:$rootScope.eid,
-                    	tid:$rootScope.transactionId,
+                    	tid:$scope.confirmTID,
             		}
             		
             	}).success(function(data, status, headers, config) {
@@ -358,12 +359,13 @@ angular.module('ticketsapp.controllers.confirmation', [])
             
             $scope.updateRegistrationNTSCode = function(ntscode){
             	$http.get($rootScope.serverAddress+'embedded_reg/updatentsaction.jsp?timestamp='+(new Date()).getTime(),{
-            		params:{ntscode:ntscode,eid:$rootScope.eid,tid:$rootScope.transactionId}
+            		params:{ntscode:ntscode,eid:$rootScope.eid,tid:$scope.confirmTID}
             	});
             };
             
             /* facebook share ends here   */
             
+            $rootScope.transactionId='';
         }
     ]);
 
