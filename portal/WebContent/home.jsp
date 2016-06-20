@@ -63,28 +63,30 @@
 				}
 			});
 		</script>
-		<style>
-			label {
+
+<style type="text/css">
+		/* for new dropdown start */
+		#myDropdown label {
 			font-weight: normal !important;
 			}
-			lable:hover{
+			#myDropdown lable:hover{
 			border:none !important;
 			}
 			
-			a {
+			#myDropdown a {
 			color: #333;
 			}
 			
-			a:hover {
+			#myDropdown a:hover {
 			color: #333;
 			border:transparent;
 			}
-			a:focus, a:hover {
+			#myDropdown a:focus, #myDropdown a:hover {
                 color: #23527c ;
                 text-decoration:none;
             }
-</style>
-<style type="text/css">
+            /* for new dropdown end */
+            
     body{
     	margin-top:0px !important;
     }
