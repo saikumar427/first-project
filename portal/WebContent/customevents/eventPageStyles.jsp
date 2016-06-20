@@ -434,6 +434,7 @@ i.fa-minus-square {
     right: -17px;
     width: 0;
     z-index: 10;
+    top: 0px;
 }
 
 .test-arrow > ul {
@@ -469,58 +470,85 @@ i.fa-minus-square {
 .test-arrow li:last-child a::before{
     content: none;
 }
-/* Large Devices, Wide Screens */
-/* @media only screen and (max-width : 1200px) {
-	.small-Icon{
-		display: none;
-	}
-} */
-/* Medium Devices, Desktops */
-/* @media only screen and (max-width : 992px) {
-	.small-Icon{
-		display: none;
-	}
-} */
+.steps-icon{
+	font-size: 18px !important;
+	position: relative;
+	top: 8px;
+}
+ul > li> a{
+	height: 35px;
+}
 
-/* Small Devices, Tablets */
-@media only screen and (max-width : 768px) {
-	.small-Title{
-		display:none;
-   	}
-   	.small-Icon{
-		display: show;
-	}
-   	.small-Icon{
-   		    margin: 10px 0px;
-   	}
-}
-/* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 540px) {
-	.small-Title{
-		display:none;
-	}
-   	.small-Icon{
-		display: show;
-	}
-}
-/* Extra Small Devices, Phones */ 
-@media only screen and (max-width : 480px) {
-	.small-Title{
-		display:none;
-   	}
-   	.small-Icon{
-		display: show;
-	}
-}
-/* Custom, iPhone Retina */ 
-@media only screen and (max-width : 320px) {
-	.small-Title{
-		display:none;
-   	}
-   	.small-Icon{
-		display: show;
-	}
-}
+@media only screen and (max-width : 1648px) {
+.steps-icon{
+    display:none;
+   }
+    }
+    
+    
+    @media only screen and (max-width : 1424px) {
+.steps-icon{
+    display:none;
+   }
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+.steps-icon{
+    display:none;
+   }
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+.steps-icon{
+    display:none;
+   }
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+.hide-on-small{
+    #display:none;
+    #font-size:10px;
+   }
+   .steps-icon{
+    display:none;
+   }
+    }
+ /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 540px) {
+.hide-on-small{
+    display:none;
+   }
+   .steps-icon{
+   display:block;
+    font-size:16px;
+   }
+    }
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+.hide-on-small{
+    display:none;
+   }
+   .steps-icon{
+    display:block;
+    font-size:18px;
+   }
+    }
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 320px) {
+         .hide-on-small{
+    display:none;
+   }
+   .steps-icon{
+    display:block;
+    font-size:18px;
+   }
+    }
+
+
  #tickets .widget-content{
  	padding: 0px 15px 15px 15px;
  }   
