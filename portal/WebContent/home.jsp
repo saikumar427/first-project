@@ -63,6 +63,27 @@
 				}
 			});
 		</script>
+		<style>
+			label {
+			font-weight: normal !important;
+			}
+			lable:hover{
+			border:none !important;
+			}
+			
+			a {
+			color: #333;
+			}
+			
+			a:hover {
+			color: #333;
+			border:transparent;
+			}
+			a:focus, a:hover {
+                color: #23527c ;
+                text-decoration:none;
+            }
+</style>
 <style type="text/css">
     body{
     	margin-top:0px !important;
@@ -804,13 +825,19 @@ li{
     
     				   <span style="display:block;">
 					 <%if(lang.equals("en-us")){%>
-					   <a style="/* position:relative; */top:470px;left: 8px;"><select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
+					   <%-- <a style="/* position:relative; */top:470px;left: 8px;"><select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
 		   				<option value="es-co" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
 		   				<option value="es-mx" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option>
 		   				<option value="es-es" <%if(lang.equals("es-es")){%>selected='selected' class="select-active"<%} %>>Spain - Spanish</option> 
 		    			<option value="en-us" <%if(lang.equals("en-us")){%>selected='selected' class="select-active"<%} %>>United States - English</option>             
 					 </select>      
-				 </a> 
+				 </a>  --%>
+				 <a><select   class="states"  name="" id="myDropdown" onchange="languageClick(value)" >
+			<option value="es-co" data-imagesrc="/main/images/flags/flag_colombia.png" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
+			<option value="es-mx" data-imagesrc="/main/images/flags/flag_mexico.png" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option> 
+			<option value="es-es" data-imagesrc="/main/images/flags/spainFlag.png" <%if(lang.equals("es-es")){%>selected='selected' class="select-active"<%} %>>Spain - Spanish</option>
+			<option value="en-us" data-imagesrc="/main/images/flags/flag_united_states.png" <%if(lang.equals("en-us")){%>selected='selected' class="select-active"<%} %>>United States - English</option>
+		</select></a> 
            	<%} %>
            	</span>
 
@@ -956,11 +983,27 @@ Copyright 2003-2016. Eventbee Inc. All Rights Reserved.
 
 <script src="<%=resourceaddress%>/main/js/bootstrap.min.js"></script>
 <script src="/main/js/select2.js"></script>
+<script type="text/javascript" src="/main/js/dropdown/ddslick.js"></script>
 <script src="/main/homepage/js/agency.js"></script> 
 <script src="/main/homepage/js/modernizr.js"></script>
-<script>
+<!-- <script>
         $(document).ready(function() {
             $("#states").select2();   
+        });
+</script> -->
+<script>
+var langins='<%=lang%>';
+      $(document).ready(function() {
+        	 $('#myDropdown').ddslick({
+        		onSelected: function(selectedData){
+        			console.log(JSON.stringify(selectedData.selectedData.value));
+        			if(selectedData.selectedData.value!=langins){  
+        				languageClick(selectedData.selectedData.value);
+        			}
+        				
+        		}   
+        	}); 
+        	
         });
 </script>
 <script>
@@ -971,9 +1014,9 @@ Copyright 2003-2016. Eventbee Inc. All Rights Reserved.
 
   ga('create', 'UA-60215903-1', 'auto');
   ga('send', 'pageview');
-
+  
 function signUpFormValidate(){
-		var beeid = $("#beeid").val().trim();  
+		var beeid = $("#beeid").val().trim();
 		var pwd = $("#pwdid").val().trim();  
 		var email = $("#emailid").val().trim();  
 		
@@ -1001,7 +1044,7 @@ function signUpFormValidate(){
 			$('#beeid').focus();
 		 return false;
 		}else{
-			var letters = /^[0-9a-zA-Z_]+$/;  
+			var letters = /^[0-9a-zA-Z_]+$/; 
 			if(!beeid.match(letters)){ 
 				$("#signupflderrors").html("Spaces, dashes, and special characters are not allowed.");
 				$("#signupflderrors").css('visibility','visible');
@@ -1383,6 +1426,18 @@ function showPricing() {
 				location.href="/main/eventbee-ticketing-kindle-promotion";
 			});
 
+</script>
+<script>
+$('#beeid').keypress(function (e) {
+	   var regex = new RegExp("^[a-zA-Z0-9_]+$");
+	   var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+	   if (regex.test(str)) {
+	       return true;
+	   }
+
+	   e.preventDefault();
+	   return false;
+	});
 </script>
 <!-- Facebook Conversion Code for fb-homepage -->
 <script>(function() {

@@ -208,7 +208,10 @@ chk=getQuestionsFortheTransactionlevel(eventid);
 
 int chk1 =chk.size();
 if(chk1 != 0){
-registrantdetails=getPropValue("rsvp.other.info",eventid);
+	if("104549894".equals(eventid))//Eventbee Kindle Fire Promotion eventid
+		registrantdetails="Your events & shipping information";
+	else
+		registrantdetails=getPropValue("rsvp.other.info",eventid);
 }
 if(Integer.parseInt(sure) ==0 && Integer.parseInt(notsure) ==0)
 registrantdetails="";

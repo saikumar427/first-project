@@ -206,19 +206,19 @@ int min=Integer.parseInt(db.getValue(i,"min_qty","0"));
 eventTicketObj.setOriginalMax(max);
 tkktid=db.getValue(i,"price_id","");
  int rem=0;
- if(maxmin.get("seat_"+tkktid)==null)
- {
+ /*if(maxmin.get("seat_"+tkktid)==null) //commented on 10-jun-2016 for waitlist with seating issue.
+ {*/
  try{
 	 rem= eventTicketObj.getTicketCapacity()- eventTicketObj.getTicketSoldQty()-Integer.parseInt(GenUtil.getHMvalue(maxmin,"hold_"+tkktid,"0"));
    if(rem<0)rem=0;
   }catch(Exception e){System.out.println("error in holding ticketinginfo "+e.getMessage());}
 
- if(rem<max)
+ if(rem<max && maxmin.get("seat_"+tkktid)==null)//no need update max if rem<max for seat assigned ticket. on 10-jun-2016 for waitlist with seating issue.
   {
 	max=rem;
 	if(rem<min){min=0;max=0;}
    }
- }
+ //}
  eventTicketObj.setRemainQty(rem);
  if(tktFormatMap !=null && tktFormatMap.containsKey(tkktid)){
 	 avaiabiltyMsgMap.put("capacity_"+tkktid, eventTicketObj.getTicketCapacity()+"");
@@ -270,10 +270,7 @@ else if("NOT_STARTED".equals((String)timeHm.get("startstatus")))
 eventTicketObj.setTicketStatus("NOT_STARTED");
 eventTicketObj.setMemberTicketFlag(false);
 eventTicketObj.setIsAtDoor(db.getValue(i,"is_at_door","Y"));
-if(maxmin.get("seat_"+tkktid)==null)
-	eventTicketObj.setWaitListType(db.getValue(i,"wait_list_type","NO"));
-else 
-	eventTicketObj.setWaitListType("NO");
+eventTicketObj.setWaitListType(db.getValue(i,"wait_list_type","NO"));
 eventTicketObj.setWaitListLimit(Integer.parseInt(db.getValue(i,"wait_list_max_qty","0")));
 groupTicketsArray.add(eventTicketObj);
 if(groupTicketsArray!=null){

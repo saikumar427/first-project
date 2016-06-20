@@ -70,8 +70,8 @@ public int SendEmail(String toemail,String fromemail,String subject,String uniti
 	String subject=request.getParameter("subject");
 	String personalmessage=request.getParameter("note");
 	personalmessage=GenUtil.processTextHtml(personalmessage,true);
-		
-	message=personalmessage;
+	message="<p>-------------<br/>This email is generated from the Contact Manager link on your event page. The name of the person who contacted you is - "+fromname+", and contact email is - "+fromemail+"<br/>-------------</p>";
+	message=message+personalmessage;
 	
 	String captchatxt=request.getParameter("captchamgr");
 	String text="";

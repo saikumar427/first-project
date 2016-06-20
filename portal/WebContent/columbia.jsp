@@ -19,7 +19,7 @@
 <link rel="icon" href="<%=resourceaddress%>/main/images/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="<%=resourceaddress%>/main/images/favicon.ico" type="image/x-icon" />
 <link type="text/css" rel="stylesheet" href="/main/css/bootstrap/bootstrap.min.css" />
-<link type="text/css" rel="stylesheet" href="/main/css/select2.css" />
+<!-- <link type="text/css" rel="stylesheet" href="/main/css/select2.css" /> -->
 <link type="text/css" rel="stylesheet" href="<%=resourceaddress%>/main/css/bootstrap/style-min.css" />
 <link type="text/css" rel="stylesheet" href="/main/font-awesome-4.0.3/css/font-awesome.min.css" />
 <script src="<%=resourceaddress%>/main/js/jquery-1.11.2.min.js"></script>
@@ -65,6 +65,27 @@
 				}
 			});
 		</script>
+<style>
+			label {
+			font-weight: normal !important;
+			}
+			lable:hover{
+			border:none !important;
+			}
+			
+			a {
+			color: #333;
+			}
+			
+			a:hover {
+			color: #333;
+			border:transparent;
+			}
+			a:focus, a:hover {
+                color: #23527c ;
+                text-decoration:none;
+            }
+</style>
 		<style>
 
 .footertabheader{
@@ -91,6 +112,7 @@
     color: #ccc;
     padding: 0;
 </style>
+
 <style type="text/css">
     body{
     	margin-top:0px !important;
@@ -744,19 +766,26 @@ li{
 			</div>
 		</div>
 		<div class="col-md-3 col-sm-3" style="margin-top:16px;">
-		<a>
+		 <%-- <a>
 		 <select name="" style="width:200px;height:36px !important;line-height:35px !important;margin-top:10px !important;padding: 0px !important;" id="states" onchange="languageClick(value)"> 
 		   	<option value="es-co" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
 			<option value="es-mx" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option> 
 		   	<option value="es-es" <%if(lang.equals("es-es")){%>selected='selected' class="select-active"<%} %>>Spain - Spanish</option>			
 		    <option value="en-us" <%if(lang.equals("en-us")){%>selected='selected' class="select-active"<%} %>>United States - English</option>             
 		</select>      
-			</a> 
+			</a>  --%> 
+			 <a><select   class="states"  name="" id="myDropdown" onchange="languageClick(value)" >
+			<option value="es-co" data-imagesrc="/main/images/flags/flag_colombia.png" <%if(lang.equals("es-co")){%>selected='selected' class="select-active"<%} %>>Colombia - Spanish</option>
+			<option value="es-mx" data-imagesrc="/main/images/flags/flag_mexico.png" <%if(lang.equals("es-mx")){%>selected='selected' class="select-active"<%} %>>Mexico - Spanish</option> 
+			<option value="es-es" data-imagesrc="/main/images/flags/spainFlag.png" <%if(lang.equals("es-es")){%>selected='selected' class="select-active"<%} %>>Spain - Spanish</option>
+			<option value="en-us" data-imagesrc="/main/images/flags/flag_united_states.png" <%if(lang.equals("en-us")){%>selected='selected' class="select-active"<%} %>>United States - English</option>
+		</select></a> 		
 		</div>
 		
 		
 	</div>
 </div>
+
 <hr style="margin: 0; background-color: #606060; height: 1px; border-top: 1px solid #282828;" />
 
 <div class="container" style="background-color: #474747; width: 100%;">
@@ -805,12 +834,28 @@ li{
 
 
 <script src="<%=resourceaddress%>/main/js/bootstrap.min.js"></script>
-<script src="/main/js/select2.js"></script>
+<!-- <script src="/main/js/select2.js"></script>  -->
+ <script type="text/javascript" src="/main/js/dropdown/ddslick.js"></script>
 <script src="/main/homepage/js/agency.js"></script> 
 <script src="/main/homepage/js/modernizr.js"></script>
-<script>
+<!-- <script>
         $(document).ready(function() {
             $("#states").select2();   
+        });
+</script> -->
+<script>
+var langins='<%=lang%>';
+      $(document).ready(function() {
+        	 $('#myDropdown').ddslick({
+        		onSelected: function(selectedData){
+        			console.log(JSON.stringify(selectedData.selectedData.value));
+        			if(selectedData.selectedData.value!=langins){  
+        				languageClick(selectedData.selectedData.value);
+        			}
+        				
+        		}   
+        	}); 
+        	
         });
 </script>
 	<script>
@@ -836,7 +881,7 @@ $('#eventSites').on('click', 'li', function(){
   ga('send', 'pageview');
 
 function signUpFormValidate(){
-		var beeid = $("#beeid").val().trim();  
+		var beeid = $("#beeid").val().trim(); 
 		var pwd = $("#pwdid").val().trim();  
 		var email = $("#emailid").val().trim();  
 		
@@ -1313,6 +1358,18 @@ function showPricing() {
 				}
 				
 			}
+</script>
+<script>
+$('#beeid').keypress(function (e) {
+	   var regex = new RegExp("^[a-zA-Z0-9_]+$");
+	   var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+	   if (regex.test(str)) {
+	       return true;
+	   }
+
+	   e.preventDefault();
+	   return false;
+	});
 </script>
 <!-- Facebook Conversion Code for fb-homepage -->
 <script>(function() {
