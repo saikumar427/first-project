@@ -1,7 +1,6 @@
 angular.module('ticketsapp.controllers.payment', [])
     .controller('payment', ['$scope', '$location', '$rootScope', '$http', '$timeout', '$interval', '$window',
         function($scope, $location, $rootScope, $http, $timeout, $interval,  $window) {
-
             if ($rootScope.eid) $rootScope.eid = $rootScope.eid;
             else $location.url('/event');
             $rootScope.css2 = 'active';
@@ -55,6 +54,8 @@ angular.module('ticketsapp.controllers.payment', [])
             }).success(function(data, status, headers, config) {
                 if (data.status == 'success') {
                     $scope.paymentsData = data;
+                    if($scope.paymentsData.payment_details.length==3)$scope.arrow_side=true;
+                    if($scope.paymentsData.payment_details.length==5)$scope.arrow_side1=true;
                     $scope.scheme = data.scheme;
                     $rootScope.totalMinutes = Number(data.timediffrence);
                     $rootScope.secondsRemaining = Number(data.secdiffrence);

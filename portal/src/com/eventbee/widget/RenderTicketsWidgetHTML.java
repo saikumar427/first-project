@@ -47,9 +47,8 @@ public class RenderTicketsWidgetHTML implements RenderWidgetHTML {
 		 			  vcontext.put("recurreningSelect",recurringselect);
 		 			  vcontext.put("recurringdateslabel",recurdateslabel);
 		 		  }
-		 		  if(isPriority) vcontext.put("isPriority","Yes");
 		 	   }
-			   
+		 	   if(isPriority) vcontext.put("isPriority","Yes");
 			   VelocityEngine ve= new VelocityEngine();
 			   String tktwdgttemplate=configHash.get("global_template_ticketingwidget");
 			   List<String> newTktWidgetList = new ArrayList<String>(Arrays.asList(GenUtil.getHMvalue(configMap,"new.ticket.widget","").split(",")));

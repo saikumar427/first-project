@@ -200,7 +200,53 @@ height:5px;
 
 
 
+.text-field-expand{
+	width:100%;
+	-webkit-transition: width 2s;
+	-moz-transition: width 2s;
+	-o-transition: width 2s;
+	transition: width 2s;
+}
+.text-field-collapse{
+	width:90%;
+	-webkit-transition: width 2s;
+	-moz-transition: width 2s;
+	-o-transition: width 2s;
+	transition: width 2s;
+}
+
+.cancel-order{
+	color: #ff3333;
+	cursor: pointer;
+}
+.cancel-order:HOVER{
+	color: #ff0000;
+}
+
+
+
+/* start--- */
+
+
+
+/* payment page css */
+
+
+
 .arrow_box {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 10px;	
+}
+
+.arrow-side {
+	position: relative;
+	background: #fff;
+	border: 2px solid #ddd;
+	padding: 10px;	
+}
+.arrow-side1 {
 	position: relative;
 	background: #fff;
 	border: 2px solid #ddd;
@@ -208,7 +254,6 @@ height:5px;
 }
 .arrow_box:after, .arrow_box:before {
 	right: 100%;
-	top: 23%;
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -216,6 +261,24 @@ height:5px;
 	position: absolute;
 	pointer-events: none;
 }
+.arrow-side:after, .arrow-side:before{
+	top: 22%;
+}
+
+.arrow-side1:after, .arrow-side1:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.arrow-side1:after, .arrow-side1:before{
+	top: 36%;
+}
+
+
 
 .arrow_box:after {
 	border-color: rgba(136, 183, 213, 0);
@@ -229,17 +292,18 @@ height:5px;
 	border-width: 36px;
 	margin-top: -36px;
 }
+
 @media only screen and (max-width : 768px) {
 .arrow_box {
 	position: relative;
 	background: #fff;
-	border: 2px solid #ddd;
+	border: 1px solid #ddd;
 	margin-top: 35px;
 }
 .arrow_box:after, .arrow_box:before {
 	bottom: 100%;
 	left: 50%;
-	top: -14%;
+	top: -26%;
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -257,8 +321,8 @@ height:5px;
 .arrow_box:before {
 	border-color: rgba(221, 221, 221, 0);
 	border-bottom-color: #ddd;
-	border-width: 33px;
-	margin-left: -33px;
+	border-width: 34px;
+	margin-left: -34px;
 }
 }
 /* Extra Small Devices, Phones */ 
@@ -326,27 +390,4 @@ height:5px;
 	margin-left: -33px;
 }
 }
-
-
-.text-field-expand{
-	width:100%;
-	-webkit-transition: width 2s;
-	-moz-transition: width 2s;
-	-o-transition: width 2s;
-	transition: width 2s;
-}
-.text-field-collapse{
-	width:90%;
-	-webkit-transition: width 2s;
-	-moz-transition: width 2s;
-	-o-transition: width 2s;
-	transition: width 2s;
-}
-
-.cancel-order{
-	color: #ff3333;
-	cursor: pointer;
-}
-.cancel-order:HOVER{
-	color: #ff0000;
-}
+/* payment page css */

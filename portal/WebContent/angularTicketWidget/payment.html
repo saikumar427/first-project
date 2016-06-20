@@ -15,9 +15,10 @@
 
     <div class=" col-md-5 col-sm-5 col-xs-12">
     
-    <div class="" ng-repeat="item in paymentsData.payment_details" ng-class="{'active':$last}">
-    	<div class="col-md-6 col-sm-6 col-xs-6 text-right grand-total">{{ item.label }} :</div>
-    	<div class="col-md-6 col-sm-6 col-xs-6 text-right grand-total" >{{ item.value | currency:paymentsData.currency_format }}</div>
+   
+    <div class="" ng-repeat="item in paymentsData.payment_details" ng-class="{'active':$last}" >
+    	<div class="col-md-8 col-sm-8 col-xs-6 text-right grand-total">{{ item.label }} :</div>
+    	<div class="col-md-4 col-sm-4 col-xs-6 text-right grand-total" >{{ item.value | currency:paymentsData.currency_format }}</div>
     	<div style="clear:both;"></div>
     </div>
     
@@ -34,9 +35,9 @@
     
     
     
-    <div class=" col-md-6 col-sm-6 col-xs-12 arrow_box">
+    <div class=" col-md-6 col-sm-6 col-xs-12 arrow_box " ng-class='{"arrow-side":arrow_side,"arrow-side1":arrow_side1}'>
     <div ><b>Payment Method</b></div>
-    	<div class="row" ng-repeat="payment_type in paymentsData.payment_types" ng-hide="isTotalZero()" style="margin-bottom: 10px;">
+    	<div class="row" ng-repeat="payment_type in paymentsData.payment_types" ng-hide="isTotalZero()" style="margin-bottom: 10px;" ng-init='arrow_side=$index==0?true:false'>
     		
     		<div ng-if="payment_type.type == 'paypal'">
 	    		<div class="col-md-12 col-sm-12 col-xs-12">

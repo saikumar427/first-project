@@ -301,14 +301,80 @@ i.fa-minus-square {
 }
 /* ------------------------------confirmation page share email fb tweet end-------------------------------------------------- */
 
+
+/* -------------------------confirmation page ticket start----------------------------------------- */
+.no-padding-th th{
+	padding: 0px !important
+}
+
+.no-padding-td td{
+	padding: 10px 0px !important
+}
+/* ------------------------------confirmation page ticket end-------------------------------------- */
+
+/* ------------------------------group ticket title start------------------------------------------ */
+.group-ticket-fieldset{
+	border: 1px solid <%=border%>;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+.group-ticket-legend{
+	font-family:<%=contentTextFont%>;
+	font-size:<%=contentTextSize%>px;
+	width: auto;
+	border-bottom: 0px;
+	margin-bottom: 5px;
+}
+/* -----------------------------group ticket title start------------------------------------------- */
+
+.form-control{
+	height: 30px;
+	border-radius: 0px;
+}
+.order-summary{
+	font-size:<%=headerTextSize%>px;
+	#color:<%=headerText%>;
+}
+.sub-module{
+	#border-left: 4px solid #ddd;
+    padding: 0px 40px 0px 40px;
+    #border-right: 4px solid #ddd;
+}
+
+
+.active .grand-total{
+	font-weight: bold;
+	background-color: <%=header%>;
+	<%-- border:1px solid <%=border%>; --%>
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color:<%=headerText%>;
+}
+#no-bottom .modal-footer{
+	border: 0px;
+	text-align: center;
+	padding-top: 0px;
+}
+#no-bottom .modal-header{
+	border-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+
+/* start--- */
+
+
 /* ------------------------------For top menu start-------------------------------------------------- */
 #conformation{
 	border-right: 1px solid <%=border%>;
 }
 .margin-right-left{
-	    margin: 0px -26px 0px -18px;
+	    #margin: 0 -24px 0 -17px;
 }
-
+.widget-content{
+	padding:0px !important;
+}
 .test-arrow> ul {
    	padding:0px;
 	width:100%;
@@ -320,8 +386,8 @@ i.fa-minus-square {
     #height: 30px;
     height: 0px;
     line-height: 35px;
-    width: 24.8%;
-    margin: 0px 0px 0px -7px!important; 
+    width: 25%;
+    margin: 0 -2px 0 -2px !important;
     #text-indent: 15px;
     position: relative;
 	border:0px solid #FFFFFF;
@@ -332,28 +398,48 @@ i.fa-minus-square {
 }
 .test-arrow> ul li:before {
 	border-color: transparent transparent transparent <%=border%>;
-    border-style: solid;
+    border-style:solid;
     border-width: 18px 0 18px 18px;
     content: " ";
     height: 0;
-    left: 1px;
+    left: 0px;
     position: absolute;
     width: 0;
     z-index: 0
 }
+.test-arrow ul{
+	margin-bottom:7px !important;
+}
+#leftList{
+	margin:0 15px 15px 15px !important;
+}
 .test-arrow> ul li:first-child:before {
     border-color: transparent;
+}
+.alert {
+    font-size: 12px;
+    padding: 15px;
+    margin-bottom: 30px;
+    border: 1px solid transparent;
+    border-radius: 0px;
 }
 .test-arrow> ul li a:after {
 	border-color: transparent transparent transparent <%=header%>;
     border-style: solid;
-    border-width: 18px 0 17px 17px;
+    border-width: 18px 0 17px 18px;
     content: " ";
     height: 0;
     position: absolute;
-    right: -15px;
+    right: -17px;
     width: 0;
     z-index: 10;
+}
+
+.test-arrow > ul {
+    font-size: 12px;
+    padding: 0;
+    text-align: center;
+    width: 100%;
 }
 .test-arrow> ul li.active a {
     background: <%=content%>;
@@ -450,61 +536,16 @@ i.fa-minus-square {
 }
 /* ------------------------------For top menu end-------------------------------------------------- */
 
-/* -------------------------confirmation page ticket start----------------------------------------- */
-.no-padding-th th{
-	padding: 0px !important
-}
-
-.no-padding-td td{
-	padding: 10px 0px !important
-}
-/* ------------------------------confirmation page ticket end-------------------------------------- */
-
-/* ------------------------------group ticket title start------------------------------------------ */
-.group-ticket-fieldset{
-	border: 1px solid <%=border%>;
-    margin: 0 2px;
-    padding: 0.35em 0.625em 0.75em;
-}
-
-.group-ticket-legend{
-	font-family:<%=contentTextFont%>;
-	font-size:<%=contentTextSize%>px;
-	width: auto;
-	border-bottom: 0px;
-	margin-bottom: 5px;
-}
-/* -----------------------------group ticket title start------------------------------------------- */
-
-.form-control{
-	height: 30px;
-}
-.order-summary{
-	font-size:<%=headerTextSize%>px;
-	#color:<%=headerText%>;
-}
-.sub-module{
-	#border-left: 4px solid #ddd;
-    padding: 0px 40px 0px 40px;
-    #border-right: 4px solid #ddd;
-}
 
 
-.active .grand-total{
-	font-weight: bold;
-	background-color: <%=header%>;
-	<%-- border:1px solid <%=border%>; --%>
-    padding-top: 10px;
-    padding-bottom: 10px;
-    color:<%=headerText%>;
-}
-#no-bottom .modal-footer{
-	border: 0px;
-	text-align: center;
-	padding-top: 0px;
-}
-#no-bottom .modal-header{
-	border-bottom: 0px;
-	padding-bottom: 0px;
-}
+
+
+
+
+
+
+
+
+
+
 </style>
