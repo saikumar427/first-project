@@ -13,14 +13,14 @@ public class GetTicketsThread implements Runnable{
 		paramMap = hm;  
     }
 	public void run() {
-		try{
+		/* try{
 			com.eventbee.util.CoreConnector cc1=new com.eventbee.util.CoreConnector(com.eventbee.general.EbeeConstantsF.get("CONNECTING_PDF_URL",serveraddress+"/attendee/utiltools/sendPdfMail.jsp"));
 			cc1.setArguments(paramMap);
 		    cc1.setTimeout(30000);
 		    String st=cc1.MGet();
 		}catch(Exception e){
 			System.out.println("Error in GetTicketsThread: "+e.getMessage());
-		}
+		} */
 	}
 
 }

@@ -5,6 +5,7 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
     	$scope.dropDisbleMay=true;
     	$scope.rsvprecurring="";
     	$scope.attendlimit="";
+    	$scope.moreDivClick=false;
     	$scope.notsurelimit="";
     	$scope.otherProfileDiv=false;
     	$http.get($rootScope.baseURL+ 'rsvpoptions.jsp',{
@@ -35,17 +36,28 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
         	 $scope.defaultmsg="Select Count";
         	 $scope.promotionsection=data.promotionsection;
         	 $scope.promotionCheckBox=data.promotionsection=='No'?false:true;
+        	 $scope.backToSelectDate=false;
+        	 $scope.attOpt=false;
+    		 $scope.mayOpt=false;
         	 if($scope.notattenAllowed=='N' && $scope.notsurelimit=='0' && $scope.attendlimit=='1' && $scope.isRecirring!="Y"){
             	 $scope.OneAttendee=true;
             	 $scope.profileHide=true;
             	 $scope.validate(1,0,'yes');
              }
+        	 
         	 if($scope.isRecirring=="Y"){
+        		 $scope.selected = {value: 1000};     
+        		 $scope.selected1 = {value: 1000};
         		 $scope.radioButtons=false;
         		 $scope.date_default_option=data.defaultDrop;
         		 $scope.selectmsg=data.rsvprecdateslable;
         		 $rootScope.selectDate=data.dates;
-        		 $scope.$watch('selectedDate.value', function(newVal, oldVal) {
+        		 $scope.moreDates=$rootScope.selectDate.length;
+        		 $scope.moreDiv=false;
+        		 $scope.moreDivClick1=false;
+        		 if($scope.moreDates>10)
+        			 $scope.moreDiv=true;
+        		 /*$scope.$watch('selectedDate.value', function(newVal, oldVal) {
                      if (newVal == null){
                     	 $scope.radioButtons=false;
                      }
@@ -64,7 +76,7 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
                          }
                          
                      }
-                 });
+                 });*/
         		 }
         	 
         	 }
@@ -79,14 +91,18 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
         });
     	
     	 $scope.validate=function(sureattend,notsureattend,option){
+    		 $scope.loadingQuestions=false;
     		 $scope.profileDiv=true;
     		 if(sureattend==null || notsureattend==null ){
     			 $scope.notsureattend=0;notsureattend=0;
     			 $scope.profileDiv=false;
     			 return;
     		 }
-    		 if(sureattend==0 && notsureattend==0)
-    		 $scope.dropDisbleMay=$scope.dropDisble=true;
+    		 if(sureattend==0 && notsureattend==0){
+    			 $scope.attOpt=false;
+    			 $scope.mayOpt=false;
+    			 $scope.dropDisbleMay=$scope.dropDisble=true;
+    		 }
     		 $scope.sureattend=sureattend;
     		 $scope.notsureattend=notsureattend;
     		 $scope.option=option;
@@ -135,6 +151,7 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
     	    		 			console.log(JSON.stringify($scope.profileQuestions));
     	    		 		}else if($scope.option=='yes'){
     	    		 			$scope.profileHide=false;
+    	    		 			if(sureattend==1 && $scope.attendlimit==1 || $scope.notsurelimit==1 && notsureattend==1)$scope.profileHide=true;
     	    		 			 $scope.surequestions=data.surequestions;
     	    		 			$scope.notsurequestions=data.notsurequestions;
     	    		 			$scope.notAttquestions=data.questions;
@@ -192,7 +209,7 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
         	    		 			console.log("otherQuestions : "+JSON.stringify($scope.otherQuestions));
     	    		 			}
     	    		 		}
-    	    		 			
+    	    		 		$scope.loadingQuestions=false;
     	    		 	}
     	    	 });
     	    	 
@@ -241,21 +258,26 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
                 	  $scope.submitStatus=submitData.Status;
                 	  $scope.responsetype=submitData.responsetype;
                 	  $scope.transactionid=submitData.transactionid;
-                	  //rsvpconformation.jsp
-                 	 $http.get('http://localhost/angularTicketWidget/rsvp/rsvpconformation.jsp', {
-                         params: {
-                        	 eventid:$rootScope.eid,
-                        	 rsvp_event_date: $rootScope.eventDate,
-                        	 sure:$scope.sureattend,
-                        	 notsure:$scope.notsureattend,
-                        	 transactionid:$scope.transactionid,
-                        	 emailid:$scope.emailid,
-                        	 ordernumber:$scope.ordernumber,
-                         }
-                     }).success(function(submitData, status, headers, config) {
-                    	 $scope.confirmationPage=true;
-                    	 $scope.confirmationPageData=submitData;
-                     });
+                	  if($scope.submitStatus=="Success")
+                		  if($scope.responsetype=="N"){
+                			  $scope.confirmationPage=true;
+                	  		  $scope.confirmationPageData=$scope.submitDataMsg+"<br/><br/><a href='' onClick='refreshPage()' align='center'>Back To Event Page</a>";
+                		  }
+                		  else	  
+		                 	  $http.get('http://localhost/angularTicketWidget/rsvp/rsvpconformation.jsp', {
+		                         params: {
+		                        	 eventid:$rootScope.eid,
+		                        	 rsvp_event_date: $rootScope.eventDate,
+		                        	 sure:$scope.sureattend,
+		                        	 notsure:$scope.notsureattend,
+		                        	 transactionid:$scope.transactionid,
+		                        	 emailid:$scope.emailid,
+		                        	 ordernumber:$scope.ordernumber,
+		                         }
+		                     }).success(function(submitData, status, headers, config) {
+		                    	 $scope.confirmationPage=true;
+		                    	 $scope.confirmationPageData=submitData;
+		                     });
                   });
     	 };
     	 $scope.rsvpcompleted=function(){
@@ -272,18 +294,63 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
     			}
     			return false;
     	 }
-    	 $scope.getRsvprecurrProfileVm=function(){
-    		 
-    	 }
+    	 $scope.dateClick=function(date,ix){
+    		 if(ix==1)$scope.selected1 = {value: 1000};
+    		 else if(ix==2)$scope.selected = {value: 1000};
+    		 $scope.isRecirring=false;
+    		 $scope.backToSelectDate=true;
+    		 $scope.selectedDate=date;
+    		 $rootScope.eventDate = date;
+             $scope.radioButtons=true;
+             $scope.profileDiv=false;
+             $scope.notsureattend=0;
+             $scope.sureattend=0;
+             $scope.rsvpRecurring=false;
+             $scope.dropDisbleMay=$scope.dropDisble=true;
+             $scope.loadingQuestions=true;
+             if($scope.notattenAllowed=='N' && $scope.notsurelimit=='0' && $scope.attendlimit=='1'){
+            	 $scope.OneAttendee=true;
+            	 $scope.profileHide=true;
+            	 $scope.validate(1,0,'yes');
+             }
+             
+    	 };
+    	 $scope.moreDivClick =function(){
+    		 $scope.moreDiv=false;
+    		 $scope.moreDivClick1=true;
+    	 };
+    	 $scope.refresh = function(){
+    		 $scope.active=true;
+    		 $scope.isRecirring=true;
+    		 $scope.radioButtons=false;
+    		 $scope.moreDiv=false;
+    		 $scope.moreDivClick1=true;
+    	 };
     	 
     	 $scope.getList=function(range,disable){
+    		 if($scope.notsurelimit=='1' && disable=="maybeAttend"){
+    			 $scope.mayOpt=false;
+    			 $scope.attOpt=false;
+            	 $scope.validate(0,1,'yes');
+            	 return;
+             }
+    		 if($scope.attendlimit=='1' && disable=="attend"){
+    			 $scope.attOpt=false;
+    			 $scope.mayOpt=false;
+            	 $scope.validate(1,0,'yes');
+            	 return;
+             }
     		 if(disable=="attend"){
+    			 $scope.attOpt=true;
+    			 $scope.mayOpt=false;
     			 $scope.dropDisble=false;
     			 $scope.notsureattend=0;
     			 $scope.dropDisbleMay=true;
     			 $scope.profileDiv=false;
     		 }
     		 else if(disable="maybeAttend"){
+    			 $scope.attOpt=false;
+    			 $scope.mayOpt=true;
     			 $scope.dropDisble=true;
     			 $scope.sureattend=0;
     			 $scope.dropDisbleMay=false;
@@ -301,7 +368,14 @@ angular.module('ticketsapp.controllers.rsvptickets', [])
         return function(x) {
         	//24 June 2016 09:00 AM-10:00 AM (Fri)          Mon, Apr 29, 7PM
         	var date=x;
-        	  x =  date.split("(")[1].split(")")[0]+" "+date.split(" ")[1]+", "+date.split(" ")[0]+", "+date.split(" ")[3].split(":")[0]+date.split(" ")[4].split("-")[0];
+        	if(x=="" || x==null)return "";
+        	   var day =  date.split("(")[1].split(")")[0]+", ";//Mon, 
+        	   var month=date.split(" ")[1]+" "+date.split(" ")[0]+", ";//Apr 29,
+        	   var time=date.split(" ")[3].split(":")[0];
+        	        if(time.charAt(0)=="0")
+        	        	time=time.charAt(1);
+               var amPm =date.split(" ")[4].split("-")[0]; //AM
+               x=day+month+time+amPm;
             return x;
         };
     });

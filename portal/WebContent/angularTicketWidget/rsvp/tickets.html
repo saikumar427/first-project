@@ -9,65 +9,87 @@
     margin: 10px;
     padding: 5px 0;
     }
+    .date-btn-active{
+	  border:1px solid #ddd;
+	background-color: #f5f5f5;
+	color:#000;
+		}
+	.date-btn:hover, .date-btn:active,.date-btn:focus{
+	border:1px solid #ddd;
+	background-color: #f5f5f5;
+	color:#000;
+			
+	}
+	.date-btn:hover:active:focus{border:1px solid #ddd;
+	background-color: #f5f5f5;}
 </style>
 <div ng-show="do_continue ">
    <div  ng-hide="confirmationPage">
+   
    <!-- recurring event block start -->
    <div class="text-center" ng-show="isRecirring">
       <div ng-show="selectError" style="color:red;">{{reason}}</div>
       <br>
-      <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12" style="float:none;margin: 0 auto;">
-         {{selectmsg}}
-         <select class="form-control" id="recurDate"  style="margin-bottom: 10px;" ng-model="selectedDate.value" ng-options="date.name as date.value for date in selectDate">
-            <option value="">
-               {{date_default_option }}
-            </option>
-         </select>
+     
+      <!--  for REcurring dates display  -->
+      <div ng-click="dateClick(date.name,1);selected.value = $index" ng-class="{'date-btn-active':selected.value==$index}" class="date-btn col-md-2 col-sm-2 col-xs-4" ng-repeat=" date in selectDate | limitTo : 10">
+             <span   >{{date.name | dateFormat }}</span>  
       </div>
-      
+      <div ng-show="moreDiv" style="text-align: right;"><span ng-click="moreDivClick()" style="cursor: pointer;color: blue;">More..</span></div>
+      <div ng-show="moreDivClick1" ng-class="{'date-btn-active':selected1.value==$index}" ng-click="dateClick(date.name,2);selected1.value = $index"" class="date-btn col-md-2 col-sm-2 col-xs-4" ng-repeat=" date in selectDate | limitTo :moreDates: 10">
+             <span >{{date.name | dateFormat }} </span>  
+      </div>
+      <!--  REcurring dates display End -->
    </div>
-   <div ng-show="radioButtons">
-	   <div class="col-md-5 col-sm-5 col-xs-12" ng-hide="OneAttendee">
-	      <div class="col-md-5 col-sm-5 col-xs-12" >
+   <!-- recurring event block End -->
+   
+  
+   <div ng-show="radioButtons" ><br>
+ 
+       <div ng-show="backToSelectDate" class="col-md-12 col-sm-12 col-xs-12" style="padding:0px;margin:0px">
+       
+       <div class="col-md-3 col-sm-3" style="padding:20px 0px 0px 0px;"><span ng-click="refresh()" style="cursor: pointer;color: blue;"><<</span>select date and time </div>
+       <div class="col-md-3 col-sm-3" style="padding:0px;" > <div class="date-btn date-btn-active" style="text-align:center"> {{selectedDate | dateFormat}}</div> </div>
+       
+        </div>
+      
+        
+         <!--  Radio buttons disply start -->
+         <div class="col-md-12 col-sm-12 col-xs-12" style="padding:0px;margin:0px">
+	   <div class="col-md-5 col-sm-5 col-xs-12" ng-hide="OneAttendee" style="padding:0px;" >
+	      <div class="col-md-4 col-sm-4 col-xs-12" style="padding:0px;">
 		      <input type="radio" ng-model="rsvpRecurring" value="attend" ng-click=getList(attendlimit,rsvpRecurring);>
 		      {{attending}} 
 		      </div>
-			 <div class="col-md-7 col-sm-7 col-xs-12" >
-			<select class="form-control" ng-disabled="dropDisble" ng-model="sureattend" ng-change="validate(sureattend,0,'yes');" ng-options="y for y in list"><option value="">{{defaultmsg }}</option></select>
+			 <div class="col-md-5 col-sm-5 col-xs-12" style="padding:0px;">
+			<select class="form-control" ng-disabled="dropDisble" ng-show="attOpt" ng-model="sureattend" ng-change="validate(sureattend,0,'yes');" ng-options="y for y in list"><option value="">{{defaultmsg }}</option></select>
 	      </div>
 	   </div>
 	   
-	   <div ng-show="isMaybeAttend" >
-	     	<div class="col-md-5 col-sm-5 col-xs-12" >
-	      		<div class="col-md-4 col-sm-4 col-xs-12" >
+	   <div ng-show="isMaybeAttend">
+	     	<div class="col-md-5 col-sm-5 col-xs-12" style="padding:0px;" >
+	      		<div class="col-md-3 col-sm-3 col-xs-12" style="padding:0px;">
 		      <input type="radio" ng-model="rsvpRecurring" value="maybeAttend" ng-click=getList(notsurelimit,rsvpRecurring);>
 		      {{maybe}}
 		      </div>
-		       <div class="col-md-8 col-sm-8 col-xs-12" >
-			<select class="form-control" ng-disabled="dropDisbleMay" ng-model="notsureattend" ng-change="validate(0,notsureattend,'yes');" ng-options="y for y in list"><option value="">{{defaultmsg }}</option></select></span>
+		       <div class="col-md-5 col-sm-5 col-xs-12" style="padding:0px;"  >
+			<select class="form-control" ng-disabled="dropDisbleMay" ng-show="mayOpt" ng-model="notsureattend" ng-change="validate(0,notsureattend,'yes');" ng-options="y for y in list"><option value="">{{defaultmsg }}</option></select></span>
 	   </div>
 	   </div>
 	   </div>
-	   <div class="col-md-2 col-sm-2 col-xs-12" ng-show="isNotAttend">
+	   <div class="col-md-2 col-sm-2 col-xs-12" ng-show="isNotAttend" style="padding:0px;">
 	      <label>
 		      <input type="radio" ng-model="rsvpRecurring" ng-click="validate(0,0,'no')" value="notAttend">
 		      {{notAttending}}
 	    </label>
 	   </div>
+	   </div>
 	   <div style="clear: both;"></div>
-
-   <form class="form-horizontal" name="questionForm" ng-submit="sub()" ng-hide="formSH">
-   			 <!-- <div ng-repeat="ticket in profileQuestions" ng-init="ticketIndex = $index"> -->
-   			 <!-- <div ng-show="profileDiv">
-                 <div  ng-repeat="profile in dataq" ng-init="profileIndex = $index"> 
-                    <h3 class="bodyheaders">{{profileName}} <span ng-hide="pCount">#{{ $index+1 }}</span></h3>
-					<div ng-repeat="question in profileQuestions">
-                        <div ng-include="'/angularTicketWidget/rsvp/attendeeQuestions.html'"></div>
-                    </div>
-               </div>  -->
-               
-               
-             
+    <!--  Radio buttons disply End -->
+    
+     
+   <form class="form-horizontal" name="questionForm" ng-submit="sub()" ng-hide="formSH" ng-hide="loadingQuestions">
+             <!--  ProfilePage  disply start -->
                <div ng-show="profileDiv">
                <div ng-repeat="ticket in profileQuestions" ng-init="ticketIndex = $index">
                
@@ -98,6 +120,7 @@
             	<button class="btn btn-warning pull-right" type="submit" ng-hide="loadingSubmit">continue</button>
             </div>
                 </div>
+                <!--  ProfilePage  disply End -->
              </div>
             <!-- </div> -->
     </form>

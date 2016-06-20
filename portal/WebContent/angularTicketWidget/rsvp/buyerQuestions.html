@@ -45,74 +45,74 @@
 <!-- Type is text area end -->
 
 <!-- Type is radio start -->
-<div class="form-group" ng-if="question.type=='radio'" ng-form="subForm" ng-init="tempoptions=question.options">
+<div class="form-group" ng-if="question.type=='radio'" ng-form="subForm" ng-init="tempoptions=question.Options">
    <div class="col-md-12 col-sm-12">
       <label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='Y'">*</span>
       <div class="" ng-class="{'has-error':subForm.name.$error.required}">
-         <span ng-repeat="option in question.options">
+         <span ng-repeat="option in question.Options">
          <label class="radio-inline" >
-         <input type="radio" name="{{ question.id }}" class="button-style" ng-model="question.response" value="{{option.value}}" 
-         ng-required="question.required=='Y'" ng-init="question.response = getBuyerAnswers(question.id,question.type);" />{{ option.display }}
+         <input type="radio" name="{{ question.id }}" class="button-style" ng-model="question.response" value="{{option.Value}}" 
+         ng-required="question.required=='Y'" ng-init="question.response = getBuyerAnswers(question.id,question.type);" />{{ option.Display }}
          </label><br/>
          </span>
       </div>
    </div>
    <!-- <div class="col-md-12 col-sm-12" ng-show="tempoptions" ><br></div> -->
-   <div  ng-repeat="subqns in tempoptions" class="col-md-12 col-sm-12 sub-module">
+   <!-- <div  ng-repeat="subqns in tempoptions" class="col-md-12 col-sm-12 sub-module">
       <div ng-if="question.response==subqns.value" ng-animate=" 'animate'" class="animate-enter animate-enter-active" >
       <div class="col-md-12 col-sm-12"><br></div>
          <span ng-repeat="subQuestion in subqns.sub_questions">
             <div ng-include="'/angularTicketWidget/subBuyerQuestions.html'" ></div>
          </span>
       </div>
-   </div>
+   </div> -->
 </div>
 <!-- Type is radio end -->
 
 <!-- Type is check box start -->
-<div class="form-group" ng-if="question.type=='checkbox'" ng-form="subForm" ng-init="checkboxoptions=question.options">
+<div class="form-group" ng-if="question.type=='checkbox'" ng-form="subForm" ng-init="checkboxoptions=question.Options">
 <span ng-init="question.response={}; answers=getBuyerAnswers(question.id,question.type)"></span>
    <div class="col-md-12 col-sm-12">
       <label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='Y'">*</span>
-      <div ng-repeat="option in question.options">
+      <div ng-repeat="option in question.Options">
          <label class="checkbox-inline">
-         <input type="checkbox" name="checkboxgroup[]" ng-init="question.response[option.value] = answers.indexOf(option.value) > - 1 ?   true :  false"
-         ng-model="question.response[option.value]" ng-required="(question.required == 'Y' && !atleastOneTrue(question.response))" />{{ option.display }}
+         <input type="checkbox" name="checkboxgroup[]" ng-init="question.response[option.Value] = answers.indexOf(option.Value) > - 1 ?   true :  false"
+         ng-model="question.response[option.Value]" ng-required="(question.required == 'Y' && !atleastOneTrue(question.response))" />{{ option.Display }}
          </label><br/>
       </div>
    </div>
    <!-- <div class="col-md-12 col-sm-12" ng-show="checkboxoptions" ><br></div> -->
-   <div ng-repeat="subqns in checkboxoptions" class="col-md-12 col-sm-12 sub-module">
+   <!-- <div ng-repeat="subqns in checkboxoptions" class="col-md-12 col-sm-12 sub-module">
       <div ng-if="question.response[subqns.value]==true" ng-animate=" 'animate'" class="animate-enter animate-enter-active">
       <div class="col-md-12 col-sm-12"><br></div>
          <span ng-repeat="subQuestion in subqns.sub_questions">
             <div ng-include="'/angularTicketWidget/subBuyerQuestions.html'" ></div>
          </span>
       </div>
-   </div>
+   </div> -->
 </div>
 <!-- Type is check box end -->
 
 <!-- Type is select box start -->
-<div class="form-group" ng-if="question.type=='select'" ng-form="subForm" ng-init="selectoptions=question.options">
+<div class="form-group" ng-if="question.type=='select'" ng-form="subForm" ng-init="selectoptions=question.Options">
    <div class="col-md-12 col-sm-12">
       <label ng-bind-html="question.label" class="question-title"></label> <span ng-show="question.required=='Y'">*</span>
       <div class="" ng-class="{'has-error':subForm.name.$error.required && !subForm.name.$pristine}">
-         <select class="form-control" name="name" ng-model="question.response" ng-init="question.response = getBuyerAnswers(question.id,question.type);" 
-         ng-required="question.required=='Y'" ng-options="option.value as option.display for option in question.options">
+         <select class="form-control" name="name" ng-model="question.response" 
+         ng-required="question.required=='Y'" ng-options="option.Value as option.Display for option in question.Options">
             <option value="">-- Select an option --</option>
          </select>
          <p ng-show="subForm.name.$error.required && !subForm.name.$pristine" class="help-block">Select an option</p>
       </div>
    </div>
    <!-- <div class="col-md-12 col-sm-12" ng-show="selectoptions" ><br></div> -->
-   <div ng-repeat="subqns in selectoptions" class="col-md-12 col-sm-12 sub-module">
+   <!-- <div ng-repeat="subqns in selectoptions" class="col-md-12 col-sm-12 sub-module">
       <div ng-if="question.response==subqns.value" ng-animate="'animate'" class="animate-enter animate-enter-active">
       <div class="col-md-12 col-sm-12"><br></div>
          <span ng-repeat="subQuestion in subqns.sub_questions">
             <div ng-include="'/angularTicketWidget/subBuyerQuestions.html'" ></div>
          </span>
       </div>
-   </div>
+   </div> -->
 </div>
 <!-- Type is select box start -->

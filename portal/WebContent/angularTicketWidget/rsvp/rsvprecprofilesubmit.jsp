@@ -166,11 +166,46 @@ void fillTransactionLevelQuestions(CustomAttribute[] attributeSet,ArrayList attr
 			String type=cb.getAttributeType();
 			ArrayList options=cb.getOptions();
 			if("checkbox".equals(type)||"radio".equals(type)||"select".equals(type)){
-				String responses[]=req.getParameterValues("q_p_"+questionid);
+				String data="";String temp;String tempval[];String responses[]=new String[100];
+					try{
+					
+					if("checkbox".equals(type)){
+							if(buyerJSON.has("q_p_"+questionid)){
+								 data=buyerJSON.getJSONObject("q_p_"+questionid).toString();
+								  data=data.replace("{", "");data=data.replace("}", ""); 
+								   if(data.split(",").length!=1){//  "2":true,"1":true
+									   tempval=data.split(",");
+									   for(int k=0;k<tempval.length;k++){  //"2":true
+										 if("true".equals(tempval[k].split(":")[1])){
+											 responses[k]=tempval[k].split(":")[0].replace("\"", "");
+										 }
+									   }
+								   }else{   //{"2":true}
+									   String abc=data.split(":")[0].replace("\"", "");
+										  if("true".equals(data.split(":")[1])){
+											  System.out.println("abc :  "+abc);
+											  responses[0]=abc;
+										  }
+								   }
+								   
+							}
+					 }
+					else if("radio".equals(type) || "select".equals(type)){
+						System.out.println("radio "+type+" questionid "+questionid + "  ---  "+buyerJSON.getString("q_p_"+questionid));
+						try{
+						System.out.println(" radio  "+buyerJSON.getString("q_p_"+questionid).toString());}catch(Exception e){e.printStackTrace();}
+						responses[0]=buyerJSON.getString("q_p_"+questionid).toString();
+					}
+					}
+				catch(Exception e){
+				}
+				//String responses[]=req.getParameterValues("q_p_"+questionid);
 				if(responses!=null){
 				String responsesVal[]=profiledbaction.getOptionVal(options,responses);
 				shortresponse=GenUtil.stringArrayToStr(responses,",");
+				System.out.println("shortresponse :  "+shortresponse);
 				bigresponse=GenUtil.stringArrayToStr(responsesVal,",");
+				System.out.println("bigresponse :  "+bigresponse);
 				}
 			}
 		else{
@@ -203,11 +238,9 @@ void fillTransactionLevelQuestions(CustomAttribute[] attributeSet,ArrayList attr
 
 void fillResponseLevelQuestions(CustomAttribute[] attributeSet,ArrayList attribsList,ProfileActionDB profiledbaction,HttpServletRequest req,String attribsetid,String eventid,String pattern,int count,String transid,String promotiontype,JSONObject buyerJSON){
 	String ticketid="102";
-	System.out.println("attribsList : "+attribsList+ "      "+attributeSet);
 	if("q_s_".equals(pattern)){
 		ticketid="101";
 	}
-	System.out.println("count :: "+count);
 	String Insertprofile_base_info_query="insert into profile_base_info(eventid,fname,lname,transactionid,phone,email,profilekey,ticketid,tickettype,profileid,created_at) values (CAST(? AS BIGINT),?,?,?,?,?,?,CAST(? AS BIGINT),?,CAST(? AS INTEGER),to_timestamp(?,'YYYY-MM-DD HH24:MI:SS.MS'))";
 
 	for(int i=1;i<=count;i++){
@@ -257,20 +290,60 @@ void fillResponseLevelQuestions(CustomAttribute[] attributeSet,ArrayList attribs
         shortresponse=null;
 		bigresponse=null;
         CustomAttribute cb=(CustomAttribute)attributeSet[j];
-        System.out.println("cb.getAttribId() : "+cb.getAttribId()+" cb.getAttributeType()"+cb.getAttributeType());
 		if(attribsList.contains(cb.getAttribId())){
 			String questionid=cb.getAttribId();
 			
 			String question=cb.getAttributeName();
 			String type=cb.getAttributeType();
 			ArrayList options=cb.getOptions();
+			System.out.println("type  :: "+type);
+			
 			if("checkbox".equals(type)||"radio".equals(type)||"select".equals(type)){
-				String responses[]=req.getParameterValues(pattern+questionid+"_"+i);
-				if(responses!=null){
+				String data="";String temp;String tempval[];String responses[]=new String[100];
+				
+				//{"2":true,"1":true}
+				try{
+					
+					if("checkbox".equals(type)){
+							if(buyerJSON.has(pattern+questionid+"_"+i)){
+								 data=buyerJSON.getJSONObject(pattern+questionid+"_"+i).toString();
+								  data=data.replace("{", "");data=data.replace("}", ""); 
+								  System.out.println("checkbox data : "+data);
+								   if(data.split(",").length!=1){//  "2":true,"1":true
+									   tempval=data.split(",");
+									   for(int k=0;k<tempval.length;k++){  //"2":true
+										 if("true".equals(tempval[k].split(":")[1])){
+											 responses[k]=tempval[k].split(":")[0].replace("\"", "");
+											 System.out.println(" ckeck  : "+tempval[k].split(":")[0].replace("\"", ""));
+										 }
+									   }
+								   }else{   //{"2":true}
+									   System.out.println("checkbox data in else : "+data);
+									   String abc=data.split(":")[0].replace("\"", "");
+										  if("true".equals(data.split(":")[1])){
+											  System.out.println("abc :  "+abc);
+											  responses[0]=abc;
+										  }
+								   }
+								   
+							}
+					 }
+					else if("radio".equals(type) || "select".equals(type)){
+						System.out.println("radio "+type);
+						try{
+						System.out.println(" radio  "+buyerJSON.getString(pattern+questionid+"_"+i).toString());}catch(Exception e){e.printStackTrace();}
+						responses[0]=buyerJSON.getString(pattern+questionid+"_"+i).toString();
+					}
+					}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+				//String responses[]=req.getParameterValues(pattern+questionid+"_"+i);
+				 if(responses!=null){
 				String responsesVal[]=profiledbaction.getOptionVal(options,responses);
 				shortresponse=GenUtil.stringArrayToStr(responses,",");
 				bigresponse=GenUtil.stringArrayToStr(responsesVal,",");
-				}
+				} 
 			}
 		else{
 			try{
@@ -289,7 +362,6 @@ void fillResponseLevelQuestions(CustomAttribute[] attributeSet,ArrayList attribs
 		userResponse.put("shortresponse",shortresponse);
 		userResponse.put("bigresponse",bigresponse);
 		userResponse.put("responseid",responseId);
-		System.out.println("userResponse :: "+userResponse);
 		if(bigresponse!=null && !"".equals(bigresponse.trim()))
 		profiledbaction.insertResponse(userResponse);
 

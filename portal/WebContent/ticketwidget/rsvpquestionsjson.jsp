@@ -102,7 +102,7 @@ if(attributeSet!=null&&attributeSet.length>0){
 					if("select".equals(cb.getAttributeType()))
 						attributesObj.put("Validate","N");
 
-					attributesObj.put("options",optionsArrayObj);
+					attributesObj.put("Options",optionsArrayObj);
 					
 				}
 			}
