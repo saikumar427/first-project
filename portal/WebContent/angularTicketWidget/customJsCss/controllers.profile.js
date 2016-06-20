@@ -461,3 +461,12 @@ angular.module('ticketsapp.controllers.profile', [])
         
     	}
     ]);
+
+function checkEmail(input) {  
+    if(input.validity.typeMismatch){  
+        input.setCustomValidity("'" + input.value + "' is not a valid email.");  
+    }  
+    else {  
+        input.setCustomValidity("");  
+    }                 
+};

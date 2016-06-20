@@ -1,11 +1,11 @@
-<div class="col-md-12 col-sm-12 text-right"><a style="cursor: pointer;" ng-click="backToTickets();">{{confirmData.backtoevent}}</a></div>
+<div class="col-md-12 col-sm-12" style="margin-left: -15px;"><a style="cursor: pointer;" ng-click="backToTickets();">{{confirmData.backtoevent}}</a></div>
 
 <!-- for print ticket 'TITLE' -->
 <!-- <span id="eventTitle" style="display:none;">{{eventTitle}}</span> -->
 
-<div ng-bind-html="templateHtml" ng-init="renderHtml()" id="forPrint"></div>
+<div ng-bind-html="templateHtml" ng-init="renderHtml()" id="forPrint" class="row"></div>
 
-<div class="col-md-12 col-sm-12 text-right"><a style="cursor: pointer;" ng-click="backToTickets();">{{confirmData.backtoevent}}</a></div>
+<!-- <div class="col-md-12 col-sm-12 text-right"><a style="cursor: pointer;" ng-click="backToTickets();">{{confirmData.backtoevent}}</a></div> -->
 
 <div class="modal" ng-show="shareonfacebookpop"  >
 	<div class="modal-dialog modal-sm" > 

@@ -95,6 +95,9 @@ angular.module('ticketsapp.controllers.confirmation', [])
             	    // Animation complete.
             	  });
             };
+            $scope.copy_url = function(){
+            	alert('link copied!');
+            };
             $scope.backToTickets = function(){
             	location.reload();
             };
@@ -363,3 +366,42 @@ angular.module('ticketsapp.controllers.confirmation', [])
             
         }
     ]);
+
+
+var printtickets = function(){
+	$("#forPrint .PrintDelete").hide();
+	var mode = 'iframe'; //popup
+    var close = mode == "popup";
+    var options = { mode : mode, popClose : close};
+    $("div#forPrint").printArea( options );
+    $("#forPrint .PrintDelete").show();
+};
+
+
+
+
+/*
+function VoucherSourcetoPrint() {
+	return "<html><head><script>function step1(){\n" +
+			"setTimeout('step2()', 10);}\n" +
+			"function step2(){window.print();window.close()}\n" +
+			"</scri" + "pt></head><body onload='step1()'>\n" +
+			"<img src='http://www.eventbee.com/home/images/poweredby.jpg' /></body></html>";
+}
+
+var printtickets = function(){
+	var eventTitle = $('#eventTitle').html();
+	eventTitle = eventTitle.split("-")[0];
+	$("#forPrint .PrintDelete").hide();
+	var divContents = $("#forPrint").html();
+	$("#forPrint .PrintDelete").show();
+    var printWindow = window.open('', '', 'height=650,width=900');
+    printWindow.document.write('<html><head><title>'+eventTitle+'</title>');
+    printWindow.document.write('</head><body >');
+    printWindow.document.write('<pre><code>'+divContents+'</code></pre>');
+    printWindow.document.write(VoucherSourcetoPrint());
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+    
+};*/

@@ -21,7 +21,7 @@
          <input type="email" name="name" ng-model="question.response" class="form-control" ng-required="question.required=='y'" 
          placeholder="{{question.label}}" ng-init="question.response = getBuyerAnswers(question.id,question.type);collapse=true;expand=false;" 
          ng-style="myStyle" ng-focus="expand=true;collapse=false" ng-blur="collapse=true;expand=false;" title="{{question.label}}" 
-         ng-class='{"text-field-expand":expand,"text-field-collapse":collapse}'/>
+         ng-class='{"text-field-expand":expand,"text-field-collapse":collapse}' onkeyup="checkEmail(this)"/>
          
          <p ng-show="subForm.name.$error.email && !subForm.name.$pristine" class="help-block">{{requiredError}}</p>
       </div>
