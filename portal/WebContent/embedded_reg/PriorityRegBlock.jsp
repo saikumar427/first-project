@@ -11,6 +11,7 @@ JSONObject fieldListObject=new JSONObject();
 JSONObject priorityListData=new JSONObject();
 ArrayList<JSONObject> list=new ArrayList<JSONObject>();
 String eventId = request.getParameter("eid");
+String powertype = request.getParameter("powertype");
 String listsQuery="select list_id,list_name,field1,field2,nooffields from priority_list where eventid=CAST(? AS BIGINT) order by list_id";
 DBManager dbmanager=new DBManager();
 StatusObj statobj=null;
@@ -34,13 +35,43 @@ if(statobj.getStatus() && count>0){
 		 fieldListObject.put(list_id,fieldsObject);
 	}
 }
-String compareTicketsQry="select price_id from price where price_id::text not in (SELECT distinct(regexp_split_to_table(tickets, ',')) AS split_tickets FROM priority_list where eventid=?) and evt_id=CAST(? AS BIGINT)";
-List tickets=DbUtil.getValues(compareTicketsQry,new String []{eventId,eventId});
+List tickets=null;
+if(!"RSVP".equals(powertype)){
+	String compareTicketsQry="select price_id from price where price_id::text not in (SELECT distinct(regexp_split_to_table(tickets, ',')) AS split_tickets FROM priority_list where eventid=?) and evt_id=CAST(? AS BIGINT)";
+	tickets=DbUtil.getValues(compareTicketsQry,new String []{eventId,eventId});
+}
 if(tickets!=null && tickets.size()>0) priorityListData.put("skip_btn_req","Y");
 else priorityListData.put("skip_btn_req","N");
 priorityListData.put("list_labels",fieldListObject);
 priorityListData.put("list",list);
-priorityListData.put("PriorityRegWordings",DisplayAttribsDB.getAttribValues(eventId,"RegFlowWordings"));
-//System.out.println("priorityListData: "+priorityListData);
+if("RSVP".equals(powertype)){
+	String rsvprecurring=DbUtil.getVal("Select value from config where name='event.recurring' and config_id=(select config_id from eventinfo where eventid=CAST(? AS BIGINT))",new String[]{eventId});
+	if("Y".equals(rsvprecurring)){
+		String Rsvp_RECURRING_EVEBT_DATES = "select date_display,date_key from event_dates where eventid=CAST(? AS BIGINT) "+
+					"and (zone_startdate+cast(cast(to_timestamp(COALESCE(zone_start_time,'00'),'HH24:MI:SS') as text) as time ))>=current_date "+
+					"order by cast(zone_startdate||' '|| zone_start_time AS timestamp)";
+				DBManager rsvpdbmanager = new DBManager();
+				StatusObj rsvpstatobj = rsvpdbmanager.executeSelectQuery(Rsvp_RECURRING_EVEBT_DATES, new String[]{eventId});
+				int rsvpcount = rsvpstatobj.getCount();
+				String str="";
+				if (rsvpstatobj.getStatus() && rsvpcount > 0) {
+					str="<select name='rsvp_event_date' id='rsvp_event_date'>";
+					str=str+"<option value='--Select Date--'>"+getPropValue("rsvp.sel.date",eventId)+"</option>";
+					for (int k = 0; k < rsvpcount; k++) {
+						String get_value = rsvpdbmanager.getValue(k, "date_display", "");
+						String get_key = rsvpdbmanager.getValue(k, "date_key", "");
+						str=str+"<option value='"+get_value+"'>"+get_value+"</option>";
+						
+
+						}
+					str=str+"</select>";
+					
+				}
+				priorityListData.put("rsvprecselect",str);
+	}
+	priorityListData.put("PriorityRegWordings",DisplayAttribsDB.getAttribValues(eventId,"RSVPFlowWordings"));
+}else
+	priorityListData.put("PriorityRegWordings",DisplayAttribsDB.getAttribValues(eventId,"RegFlowWordings"));
+priorityListData.put("powertype",powertype);
 out.println(priorityListData);
 %>

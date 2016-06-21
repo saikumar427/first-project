@@ -63,30 +63,21 @@
 				}
 			});
 		</script>
-
-<style type="text/css">
-		/* for new dropdown start */
-		#myDropdown label {
+<style>
+			#myDropdown label {
 			font-weight: normal !important;
 			}
 			#myDropdown lable:hover{
 			border:none !important;
-			}
-			
+			}			
 			#myDropdown a {
 			color: #333;
 			}
-			
-			#myDropdown a:hover {
-			color: #333;
-			border:transparent;
-			}
 			#myDropdown a:focus, #myDropdown a:hover {
-                color: #23527c ;
                 text-decoration:none;
             }
-            /* for new dropdown end */
-            
+</style>
+<style type="text/css">
     body{
     	margin-top:0px !important;
     }
@@ -985,7 +976,7 @@ Copyright 2003-2016. Eventbee Inc. All Rights Reserved.
 
 <script src="<%=resourceaddress%>/main/js/bootstrap.min.js"></script>
 <script src="/main/js/select2.js"></script>
-<script type="text/javascript" src="/main/js/dropdown/ddslick.js"></script>
+<script type="text/javascript" src="/main/js/dropdown/ddslick.js?id=2"></script>
 <script src="/main/homepage/js/agency.js"></script> 
 <script src="/main/homepage/js/modernizr.js"></script>
 <!-- <script>

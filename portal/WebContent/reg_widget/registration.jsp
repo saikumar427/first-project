@@ -362,6 +362,28 @@ background:none;
     background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), <%=border%>, rgba(0,0,0,0)); 
     background-image:      -o-linear-gradient(left, rgba(0,0,0,0), <%=border%>, rgba(0,0,0,0));
 }
+
+.rsvp-submit-btn{	
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+	display: inline-block;
+    padding: 5px 10px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+	touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+.rsvp-submit-btn:hover{
+	background-color: #3c60AA;
+}
 </style>
 <%if("YES".equals(isseatingevent)){ 
 notavail=DbUtil.getVal("select image from venue_seating_images where venue_id=CAST(? AS BIGINT) and context='notavailable'",new String[]{venueid});	
@@ -385,7 +407,8 @@ var refere='<%=Referer%>';
 <script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/home/js/prototype.js'></script>
 <script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/home/js/ajax.js' defer>function ajaxdummy(){ }</script>
 <script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/main/js/registration/registration.js'></script>
-
+<%if("Y".equals(isPriority))%>
+<script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/main/js/registration/registration/priority_reg.js'></script>
 <%if(isrsvpd){%>
 <script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/home/js/rsvpreg.js'></script>
 <%}else{%>
@@ -403,9 +426,7 @@ var refere='<%=Referer%>';
 	<script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/main/js/registration/common/seating/seatingtimer_common.js'></script>
 	<script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/main/js/registration/registration/seating/seatingtimer_registration.js'></script>
 	<%}
-	if("Y".equals(isPriority))%>
-	<script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/main/js/registration/registration/priority_reg.js'></script>
-<%}%>	
+}%>	
 <script type='text/javascript' language='JavaScript' src='<%=resourceaddress%>/home/js/ebeepopup.js'></script>
 </head>
 <body >
@@ -485,7 +506,11 @@ window.fbAsyncInit = function() {
     <tr><td id="rsvpreg"></td></tr>
      <tr><td id="rsvpprofilecontent"></td></tr>
 	 <tr><td id="rsvpimageLoad" align="center"></td></tr>
-	 <script>getRsvpOptionsBlock("<%=eid%>")</script>
+	 <%if("Y".equals(isPriority)){%>
+		<script>getPriorityRegistration("<%=eid%>",'RSVP');</script>
+	<%}else{%>
+	 	<script>getRsvpOptionsBlock("<%=eid%>")</script>
+	 <%}%>
 
 <%}else{
 if(isrecurringevent){%>
@@ -504,7 +529,7 @@ String recurringselect=tktdb.getRecurringEventDates(eid,"tickets");
 <tr><td id="paymentsection"></td></tr>
 <tr><td id="imageLoad" align="center"></td></tr>
 <%if("Y".equals(isPriority)){%>
-<script>getPriorityRegistration("<%=eid%>");</script>
+<script>getPriorityRegistration("<%=eid%>",'Ticketing');</script>
 <%}else{%>
 <script>getTicketsJson("<%=eid%>");</script>
 <%}

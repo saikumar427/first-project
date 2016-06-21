@@ -41,6 +41,12 @@ padding:0px;
 String get_key=null,get_value=null;
 String str="";
 String eventid=request.getParameter("eventid");
+String priregToken=request.getParameter("priregtoken");
+String prilistId=request.getParameter("prilistid");
+String eventdate=request.getParameter("evtdate");
+if(priregToken==null) priregToken="";
+if(prilistId==null) prilistId="";
+if(eventdate==null) eventdate="";
 
 HashMap profilePageLabels=DisplayAttribsDB.getAttribValues(eventid,"RSVPFlowWordings");
 String alertmsg=GenUtil.getHMvalue(profilePageLabels,"event.reg.response.error.message","Please select Attending Qantity to Continue");
@@ -83,17 +89,22 @@ if("Y".equals(rsvprecurring)){
 			int rsvpcount = statobj.getCount();
 			
 			if (statobj.getStatus() && rsvpcount > 0) {
-				str="<select name='rsvp_event_date' id='rsvp_event_date' onchange='rsvp_recurring_change_list()'>";
+				String selected="";
+				if(!"".equals(priregToken) && !"".equals(prilistId))
+					str="<select name='rsvp_event_date' id='rsvp_event_date' disabled>";
+				else 	
+					str="<select name='rsvp_event_date' id='rsvp_event_date' onchange='rsvp_recurring_change_list()'>";
 				str=str+"<option value='--Select Date--'>"+getPropValue("rsvp.sel.date",eventid)+"</option>";
 				for (int k = 0; k < rsvpcount; k++) {
 					get_value = dbmanager.getValue(k, "date_display", "");
 					get_key = dbmanager.getValue(k, "date_key", "");
-					str=str+"<option value='"+get_value+"'>"+get_value+"</option>";
+					if(eventdate.equals(get_value)) selected="selected";
+					else selected="";
+					str=str+"<option value='"+get_value+"' "+selected+">"+get_value+"</option>";
 					
 
 					}
 				str=str+"</select>";
-				
 			}
 }
 

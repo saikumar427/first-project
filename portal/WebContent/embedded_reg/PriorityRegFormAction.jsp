@@ -38,6 +38,7 @@ JSONObject getPriorityRegToken(String eventId,String listId,String prioKey1, Str
 	String prioKey2 = request.getParameter("prioritykey2");
 	String noofflds = request.getParameter("noofflds");
 	String eventdate=request.getParameter("evtdate");
+	String powertype=request.getParameter("powertype");
 	JSONObject resData = new JSONObject();
 	//System.out.println("!!! prioKey1: "+prioKey1+" prioKey2: "+prioKey2+" noofflds: "+noofflds+" eventdate: "+eventdate+" eventId: "+eventId+" listId: "+listId);
 	try {
@@ -102,6 +103,6 @@ JSONObject getPriorityRegToken(String eventId,String listId,String prioKey1, Str
 		resData.put("status", "fail");
 		resData.put("reason", getPropValue("pri.reg.invalid.errmsg",eventId));
 	}
-	System.out.println(resData.toString(2));
+	resData.put("powertype",powertype);
 	out.println(resData.toString(2));
 %>

@@ -142,6 +142,8 @@ String eventid=request.getParameter("eventid");
 String sure=request.getParameter("sure");
 String notsure=request.getParameter("notsure");
 String trackcode=request.getParameter("trackcode");
+String priorityToken=request.getParameter("priregtoken");
+String prilistId=request.getParameter("prilistid");
 HashMap attribMap=new HashMap();
 HashMap sureattribMap=new HashMap();
 HashMap notsureattribMap=new HashMap();
@@ -175,14 +177,14 @@ System.out.println("getprofiles----"+e.getMessage());
 
 String rsvpsuspended=DbUtil.getVal("select status from eventinfo where eventid=CAST(? AS BIGINT)",new String[]{eventid});
 
-String rsvpprofileForm="<form name='rsvpprofile', id='rsvpprofile' action='/rsvpregister/rsvprecprofilesubmit.jsp' method='post' ><input type='hidden' name='attribsetid' value='"+arribsetid+"' /><input type='hidden' name='eventid' value='"+eventid+"' /><input type='hidden' name='selectedoption' id='selectedOption' value='"+selectedOption+"' /><input type='hidden' name='rsvp_event_date' value='"+rsvp_event_date+"' /><input type='hidden' name='sure' value='"+sure+"' /><input type='hidden' name='notsure' value='"+notsure+"' /><input type='hidden' name='trackcode' id='trackcode' value='"+trackcode+"'><input type='hidden' name='rsvpsuspended' id='rsvpsuspended' value='"+rsvpsuspended+"' />";
+String rsvpprofileForm="<form name='rsvpprofile', id='rsvpprofile' action='/rsvpregister/rsvprecprofilesubmit.jsp' method='post' ><input type='hidden' name='priregtoken' value='"+priorityToken+"' /><input type='hidden' name='prilistid' value='"+prilistId+"' /><input type='hidden' name='attribsetid' value='"+arribsetid+"' /><input type='hidden' name='eventid' value='"+eventid+"' /><input type='hidden' name='selectedoption' id='selectedOption' value='"+selectedOption+"' /><input type='hidden' name='rsvp_event_date' value='"+rsvp_event_date+"' /><input type='hidden' name='sure' value='"+sure+"' /><input type='hidden' name='notsure' value='"+notsure+"' /><input type='hidden' name='trackcode' id='trackcode' value='"+trackcode+"'><input type='hidden' name='rsvpsuspended' id='rsvpsuspended' value='"+rsvpsuspended+"' />";
 String rsvpprofileFormclose="";
 if("mobile".equals(request.getParameter("regtype"))){
-rsvpprofileFormclose="<center><input type='button' name='submit' id='submit' value='"+GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.submitbutton.label","Submit")+"' onclick='validateRsvpProfiles();' /></center></form>";
+rsvpprofileFormclose="<center><input type='button' name='submit' id='submit' value='"+GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.submitbutton.label","Submit")+"' onclick='priorityTimeCheck(\"RSVP\");' /></center></form>";
 
 }
 else
-rsvpprofileFormclose="<input type='button' name='submit' id='submit' value='"+GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.submitbutton.label","Submit")+"' onclick='validateRsvpProfiles();' /></form>";
+rsvpprofileFormclose="<table width='100%' cellpadding='0' cellspacing='0'><tr><td width='50%'></td><td><input type='button' class='rsvp-submit-btn' name='submit' id='submit' value='"+GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.submitbutton.label","Submit")+"' onclick='priorityTimeCheck(\"RSVP\");' /></td></tr></table></form>";
 String promotionsection=getpromotionsection(eventid,profilePageLabels);
 String promotionsectionheader=GenUtil.getHMvalue(profilePageLabels,"event.reg.profile.promotions.title.label","Promotions");
 
@@ -212,6 +214,7 @@ if(chk1 != 0){
 		registrantdetails="Your events & shipping information";
 	else
 		registrantdetails=getPropValue("rsvp.other.info",eventid);
+
 }
 if(Integer.parseInt(sure) ==0 && Integer.parseInt(notsure) ==0)
 registrantdetails="";

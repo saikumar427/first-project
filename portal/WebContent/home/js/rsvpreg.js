@@ -16,7 +16,7 @@ function getRsvpOptionsBlock(evtid){
 		
  new Ajax.Request('/rsvpregister/rsvpoptions.jsp?timestamp='+(new Date()).getTime(), {
    method: 'get',
-   parameters:{eventid:evtid,rsvpurl:rsvpurl},
+   parameters:{eventid:evtid,rsvpurl:rsvpurl,priregtoken:priRegToken,prilistid:priListId,evtdate:evtdate},
    onSuccess: successFunc,
    onFailure:  failureFunc
   });
@@ -593,7 +593,7 @@ if(document.getElementById('attendeeno')){
 try{
 new Ajax.Request('/rsvpregister/rsvprecprofilevm.jsp?timestamp='+(new Date()).getTime(), {
 method: 'get',
-parameters:{eventid:evetid,option: option,sure:sureselect,notsure:notsureselect,rsvp_event_date:rsvp_event_date,more:more,trackcode:rsvpurl},
+parameters:{eventid:evetid,option: option,sure:sureselect,notsure:notsureselect,rsvp_event_date:rsvp_event_date,more:more,trackcode:rsvpurl,priregtoken:priRegToken,prilistid:priListId},
 onSuccess: getrsvprecprofiles,
   onFailure:  failurep
 
@@ -1088,4 +1088,9 @@ b.innerHTML='';
 }
 catch(e){}
 }
+}
+
+function failureJsonResponse(response){
+	clickcount=0;
+	alert("Sorry this request cannot be processed at this time");
 }

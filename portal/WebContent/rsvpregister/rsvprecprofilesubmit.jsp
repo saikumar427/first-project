@@ -137,6 +137,16 @@ if("".equals(promotiontype)){
 DbUtil.executeUpdateQuery(Insertpromotiontypequery,new String[]{(String)attendeeMap.get("eventid"),(String)attendeeMap.get("transid"),"",(String)attendeeMap.get("fname"),(String)attendeeMap.get("lname"),(String)attendeeMap.get("email")});
 	}
 
+String priToken=(String)attendeeMap.get("priregtoken");
+String prilistId=(String)attendeeMap.get("prilistid");
+if(!"".equals(prilistId) && !"".equals(priToken)){
+	String priorityStatus="Completed";
+	if(eventdate!=null && !"".equals(eventdate))
+		DbUtil.executeUpdateQuery("update priority_reg_transactions set tid=?,status=?,eventdate=?,updated_at=to_timestamp(?,'YYYY-MM-DD HH24:MI:SS.MS') where eventid=CAST(? AS BIGINT) and list_id=? and pri_token=?",new String[]{transid,priorityStatus,eventdate,DateUtil.getCurrDBFormatDate(),(String)attendeeMap.get("eventid"),prilistId,priToken});
+	else
+		DbUtil.executeUpdateQuery("update priority_reg_transactions set tid=?,status=?,updated_at=to_timestamp(?,'YYYY-MM-DD HH24:MI:SS.MS') where eventid=CAST(? AS BIGINT) and list_id=? and pri_token=?",new String[]{transid,priorityStatus,DateUtil.getCurrDBFormatDate(),(String)attendeeMap.get("eventid"),prilistId,priToken});
+}
+
 return orderseq;
 }
 void fillTransactionLevelQuestions(CustomAttribute[] attributeSet,ArrayList attribsList,ProfileActionDB profiledbaction,HttpServletRequest req,String attendeeid,String attribsetid,String eventid,String profilekey,String transid){
@@ -382,6 +392,8 @@ System.out.println("option: "+option);
 String rec_event_date=request.getParameter("rsvp_event_date");
 String promotiontype=request.getParameter("enablepromotion");
 String trackcode=request.getParameter("trackcode");
+String priorityToken=request.getParameter("priregtoken");
+String prilistId=request.getParameter("prilistid");
 String surecount="0",notsurecount="0";
 if("no".equals(option)){
 	System.out.println("nooo");
@@ -452,6 +464,8 @@ rsvpAttendee.put("option",option);
 rsvpAttendee.put("profilekey",profilekey);
 rsvpAttendee.put("transid",transid);
 rsvpAttendee.put("trackcode",trackcode);
+rsvpAttendee.put("priregtoken",priorityToken);
+rsvpAttendee.put("prilistid",prilistId);
 //profiledbaction.InsertAttendeeInfo(rsvpAttendee);
 
 orderNumber=InsertEventregTransaction(rsvpAttendee,"RK",request,promotiontype);

@@ -71,21 +71,14 @@
 			}
 			#myDropdown lable:hover{
 			border:none !important;
-			}
-			
+			}			
 			#myDropdown a {
 			color: #333;
 			}
-			
-			#myDropdown a:hover {
-			color: #333;
-			border:transparent;
-			}
 			#myDropdown a:focus, #myDropdown a:hover {
-                color: #23527c ;
                 text-decoration:none;
             }
-</style>	
+</style>
 		<style>
 
 .footertabheader{
@@ -831,7 +824,7 @@ li{
 
 <script src="<%=resourceaddress%>/main/js/bootstrap.min.js"></script>
 <!-- <script src="/main/js/select2.js"></script> -->
-<script type="text/javascript" src="/main/js/dropdown/ddslick.js"></script>
+<script type="text/javascript" src="/main/js/dropdown/ddslick.js?id=2"></script>
 <script src="/main/homepage/js/agency.js"></script> 
 <script src="/main/homepage/js/modernizr.js"></script>
 <!-- <script>
